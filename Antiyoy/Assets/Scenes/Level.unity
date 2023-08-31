@@ -236,7 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18841e83a79340c42a77f1a48ca33c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+  _tileStaticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+  _terrainStaticData: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
 --- !u!4 &1806076626
 Transform:
   m_ObjectHideFlags: 0

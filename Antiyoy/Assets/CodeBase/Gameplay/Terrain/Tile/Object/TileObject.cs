@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile.Object
 {
     public class TileObject
     {
-        public Vector2 Position;
+        public Dictionary<int, TileObject> Neighbors;
+        public TileObjectData TileObjectData;
+        public Vector2Int Index;
     }
 }

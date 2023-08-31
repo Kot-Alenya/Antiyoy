@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Terrain.Tile.Object;
+﻿using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Gameplay.Terrain.Tile.Object;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile
@@ -6,53 +7,49 @@ namespace CodeBase.Gameplay.Terrain.Tile
     public class TileFactory
     {
         private TileStaticData _staticData;
-        private float _tileBiggestRadius;
-        private float _tileSmallerRadius;
+        private TilePositionOffsets _positionOffsets;
 
         public void Initialize(TileStaticData staticData)
         {
             _staticData = staticData;
-            SetBiggestRadius(staticData.Prefab.Size);
-            SetSmallerRadius();
+            _positionOffsets = CreatePositionOffsets(_staticData.Prefab.Size);
         }
 
-        public TileObject Create(Vector2 position, Transform root)
+        public TileObject Create(Transform root,Vector2 position, Vector2Int index)
         {
-            var tile = new TileObject();
-
-            CreateObjectData(position, root);
-            tile.Position = position;
+            var tile = new TileObject
+            {
+                TileObjectData = CreateObjectData(position, root),
+                Index = index
+            };
 
             return tile;
         }
 
-        public Vector2 GetTilePosition(int sideIndex, Vector2 parentPosition)
+        public TilePositionOffsets GetTilePositionOffsets() =>
+            _positionOffsets;
+
+        private TilePositionOffsets CreatePositionOffsets(int tileSize)
         {
-            var offsetX = _tileBiggestRadius * 3 / 2;
-
-            var position = sideIndex switch
-            {
-                TileSide.Down => parentPosition + new Vector2(0, -_tileSmallerRadius * 2),
-                TileSide.Up => parentPosition + new Vector2(0, _tileSmallerRadius * 2),
-                TileSide.UpRight => parentPosition + new Vector2(offsetX, _tileSmallerRadius),
-                TileSide.DownRight => parentPosition + new Vector2(offsetX, -_tileSmallerRadius),
-                TileSide.UpLeft => parentPosition + new Vector2(-offsetX, _tileSmallerRadius),
-                TileSide.DownLeft => parentPosition + new Vector2(-offsetX, -_tileSmallerRadius),
-                _ => default
-            };
-
-            var roundedPosition = new Vector2(
-                (float)System.Math.Round(position.x, 4),
-                (float)System.Math.Round(position.y, 4));
+            var tileBiggestRadius = tileSize / 2f;
+            var tileSmallerRadius = Mathf.Sqrt(3) * tileBiggestRadius / 2;
+            var tileSmallerDiameter = tileSmallerRadius * 2;
+            var offsetX = tileBiggestRadius * 3 / 2;
             
-            return roundedPosition;
+            return new TilePositionOffsets
+            {
+                Up = new Vector2(0, tileSmallerDiameter),
+                Down = new Vector2(0, -tileSmallerDiameter),
+
+                RightUp = new Vector2(offsetX, tileSmallerRadius),
+                RightDown = new Vector2(offsetX, -tileSmallerRadius),
+
+                LeftUp = new Vector2(-offsetX, tileSmallerRadius),
+                LeftDown = new Vector2(-offsetX, -tileSmallerRadius)
+            };
         }
 
-        private void SetBiggestRadius(int tileSize) => _tileBiggestRadius = tileSize / 2f;
-
-        private void SetSmallerRadius() => _tileSmallerRadius = Mathf.Sqrt(3) * _tileBiggestRadius / 2;
-
-        private void CreateObjectData(Vector2 position, Transform root)
+        private TileObjectData CreateObjectData(Vector2 position, Transform root)
         {
             var prefab = _staticData.Prefab;
             var gameObjectPosition = new Vector3(position.x, position.y, 0);
@@ -60,6 +57,8 @@ namespace CodeBase.Gameplay.Terrain.Tile
             var gameObject = UnityEngine.Object.Instantiate(prefab, gameObjectPosition, rotation);
 
             gameObject.transform.parent = root;
+
+            return gameObject;
         }
     }
 }
