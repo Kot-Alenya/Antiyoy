@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8a442c3f0a4b2c821f47ab0b6c2541, type: 3}
   m_Name: TerrainConfig
   m_EditorClassIdentifier: 
-  Size: {x: 10, y: 10}
+  Size: {x: 2, y: 2}

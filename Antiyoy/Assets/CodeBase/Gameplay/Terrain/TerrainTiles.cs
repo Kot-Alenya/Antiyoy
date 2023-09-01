@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Gameplay.Terrain.Tile.Object;
 using UnityEngine;
 
@@ -8,40 +7,43 @@ namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainTiles : IEnumerable<TileObject>
     {
-        private readonly TileObject[,] _tiles;
+        private readonly TileObject[] _tiles;
         private readonly Vector2Int _size;
 
         public TerrainTiles(Vector2Int size)
         {
-            _tiles = new TileObject[size.x, size.y];
+            _tiles = new TileObject[size.x * size.y];
             _size = size;
         }
 
-        public void Set(TileObject tile, Vector2Int index) => _tiles[index.x, index.y] = tile;
+        public void Set(TileObject tile, HexCoordinates hex) =>
+            _tiles[HexToIndex(hex)] = tile;
 
-        public TileObject Get(Vector2Int index) => _tiles[index.x, index.y];
+        public TileObject Get(HexCoordinates hex) =>
+            _tiles[HexToIndex(hex)];
 
-        public bool IsTileInTerrain(Vector2Int index)
+        public bool IsIndexValid(HexCoordinates hex)
         {
-            if (index.x < 0)
+            if (hex.X < 0)
                 return false;
 
-            if (index.x > _size.x)
+            if (hex.X >= _size.x)
                 return false;
 
-            if (index.y < 0)
+            if (hex.Y < 0)
                 return false;
 
-            if (index.y > _size.y)
+            if (hex.Y >= _size.y)
                 return false;
 
             return true;
         }
 
-        public bool IsTileCreated(Vector2Int index) => _tiles[index.x, index.y] != null;
-
-        public IEnumerator<TileObject> GetEnumerator() => _tiles.Cast<TileObject>().GetEnumerator();
-
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public IEnumerator<TileObject> GetEnumerator() =>
+            ((IEnumerable<TileObject>)_tiles).GetEnumerator();
+
+        private int HexToIndex(HexCoordinates hex) => hex.Y * _size.x + hex.X;
     }
 }

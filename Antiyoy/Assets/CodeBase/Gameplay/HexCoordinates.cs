@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace CodeBase.Gameplay
+﻿namespace CodeBase.Gameplay
 {
     public struct HexCoordinates
     {
@@ -8,22 +6,33 @@ namespace CodeBase.Gameplay
         public int R;
         public int S;
 
-        private HexCoordinates(int q, int r, int s)
+        public int X => Q + R / 2;
+
+        public int Y => R;
+
+        public HexCoordinates(int q, int r, int s)
         {
             Q = q;
             R = r;
             S = s;
         }
 
-        public override string ToString() => $"{Q};{R};{S}";
-
-        public static HexCoordinates FromOffset(Vector2Int offsetCoordinates)
+        public HexCoordinates(int x, int y)
         {
-            var r = offsetCoordinates.y;
-            var q = offsetCoordinates.x - r / 2;
-            var s = -q - r;
+            Q = x - y / 2;
+            R = y;
+            S = -Q - y;
+        }
 
-            return new HexCoordinates(q, r, s);
+        public override string ToString() => $"Q R S\n{Q};{R};{S}";
+
+        public static HexCoordinates operator +(HexCoordinates a, HexCoordinates b)
+        {
+            a.Q += b.Q;
+            a.R += b.R;
+            a.S += b.S;
+
+            return a;
         }
     }
 }
