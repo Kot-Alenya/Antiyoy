@@ -17,13 +17,13 @@ namespace CodeBase.Gameplay.Terrain.Tile
             _tileSmallerRadius = Mathf.Sqrt(3) * _tileBiggestRadius / 2;
         }
 
-        public TileObject Create(Transform root, Vector2Int index)
+        public TileObject Create(Transform root, Vector2Int offsetCoordinates)
         {
-            var position = GetTilePosition(index);
+            var position = GetTilePosition(offsetCoordinates);
             var tile = new TileObject
             {
                 TileObjectData = CreateObjectData(position, root),
-                Index = index
+                Coordinates = HexCoordinates.FromOffset(offsetCoordinates)
             };
 
             return tile;
@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.Terrain.Tile
             var x = index.x * _tileSmallerRadius * 2;
             var y = index.y * _tileBiggestRadius * 3 / 2;
 
-            return index.y % 2 == 0 ? new Vector2(x, y) : new Vector2(x - _tileSmallerRadius, y);
+            return index.y % 2 == 0 ? new Vector2(x - _tileSmallerRadius, y) : new Vector2(x, y);
         }
 
         private TileObjectData CreateObjectData(Vector2 position, Transform root)

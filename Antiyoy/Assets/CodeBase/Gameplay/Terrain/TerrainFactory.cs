@@ -4,6 +4,25 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
 {
+    /*
+        public Vector2Int ToOffset(HexCoordinates hexCoordinates)
+        {
+        }
+
+     //Направления: северо-восток, восток, юго-восток, юго-запад, запад и северо-запад
+        var cube_direction_vectors =  [
+            Cube(+1, 0, -1), Cube(+1, -1, 0), Cube(0, -1, +1),
+            Cube(-1, 0, +1), Cube(-1, +1, 0), Cube(0, +1, -1),
+        ]
+        function cube_direction(direction):
+            return cube_direction_vectors[direction]
+        function cube_add(hex, vec):
+            return Cube(hex.q + vec.q, hex.r + vec.r, hex.s + vec.s)
+
+        function cube_neighbor(cube, direction):
+            return cube_add(cube, cube_direction(direction))
+*/
+
     public class TerrainObject
     {
         private readonly TerrainTiles _tiles;
@@ -18,7 +37,7 @@ namespace CodeBase.Gameplay.Terrain
             _tiles = tiles;
         }
 
-        public void ConnectNodes(TileObject first, TileObject second)
+        public void ConnectTiles(TileObject first, TileObject second)
         {
         }
     }
@@ -39,8 +58,8 @@ namespace CodeBase.Gameplay.Terrain
         {
             var root = new GameObject(nameof(TerrainObject)).transform;
             var tiles = CreateTerrainTiles(root, _staticData.Size);
-            CreateTerrainGrid(tiles, _staticData.Size);
 
+            CreateTerrainGrid(tiles, _staticData.Size);
             DecorateTerrainTiles(tiles);
         }
 
@@ -51,10 +70,9 @@ namespace CodeBase.Gameplay.Terrain
             for (var y = 0; y < size.y; y++)
             for (var x = 0; x < size.x; x++)
             {
-                var index = new Vector2Int(x, y);
-                var tile = _tileFactory.Create(root, index);
-
-                tiles.Set(tile);
+                var offsetCoordinates = new Vector2Int(x, y);
+                var tile = _tileFactory.Create(root, offsetCoordinates);
+                tiles.Set(tile, offsetCoordinates);
             }
 
             return tiles;
@@ -68,7 +86,7 @@ namespace CodeBase.Gameplay.Terrain
         {
             var colors = new Color[]
             {
-                Color.blue, Color.green, Color.cyan, Color.magenta, Color.yellow, Color.white, Color.black, Color.gray,
+                Color.blue, Color.green, Color.cyan, Color.magenta, Color.yellow, Color.white, Color.gray,
                 Color.red
             };
 
@@ -79,6 +97,8 @@ namespace CodeBase.Gameplay.Terrain
 
                 tile.TileObjectData.gameObject.GetComponent<SpriteRenderer>().color =
                     colors[Random.Range(0, colors.Length)];
+
+                tile.TileObjectData.DebugText.text = tile.Coordinates.ToString();
             }
         }
     }

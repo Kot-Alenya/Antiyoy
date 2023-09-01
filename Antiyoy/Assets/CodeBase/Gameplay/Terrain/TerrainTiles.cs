@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.Terrain
             _size = size;
         }
 
-        public void Set(TileObject tile) => _tiles[tile.Index.x, tile.Index.y] = tile;
+        public void Set(TileObject tile, Vector2Int index) => _tiles[index.x, index.y] = tile;
 
         public TileObject Get(Vector2Int index) => _tiles[index.x, index.y];
 
