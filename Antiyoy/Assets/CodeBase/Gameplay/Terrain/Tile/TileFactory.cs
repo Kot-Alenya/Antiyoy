@@ -7,16 +7,19 @@ namespace CodeBase.Gameplay.Terrain.Tile
     public class TileFactory
     {
         private TileStaticData _staticData;
-        private TilePositionOffsets _positionOffsets;
+        private float _tileBiggestRadius;
+        private float _tileSmallerRadius;
 
         public void Initialize(TileStaticData staticData)
         {
             _staticData = staticData;
-            _positionOffsets = CreatePositionOffsets(_staticData.Prefab.Size);
+            _tileBiggestRadius = staticData.Prefab.Size / 2f;
+            _tileSmallerRadius = Mathf.Sqrt(3) * _tileBiggestRadius / 2;
         }
 
-        public TileObject Create(Transform root,Vector2 position, Vector2Int index)
+        public TileObject Create(Transform root, Vector2Int index)
         {
+            var position = GetTilePosition(index);
             var tile = new TileObject
             {
                 TileObjectData = CreateObjectData(position, root),
@@ -26,27 +29,12 @@ namespace CodeBase.Gameplay.Terrain.Tile
             return tile;
         }
 
-        public TilePositionOffsets GetTilePositionOffsets() =>
-            _positionOffsets;
-
-        private TilePositionOffsets CreatePositionOffsets(int tileSize)
+        private Vector2 GetTilePosition(Vector2Int index)
         {
-            var tileBiggestRadius = tileSize / 2f;
-            var tileSmallerRadius = Mathf.Sqrt(3) * tileBiggestRadius / 2;
-            var tileSmallerDiameter = tileSmallerRadius * 2;
-            var offsetX = tileBiggestRadius * 3 / 2;
-            
-            return new TilePositionOffsets
-            {
-                Up = new Vector2(0, tileSmallerDiameter),
-                Down = new Vector2(0, -tileSmallerDiameter),
+            var x = index.x * _tileSmallerRadius * 2;
+            var y = index.y * _tileBiggestRadius * 3 / 2;
 
-                RightUp = new Vector2(offsetX, tileSmallerRadius),
-                RightDown = new Vector2(offsetX, -tileSmallerRadius),
-
-                LeftUp = new Vector2(-offsetX, tileSmallerRadius),
-                LeftDown = new Vector2(-offsetX, -tileSmallerRadius)
-            };
+            return index.y % 2 == 0 ? new Vector2(x, y) : new Vector2(x - _tileSmallerRadius, y);
         }
 
         private TileObjectData CreateObjectData(Vector2 position, Transform root)

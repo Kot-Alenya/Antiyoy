@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.Terrain
 
         public void Set(TileObject tile) => _tiles[tile.Index.x, tile.Index.y] = tile;
 
-        public object Get(Vector2Int index) => _tiles[index.x, index.y];
+        public TileObject Get(Vector2Int index) => _tiles[index.x, index.y];
 
         public bool IsTileInTerrain(Vector2Int index)
         {
