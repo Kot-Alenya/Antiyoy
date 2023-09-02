@@ -1,18 +1,21 @@
 ﻿using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainFactory
     {
+        private readonly TerrainStaticData _staticData;
         private readonly TileFactory _tileFactory;
-        private TerrainStaticData _staticData;
 
-        public TerrainFactory(TileFactory tileFactory) => _tileFactory = tileFactory;
-
-        public void Initialize(TerrainStaticData staticData) => _staticData = staticData;
+        public TerrainFactory(StaticData data, TileFactory tileFactory)
+        {
+            _staticData = data.TerrainStaticData;
+            _tileFactory = tileFactory;
+        }
 
         public TerrainObject Create()
         {
@@ -53,7 +56,7 @@ namespace CodeBase.Gameplay.Terrain
 
                 var neighbourTile = tiles.Get(neighbourTileIndex);
                 var connection = new TileConnection(neighbourTile);
-                
+
                 tile.AddConnection(connection);
             }
         }

@@ -1,16 +1,15 @@
 ﻿using CodeBase.Gameplay.Camera.Data;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera
 {
     public class CameraFactory
     {
-        private CameraStaticData _staticData;
+        private readonly CameraStaticData _staticData;
 
-        public void Initialize(CameraStaticData staticData)
-        {
-            _staticData = staticData;
-        }
+        public CameraFactory(StaticData data) =>
+            _staticData = data.CameraStaticData;
 
         public void Create()
         {

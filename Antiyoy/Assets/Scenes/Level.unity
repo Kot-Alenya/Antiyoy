@@ -132,6 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1806076626}
+  - component: {fileID: 1806076628}
+  - component: {fileID: 1806076627}
   - component: {fileID: 1806076625}
   m_Layer: 0
   m_Name: Startup
@@ -152,9 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18841e83a79340c42a77f1a48ca33c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileStaticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
-  _terrainStaticData: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
-  _cameraStaticData: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
 --- !u!4 &1806076626
 Transform:
   m_ObjectHideFlags: 0
@@ -170,3 +169,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806076627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806076624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf93bfa0107442438735c01f94e9379b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _staticData:
+    TileStaticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+    TerrainStaticData: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
+    CameraStaticData: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+--- !u!114 &1806076628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806076624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1806076627}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []

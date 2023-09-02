@@ -1,19 +1,21 @@
 ﻿using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Infrastructure;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile
 {
     public class TileFactory
     {
-        private TileStaticData _staticData;
-        private float _tileBiggestRadius;
-        private float _tileSmallerRadius;
+        private readonly TileStaticData _staticData;
+        private readonly float _tileBiggestRadius;
+        private readonly float _tileSmallerRadius;
 
-        public void Initialize(TileStaticData staticData)
+        public TileFactory(StaticData data)
         {
-            _staticData = staticData;
-            _tileBiggestRadius = staticData.Prefab.Size / 2f;
+            _staticData = data.TileStaticData;
+
+            _tileBiggestRadius = _staticData.Prefab.Size / 2f;
             _tileSmallerRadius = Mathf.Sqrt(3) * _tileBiggestRadius / 2;
         }
 

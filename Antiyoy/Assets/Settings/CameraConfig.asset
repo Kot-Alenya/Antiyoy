@@ -16,4 +16,5 @@ MonoBehaviour:
   InputPrefabs:
   - {fileID: 3927514758033950322, guid: 4952670f501f8da43a868899104cb0e0, type: 3}
   - {fileID: 3146852550580726096, guid: 391247d85aa0e794798b46fd74beb053, type: 3}
-  Velocity: 1
+  MoveVelocity: 1
+  ZoomVelocity: 1
