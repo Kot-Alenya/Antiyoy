@@ -1,4 +1,5 @@
 using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Gameplay.Terrain.Tile.Data;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace CodeBase
     {
         [SerializeField] private TileStaticData _tileStaticData;
         [SerializeField] private TerrainStaticData _terrainStaticData;
-        
+
         private void Start()
         {
             var tileFactory = new TileFactory();
@@ -17,8 +18,8 @@ namespace CodeBase
 
             var terrainFactory = new TerrainFactory(tileFactory);
             terrainFactory.Initialize(_terrainStaticData);
-            
-            terrainFactory.Create();
+
+            var terrain = terrainFactory.Create();
         }
     }
 }

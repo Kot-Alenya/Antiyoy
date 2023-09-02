@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.Terrain
+﻿namespace CodeBase.Gameplay.Terrain.Data
 {
     public struct HexCoordinatesDirections
     {

@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.Terrain.Tile.Data;
-using CodeBase.Gameplay.Terrain.Tile.Object;
+﻿using CodeBase.Gameplay.Terrain.Data;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile
@@ -20,11 +20,8 @@ namespace CodeBase.Gameplay.Terrain.Tile
         public TileObject Create(Transform root, HexCoordinates coordinates)
         {
             var position = GetTilePosition(coordinates);
-            var tile = new TileObject
-            {
-                TileObjectData = CreateObjectData(position, root),
-                Coordinates = coordinates
-            };
+            var gameObject = CreateObjectData(position, root);
+            var tile = new TileObject(gameObject, coordinates);
 
             return tile;
         }
@@ -37,12 +34,12 @@ namespace CodeBase.Gameplay.Terrain.Tile
             return coordinates.Y % 2 == 0 ? new Vector2(x - _tileSmallerRadius, y) : new Vector2(x, y);
         }
 
-        private TileObjectData CreateObjectData(Vector2 position, Transform root)
+        private TileObjectStaticData CreateObjectData(Vector2 position, Transform root)
         {
             var prefab = _staticData.Prefab;
             var gameObjectPosition = new Vector3(position.x, position.y, 0);
             var rotation = Quaternion.identity;
-            var gameObject = UnityEngine.Object.Instantiate(prefab, gameObjectPosition, rotation);
+            var gameObject = Object.Instantiate(prefab, gameObjectPosition, rotation);
 
             gameObject.transform.parent = root;
 
