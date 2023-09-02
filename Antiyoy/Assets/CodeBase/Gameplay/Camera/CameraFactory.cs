@@ -13,20 +13,17 @@ namespace CodeBase.Gameplay.Camera
 
         public void Create()
         {
-            var gameObject = Object.Instantiate(_staticData.ObjectPrefab);
-            var movement = new CameraMovement(gameObject, _staticData.MoveVelocity, _staticData.ZoomVelocity);
-            var cameraObject = new CameraObject(gameObject, movement);
+            var objectData = Object.Instantiate(_staticData.ObjectPrefab);
+            var movement = new CameraMovement(_staticData, objectData);
+            var cameraObject = new CameraObject(objectData, movement);
 
             CreateCameraInput(cameraObject);
         }
 
         private void CreateCameraInput(CameraObject cameraObject)
         {
-            foreach (var prefab in _staticData.InputPrefabs)
-            {
-                var input = Object.Instantiate(prefab, cameraObject.Data.transform);
+            foreach (var input in cameraObject.Data.Inputs)
                 input.Constructor(cameraObject);
-            }
         }
     }
 }

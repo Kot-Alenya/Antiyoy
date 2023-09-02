@@ -5,32 +5,31 @@ namespace CodeBase.Gameplay.Camera
 {
     public class CameraMovement
     {
-        private readonly CameraObjectStaticData _data;
-        private readonly float _moveVelocity;
-        private readonly float _zoomVelocity;
+        private readonly CameraStaticData _staticData;
+        private readonly UnityEngine.Camera _camera;
 
-        public CameraMovement(CameraObjectStaticData data, float moveVelocity, float zoomVelocity)
+        public CameraMovement(CameraStaticData staticData, CameraObjectStaticData cameraObjectData)
         {
-            _data = data;
-            _moveVelocity = moveVelocity;
-            _zoomVelocity = zoomVelocity;
+            _staticData = staticData;
+            _camera = cameraObjectData.Camera;
         }
 
         public void Move(Vector2 direction)
         {
-            var currentPosition = _data.Camera.transform.position;
+            var currentPosition = _camera.transform.position;
             var nextPosition = currentPosition + (Vector3)direction;
-            var newPosition = Vector3.Lerp(currentPosition, nextPosition, _moveVelocity * Time.fixedDeltaTime);
+            var newPosition = Vector3.Lerp(currentPosition, nextPosition,
+                _staticData.MoveVelocity * Time.fixedDeltaTime);
 
-            _data.Camera.transform.position = newPosition;
+            _camera.transform.position = newPosition;
         }
 
         public void Zoom(bool isIncrease)
         {
-            var offset = isIncrease ? -_zoomVelocity : _zoomVelocity;
-            var newSize = _data.Camera.orthographicSize + offset;
+            var offset = isIncrease ? -_staticData.ZoomVelocity : _staticData.ZoomVelocity;
+            var newSize = _camera.orthographicSize + offset;
 
-            _data.Camera.orthographicSize = Mathf.Clamp(newSize, 1, 10);
+            _camera.orthographicSize = Mathf.Clamp(newSize, _staticData.MinZoomValue, _staticData.MaxZoomValue);
         }
     }
 }

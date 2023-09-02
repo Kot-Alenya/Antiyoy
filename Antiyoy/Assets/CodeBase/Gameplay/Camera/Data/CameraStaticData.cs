@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.Camera.Input;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera.Data
 {
@@ -7,8 +6,9 @@ namespace CodeBase.Gameplay.Camera.Data
     public class CameraStaticData : ScriptableObject
     {
         public CameraObjectStaticData ObjectPrefab;
-        public CameraInput[] InputPrefabs;
         public float MoveVelocity;
         public float ZoomVelocity;
+        public float MinZoomValue;
+        public float MaxZoomValue;
     }
 }

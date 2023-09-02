@@ -6,5 +6,6 @@ namespace CodeBase.Gameplay.Terrain.Tile.Data
     public class TileStaticData : ScriptableObject
     {
         public TileObjectStaticData Prefab;
+        public int Size;
     }
 }

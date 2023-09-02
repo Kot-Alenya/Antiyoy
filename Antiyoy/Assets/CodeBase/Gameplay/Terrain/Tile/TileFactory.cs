@@ -15,7 +15,7 @@ namespace CodeBase.Gameplay.Terrain.Tile
         {
             _staticData = data.TileStaticData;
 
-            _tileBiggestRadius = _staticData.Prefab.Size / 2f;
+            _tileBiggestRadius = _staticData.Size / 2f;
             _tileSmallerRadius = Mathf.Sqrt(3) * _tileBiggestRadius / 2;
         }
 

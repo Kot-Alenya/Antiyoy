@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: TileConfig
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1287134461100307839, guid: c73615c4e6c3dc64b8053dfed5105949, type: 3}
+  Size: 1
