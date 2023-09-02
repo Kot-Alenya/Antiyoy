@@ -1,3 +1,5 @@
+using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Camera.Data;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile;
@@ -10,8 +12,15 @@ namespace CodeBase
     {
         [SerializeField] private TileStaticData _tileStaticData;
         [SerializeField] private TerrainStaticData _terrainStaticData;
+        [SerializeField] private CameraStaticData _cameraStaticData;
 
         private void Start()
+        {
+            CreateTerrain();
+            CreateCamera();
+        }
+
+        private void CreateTerrain()
         {
             var tileFactory = new TileFactory();
             tileFactory.Initialize(_tileStaticData);
@@ -19,7 +28,14 @@ namespace CodeBase
             var terrainFactory = new TerrainFactory(tileFactory);
             terrainFactory.Initialize(_terrainStaticData);
 
-            var terrain = terrainFactory.Create();
+            terrainFactory.Create();
+        }
+
+        private void CreateCamera()
+        {
+            var cameraFactory = new CameraFactory();
+            cameraFactory.Initialize(_cameraStaticData);
+            cameraFactory.Create();
         }
     }
 }
