@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Terrain.Data;
+﻿using _dev;
+using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Infrastructure;
@@ -21,7 +22,8 @@ namespace CodeBase.Gameplay.Terrain
         {
             var gameObject = new GameObject(nameof(TerrainObject));
             var tiles = CreateTerrainTiles(gameObject.transform, _staticData.Size);
-            var terrain = new TerrainObject();
+            var regions = CreateRegions(tiles);
+            var terrain = new TerrainObject(tiles, regions);
 
             ConnectTiles(tiles);
 
@@ -59,6 +61,12 @@ namespace CodeBase.Gameplay.Terrain
 
                 tile.AddConnection(connection);
             }
+        }
+
+        private TerrainRegions CreateRegions(TerrainTiles tiles)
+        {
+            //tiles.
+            return default;
         }
     }
 }

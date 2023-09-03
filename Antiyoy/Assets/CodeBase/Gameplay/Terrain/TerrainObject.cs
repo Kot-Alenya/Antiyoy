@@ -1,10 +1,17 @@
-﻿using UnityEngine;
+﻿using _dev;
 
 namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainObject
     {
-        private GameObject GameObject;
-        private TerrainTiles Tiles;
+        public TerrainObject(TerrainTiles tiles, TerrainRegions regions)
+        {
+            Tiles = tiles;
+            Regions = regions;
+        }
+
+        public TerrainTiles Tiles { get; }
+
+        private TerrainRegions Regions { get; }
     }
 }

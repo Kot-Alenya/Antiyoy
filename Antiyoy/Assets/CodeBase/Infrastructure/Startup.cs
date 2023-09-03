@@ -1,3 +1,4 @@
+using _dev.Country;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Terrain;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace CodeBase.Infrastructure
 {
     public class Startup : MonoBehaviour
     {
+        [SerializeField] private CapitalObjectStaticData _capitalPrefab;
+
         private TerrainFactory _terrainFactory;
         private CameraFactory _cameraFactory;
 
@@ -19,8 +22,11 @@ namespace CodeBase.Infrastructure
 
         private void Start()
         {
-            _terrainFactory.Create();
+            var terrain = _terrainFactory.Create();
             _cameraFactory.Create();
+
+            //var countryFactory = new CountryFactory(_capitalPrefab);
+            //countryFactory.Create(terrain, new(0, 0), Color.green);
         }
     }
 }
