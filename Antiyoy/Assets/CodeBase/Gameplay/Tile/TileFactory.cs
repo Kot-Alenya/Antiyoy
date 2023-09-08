@@ -1,9 +1,9 @@
 ﻿using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Gameplay.Tile.Data;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Terrain.Tile
+namespace CodeBase.Gameplay.Tile
 {
     public class TileFactory
     {
@@ -22,8 +22,10 @@ namespace CodeBase.Gameplay.Terrain.Tile
         public TileObject Create(Transform root, HexCoordinates coordinates)
         {
             var position = GetTilePosition(coordinates);
-            var gameObject = CreateObjectData(position, root);
-            var tile = new TileObject(gameObject, coordinates);
+            var prefabData = CreatePrefabData(position, root);
+            var tile = prefabData.gameObject.AddComponent<TileObject>();
+
+            tile.Constructor(prefabData, coordinates);
 
             return tile;
         }
@@ -36,7 +38,7 @@ namespace CodeBase.Gameplay.Terrain.Tile
             return coordinates.Y % 2 == 0 ? new Vector2(x - _tileSmallerRadius, y) : new Vector2(x, y);
         }
 
-        private TileObjectStaticData CreateObjectData(Vector2 position, Transform root)
+        private TilePrefabData CreatePrefabData(Vector2 position, Transform root)
         {
             var prefab = _staticData.Prefab;
             var gameObjectPosition = new Vector3(position.x, position.y, 0);

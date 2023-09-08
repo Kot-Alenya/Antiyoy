@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
@@ -16,8 +16,6 @@ namespace CodeBase.Gameplay.Terrain
             _tiles = new TileObject[size.x * size.y];
             _size = size;
         }
-
-        public int Count => _tiles.Length;
 
         public void Set(TileObject tile, HexCoordinates hex) =>
             _tiles[HexToIndex(hex)] = tile;

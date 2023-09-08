@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
 namespace _dev.Country
@@ -39,7 +39,7 @@ namespace _dev.Country
         //в отдельную фабрику(?)
         private void CreateCapital(TileObject tile)
         {
-            Object.Instantiate(_capitalPrefab, tile.GameObject.transform);
+            Object.Instantiate(_capitalPrefab, tile.transform);
         }
     }
 

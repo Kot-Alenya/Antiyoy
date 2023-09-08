@@ -1,7 +1,7 @@
 ﻿using _dev;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile;
-using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Tile.Data;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
@@ -49,7 +49,7 @@ namespace CodeBase.Gameplay.Terrain
         private void ConnectTiles(TerrainTiles tiles)
         {
             foreach (var tile in tiles)
-            foreach (var direction in _staticData.WaveDirections)
+            foreach (var direction in HexCoordinatesDirections.Directions)
             {
                 var neighbourTileIndex = tile.Coordinates + direction;
 
@@ -59,7 +59,7 @@ namespace CodeBase.Gameplay.Terrain
                 var neighbourTile = tiles.Get(neighbourTileIndex);
                 var connection = new TileConnection(neighbourTile);
 
-                tile.AddConnection(connection);
+                tile.Connections.Add(connection);
             }
         }
 

@@ -6,7 +6,5 @@ namespace CodeBase.Gameplay.Terrain.Data
     public class TerrainStaticData : ScriptableObject
     {
         public Vector2Int Size;
-        
-        public readonly HexCoordinates[] WaveDirections = HexCoordinatesDirections.Directions;
     }
 }
