@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Tile;
 using UnityEngine;
 
 namespace _dev.Country

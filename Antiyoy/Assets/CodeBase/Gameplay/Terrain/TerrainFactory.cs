@@ -1,7 +1,7 @@
 ﻿using _dev;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile;
-using CodeBase.Gameplay.Tile.Data;
+using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Infrastructure;
 using UnityEngine;
 

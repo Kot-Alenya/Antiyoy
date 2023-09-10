@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.Tile.Data
+﻿namespace CodeBase.Gameplay.Terrain.Tile.Data
 {
     public struct TileConnection
     {

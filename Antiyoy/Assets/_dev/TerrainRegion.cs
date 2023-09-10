@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.Tile;
+﻿using CodeBase.Gameplay.Terrain.Tile;
 using UnityEngine;
 
 namespace _dev

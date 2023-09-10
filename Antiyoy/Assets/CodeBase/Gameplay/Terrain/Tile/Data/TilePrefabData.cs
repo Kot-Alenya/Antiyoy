@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Tile.Data
+namespace CodeBase.Gameplay.Terrain.Tile.Data
 {
     public class TilePrefabData : MonoBehaviour
     {

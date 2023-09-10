@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Tile;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain

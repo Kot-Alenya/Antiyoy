@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile.Data;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Tile
+namespace CodeBase.Gameplay.Terrain.Tile
 {
     public class TileObject : MonoBehaviour
     {
