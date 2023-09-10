@@ -1,6 +1,4 @@
-﻿using _dev;
-
-namespace CodeBase.Gameplay.Terrain
+﻿namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainObject
     {

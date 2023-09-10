@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
@@ -23,7 +23,7 @@ namespace CodeBase.Gameplay.Terrain
         public TileObject Get(HexCoordinates hex) =>
             _tiles[HexToIndex(hex)];
 
-        public bool IsIndexValid(HexCoordinates hex)
+        public bool IsHexValid(HexCoordinates hex)
         {
             if (hex.X < 0)
                 return false;

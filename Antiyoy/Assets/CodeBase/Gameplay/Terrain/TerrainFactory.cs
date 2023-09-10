@@ -1,7 +1,8 @@
-﻿using _dev;
+﻿using CodeBase.Gameplay.Region;
+using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Terrain.Tile;
-using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Tile.Data;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
@@ -10,19 +11,21 @@ namespace CodeBase.Gameplay.Terrain
     public class TerrainFactory
     {
         private readonly TerrainStaticData _staticData;
+        private readonly RegionFactory _regionFactory;
         private readonly TileFactory _tileFactory;
 
-        public TerrainFactory(StaticData data, TileFactory tileFactory)
+        public TerrainFactory(StaticData data, RegionFactory regionFactory, TileFactory tileFactory)
         {
             _staticData = data.TerrainStaticData;
+            _regionFactory = regionFactory;
             _tileFactory = tileFactory;
         }
 
         public TerrainObject Create()
         {
             var gameObject = new GameObject(nameof(TerrainObject));
-            var tiles = CreateTerrainTiles(gameObject.transform, _staticData.Size);
-            var regions = CreateRegions(tiles);
+            var regions = CreateRegions();
+            var tiles = CreateTerrainTiles(regions, gameObject.transform, _staticData.Size);
             var terrain = new TerrainObject(tiles, regions);
 
             ConnectTiles(tiles);
@@ -30,7 +33,16 @@ namespace CodeBase.Gameplay.Terrain
             return terrain;
         }
 
-        private TerrainTiles CreateTerrainTiles(Transform root, Vector2Int size)
+        private TerrainRegions CreateRegions()
+        {
+            return new TerrainRegions(
+                _regionFactory.Create(RegionType.None),
+                _regionFactory.Create(RegionType.Neutral),
+                _regionFactory.Create(RegionType.Red),
+                _regionFactory.Create(RegionType.Blue));
+        }
+
+        private TerrainTiles CreateTerrainTiles(TerrainRegions regions, Transform root, Vector2Int size)
         {
             var tiles = new TerrainTiles(size);
 
@@ -40,6 +52,7 @@ namespace CodeBase.Gameplay.Terrain
                 var coordinates = new HexCoordinates(x, y);
                 var tile = _tileFactory.Create(root, coordinates);
 
+                tile.SetRegion(regions.Get(RegionType.None));
                 tiles.Set(tile, coordinates);
             }
 
@@ -51,22 +64,16 @@ namespace CodeBase.Gameplay.Terrain
             foreach (var tile in tiles)
             foreach (var direction in HexCoordinatesDirections.Directions)
             {
-                var neighbourTileIndex = tile.Coordinates + direction;
+                var neighbourTileHex = tile.Coordinates + direction;
 
-                if (!tiles.IsIndexValid(neighbourTileIndex))
+                if (!tiles.IsHexValid(neighbourTileHex))
                     continue;
 
-                var neighbourTile = tiles.Get(neighbourTileIndex);
+                var neighbourTile = tiles.Get(neighbourTileHex);
                 var connection = new TileConnection(neighbourTile);
 
                 tile.Connections.Add(connection);
             }
-        }
-
-        private TerrainRegions CreateRegions(TerrainTiles tiles)
-        {
-            //tiles.
-            return default;
         }
     }
 }

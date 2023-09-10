@@ -24,9 +24,6 @@ namespace CodeBase.Infrastructure
         {
             var terrain = _terrainFactory.Create();
             _cameraFactory.Create();
-
-            //var countryFactory = new CountryFactory(_capitalPrefab);
-            //countryFactory.Create(terrain, new(0, 0), Color.green);
         }
     }
 }
