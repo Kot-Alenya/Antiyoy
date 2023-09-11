@@ -10,6 +10,6 @@
 
         public TerrainTiles Tiles { get; }
 
-        private TerrainRegions Regions { get; }
+        public TerrainRegions Regions { get; }
     }
 }

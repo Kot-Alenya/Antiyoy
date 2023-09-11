@@ -1,4 +1,3 @@
-using _dev.Country;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Terrain;
 using UnityEngine;
@@ -6,17 +5,15 @@ using Zenject;
 
 namespace CodeBase.Infrastructure
 {
-    public class Startup : MonoBehaviour
+    public class LevelStartup : MonoBehaviour
     {
-        [SerializeField] private CapitalObjectStaticData _capitalPrefab;
-
         private TerrainFactory _terrainFactory;
         private CameraFactory _cameraFactory;
 
         [Inject]
-        private void Constructor(TerrainFactory TerrainFactory, CameraFactory cameraFactory)
+        private void Constructor(TerrainFactory terrainFactory, CameraFactory cameraFactory)
         {
-            _terrainFactory = TerrainFactory;
+            _terrainFactory = terrainFactory;
             _cameraFactory = cameraFactory;
         }
 

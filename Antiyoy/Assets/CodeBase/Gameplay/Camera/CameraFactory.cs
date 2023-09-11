@@ -11,13 +11,15 @@ namespace CodeBase.Gameplay.Camera
         public CameraFactory(StaticData data) =>
             _staticData = data.CameraStaticData;
 
-        public void Create()
+        public CameraObject Create()
         {
             var objectData = Object.Instantiate(_staticData.ObjectPrefab);
             var movement = new CameraMovement(_staticData, objectData);
             var cameraObject = new CameraObject(objectData, movement);
 
             CreateCameraInput(cameraObject);
+
+            return cameraObject;
         }
 
         private void CreateCameraInput(CameraObject cameraObject)
