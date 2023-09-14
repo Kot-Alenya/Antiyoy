@@ -35,11 +35,7 @@ namespace CodeBase.Gameplay.Terrain
 
         private TerrainRegions CreateRegions()
         {
-            return new TerrainRegions(
-                _regionFactory.Create(RegionType.None),
-                _regionFactory.Create(RegionType.Neutral),
-                _regionFactory.Create(RegionType.Red),
-                _regionFactory.Create(RegionType.Blue));
+            return new TerrainRegions();
         }
 
         private TerrainTiles CreateTerrainTiles(TerrainRegions regions, Transform root, Vector2Int size)
@@ -52,7 +48,6 @@ namespace CodeBase.Gameplay.Terrain
                 var coordinates = new HexCoordinates(x, y);
                 var tile = _tileFactory.Create(root, coordinates);
 
-                tile.SetRegion(regions.Get(RegionType.None));
                 tiles.Set(tile, coordinates);
             }
 

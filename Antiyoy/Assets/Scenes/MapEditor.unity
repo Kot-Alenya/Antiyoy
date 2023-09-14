@@ -219,3 +219,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabData: {fileID: 3804988188308542292, guid: 77c63ed7e26512147a29f807ba5aaac7, type: 3}
+  _staticData: {fileID: 11400000, guid: ff79baf2136c1314e8c55a5baa09baeb, type: 2}

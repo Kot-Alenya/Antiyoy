@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using _dev;
 using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile.Data;
+using TMPro;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Tile
@@ -16,6 +18,10 @@ namespace CodeBase.Gameplay.Tile
 
         public RegionObject Region { get; private set; }
 
+        public IEntityController Entity { get; private set; }
+
+        public TextMeshProUGUI DebugText => _instance.DebugText;
+
         public void Constructor(TilePrefabData instance, HexCoordinates coordinates)
         {
             _instance = instance;
@@ -25,9 +31,15 @@ namespace CodeBase.Gameplay.Tile
         public void SetRegion(RegionObject region)
         {
             Region = region;
-
-            region.Tiles.Add(this);
             _instance.SpriteRenderer.color = region.Color;
+        }
+
+        public void SetEntity(IEntityController entity) => Entity = entity;
+
+        public void RemoveRegion()
+        {
+            Region = null;
+            _instance.SpriteRenderer.color = Color.clear;
         }
     }
 }

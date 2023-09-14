@@ -2,7 +2,6 @@
 {
     public enum RegionType
     {
-        None,
         Neutral,
         Red,
         Blue

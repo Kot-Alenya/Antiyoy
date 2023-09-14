@@ -17,7 +17,14 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void Update()
         {
-            if (!Input.GetMouseButton(0))
+            //всё поле чёрное, но, места для тайлов - серые.
+            //тоесть есть дефолтный цывет тайлов.
+            //нейтральный регион - тоже регион.
+            //расчёт поля прост => мы можем просто создавать тайлы и удалять их!
+            
+            //при нажатии на мышь, указываем регионы.
+            
+            if (!Input.GetMouseButtonDown(0))
                 return;
 
             var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);
