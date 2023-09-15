@@ -34,10 +34,11 @@ namespace CodeBase.Gameplay.Hex
             var y = position.y / yOffset;
             var x = position.x / xOffset;
 
-            x = y % 2f == 0 ? x + InnerRadius : x;
+            var roundY = (int)(y + 0.5f);
 
-            var roundY = (int)(y + 0.6f);
-            var roundX = (int)(x + 0.6f);
+            x = roundY % 2f == 0 ? x + InnerRadius : x;
+
+            var roundX = (int)(x + 0.5f);
 
             return FromArrayIndex(new Vector2Int(roundX, roundY));
         }

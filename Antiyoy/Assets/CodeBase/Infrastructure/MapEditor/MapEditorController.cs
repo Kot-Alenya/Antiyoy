@@ -36,7 +36,7 @@ namespace CodeBase.Infrastructure.MapEditor
             var coordinates = new Vector2(position.x, position.y);
 
             UnityEngine.Debug.Log(
-                $"Component: {component.Coordinates}, Calculated: {HexMath.FromWorldPosition(coordinates)}");
+                $"Component: {component.Coordinates}, Calculated: {HexMath.FromWorldPosition(hitPoint)}");
         }
 
         public void ProcessTiles()
