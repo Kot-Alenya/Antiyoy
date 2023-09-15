@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CodeBase.Gameplay.Terrain.Data;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
@@ -17,34 +17,22 @@ namespace CodeBase.Gameplay.Terrain
             _size = size;
         }
 
-        public void Set(TileObject tile, HexCoordinates hex) =>
-            _tiles[HexToIndex(hex)] = tile;
+        public void Set(TileObject tile, HexPosition hex) =>
+            _tiles[GetIndex(hex)] = tile;
 
-        public TileObject Get(HexCoordinates hex) =>
-            _tiles[HexToIndex(hex)];
-
-        public bool IsHexValid(HexCoordinates hex)
-        {
-            if (hex.X < 0)
-                return false;
-
-            if (hex.X >= _size.x)
-                return false;
-
-            if (hex.Y < 0)
-                return false;
-
-            if (hex.Y >= _size.y)
-                return false;
-
-            return true;
-        }
+        public TileObject Get(HexPosition hex) =>
+            _tiles[GetIndex(hex)];
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerator<TileObject> GetEnumerator() =>
             ((IEnumerable<TileObject>)_tiles).GetEnumerator();
 
-        private int HexToIndex(HexCoordinates hex) => hex.Y * _size.x + hex.X;
+        private int GetIndex(HexPosition hex)
+        {
+            var arrayIndex = HexMath.ToArrayIndex(hex);
+
+            return arrayIndex.y * _size.x + arrayIndex.x;
+        }
     }
 }

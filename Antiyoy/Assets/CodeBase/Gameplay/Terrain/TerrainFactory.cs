@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.Region;
-using CodeBase.Gameplay.Region.Data;
+﻿using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile;
 using CodeBase.Gameplay.Tile.Data;
@@ -24,28 +24,34 @@ namespace CodeBase.Gameplay.Terrain
         public TerrainObject Create()
         {
             var gameObject = new GameObject(nameof(TerrainObject));
-            var regions = CreateRegions();
-            var tiles = CreateTerrainTiles(regions, gameObject.transform, _staticData.Size);
-            var terrain = new TerrainObject(tiles, regions);
+            var tiles = CreateTerrainTiles(gameObject.transform, _staticData.Size);
+            var regions = new TerrainRegions();
+            var terrain = new TerrainObject(tiles, regions, _staticData.Size);
 
-            ConnectTiles(tiles);
+            ConnectTiles(terrain);
+            //как создавать террейн?
+
+            //создать все нужные массивы.
+            //добавлять в террейн новые тайлы, созданные в factory.
+            //как определить местоположение для создания тайла?
+
+            //создать все нужные массивы и упращённые тайлы.
+            //настраиваем(активируем) тайлы в террейне.
+
+            //создаём клектки(background), клетки определяют позиции гексов.
 
             return terrain;
         }
 
-        private TerrainRegions CreateRegions()
-        {
-            return new TerrainRegions();
-        }
-
-        private TerrainTiles CreateTerrainTiles(TerrainRegions regions, Transform root, Vector2Int size)
+        private TerrainTiles CreateTerrainTiles(Transform root, Vector2Int size)
         {
             var tiles = new TerrainTiles(size);
 
             for (var y = 0; y < size.y; y++)
             for (var x = 0; x < size.x; x++)
             {
-                var coordinates = new HexCoordinates(x, y);
+                var arrayIndex = new Vector2Int(x, y);
+                var coordinates = HexMath.FromArrayIndex(arrayIndex);
                 var tile = _tileFactory.Create(root, coordinates);
 
                 tiles.Set(tile, coordinates);
@@ -54,21 +60,32 @@ namespace CodeBase.Gameplay.Terrain
             return tiles;
         }
 
-        private void ConnectTiles(TerrainTiles tiles)
+        private void ConnectTiles(TerrainObject terrain)
         {
-            foreach (var tile in tiles)
-            foreach (var direction in HexCoordinatesDirections.Directions)
+            foreach (var tile in terrain.Tiles)
+            foreach (var direction in HexPositionDirections.Directions)
             {
                 var neighbourTileHex = tile.Coordinates + direction;
 
-                if (!tiles.IsHexValid(neighbourTileHex))
+                if (!terrain.IsHexInTerrain(neighbourTileHex))
                     continue;
 
-                var neighbourTile = tiles.Get(neighbourTileHex);
+                var neighbourTile = terrain.Tiles.Get(neighbourTileHex);
                 var connection = new TileConnection(neighbourTile);
 
                 tile.Connections.Add(connection);
             }
+        }
+
+        private void CreateBackground(Transform root, Vector2Int size)
+        {
+            var instance = new GameObject();
+
+            instance.transform.SetParent(root);
+            //instance.transform.;
+
+            //нужен доступ к расчёту позиции.
+            //из hex в position & position в hex
         }
     }
 }

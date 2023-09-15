@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _dev;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile.Data;
@@ -14,7 +15,7 @@ namespace CodeBase.Gameplay.Tile
 
         public List<TileConnection> Connections { get; private set; } = new();
 
-        public HexCoordinates Coordinates { get; private set; }
+        public HexPosition Coordinates { get; private set; }
 
         public RegionObject Region { get; private set; }
 
@@ -22,7 +23,7 @@ namespace CodeBase.Gameplay.Tile
 
         public TextMeshProUGUI DebugText => _instance.DebugText;
 
-        public void Constructor(TilePrefabData instance, HexCoordinates coordinates)
+        public void Constructor(TilePrefabData instance, HexPosition coordinates)
         {
             _instance = instance;
             Coordinates = coordinates;

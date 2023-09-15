@@ -1,7 +1,10 @@
 using _dev;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Region.Data;
+using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor
 {
@@ -26,5 +29,19 @@ namespace CodeBase.Infrastructure.MapEditor
         }
 
         public void ProcessTile(TileObject tileObject) => _model.ProcessTile(tileObject);
+
+        public void SelectTile(TileObject component, Vector2 hitPoint)
+        {
+            var position = component.transform.position;
+            var coordinates = new Vector2(position.x, position.y);
+
+            UnityEngine.Debug.Log(
+                $"Component: {component.Coordinates}, Calculated: {HexMath.FromWorldPosition(coordinates)}");
+        }
+
+        public void ProcessTiles()
+        {
+            //UnityEngine.Debug.Log("Process");
+        }
     }
 }

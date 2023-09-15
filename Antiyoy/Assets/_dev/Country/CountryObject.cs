@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Terrain;
+﻿using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace _dev.Country
             _capitalPrefab = capitalPrefab;
         }
 
-        public void Create(TerrainObject terrain, HexCoordinates coordinates, Color color)
+        public void Create(TerrainObject terrain, HexPosition coordinates, Color color)
         {
             var capitalTile = terrain.Tiles.Get(coordinates);
             var country = new CountryObject();

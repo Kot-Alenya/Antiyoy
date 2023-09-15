@@ -122,6 +122,7 @@ namespace CodeBase.Gameplay.Terrain
             }
 
             Separate(newRegion);
+            Separate(regionObject);
         }
 
         private void Add(TileObject tile, RegionObject regionObject)

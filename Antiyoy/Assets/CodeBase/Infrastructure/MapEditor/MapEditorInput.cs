@@ -17,13 +17,9 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void Update()
         {
-            //всё поле чёрное, но, места для тайлов - серые.
-            //тоесть есть дефолтный цывет тайлов.
-            //нейтральный регион - тоже регион.
-            //расчёт поля прост => мы можем просто создавать тайлы и удалять их!
-            
-            //при нажатии на мышь, указываем регионы.
-            
+            if (Input.GetMouseButtonUp(0))
+                _controller.ProcessTiles();
+
             if (!Input.GetMouseButtonDown(0))
                 return;
 
@@ -34,7 +30,11 @@ namespace CodeBase.Infrastructure.MapEditor
                 return;
 
             if (hit.transform.TryGetComponent<TileObject>(out var tile))
-                _controller.ProcessTile(tile);
+                _controller.SelectTile(tile, hit.point);
+
+            //как регулировать backround?
+            //terrain.SetBackground();
+            //создаём террейн тайлов, но эти тайлы 
         }
     }
 }
