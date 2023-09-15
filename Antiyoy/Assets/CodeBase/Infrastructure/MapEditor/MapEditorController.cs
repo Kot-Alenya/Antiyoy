@@ -1,6 +1,7 @@
 using _dev;
 using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Region.Data;
+using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
@@ -10,9 +11,14 @@ namespace CodeBase.Infrastructure.MapEditor
 {
     public class MapEditorController
     {
+        private readonly TerrainObject _terrainObject;
         private readonly MapEditorModel _model;
 
-        public MapEditorController(MapEditorModel model) => _model = model;
+        public MapEditorController(TerrainObject terrainObject, MapEditorModel model)
+        {
+            _terrainObject = terrainObject;
+            _model = model;
+        }
 
         public void SetRegionMode(RegionType regionType)
         {
@@ -30,13 +36,12 @@ namespace CodeBase.Infrastructure.MapEditor
 
         public void ProcessTile(TileObject tileObject) => _model.ProcessTile(tileObject);
 
-        public void SelectTile(TileObject component, Vector2 hitPoint)
+        public void SelectTile(Vector2 hitPoint)
         {
-            var position = component.transform.position;
-            var coordinates = new Vector2(position.x, position.y);
+            var hexPosition = HexMath.FromWorldPosition(hitPoint);
 
-            UnityEngine.Debug.Log(
-                $"Component: {component.Coordinates}, Calculated: {HexMath.FromWorldPosition(hitPoint)}");
+            if (_terrainObject.IsHexInTerrain(hexPosition))
+                UnityEngine.Debug.Log(_terrainObject.Tiles.Get(hexPosition).Coordinates);
         }
 
         public void ProcessTiles()

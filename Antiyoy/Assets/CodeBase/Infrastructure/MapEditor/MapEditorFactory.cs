@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.MapEditor
         {
             var instance = Object.Instantiate(_prefabData);
             var model = new MapEditorModel(terrainObject, _entityFactory);
-            var controller = new MapEditorController(model);
+            var controller = new MapEditorController(terrainObject, model);
 
             CreateInput(instance, cameraObject, controller);
             ConstructUI(instance, controller);

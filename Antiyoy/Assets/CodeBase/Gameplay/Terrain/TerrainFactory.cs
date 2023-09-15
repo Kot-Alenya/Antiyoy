@@ -23,22 +23,13 @@ namespace CodeBase.Gameplay.Terrain
 
         public TerrainObject Create()
         {
-            var gameObject = new GameObject(nameof(TerrainObject));
-            var tiles = CreateTerrainTiles(gameObject.transform, _staticData.Size);
+            var root = new GameObject(nameof(TerrainObject)).transform;
+            var tiles = CreateTerrainTiles(root, _staticData.Size);
             var regions = new TerrainRegions();
             var terrain = new TerrainObject(tiles, regions, _staticData.Size);
 
             ConnectTiles(terrain);
-            //как создавать террейн?
-
-            //создать все нужные массивы.
-            //добавлять в террейн новые тайлы, созданные в factory.
-            //как определить местоположение для создания тайла?
-
-            //создать все нужные массивы и упращённые тайлы.
-            //настраиваем(активируем) тайлы в террейне.
-
-            //создаём клектки(background), клетки определяют позиции гексов.
+            CreateBackground(root, _staticData.Size);
 
             return terrain;
         }
@@ -79,13 +70,14 @@ namespace CodeBase.Gameplay.Terrain
 
         private void CreateBackground(Transform root, Vector2Int size)
         {
-            var instance = new GameObject();
+            var instance = Object.Instantiate(_staticData.BackgroundPrefabData, root, true);
+            var middleHexIndex = (size - Vector2Int.one) / 2;
+            var middleHexPosition = HexMath.ToWorldPosition(HexMath.FromArrayIndex(middleHexIndex));
+            var xPositionOffset = middleHexPosition.x + HexMath.InnerRadius / 2f;
+            var position = new Vector3(xPositionOffset, middleHexPosition.y, instance.transform.position.z);
 
-            instance.transform.SetParent(root);
-            //instance.transform.;
-
-            //нужен доступ к расчёту позиции.
-            //из hex в position & position в hex
+            instance.Transform.localScale = new Vector3(size.x - 1, size.y - 2);
+            instance.Transform.position = position;
         }
     }
 }

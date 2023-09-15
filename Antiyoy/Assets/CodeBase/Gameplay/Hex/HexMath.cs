@@ -6,8 +6,8 @@ namespace CodeBase.Gameplay.Hex
     {
         private const float HexSize = 1f;
 
-        private static readonly float OuterRadius = HexSize / 2f;
-        private static readonly float InnerRadius = Mathf.Sqrt(3) * OuterRadius / 2;
+        public static readonly float OuterRadius = HexSize / 2f;
+        public static readonly float InnerRadius = Mathf.Sqrt(3) * OuterRadius / 2;
 
         public static HexPosition FromArrayIndex(Vector2Int index)
         {

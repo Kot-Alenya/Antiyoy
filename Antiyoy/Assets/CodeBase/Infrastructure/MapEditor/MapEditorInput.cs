@@ -29,12 +29,7 @@ namespace CodeBase.Infrastructure.MapEditor
             if (hit.transform == null)
                 return;
 
-            if (hit.transform.TryGetComponent<TileObject>(out var tile))
-                _controller.SelectTile(tile, hit.point);
-
-            //как регулировать backround?
-            //terrain.SetBackground();
-            //создаём террейн тайлов, но эти тайлы 
+            _controller.SelectTile(hit.point);
         }
     }
 }
