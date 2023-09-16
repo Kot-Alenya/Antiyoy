@@ -12,14 +12,13 @@ namespace CodeBase.Gameplay.Tile
     public class TileObject : MonoBehaviour
     {
         private TilePrefabData _instance;
-
+        
         public List<TileConnection> Connections { get; private set; } = new();
-
+        //что делать со связями?
+        
         public HexPosition Coordinates { get; private set; }
 
         public RegionObject Region { get; private set; }
-
-        public IEntityController Entity { get; private set; }
 
         public TextMeshProUGUI DebugText => _instance.DebugText;
 
@@ -29,18 +28,14 @@ namespace CodeBase.Gameplay.Tile
             Coordinates = coordinates;
         }
 
-        public void SetRegion(RegionObject region)
+        public void Initialize(RegionObject regionObject)
         {
-            Region = region;
-            _instance.SpriteRenderer.color = region.Color;
+            Region = regionObject;
+            _instance.SpriteRenderer.color = regionObject.Color;
         }
 
-        public void SetEntity(IEntityController entity) => Entity = entity;
-
-        public void RemoveRegion()
+        public void Dispose()
         {
-            Region = null;
-            _instance.SpriteRenderer.color = Color.clear;
         }
     }
 }

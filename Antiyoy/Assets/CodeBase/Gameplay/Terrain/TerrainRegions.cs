@@ -33,6 +33,16 @@ namespace CodeBase.Gameplay.Terrain
             tileObject.RemoveRegion();
         }
 
+        public bool TryGetRegion(TileObject tileObject, RegionType regionType)
+        {
+            var neighbourRegions = GetRegionsInNeighbours(tileObject, regionType);
+
+            if (neighbourRegions.Count > 0)
+            {
+                return true;
+            }
+        }
+
         public void Set(TileObject tileObject, RegionType regionType)
         {
             if (IsTypesMatch(tileObject.Region, regionType))

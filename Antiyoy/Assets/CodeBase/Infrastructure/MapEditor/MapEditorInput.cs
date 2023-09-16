@@ -1,4 +1,5 @@
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace CodeBase.Infrastructure.MapEditor
             if (Input.GetMouseButtonUp(0))
                 _controller.ProcessTiles();
 
-            if (!Input.GetMouseButtonDown(0))
+            if (!Input.GetMouseButton(0))
                 return;
 
             var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);
@@ -29,7 +30,7 @@ namespace CodeBase.Infrastructure.MapEditor
             if (hit.transform == null)
                 return;
 
-            _controller.SelectTile(hit.point);
+            _controller.SelectTile(HexMath.FromWorldPosition(hit.point));
         }
     }
 }
