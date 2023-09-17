@@ -26,7 +26,7 @@ namespace CodeBase.Infrastructure.MapEditor
             var terrainObject = _terrainFactory.Create();
             var cameraObject = _cameraFactory.Create();
             var entityFactory = new EntityFactory(_staticData);
-            var mapEditorFactory = new MapEditorFactory(_prefabData, entityFactory);
+            var mapEditorFactory = new MapEditorFactory(_prefabData);
 
             mapEditorFactory.Create(terrainObject, cameraObject);
         }

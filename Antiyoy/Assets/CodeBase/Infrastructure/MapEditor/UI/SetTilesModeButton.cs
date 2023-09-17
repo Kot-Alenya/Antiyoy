@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor.UI
 {
-    public class SetRegionModeButton : ButtonBase, IMapEditorUIElement
+    public class SetTilesModeButton : ButtonBase, IMapEditorUIElement
     {
-        [SerializeField] private RegionType _region;
+        [SerializeField] private RegionType _tilesRegionType;
 
         private MapEditorController _controller;
 
         public void Constructor(MapEditorController controller) => _controller = controller;
 
-        private protected override void OnClick() => _controller.SetRegionMode(_region);
+        private protected override void OnClick() => _controller.SetTilesMode(_tilesRegionType);
     }
 }

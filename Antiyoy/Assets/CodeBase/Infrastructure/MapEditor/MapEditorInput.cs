@@ -1,6 +1,5 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -21,13 +20,13 @@ namespace CodeBase.Infrastructure.MapEditor
             if (Input.GetMouseButtonUp(0))
                 _controller.ProcessTiles();
 
-            if (!Input.GetMouseButton(0))
+            if (!Input.GetMouseButtonDown(0))
                 return;
 
             var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit.transform == null)
+            if (hit.transform == default)
                 return;
 
             _controller.SelectTile(HexMath.FromWorldPosition(hit.point));

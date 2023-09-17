@@ -1,6 +1,6 @@
 ﻿namespace CodeBase.Gameplay.Region.Data
 {
-    public enum RegionType
+    public enum RegionType //tiles region?
     {
         Neutral,
         Red,

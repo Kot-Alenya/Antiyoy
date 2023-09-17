@@ -2,6 +2,7 @@
 using _dev;
 using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Region;
+using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile.Data;
 using TMPro;
@@ -9,24 +10,34 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.Tile
 {
-    public class TileObject : MonoBehaviour
+    public struct TileData
     {
-        private TilePrefabData _instance;
-        
-        public List<TileConnection> Connections { get; private set; } = new();
+        public RegionObject Region;
+        public HexPosition Hex;
+    }
+
+    public class TileObject //model + controller or just DATA
+    {
+        private readonly TilePrefabData _instance;
+
+        public List<TileObject> Connections { get; private set; } = new();
         //что делать со связями?
-        
-        public HexPosition Coordinates { get; private set; }
+
+        public HexPosition Hex { get; private set; }
 
         public RegionObject Region { get; private set; }
 
         public TextMeshProUGUI DebugText => _instance.DebugText;
 
-        public void Constructor(TilePrefabData instance, HexPosition coordinates)
+        public TileObject(TilePrefabData instance, HexPosition coordinates, RegionType regionType)
         {
             _instance = instance;
-            Coordinates = coordinates;
+            Hex = coordinates;
+            Type = regionType;
         }
+
+        public RegionType Type { get; set; }
+        public Object GameObject => _instance.gameObject;
 
         public void Initialize(RegionObject regionObject)
         {
@@ -36,6 +47,24 @@ namespace CodeBase.Gameplay.Tile
 
         public void Dispose()
         {
+        }
+
+        public void RemoveFromConnections(TileObject tileObject)
+        {
+            for (var i = 0; i < Connections.Count; i++)
+            {
+                if (Connections[i] == tileObject)
+                {
+                    Connections.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        public void SetRegion(RegionObject region)
+        {
+            Region = region;
+            _instance.SpriteRenderer.color = region.Color;
         }
     }
 }

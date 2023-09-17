@@ -28,7 +28,7 @@ namespace _dev
 
         private CapitalController CreateCapital(TileObject rootTile)
         {
-            var instance = UnityEngine.Object.Instantiate(_staticData.CapitalPrefab, rootTile.transform);
+            //var instance = UnityEngine.Object.Instantiate(_staticData.CapitalPrefab, rootTile.transform);
             var capital = new CapitalController();
 
             return capital;

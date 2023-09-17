@@ -6,6 +6,7 @@ namespace CodeBase.Gameplay.Region
 {
     public class RegionFactory
     {
+        /*
         private readonly RegionStaticData _staticData;
 
         public RegionFactory(StaticData staticData) => _staticData = staticData.RegionStaticData;
@@ -21,5 +22,6 @@ namespace CodeBase.Gameplay.Region
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
+        */
     }
 }

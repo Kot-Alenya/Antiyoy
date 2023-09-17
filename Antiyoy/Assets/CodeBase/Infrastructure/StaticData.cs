@@ -1,6 +1,5 @@
 ﻿using System;
 using CodeBase.Gameplay.Camera.Data;
-using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Tile.Data;
 
@@ -12,6 +11,5 @@ namespace CodeBase.Infrastructure
         public TileStaticData TileStaticData;
         public TerrainStaticData TerrainStaticData;
         public CameraStaticData CameraStaticData;
-        public RegionStaticData RegionStaticData;
     }
 }

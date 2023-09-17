@@ -7,64 +7,71 @@ using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.Terrain
 {
-    public class TerrainRegions
+    public class TerrainRegions //to region Object?
     {
-        public TerrainRegions()
+        public void Recalculate(RegionObject region)
         {
+            var neighbourRegions = GetNeighborRegions(region, region.Type);
+            var regionToSeparate = region;
+
+            //UnityEngine.Debug.Log(neighbourRegions.Count);
+
+            if (neighbourRegions.Count > 1)
+                regionToSeparate = JoinRegions(neighbourRegions);
+
+            foreach (var tile in regionToSeparate.Tiles) tile.DebugText.text = regionToSeparate.Tiles.Count.ToString();
+
+            if (regionToSeparate.Tiles.Count > 0)
+                Separate(regionToSeparate);
         }
 
-        //public void Recalculate()
-        //{
-        //}
-
-        private bool IsTypesMatch(RegionObject regionObject, RegionType regionType)
-            => regionObject != null && regionObject.Type == regionType;
-
-        public void Remove(TileObject tileObject)
+        private List<RegionObject> GetNeighborRegions(RegionObject region, RegionType regionType)
         {
-            if (tileObject.Region == null)
-                return;
+            var regions = new List<RegionObject>();
 
-            tileObject.Region.Tiles.Remove(tileObject);
+            foreach (var rootTile in region.Tiles)
+            foreach (var tile in rootTile.Connections)
+            {
+                //bug в связях!
+                UnityEngine.Debug.Log(rootTile.Connections.Count);
 
-            if (tileObject.Region.Tiles.Count > 0)
-                Separate(tileObject.Region);
+                if (tile.Type != regionType)
+                    continue;
 
-            tileObject.RemoveRegion();
+                if (!regions.Contains(tile.Region))
+                    regions.Add(tile.Region);
+            }
+
+            return regions;
         }
 
-        public bool TryGetRegion(TileObject tileObject, RegionType regionType)
+        private RegionObject JoinRegions(List<RegionObject> regions)
         {
-            var neighbourRegions = GetRegionsInNeighbours(tileObject, regionType);
+            var previous = regions[0];
 
-            if (neighbourRegions.Count > 0)
+            for (var i = 1; i < regions.Count; i++)
             {
-                return true;
+                if (regions[i].Tiles.Count > previous.Tiles.Count)
+                {
+                    MoveTiles(previous, regions[i]);
+                    previous = regions[i];
+                }
+                else
+                    MoveTiles(regions[i], previous);
             }
+
+            return previous;
         }
 
-        public void Set(TileObject tileObject, RegionType regionType)
+        private void MoveTiles(RegionObject fromRegion, RegionObject toRegion)
         {
-            if (IsTypesMatch(tileObject.Region, regionType))
-                return;
-
-            Remove(tileObject);
-
-            //add region.
-            var neighbourRegions = GetRegionsInNeighbours(tileObject, regionType);
-
-            if (neighbourRegions.Count > 0)
+            foreach (var tile in fromRegion.Tiles)
             {
-                Add(tileObject, neighbourRegions[0]);
+                toRegion.Tiles.Add(tile);
+                tile.SetRegion(toRegion);
+            }
 
-                if (neighbourRegions.Count > 1)
-                    JoinRegions(neighbourRegions);
-            }
-            else
-            {
-                var regionObject = new RegionObject(regionType, GetRandomColor());
-                Add(tileObject, regionObject);
-            }
+            fromRegion.Tiles.Clear();
         }
 
         private Color GetRandomColor() => Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -82,14 +89,14 @@ namespace CodeBase.Gameplay.Terrain
 
                 foreach (var connection in tile.Connections)
                 {
-                    if (front.Contains(connection.ConnectedTile))
+                    if (front.Contains(connection))
                         continue;
 
-                    if (passed.Contains(connection.ConnectedTile))
+                    if (passed.Contains(connection))
                         continue;
 
-                    if (regionObject.Tiles.Contains(connection.ConnectedTile))
-                        front.Add(connection.ConnectedTile);
+                    if (regionObject.Tiles.Contains(connection))
+                        front.Add(connection);
                 }
 
                 front.Remove(tile);
@@ -131,58 +138,16 @@ namespace CodeBase.Gameplay.Terrain
                 regionObject.Tiles.Remove(tileObject);
             }
 
+            foreach (var tile in newRegion.Tiles) tile.DebugText.text = newRegion.Tiles.Count.ToString();
+            foreach (var tile in regionObject.Tiles) tile.DebugText.text = regionObject.Tiles.Count.ToString();
+
             Separate(newRegion);
             Separate(regionObject);
         }
 
-        private void Add(TileObject tile, RegionObject regionObject)
+        public RegionObject CreateRegion(RegionType regionType)
         {
-            regionObject.Tiles.Add(tile);
-            tile.SetRegion(regionObject);
-        }
-
-        private void MoveTiles(RegionObject fromRegion, RegionObject toRegion)
-        {
-            foreach (var tile in fromRegion.Tiles)
-                Add(tile, toRegion);
-
-            fromRegion.Tiles.Clear();
-        }
-
-        private List<RegionObject> GetRegionsInNeighbours(TileObject tileObject, RegionType regionType)
-        {
-            var regions = new List<RegionObject>();
-
-            foreach (var connection in tileObject.Connections)
-            {
-                var neighbourRegion = connection.ConnectedTile.Region;
-
-                if (!IsTypesMatch(neighbourRegion, regionType))
-                    continue;
-
-                if (regions.Contains(neighbourRegion))
-                    continue;
-
-                regions.Add(neighbourRegion);
-            }
-
-            return regions;
-        }
-
-        private void JoinRegions(List<RegionObject> regions)
-        {
-            var previous = regions[0];
-
-            for (var i = 1; i < regions.Count; i++)
-            {
-                if (regions[i].Tiles.Count > previous.Tiles.Count)
-                {
-                    MoveTiles(previous, regions[i]);
-                    previous = regions[i];
-                }
-                else
-                    MoveTiles(regions[i], previous);
-            }
+            return new RegionObject(regionType, GetRandomColor());
         }
     }
 }

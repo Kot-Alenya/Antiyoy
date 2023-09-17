@@ -6,5 +6,8 @@ namespace CodeBase.Gameplay.Tile.Data
     public class TileStaticData : ScriptableObject
     {
         public TilePrefabData Prefab;
+        public Color NeutralColor;
+        public Color RedColor;
+        public Color BlueColor;
     }
 }

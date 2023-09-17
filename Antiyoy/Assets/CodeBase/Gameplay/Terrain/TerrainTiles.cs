@@ -17,16 +17,13 @@ namespace CodeBase.Gameplay.Terrain
             _size = size;
         }
 
-        public void Set(TileObject tile, HexPosition hex) =>
-            _tiles[GetIndex(hex)] = tile;
+        public void Set(TileObject tile, HexPosition hex) => _tiles[GetIndex(hex)] = tile;
 
-        public TileObject Get(HexPosition hex) =>
-            _tiles[GetIndex(hex)];
+        public TileObject Get(HexPosition hex) => _tiles[GetIndex(hex)];
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IEnumerator<TileObject> GetEnumerator() =>
-            ((IEnumerable<TileObject>)_tiles).GetEnumerator();
+        public IEnumerator<TileObject> GetEnumerator() => ((IEnumerable<TileObject>)_tiles).GetEnumerator();
 
         private int GetIndex(HexPosition hex)
         {

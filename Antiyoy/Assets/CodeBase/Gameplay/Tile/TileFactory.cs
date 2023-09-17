@@ -1,7 +1,10 @@
-﻿using CodeBase.Gameplay.Hex;
+﻿using System;
+using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Tile.Data;
 using CodeBase.Infrastructure;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Gameplay.Tile
 {
@@ -11,16 +14,17 @@ namespace CodeBase.Gameplay.Tile
 
         public TileFactory(StaticData data) => _staticData = data.TileStaticData;
 
-        public TileObject Create(Transform root, HexPosition hex)
+        public TileObject Create(Transform root, HexPosition hex, RegionType regionType)
         {
             var position = HexMath.ToWorldPosition(hex);
             var prefabData = CreatePrefabData(position, root);
-            var tile = prefabData.gameObject.AddComponent<TileObject>();
+            var tile = new TileObject(prefabData, hex, regionType);
 
-            tile.Constructor(prefabData, hex);
-
+            prefabData.SpriteRenderer.color = GetColor(regionType);
             return tile;
         }
+
+        public void Destroy(TileObject tile) => Object.Destroy(tile.GameObject);
 
         private TilePrefabData CreatePrefabData(Vector2 position, Transform root)
         {
@@ -32,6 +36,17 @@ namespace CodeBase.Gameplay.Tile
             gameObject.transform.parent = root;
 
             return gameObject;
+        }
+
+        private Color GetColor(RegionType regionType)
+        {
+            return regionType switch
+            {
+                RegionType.Neutral => _staticData.NeutralColor,
+                RegionType.Red => _staticData.RedColor,
+                RegionType.Blue => _staticData.BlueColor,
+                _ => throw new ArgumentOutOfRangeException(nameof(regionType), regionType, null)
+            };
         }
     }
 }
