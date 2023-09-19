@@ -57,15 +57,19 @@ namespace CodeBase.Gameplay.Terrain
         public void CreateTile(HexPosition hex, RegionType regionType)
         {
             var tile = _tileFactory.Create(_instance.transform, hex, regionType);
-            var neighbours = FindNeighbours(tile.Hex);
+            var neighbours = FindNeighbours(hex);
             var region = GetRegion(neighbours, tile.Type);
+
+            //UnityEngine.Debug.Log(neighbours.Count);
+
+            tile.Connections.AddRange(neighbours);
 
             foreach (var neighbour in neighbours)
                 neighbour.Connections.Add(tile);
 
             region.Tiles.Add(tile);
             tile.SetRegion(region);
-            _tiles.Set(tile, tile.Hex);
+            _tiles.Set(tile, hex);
 
             if (!_changedRegions.Contains(region))
                 _changedRegions.Add(region);

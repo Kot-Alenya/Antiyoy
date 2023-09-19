@@ -20,7 +20,7 @@ namespace CodeBase.Infrastructure.MapEditor
             if (Input.GetMouseButtonUp(0))
                 _controller.ProcessTiles();
 
-            if (!Input.GetMouseButtonDown(0))
+            if (!Input.GetMouseButton(0))
                 return;
 
             var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);

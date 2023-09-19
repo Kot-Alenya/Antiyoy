@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.Terrain
             foreach (var tile in rootTile.Connections)
             {
                 //bug в связях!
-                UnityEngine.Debug.Log(rootTile.Connections.Count);
+                //UnityEngine.Debug.Log(rootTile.Connections.Count);
 
                 if (tile.Type != regionType)
                     continue;
