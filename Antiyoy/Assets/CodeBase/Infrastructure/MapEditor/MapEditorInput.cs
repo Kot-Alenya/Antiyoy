@@ -1,5 +1,5 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Terrain.Data.Hex;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor

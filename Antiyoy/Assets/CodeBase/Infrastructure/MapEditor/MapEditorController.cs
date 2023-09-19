@@ -1,5 +1,6 @@
-using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Region.Data;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor

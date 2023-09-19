@@ -1,9 +1,10 @@
-using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Terrain;
 using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -29,7 +30,7 @@ namespace CodeBase.Infrastructure.MapEditor
 
             if (_selectedTiles.Contains(hex))
                 return;
-            
+
             if (_currentMode == MapEditorMode.SetTiles)
                 _terrain.CreateTile(hex, _currentRegion);
             else if (_currentMode == MapEditorMode.RemoveTiles)
@@ -53,7 +54,7 @@ namespace CodeBase.Infrastructure.MapEditor
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             _selectedTiles.Clear();
         }
     }

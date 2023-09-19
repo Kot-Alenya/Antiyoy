@@ -1,132 +1,95 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Region;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainModel
     {
-        private readonly List<RegionObject> _changedRegions = new();
+        private readonly List<RegionData> _changedRegions = new();
         private readonly TerrainTiles _tiles;
         private readonly TerrainRegions _regions;
         private readonly GameObject _instance;
         private readonly TileFactory _tileFactory;
-        private readonly Vector2Int _size;
 
-        public TerrainModel(TerrainTiles tiles, TerrainRegions regions, GameObject instance, TileFactory tileFactory,
-            Vector2Int size)
+        public TerrainModel(TerrainTiles tiles, TerrainRegions regions, GameObject instance, TileFactory tileFactory)
         {
             _tiles = tiles;
             _regions = regions;
             _instance = instance;
             _tileFactory = tileFactory;
-            _size = size;
         }
 
-        public bool IsHexInTerrain(HexPosition hex)
-        {
-            var index = HexMath.ToArrayIndex(hex);
+        public bool IsHexInTerrain(HexPosition hex) => _tiles.IsHexInArraySize(hex);
 
-            if (index.x < 0)
-                return false;
-
-            if (index.x >= _size.x)
-                return false;
-
-            if (index.y < 0)
-                return false;
-
-            return index.y < _size.y;
-        }
-
-        public bool TryGetTile(HexPosition hex, out TileObject tile)
-        {
-            if (IsHexInTerrain(hex))
-            {
-                tile = _tiles.Get(hex);
-                return tile != default;
-            }
-
-            tile = default;
-            return false;
-        }
+        public bool TryGetTile(HexPosition hex, out TileData tile) => _tiles.TryGet(hex, out tile);
 
         public void CreateTile(HexPosition hex, RegionType regionType)
         {
-            var tile = _tileFactory.Create(_instance.transform, hex, regionType);
-            var neighbours = FindNeighbours(hex);
-            var region = GetRegion(neighbours, tile.Type);
+            var tile = _tileFactory.Create(_instance.transform, hex);
 
-            //UnityEngine.Debug.Log(neighbours.Count);
-
-            tile.Connections.AddRange(neighbours);
-
-            foreach (var neighbour in neighbours)
-                neighbour.Connections.Add(tile);
-
-            region.Tiles.Add(tile);
-            tile.SetRegion(region);
-            _tiles.Set(tile, hex);
-
-            if (!_changedRegions.Contains(region))
-                _changedRegions.Add(region);
+            _tiles.Set(tile, tile.Hex);
+            ConnectNeighbours(tile);
+            ConnectToRegion(tile, regionType);
         }
 
-        public void DestroyTile(TileObject tile)
+        public void DestroyTile(TileData tile)
         {
-            var region = tile.Region;
-
-            foreach (var neighbour in tile.Connections)
-                neighbour.RemoveFromConnections(tile);
+            DisconnectNeighbours(tile);
+            DisconnectFromRegion(tile);
 
             _tiles.Set(null, tile.Hex);
-            region.Tiles.Remove(tile);
             _tileFactory.Destroy(tile);
-
-            if (!_changedRegions.Contains(region))
-                _changedRegions.Add(region);
         }
 
         public void RecalculateChangedRegions()
         {
-            //UnityEngine.Debug.Log(_changedRegions.Count);
-
-            foreach (var region in _changedRegions)
-                _regions.Recalculate(region);
-
+            _regions.Recalculate(_changedRegions);
             _changedRegions.Clear();
         }
 
-        private List<TileObject> FindNeighbours(HexPosition rootHex)
+        private void ConnectNeighbours(TileData tile)
         {
-            var neighbours = new List<TileObject>();
+            var neighbours = _tiles.GetNeighbours(tile.Hex);
 
-            foreach (var direction in HexPositionDirections.Directions)
+            foreach (var neighbour in neighbours)
             {
-                var neighbourHex = rootHex + direction;
-
-                if (!IsHexInTerrain(neighbourHex))
-                    continue;
-
-                var neighbour = _tiles.Get(neighbourHex);
-
-                if (neighbour != null)
-                    neighbours.Add(neighbour);
+                neighbour.Neighbors.Add(tile);
+                tile.Neighbors.Add(neighbour);
             }
-
-            return neighbours;
         }
 
-        private RegionObject GetRegion(List<TileObject> tileNeighbours, RegionType regionType)
+        private void DisconnectNeighbours(TileData tile)
         {
-            foreach (var neighbour in tileNeighbours)
-                if (neighbour.Type == regionType)
-                    return neighbour.Region;
+            foreach (var neighbour in tile.Neighbors)
+                neighbour.RemoveFromNeighbors(tile);
 
-            return _regions.CreateRegion(regionType); //FACTORY
+            tile.Neighbors.Clear();
+        }
+
+        private void ConnectToRegion(TileData tile, RegionType regionType)
+        {
+            var region = _regions.GetOrCreateRegionFromNeighbors(tile, regionType);
+
+            region.Tiles.Add(tile);
+            tile.SetRegion(region);
+
+            if (!_changedRegions.Contains(region))
+                _changedRegions.Add(region);
+        }
+
+        private void DisconnectFromRegion(TileData tile)
+        {
+            var region = tile.Region;
+
+            region.Tiles.Remove(tile);
+
+            if (!_changedRegions.Contains(region))
+                _changedRegions.Add(region);
         }
     }
 }

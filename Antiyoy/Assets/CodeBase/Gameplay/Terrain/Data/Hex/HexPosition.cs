@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Gameplay.Hex
+namespace CodeBase.Gameplay.Terrain.Data.Hex
 {
     public struct HexPosition : IEquatable<HexPosition>
     {

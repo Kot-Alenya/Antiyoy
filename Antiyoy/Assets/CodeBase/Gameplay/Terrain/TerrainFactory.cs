@@ -1,7 +1,8 @@
-﻿using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile;
+﻿using CodeBase.Gameplay.Terrain.Data;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
@@ -11,25 +12,27 @@ namespace CodeBase.Gameplay.Terrain
     {
         private readonly TerrainStaticData _staticData;
         private readonly TileFactory _tileFactory;
+        private readonly RegionFactory _regionFactory;
 
-        public TerrainFactory(StaticData data, TileFactory tileFactory)
+        public TerrainFactory(StaticData data, TileFactory tileFactory, RegionFactory regionFactory)
         {
             _staticData = data.TerrainStaticData;
             _tileFactory = tileFactory;
+            _regionFactory = regionFactory;
         }
 
         public TerrainController Create()
         {
             var root = new GameObject(nameof(TerrainController));
             var tiles = new TerrainTiles(_staticData.Size);
-            var regions = new TerrainRegions();
-            var model = new TerrainModel(tiles, regions, root, _tileFactory, _staticData.Size);
+            var regions = new TerrainRegions(_regionFactory);
+            var model = new TerrainModel(tiles, regions, root, _tileFactory);
             var terrain = new TerrainController(model);
 
             CreateBackground(root.transform, _staticData.Size);
             CreateTiles(terrain, _staticData.Size);
             terrain.RecalculateChangedRegions();
-            
+
             return terrain;
         }
 

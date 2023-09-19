@@ -1,6 +1,8 @@
-﻿using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Tile;
+﻿using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 
 namespace CodeBase.Gameplay.Terrain
 {
@@ -11,8 +13,6 @@ namespace CodeBase.Gameplay.Terrain
         public TerrainController(TerrainModel model) => _model = model;
 
         public bool IsHexInTerrain(HexPosition hex) => _model.IsHexInTerrain(hex);
-
-        public bool TryGetTile(HexPosition hex, out TileObject tile) => _model.TryGetTile(hex, out tile);
 
         public void CreateTile(HexPosition hex, RegionType regionType)
         {

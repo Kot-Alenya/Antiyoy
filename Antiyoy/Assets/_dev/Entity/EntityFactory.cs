@@ -1,5 +1,6 @@
 using System;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 
 namespace _dev
 {
@@ -9,7 +10,7 @@ namespace _dev
 
         public EntityFactory(EntityStaticData staticData) => _staticData = staticData;
 
-        public IEntityController Create(EntityType entityType, TileObject rootTile)
+        public IEntityController Create(EntityType entityType, TileData rootTile)
         {
             switch (entityType)
             {
@@ -26,7 +27,7 @@ namespace _dev
             return default;
         }
 
-        private CapitalController CreateCapital(TileObject rootTile)
+        private CapitalController CreateCapital(TileData rootTile)
         {
             //var instance = UnityEngine.Object.Instantiate(_staticData.CapitalPrefab, rootTile.transform);
             var capital = new CapitalController();
