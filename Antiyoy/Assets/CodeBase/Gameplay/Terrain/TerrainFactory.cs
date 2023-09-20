@@ -1,8 +1,8 @@
-﻿using CodeBase.Gameplay.Region;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Terrain.Data;
-using CodeBase.Gameplay.Tile;
-using CodeBase.Gameplay.Tile.Data;
+﻿using CodeBase.Gameplay.Terrain.Data;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Infrastructure;
 using UnityEngine;
 
@@ -11,64 +11,65 @@ namespace CodeBase.Gameplay.Terrain
     public class TerrainFactory
     {
         private readonly TerrainStaticData _staticData;
-        private readonly RegionFactory _regionFactory;
         private readonly TileFactory _tileFactory;
+        private readonly RegionFactory _regionFactory;
 
-        public TerrainFactory(StaticData data, RegionFactory regionFactory, TileFactory tileFactory)
+        public TerrainFactory(StaticData data, TileFactory tileFactory, RegionFactory regionFactory)
         {
             _staticData = data.TerrainStaticData;
-            _regionFactory = regionFactory;
             _tileFactory = tileFactory;
+            _regionFactory = regionFactory;
         }
 
-        public TerrainObject Create()
+        public TerrainController Create()
         {
-            var gameObject = new GameObject(nameof(TerrainObject));
-            var regions = CreateRegions();
-            var tiles = CreateTerrainTiles(regions, gameObject.transform, _staticData.Size);
-            var terrain = new TerrainObject(tiles, regions);
+            var root = new GameObject(nameof(TerrainController));
+            var tiles = new TerrainTiles(_staticData.Size);
+            var regions = new TerrainRegions(_regionFactory);
+            var model = new TerrainModel(tiles, regions, root, _tileFactory);
+            var terrain = new TerrainController(model);
 
-            ConnectTiles(tiles);
+            CreateBackground(root.transform, _staticData.Size);
+            CreateTiles(terrain, _staticData.Size);
+            terrain.RecalculateChangedRegions();
 
             return terrain;
         }
 
-        private TerrainRegions CreateRegions()
+        private void CreateTiles(TerrainController terrain, Vector2Int size)
         {
-            return new TerrainRegions();
-        }
-
-        private TerrainTiles CreateTerrainTiles(TerrainRegions regions, Transform root, Vector2Int size)
-        {
-            var tiles = new TerrainTiles(size);
-
             for (var y = 0; y < size.y; y++)
             for (var x = 0; x < size.x; x++)
             {
-                var coordinates = new HexCoordinates(x, y);
-                var tile = _tileFactory.Create(root, coordinates);
-
-                tiles.Set(tile, coordinates);
+                var arrayIndex = new Vector2Int(x, y);
+                var hex = HexMath.FromArrayIndex(arrayIndex);
+                terrain.CreateTile(hex, RegionType.Neutral);
             }
-
-            return tiles;
         }
 
-        private void ConnectTiles(TerrainTiles tiles)
+        private void CreateBackground(Transform root, Vector2Int size)
         {
-            foreach (var tile in tiles)
-            foreach (var direction in HexCoordinatesDirections.Directions)
-            {
-                var neighbourTileHex = tile.Coordinates + direction;
+            var instance = Object.Instantiate(_staticData.BackgroundPrefabData, root);
 
-                if (!tiles.IsHexValid(neighbourTileHex))
-                    continue;
+            var maxArrayIndex = size - Vector2Int.one;
+            var halfTileSize = new Vector2(HexMath.InnerRadius, HexMath.OuterRadius);
+            var lastPointOffset = maxArrayIndex.y % 2f == 0
+                ? Vector2.right * HexMath.InnerRadius
+                : Vector2.zero;
 
-                var neighbourTile = tiles.Get(neighbourTileHex);
-                var connection = new TileConnection(neighbourTile);
+            var firstTileHex = HexMath.FromArrayIndex(Vector2Int.zero);
+            var lastTileHex = HexMath.FromArrayIndex(maxArrayIndex);
 
-                tile.Connections.Add(connection);
-            }
+            var firstPoint = HexMath.ToWorldPosition(firstTileHex) - halfTileSize;
+            var lastPoint = HexMath.ToWorldPosition(lastTileHex) + halfTileSize + lastPointOffset;
+
+            var scale = lastPoint - firstPoint;
+
+            var center = firstPoint + scale / 2f;
+            var position = new Vector3(center.x, center.y, instance.Transform.position.z);
+
+            instance.Transform.localScale = scale;
+            instance.Transform.position = position;
         }
     }
 }

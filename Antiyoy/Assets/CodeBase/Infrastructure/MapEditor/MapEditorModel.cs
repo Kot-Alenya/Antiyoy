@@ -1,69 +1,61 @@
-using CodeBase.Gameplay.Region.Data;
 using CodeBase.Gameplay.Terrain;
-using CodeBase.Gameplay.Tile;
 using System;
-using _dev;
+using System.Collections.Generic;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor
 {
     public class MapEditorModel
     {
-        private readonly TerrainObject _terrainObject;
-        private readonly EntityFactory _entityFactory;
+        private readonly TileFactory _tileFactory;
+        private readonly TerrainController _terrain;
+        private readonly List<HexPosition> _selectedTiles = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
-        private EntityType _currentEntity;
 
-        public MapEditorModel(TerrainObject terrainObject, EntityFactory entityFactory)
-        {
-            _terrainObject = terrainObject;
-            _entityFactory = entityFactory;
-        }
+        public MapEditorModel(TerrainController terrain) => _terrain = terrain;
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
 
         public void SetCurrentRegion(RegionType region) => _currentRegion = region;
 
-        public void SetCurrentEntity(EntityType entityType) => _currentEntity = entityType;
+        public void SelectTile(HexPosition hex)
+        {
+            if (!_terrain.IsHexInTerrain(hex))
+                return;
 
-        public void ProcessTile(TileObject tileObject)
+            if (_selectedTiles.Contains(hex))
+                return;
+
+            if (_currentMode == MapEditorMode.SetTiles)
+                _terrain.CreateTile(hex, _currentRegion);
+            else if (_currentMode == MapEditorMode.RemoveTiles)
+                _terrain.DestroyTile(hex);
+
+            _selectedTiles.Add(hex);
+        }
+
+        public void ProcessTiles()
         {
             switch (_currentMode)
             {
                 case MapEditorMode.None:
                     break;
-                case MapEditorMode.SetRegion:
-                    SetRegion(tileObject);
+                case MapEditorMode.SetTiles:
+                    _terrain.RecalculateChangedRegions();
                     break;
-                case MapEditorMode.RemoveRegion:
-                    RemoveRegion(tileObject);
-                    break;
-                case MapEditorMode.SetEntity:
-                    //SetEntity(tileObject);
+                case MapEditorMode.RemoveTiles:
+                    _terrain.RecalculateChangedRegions();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
 
-        private void SetRegion(TileObject tileObject) =>
-            _terrainObject.Regions.Set(tileObject, _currentRegion);
-
-        private void RemoveRegion(TileObject tileObject) =>
-            _terrainObject.Regions.Remove(tileObject);
-        
-        private void SetEntity(TileObject tileObject)
-        {
-            //if (tileObject.Region.Type == RegionType.None)
-            //     return;
-
-            //if (tileObject.Region.Capital != null)
-            //    return;
-
-            var entity = _entityFactory.Create(_currentEntity, tileObject);
-            tileObject.SetEntity(entity);
-            //tileObject.Region.Capital = entity as CapitalController;
+            _selectedTiles.Clear();
         }
     }
 }

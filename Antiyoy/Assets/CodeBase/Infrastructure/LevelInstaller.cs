@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Terrain;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Tile;
 using UnityEngine;
 using Zenject;
 

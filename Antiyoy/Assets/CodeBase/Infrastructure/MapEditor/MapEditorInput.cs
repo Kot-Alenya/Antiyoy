@@ -1,5 +1,5 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Data.Hex;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -17,24 +17,19 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void Update()
         {
-            //всё поле чёрное, но, места для тайлов - серые.
-            //тоесть есть дефолтный цывет тайлов.
-            //нейтральный регион - тоже регион.
-            //расчёт поля прост => мы можем просто создавать тайлы и удалять их!
-            
-            //при нажатии на мышь, указываем регионы.
-            
-            if (!Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
+                _controller.ProcessTiles();
+
+            if (!Input.GetMouseButton(0))
                 return;
 
             var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit.transform == null)
+            if (hit.transform == default)
                 return;
 
-            if (hit.transform.TryGetComponent<TileObject>(out var tile))
-                _controller.ProcessTile(tile);
+            _controller.SelectTile(HexMath.FromWorldPosition(hit.point));
         }
     }
 }

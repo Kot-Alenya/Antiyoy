@@ -1,4 +1,3 @@
-using _dev;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Infrastructure.MapEditor.Data;
@@ -10,18 +9,13 @@ namespace CodeBase.Infrastructure.MapEditor
     public class MapEditorFactory
     {
         private readonly MapEditorPrefabData _prefabData;
-        private readonly EntityFactory _entityFactory;
 
-        public MapEditorFactory(MapEditorPrefabData prefabData, EntityFactory entityFactory)
-        {
-            _prefabData = prefabData;
-            _entityFactory = entityFactory;
-        }
+        public MapEditorFactory(MapEditorPrefabData prefabData) => _prefabData = prefabData;
 
-        public void Create(TerrainObject terrainObject, CameraObject cameraObject)
+        public void Create(TerrainController terrainController, CameraObject cameraObject)
         {
             var instance = Object.Instantiate(_prefabData);
-            var model = new MapEditorModel(terrainObject, _entityFactory);
+            var model = new MapEditorModel(terrainController);
             var controller = new MapEditorController(model);
 
             CreateInput(instance, cameraObject, controller);

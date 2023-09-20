@@ -1,6 +1,6 @@
-using _dev;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Tile;
+using CodeBase.Gameplay.Terrain.Data.Hex;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -11,20 +11,16 @@ namespace CodeBase.Infrastructure.MapEditor
 
         public MapEditorController(MapEditorModel model) => _model = model;
 
-        public void SetRegionMode(RegionType regionType)
+        public void SetTilesMode(RegionType regionType)
         {
-            _model.SetCurrentMode(MapEditorMode.SetRegion);
+            _model.SetCurrentMode(MapEditorMode.SetTiles);
             _model.SetCurrentRegion(regionType);
         }
 
-        public void RemoveRegionMode() => _model.SetCurrentMode(MapEditorMode.RemoveRegion);
+        public void RemoveTilesMode() => _model.SetCurrentMode(MapEditorMode.RemoveTiles);
 
-        public void SetEntityMode(EntityType entityType)
-        {
-            _model.SetCurrentMode(MapEditorMode.SetEntity);
-            _model.SetCurrentEntity(entityType);
-        }
+        public void SelectTile(HexPosition hex) => _model.SelectTile(hex);
 
-        public void ProcessTile(TileObject tileObject) => _model.ProcessTile(tileObject);
+        public void ProcessTiles() => _model.ProcessTiles();
     }
 }
