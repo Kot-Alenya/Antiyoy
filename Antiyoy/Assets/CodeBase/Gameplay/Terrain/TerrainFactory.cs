@@ -49,13 +49,26 @@ namespace CodeBase.Gameplay.Terrain
 
         private void CreateBackground(Transform root, Vector2Int size)
         {
-            var instance = Object.Instantiate(_staticData.BackgroundPrefabData, root, true);
-            var middleHexIndex = (size - Vector2Int.one) / 2;
-            var middleHexPosition = HexMath.ToWorldPosition(HexMath.FromArrayIndex(middleHexIndex));
-            var xPositionOffset = middleHexPosition.x + HexMath.InnerRadius / 2f;
-            var position = new Vector3(xPositionOffset, middleHexPosition.y, instance.transform.position.z);
+            var instance = Object.Instantiate(_staticData.BackgroundPrefabData, root);
 
-            instance.Transform.localScale = new Vector3(size.x - 1, size.y - 2);
+            var maxArrayIndex = size - Vector2Int.one;
+            var halfTileSize = new Vector2(HexMath.InnerRadius, HexMath.OuterRadius);
+            var lastPointOffset = maxArrayIndex.y % 2f == 0
+                ? Vector2.right * HexMath.InnerRadius
+                : Vector2.zero;
+
+            var firstTileHex = HexMath.FromArrayIndex(Vector2Int.zero);
+            var lastTileHex = HexMath.FromArrayIndex(maxArrayIndex);
+
+            var firstPoint = HexMath.ToWorldPosition(firstTileHex) - halfTileSize;
+            var lastPoint = HexMath.ToWorldPosition(lastTileHex) + halfTileSize + lastPointOffset;
+
+            var scale = lastPoint - firstPoint;
+
+            var center = firstPoint + scale / 2f;
+            var position = new Vector3(center.x, center.y, instance.Transform.position.z);
+
+            instance.Transform.localScale = scale;
             instance.Transform.position = position;
         }
     }
