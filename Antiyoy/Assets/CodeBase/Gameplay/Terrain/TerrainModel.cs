@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Terrain.Data.Hex;
+﻿using CodeBase.Gameplay.Terrain.Data.Hex;
 using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile;
@@ -10,7 +9,6 @@ namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainModel
     {
-        private readonly List<RegionData> _changedRegions = new();
         private readonly TerrainTiles _tiles;
         private readonly TerrainRegions _regions;
         private readonly GameObject _instance;
@@ -33,26 +31,22 @@ namespace CodeBase.Gameplay.Terrain
             var tile = _tileFactory.Create(_instance.transform, hex);
 
             _tiles.Set(tile, tile.Hex);
-            ConnectNeighbours(tile);
-            ConnectToRegion(tile, regionType);
+            ConnectNeighbors(tile);
+            _regions.Add(tile, regionType);
         }
 
         public void DestroyTile(TileData tile)
         {
-            DisconnectNeighbours(tile);
-            DisconnectFromRegion(tile);
+            DisconnectNeighbors(tile);
+            _regions.Remove(tile);
 
             _tiles.Set(null, tile.Hex);
             _tileFactory.Destroy(tile);
         }
 
-        public void RecalculateChangedRegions()
-        {
-            _regions.Recalculate(_changedRegions);
-            _changedRegions.Clear();
-        }
+        public void RecalculateChangedRegions() => _regions.RecalculateChangedRegions();
 
-        private void ConnectNeighbours(TileData tile)
+        private void ConnectNeighbors(TileData tile)
         {
             var neighbours = _tiles.GetNeighbours(tile.Hex);
 
@@ -63,33 +57,12 @@ namespace CodeBase.Gameplay.Terrain
             }
         }
 
-        private void DisconnectNeighbours(TileData tile)
+        private void DisconnectNeighbors(TileData tile)
         {
             foreach (var neighbour in tile.Neighbors)
                 neighbour.RemoveFromNeighbors(tile);
 
             tile.Neighbors.Clear();
-        }
-
-        private void ConnectToRegion(TileData tile, RegionType regionType)
-        {
-            var region = _regions.GetOrCreateRegionFromNeighbors(tile, regionType);
-
-            region.Tiles.Add(tile);
-            tile.SetRegion(region);
-
-            if (!_changedRegions.Contains(region))
-                _changedRegions.Add(region);
-        }
-
-        private void DisconnectFromRegion(TileData tile)
-        {
-            var region = tile.Region;
-
-            region.Tiles.Remove(tile);
-
-            if (!_changedRegions.Contains(region))
-                _changedRegions.Add(region);
         }
     }
 }

@@ -7,11 +7,12 @@ namespace CodeBase.Gameplay.Terrain.Region
     {
         public bool TryJoinWithNeighbors(RegionData region, out RegionData result)
         {
-            var neighbourRegions = GetNeighborRegions(region, region.Type);
+            var regions = GetNeighborRegions(region, region.Type);
+            regions.Add(region);
 
-            if (neighbourRegions.Count > 1)
+            if (regions.Count > 1)
             {
-                result = JoinRegions(neighbourRegions);
+                result = JoinRegions(regions);
                 return true;
             }
 
@@ -27,6 +28,9 @@ namespace CodeBase.Gameplay.Terrain.Region
             foreach (var tile in rootTile.Neighbors)
             {
                 if (tile.Region.Type != necessaryRegionType)
+                    continue;
+
+                if (tile.Region == region)
                     continue;
 
                 if (!regions.Contains(tile.Region))

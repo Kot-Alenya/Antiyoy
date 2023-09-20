@@ -10,35 +10,52 @@ namespace CodeBase.Gameplay.Terrain.Region
 
         public TerrainRegionsSplitTool(RegionFactory regionFactory) => _regionFactory = regionFactory;
 
-        public void Split(RegionData regionData)
+        public bool TrySplit(RegionData region, out List<RegionData> result)
         {
-            if (regionData.Tiles.Count == 0)
-                return;
+            result = null;
 
-            var passed = GetPassedTiles(regionData);
+            if (region.Tiles.Count == 0)
+                return false;
 
-            if (passed.Count >= regionData.Tiles.Count)
-                return;
+            var splits = GetSplits(region);
 
-            var splitPart = passed.Count * 2 > regionData.Tiles.Count
-                ? Difference(regionData.Tiles, passed)
-                : passed;
+            if (splits.Count < 2)
+                return false;
 
-            var newRegion = CreateRegion(splitPart, regionData);
-
-            Split(newRegion);
-            Split(regionData);
+            result = Split(region, splits);
+            return true;
         }
 
-        private List<TileData> GetPassedTiles(RegionData regionData)
+        private List<RegionData> Split(RegionData region, List<List<TileData>> splits)
         {
+            var regions = new List<RegionData> { region };
+
+            splits.Remove(GetBiggestSplit(splits));
+
+            foreach (var split in splits)
+                regions.Add(CreateRegion(split, region));
+
+            return regions;
+        }
+
+        private List<List<TileData>> GetSplits(RegionData regionData)
+        {
+            var splits = new List<List<TileData>>();
             var front = new List<TileData>();
+            var unPassed = new List<TileData>(regionData.Tiles);
             var passed = new List<TileData>();
 
             front.Add(regionData.Tiles[0]);
 
-            while (front.Count > 0)
+            while (unPassed.Count > 0)
             {
+                if (front.Count == 0)
+                {
+                    front.Add(unPassed[0]);
+                    splits.Add(passed);
+                    passed = new List<TileData>();
+                }
+
                 var tile = front[0];
 
                 foreach (var connection in tile.Neighbors)
@@ -46,31 +63,28 @@ namespace CodeBase.Gameplay.Terrain.Region
                     if (front.Contains(connection))
                         continue;
 
-                    if (passed.Contains(connection))
-                        continue;
-
-                    if (regionData.Tiles.Contains(connection))
+                    if (unPassed.Contains(connection))
                         front.Add(connection);
                 }
 
                 front.Remove(tile);
+                unPassed.Remove(tile);
                 passed.Add(tile);
             }
 
-            return passed;
+            splits.Add(passed);
+            return splits;
         }
 
-        private List<TileData> Difference(List<TileData> frits, List<TileData> second)
+        private List<TileData> GetBiggestSplit(List<List<TileData>> splits)
         {
-            var difference = new List<TileData>(frits.Count - second.Count);
+            var previous = splits[0];
 
-            foreach (var tileObject in frits)
-            {
-                if (!second.Contains(tileObject))
-                    difference.Add(tileObject);
-            }
+            for (var i = 1; i < splits.Count; i++)
+                if (splits[i].Count > previous.Count)
+                    previous = splits[i];
 
-            return difference;
+            return previous;
         }
 
         private RegionData CreateRegion(List<TileData> splitPart, RegionData baseRegion)
