@@ -15,10 +15,6 @@ namespace CodeBase.Gameplay.Terrain.Region
 
         private Color GetColor(RegionType regionType)
         {
-            //UnityEngine.Debug.Log("Created");
-
-            return UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-            /*
             return regionType switch
             {
                 RegionType.Neutral => _staticData.NeutralColor,
@@ -26,7 +22,6 @@ namespace CodeBase.Gameplay.Terrain.Region
                 RegionType.Blue => _staticData.BlueColor,
                 _ => throw new ArgumentOutOfRangeException(nameof(regionType), regionType, null)
             };
-            */
         }
     }
 }
