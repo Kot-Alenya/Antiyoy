@@ -1,6 +1,5 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Map;
-using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.World;
 using UnityEngine;
 using Zenject;
 
@@ -8,11 +7,11 @@ namespace CodeBase.Infrastructure
 {
     public class LevelStartup : MonoBehaviour
     {
-        private MapFactory _terrainFactory;
+        private WorldFactory _terrainFactory;
         private CameraFactory _cameraFactory;
 
         [Inject]
-        private void Constructor(MapFactory terrainFactory, CameraFactory cameraFactory)
+        private void Constructor(WorldFactory terrainFactory, CameraFactory cameraFactory)
         {
             _terrainFactory = terrainFactory;
             _cameraFactory = cameraFactory;

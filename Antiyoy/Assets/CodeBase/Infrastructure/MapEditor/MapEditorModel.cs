@@ -1,9 +1,9 @@
-using CodeBase.Gameplay.Terrain;
 using System;
-using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Map;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Tile;
+using System.Collections.Generic;
+using CodeBase.Gameplay.World;
+using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -11,16 +11,12 @@ namespace CodeBase.Infrastructure.MapEditor
     public class MapEditorModel
     {
         private readonly TileFactory _tileFactory;
-        private readonly MapController _terrain;
-        private readonly MapRecorder _recorder;
+        private readonly WorldController _worldController;
+        private readonly List<HexPosition> _selectedHex = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
 
-        public MapEditorModel(MapController terrain, MapRecorder recorder)
-        {
-            _terrain = terrain;
-            _recorder = recorder;
-        }
+        public MapEditorModel(WorldController worldController) => _worldController = worldController;
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
 
@@ -28,10 +24,16 @@ namespace CodeBase.Infrastructure.MapEditor
 
         public void SelectTile(HexPosition hex)
         {
+            if (!_worldController.IsHexInTerrain(hex) || _selectedHex.Contains(hex))
+                return;
+            
             if (_currentMode == MapEditorMode.SetTiles)
-                _terrain.CreateTile(hex, _currentRegion);
+                _worldController.CreateTile(hex, _currentRegion);
             else if (_currentMode == MapEditorMode.RemoveTiles)
-                _terrain.DestroyTile(hex);
+                if (_worldController.TryGetTile(hex, out var tile))
+                    _worldController.DestroyTile(tile);
+            
+            _selectedHex.Add(hex);
         }
 
         public void ProcessTiles()
@@ -41,20 +43,21 @@ namespace CodeBase.Infrastructure.MapEditor
                 case MapEditorMode.None:
                     break;
                 case MapEditorMode.SetTiles:
-                    _terrain.RecalculateChangedRegions();
+                    _worldController.RecalculateChangedRegions();
                     break;
                 case MapEditorMode.RemoveTiles:
-                    _terrain.RecalculateChangedRegions();
+                    _worldController.RecalculateChangedRegions();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            _recorder.Record();
+            _selectedHex.Clear();
+            _worldController.Record();
         }
 
-        public void ReturnBack() => _recorder.Back();
+        public void ReturnBack() => _worldController.Back();
 
-        public void ReturnNext() => _recorder.Next();
+        public void ReturnNext() => _worldController.Next();
     }
 }

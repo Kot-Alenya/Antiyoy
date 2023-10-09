@@ -1,8 +1,8 @@
 ﻿using System;
 using CodeBase.Gameplay.Camera.Data;
-using CodeBase.Gameplay.Map.Data;
-using CodeBase.Gameplay.Region.Data;
-using CodeBase.Gameplay.Tile.Data;
+using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Data;
+using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Infrastructure
 {

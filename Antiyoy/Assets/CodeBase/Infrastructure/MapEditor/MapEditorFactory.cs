@@ -1,6 +1,6 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Map;
 using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.World;
 using CodeBase.Infrastructure.MapEditor.Data;
 using CodeBase.Infrastructure.MapEditor.UI;
 using UnityEngine;
@@ -10,18 +10,18 @@ namespace CodeBase.Infrastructure.MapEditor
     public class MapEditorFactory
     {
         private readonly MapEditorPrefabData _prefabData;
-        private readonly MapRecorder _recorder;
+        private readonly WorldRecorder _recorder;
 
-        public MapEditorFactory(MapEditorPrefabData prefabData, MapRecorder recorder)
+        public MapEditorFactory(MapEditorPrefabData prefabData, WorldRecorder recorder)
         {
             _prefabData = prefabData;
             _recorder = recorder;
         }
 
-        public void Create(MapController terrainController, CameraObject cameraObject)
+        public void Create(WorldController terrainController, CameraObject cameraObject)
         {
             var instance = Object.Instantiate(_prefabData);
-            var model = new MapEditorModel(terrainController, _recorder);
+            var model = new MapEditorModel(terrainController);
             var controller = new MapEditorController(model);
 
             CreateInput(instance, cameraObject, controller);

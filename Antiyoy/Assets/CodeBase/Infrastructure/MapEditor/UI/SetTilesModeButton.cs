@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.Region.Data;
+﻿using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Utilities.UI;
 using UnityEngine;
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TerrainConfig
   m_EditorClassIdentifier: 
   BackgroundPrefabData: {fileID: 4666778009115165555, guid: f8f2f337e341de34cbbca5b426710084, type: 3}
-  Size: {x: 2, y: 2}
+  Size: {x: 5, y: 5}
