@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.Terrain.Region;
-using CodeBase.Gameplay.Terrain.Region.Data;
+﻿using CodeBase.Gameplay.Region.Data;
 using CodeBase.Utilities.UI;
 using UnityEngine;
 

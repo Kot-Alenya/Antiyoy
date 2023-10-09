@@ -1,10 +1,9 @@
 using CodeBase.Gameplay.Terrain;
 using System;
-using System.Collections.Generic;
-using CodeBase.Gameplay.Terrain.Data.Hex;
-using CodeBase.Gameplay.Terrain.Region;
-using CodeBase.Gameplay.Terrain.Region.Data;
-using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Map;
+using CodeBase.Gameplay.Region.Data;
+using CodeBase.Gameplay.Tile;
 using CodeBase.Infrastructure.MapEditor.Data;
 
 namespace CodeBase.Infrastructure.MapEditor
@@ -12,12 +11,16 @@ namespace CodeBase.Infrastructure.MapEditor
     public class MapEditorModel
     {
         private readonly TileFactory _tileFactory;
-        private readonly TerrainController _terrain;
-        private readonly List<HexPosition> _selectedTiles = new();
+        private readonly MapController _terrain;
+        private readonly MapRecorder _recorder;
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
 
-        public MapEditorModel(TerrainController terrain) => _terrain = terrain;
+        public MapEditorModel(MapController terrain, MapRecorder recorder)
+        {
+            _terrain = terrain;
+            _recorder = recorder;
+        }
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
 
@@ -25,18 +28,10 @@ namespace CodeBase.Infrastructure.MapEditor
 
         public void SelectTile(HexPosition hex)
         {
-            if (!_terrain.IsHexInTerrain(hex))
-                return;
-
-            if (_selectedTiles.Contains(hex))
-                return;
-
             if (_currentMode == MapEditorMode.SetTiles)
                 _terrain.CreateTile(hex, _currentRegion);
             else if (_currentMode == MapEditorMode.RemoveTiles)
                 _terrain.DestroyTile(hex);
-
-            _selectedTiles.Add(hex);
         }
 
         public void ProcessTiles()
@@ -55,7 +50,11 @@ namespace CodeBase.Infrastructure.MapEditor
                     throw new ArgumentOutOfRangeException();
             }
 
-            _selectedTiles.Clear();
+            _recorder.Record();
         }
+
+        public void ReturnBack() => _recorder.Back();
+
+        public void ReturnNext() => _recorder.Next();
     }
 }

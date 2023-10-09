@@ -1,7 +1,8 @@
 ﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Map;
+using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Terrain;
-using CodeBase.Gameplay.Terrain.Region;
-using CodeBase.Gameplay.Terrain.Tile;
+using CodeBase.Gameplay.Tile;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +16,7 @@ namespace CodeBase.Infrastructure
         {
             Container.Bind<StaticData>().FromInstance(_staticData).AsSingle();
             Container.Bind<TileFactory>().AsSingle();
-            Container.Bind<TerrainFactory>().AsSingle();
+            Container.Bind<MapFactory>().AsSingle();
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<RegionFactory>().AsSingle();
         }

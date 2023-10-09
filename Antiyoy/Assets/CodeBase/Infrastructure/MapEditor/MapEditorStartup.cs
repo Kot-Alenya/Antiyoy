@@ -1,5 +1,5 @@
-﻿using _dev;
-using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Map;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Infrastructure.MapEditor.Data;
 using UnityEngine;
@@ -10,12 +10,11 @@ namespace CodeBase.Infrastructure.MapEditor
     public class MapEditorStartup : MonoBehaviour
     {
         [SerializeField] private MapEditorPrefabData _prefabData;
-        [SerializeField] private EntityStaticData _staticData;
-        private TerrainFactory _terrainFactory;
+        private MapFactory _terrainFactory;
         private CameraFactory _cameraFactory;
 
         [Inject]
-        private void Constructor(TerrainFactory terrainFactory, CameraFactory cameraFactory)
+        private void Constructor(MapFactory terrainFactory, CameraFactory cameraFactory)
         {
             _terrainFactory = terrainFactory;
             _cameraFactory = cameraFactory;
@@ -25,8 +24,8 @@ namespace CodeBase.Infrastructure.MapEditor
         {
             var terrainObject = _terrainFactory.Create();
             var cameraObject = _cameraFactory.Create();
-            var entityFactory = new EntityFactory(_staticData);
-            var mapEditorFactory = new MapEditorFactory(_prefabData);
+            var recorder = new MapRecorder();
+            var mapEditorFactory = new MapEditorFactory(_prefabData, recorder);
 
             mapEditorFactory.Create(terrainObject, cameraObject);
         }
