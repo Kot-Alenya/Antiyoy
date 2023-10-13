@@ -1,4 +1,4 @@
-namespace CodeBase.Infrastructure.MapEditor.Data
+namespace CodeBase.MapEditor.Data
 {
     public enum MapEditorMode
     {

@@ -5,9 +5,9 @@ using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Data.Operation;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile;
-using CodeBase.Infrastructure.MapEditor.Data;
+using CodeBase.MapEditor.Data;
 
-namespace CodeBase.Infrastructure.MapEditor
+namespace CodeBase.MapEditor
 {
     public class MapEditorModel
     {

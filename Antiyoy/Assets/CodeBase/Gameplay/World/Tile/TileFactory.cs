@@ -1,10 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
-using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Tile.Data;
-using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Gameplay.World.Tile
 {

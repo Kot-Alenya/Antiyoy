@@ -18,7 +18,8 @@ namespace CodeBase.Gameplay.World.Terrain
         private readonly TileFactory _tileFactory;
         private readonly RegionFactory _regionFactory;
 
-        public TerrainFactory(IStaticDataProvider staticDataProvider, TileFactory tileFactory, RegionFactory regionFactory)
+        public TerrainFactory(IStaticDataProvider staticDataProvider, TileFactory tileFactory,
+            RegionFactory regionFactory)
         {
             _staticDataProvider = staticDataProvider;
             _tileFactory = tileFactory;

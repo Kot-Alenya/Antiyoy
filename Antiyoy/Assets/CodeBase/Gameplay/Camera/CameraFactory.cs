@@ -16,24 +16,15 @@ namespace CodeBase.Gameplay.Camera
             _staticDataProvider = staticDataProvider;
         }
 
-        public ICameraController Create()
+        public void Create()
         {
             var cameraStaticData = _staticDataProvider.Get<CameraStaticData>();
             var instance = Object.Instantiate(cameraStaticData.Prefab);
             var movement = new CameraMovement(cameraStaticData, instance);
             var camera = new CameraObject(instance, movement);
 
-            CreateCameraInput(instance, camera);
-
             _container.Bind<ICameraController>().FromInstance(camera).AsSingle();
-
-            return camera;
-        }
-
-        private void CreateCameraInput(CameraPrefabData instance, ICameraController camera)
-        {
-            foreach (var input in instance.Inputs)
-                input.Constructor(camera);
+            _container.InjectGameObject(instance.gameObject);
         }
     }
 }

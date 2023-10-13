@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.World
         public IWorldTerrainController Terrain { get; }
 
         public IWorldChangeHandler ChangeHandler { get; }
-        
+
         public IWorldChangeRecorder ChangeRecorder { get; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World;
+using CodeBase.MapEditor;
 using UnityEngine;
 using Zenject;
 
@@ -22,9 +23,9 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void Start()
         {
-            var camera = _cameraFactory.Create();
-            var world = _worldFactory.Create();
-            _mapEditorFactory.Create(camera, world);
+            _cameraFactory.Create();
+            _worldFactory.Create();
+            _mapEditorFactory.Create();
         }
     }
 }

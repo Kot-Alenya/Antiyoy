@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.World
             _terrainFactory = terrainFactory;
         }
 
-        public IWorldController Create()
+        public void Create()
         {
             var terrain = CreateTerrain();
             var recorder = new WorldChangeRecorder();
@@ -27,8 +27,6 @@ namespace CodeBase.Gameplay.World
             var controller = new WorldController(terrain, handler, recorder);
 
             _container.Bind<IWorldController>().FromInstance(controller).AsSingle();
-            
-            return controller;
         }
 
         private IWorldTerrainController CreateTerrain()

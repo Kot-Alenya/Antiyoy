@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.World.Tile.Data
         public void Set(TileData tile, HexPosition hex) => _tiles[GetIndex(hex)] = tile;
 
         public void Remove(HexPosition hex) => _tiles[GetIndex(hex)] = null;
-        
+
         public TileData Get(HexPosition hex) => _tiles[GetIndex(hex)];
 
         public bool TryGet(HexPosition hex, out TileData tile)

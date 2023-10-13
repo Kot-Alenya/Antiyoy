@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.World.Terrain
         }
 
         public Vector2Int Size => _tilesModel.Size;
-        
+
         public bool IsHexInTerrain(HexPosition hex) => _tilesModel.IsHexInTiles(hex);
 
         public bool TryGetTile(HexPosition hex, out TileData tile) => _tilesModel.TryGetTile(hex, out tile);

@@ -9,7 +9,8 @@ namespace CodeBase.Infrastructure.Bootstrap
 
         public override void InstallBindings()
         {
-            Container.Bind<IStaticDataProvider>().To<StaticDataProvider>().AsSingle().WithArguments(StaticData.StaticDataToBind);
+            Container.Bind<IStaticDataProvider>().To<StaticDataProvider>().AsSingle()
+                .WithArguments(StaticData.StaticDataToBind);
         }
     }
 }

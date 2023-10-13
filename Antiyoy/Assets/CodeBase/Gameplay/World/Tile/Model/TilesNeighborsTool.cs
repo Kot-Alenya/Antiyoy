@@ -28,7 +28,7 @@ namespace CodeBase.Gameplay.World.Tile.Model
 
             tile.Neighbors.Clear();
         }
-        
+
         private List<TileData> GetNeighbours(HexPosition rootHex)
         {
             var neighbours = new List<TileData>();
@@ -48,7 +48,7 @@ namespace CodeBase.Gameplay.World.Tile.Model
 
             return neighbours;
         }
-        
+
         private void RemoveFromNeighbors(TileData rootTile, TileData tileData)
         {
             for (var i = 0; i < rootTile.Neighbors.Count; i++)

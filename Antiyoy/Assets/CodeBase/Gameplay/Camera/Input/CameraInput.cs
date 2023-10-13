@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Camera.Input
 {
@@ -6,6 +7,7 @@ namespace CodeBase.Gameplay.Camera.Input
     {
         private protected ICameraController CameraController;
 
-        public void Constructor(ICameraController cameraController) => CameraController = cameraController;
+        [Inject]
+        private void Constructor(ICameraController cameraController) => CameraController = cameraController;
     }
 }

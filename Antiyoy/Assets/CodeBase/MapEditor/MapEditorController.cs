@@ -1,11 +1,11 @@
 using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Infrastructure.MapEditor.Data;
+using CodeBase.MapEditor.Data;
 
-namespace CodeBase.Infrastructure.MapEditor
+namespace CodeBase.MapEditor
 {
-    public class MapEditorController
+    public class MapEditorController : IMapEditorController
     {
         private readonly MapEditorModel _mapEditorModel;
         private readonly IWorldController _world;
@@ -29,7 +29,7 @@ namespace CodeBase.Infrastructure.MapEditor
         public void ProcessTiles() => _mapEditorModel.ProcessTiles();
 
         public void ReturnBack() => _world.ChangeHandler.ReturnWorldBack();
-        
+
         public void ReturnNext() => _world.ChangeHandler.ReturnWorldNext();
     }
 }

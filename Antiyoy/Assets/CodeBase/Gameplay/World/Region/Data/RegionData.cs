@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.World.Region.Data
         public readonly List<TileData> Tiles = new();
         public readonly RegionType Type;
         public readonly Color Color;
-        
+
         public RegionData(RegionType type, Color color)
         {
             Type = type;

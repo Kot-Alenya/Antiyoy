@@ -1,6 +1,5 @@
 ﻿using System;
 using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Random = UnityEngine.Random;

@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.World.Terrain
     public interface IWorldTerrainController
     {
         public Vector2Int Size { get; }
-        
+
         public bool IsHexInTerrain(HexPosition hex);
 
         public bool TryGetTile(HexPosition hex, out TileData tile);

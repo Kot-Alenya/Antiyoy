@@ -39,7 +39,7 @@ namespace CodeBase.Gameplay.World.Change.Recorder
                 _readIndex--;
                 return true;
             }
-            
+
             record = Array.Empty<IWorldOperationData>();
             return false;
         }
@@ -52,7 +52,7 @@ namespace CodeBase.Gameplay.World.Change.Recorder
                 record = _records[_readIndex];
                 return true;
             }
-            
+
             record = Array.Empty<IWorldOperationData>();
             return false;
         }
