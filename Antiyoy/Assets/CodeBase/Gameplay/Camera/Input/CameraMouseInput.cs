@@ -9,9 +9,9 @@
             var mouseScrollValue = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
 
             if (mouseScrollValue > 0.1)
-                CameraObject.Zoom(true);
+                CameraController.Zoom(true);
             else if (mouseScrollValue < -0.1)
-                CameraObject.Zoom(false);
+                CameraController.Zoom(false);
         }
     }
 }

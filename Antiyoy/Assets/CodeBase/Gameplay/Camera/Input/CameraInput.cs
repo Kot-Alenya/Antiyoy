@@ -4,8 +4,8 @@ namespace CodeBase.Gameplay.Camera.Input
 {
     public abstract class CameraInput : MonoBehaviour
     {
-        private protected CameraObject CameraObject;
+        private protected ICameraController CameraController;
 
-        public void Constructor(CameraObject cameraObject) => CameraObject = cameraObject;
+        public void Constructor(ICameraController cameraController) => CameraController = cameraController;
     }
 }

@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.Camera
         private readonly CameraStaticData _staticData;
         private readonly UnityEngine.Camera _camera;
 
-        public CameraMovement(CameraStaticData staticData, CameraObjectStaticData cameraObjectData)
+        public CameraMovement(CameraStaticData staticData, CameraPrefabData cameraObjectData)
         {
             _staticData = staticData;
             _camera = cameraObjectData.Camera;

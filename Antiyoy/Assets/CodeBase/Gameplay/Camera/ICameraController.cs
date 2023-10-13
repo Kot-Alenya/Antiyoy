@@ -5,7 +5,7 @@ namespace CodeBase.Gameplay.Camera
 {
     public interface ICameraController
     {
-        public CameraObjectStaticData Data { get; }
+        public CameraPrefabData Data { get; }
 
         public void Move(Vector2 direction);
 

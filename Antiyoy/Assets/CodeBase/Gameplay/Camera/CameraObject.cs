@@ -7,13 +7,13 @@ namespace CodeBase.Gameplay.Camera
     {
         private readonly CameraMovement _movement;
 
-        public CameraObject(CameraObjectStaticData data, CameraMovement movement)
+        public CameraObject(CameraPrefabData data, CameraMovement movement)
         {
             Data = data;
             _movement = movement;
         }
 
-        public CameraObjectStaticData Data { get; }
+        public CameraPrefabData Data { get; }
 
         public void Move(Vector2 direction) => _movement.Move(direction);
 

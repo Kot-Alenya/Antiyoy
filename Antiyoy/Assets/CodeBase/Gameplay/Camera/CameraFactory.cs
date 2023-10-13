@@ -1,6 +1,4 @@
 ﻿using CodeBase.Gameplay.Camera.Data;
-using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
@@ -21,21 +19,21 @@ namespace CodeBase.Gameplay.Camera
         public ICameraController Create()
         {
             var cameraStaticData = _staticDataProvider.Get<CameraStaticData>();
-            var objectData = Object.Instantiate(cameraStaticData.ObjectPrefab);
-            var movement = new CameraMovement(cameraStaticData, objectData);
-            var cameraObject = new CameraObject(objectData, movement);
+            var instance = Object.Instantiate(cameraStaticData.Prefab);
+            var movement = new CameraMovement(cameraStaticData, instance);
+            var camera = new CameraObject(instance, movement);
 
-            _container.Bind<ICameraController>().FromInstance(cameraObject).AsSingle();
+            CreateCameraInput(instance, camera);
 
-            CreateCameraInput(cameraObject);
+            _container.Bind<ICameraController>().FromInstance(camera).AsSingle();
 
-            return cameraObject;
+            return camera;
         }
 
-        private void CreateCameraInput(CameraObject cameraObject)
+        private void CreateCameraInput(CameraPrefabData instance, ICameraController camera)
         {
-            foreach (var input in cameraObject.Data.Inputs)
-                input.Constructor(cameraObject);
+            foreach (var input in instance.Inputs)
+                input.Constructor(camera);
         }
     }
 }

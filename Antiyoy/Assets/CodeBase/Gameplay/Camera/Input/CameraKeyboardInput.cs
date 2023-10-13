@@ -9,13 +9,13 @@ namespace CodeBase.Gameplay.Camera.Input
         private void Move()
         {
             if (UnityEngine.Input.GetKey(KeyCode.W))
-                CameraObject.Move(Vector2.up);
+                CameraController.Move(Vector2.up);
             if (UnityEngine.Input.GetKey(KeyCode.S))
-                CameraObject.Move(Vector2.down);
+                CameraController.Move(Vector2.down);
             if (UnityEngine.Input.GetKey(KeyCode.A))
-                CameraObject.Move(Vector2.left);
+                CameraController.Move(Vector2.left);
             if (UnityEngine.Input.GetKey(KeyCode.D))
-                CameraObject.Move(Vector2.right);
+                CameraController.Move(Vector2.right);
         }
     }
 }
