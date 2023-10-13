@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Data
 {
-    public class TileArray : IEnumerable<TileData>, ICloneable<TileArray>
+    public class TileArray : IEnumerable<TileData>
     {
         private readonly Vector2Int _size;
         private TileData[] _tiles;
@@ -61,20 +61,6 @@ namespace CodeBase.Gameplay.World.Tile.Data
             var arrayIndex = HexMath.ToArrayIndex(hex);
 
             return arrayIndex.y * _size.x + arrayIndex.x;
-        }
-
-        public TileArray Clone()
-        {
-            var clone = new TileArray(_size);
-
-            foreach (var tile in _tiles)
-            {
-                clone.Set(tile.Clone(),tile.Hex);
-            }
-            
-            clone._tiles = (TileData[])_tiles.Clone();
-
-            return clone;
         }
     }
 }

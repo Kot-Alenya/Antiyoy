@@ -3,7 +3,7 @@ using CodeBase.Gameplay.World;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Level
 {
     public class LevelStartup : MonoBehaviour
     {

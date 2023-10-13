@@ -1,10 +1,6 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.World;
-using CodeBase.Gameplay.World.Change;
-using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.MapEditor.Data;
-using CodeBase.Infrastructure.MapEditor.UI;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
