@@ -1,3 +1,4 @@
+using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Infrastructure.MapEditor.Data;
@@ -6,24 +7,29 @@ namespace CodeBase.Infrastructure.MapEditor
 {
     public class MapEditorController
     {
-        private readonly MapEditorModel _model;
+        private readonly MapEditorModel _mapEditorModel;
+        private readonly IWorldController _world;
 
-        public MapEditorController(MapEditorModel model) => _model = model;
-
-        public void SetTilesMode(RegionType regionType)
+        public MapEditorController(MapEditorModel mapEditorModel, IWorldController world)
         {
-            _model.SetCurrentMode(MapEditorMode.SetTiles);
-            _model.SetCurrentRegion(regionType);
+            _mapEditorModel = mapEditorModel;
+            _world = world;
         }
 
-        public void RemoveTilesMode() => _model.SetCurrentMode(MapEditorMode.RemoveTiles);
+        public void CreateTilesMode(RegionType regionType)
+        {
+            _mapEditorModel.SetCurrentMode(MapEditorMode.CreateTiles);
+            _mapEditorModel.SetCurrentRegion(regionType);
+        }
 
-        public void SelectTile(HexPosition hex) => _model.SelectTile(hex);
+        public void DestroyTilesMode() => _mapEditorModel.SetCurrentMode(MapEditorMode.DestroyTiles);
 
-        public void ProcessTiles() => _model.ProcessTiles();
+        public void SelectTile(HexPosition hex) => _mapEditorModel.SelectTile(hex);
 
-        public void ReturnBack() => _model.ReturnBack();
+        public void ProcessTiles() => _mapEditorModel.ProcessTiles();
 
-        public void ReturnNext() => _model.ReturnNext();
+        public void ReturnBack() => _world.ChangeHandler.ReturnWorldBack();
+        
+        public void ReturnNext() => _world.ChangeHandler.ReturnWorldNext();
     }
 }

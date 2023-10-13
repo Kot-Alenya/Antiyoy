@@ -1,21 +1,31 @@
 ﻿using CodeBase.Gameplay.Camera.Data;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Camera
 {
     public class CameraFactory
     {
-        private readonly CameraStaticData _staticData;
+        private readonly DiContainer _container;
+        private readonly IStaticDataProvider _staticDataProvider;
 
-        public CameraFactory(StaticData data) =>
-            _staticData = data.CameraStaticData;
-
-        public CameraObject Create()
+        public CameraFactory(DiContainer container, IStaticDataProvider staticDataProvider)
         {
-            var objectData = Object.Instantiate(_staticData.ObjectPrefab);
-            var movement = new CameraMovement(_staticData, objectData);
+            _container = container;
+            _staticDataProvider = staticDataProvider;
+        }
+
+        public ICameraController Create()
+        {
+            var cameraStaticData = _staticDataProvider.Get<CameraStaticData>();
+            var objectData = Object.Instantiate(cameraStaticData.ObjectPrefab);
+            var movement = new CameraMovement(cameraStaticData, objectData);
             var cameraObject = new CameraObject(objectData, movement);
+
+            _container.Bind<ICameraController>().FromInstance(cameraObject).AsSingle();
 
             CreateCameraInput(cameraObject);
 

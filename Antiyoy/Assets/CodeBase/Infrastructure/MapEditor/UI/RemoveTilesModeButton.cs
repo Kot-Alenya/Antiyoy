@@ -6,8 +6,8 @@ namespace CodeBase.Infrastructure.MapEditor.UI
     {
         private MapEditorController _controller;
 
-        public void Constructor(MapEditorController controller) => _controller = controller;
+        public void Construct(MapEditorController controller) => _controller = controller;
 
-        private protected override void OnClick() => _controller.RemoveTilesMode();
+        private protected override void OnClick() => _controller.DestroyTilesMode();
     }
 }

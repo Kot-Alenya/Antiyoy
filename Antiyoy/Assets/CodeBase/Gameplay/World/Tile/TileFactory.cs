@@ -1,6 +1,8 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -8,9 +10,9 @@ namespace CodeBase.Gameplay.World.Tile
 {
     public class TileFactory
     {
-        private readonly TileStaticData _staticData;
+        private readonly IStaticDataProvider _staticDataProvider;
 
-        public TileFactory(StaticData data) => _staticData = data.TileStaticData;
+        public TileFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
         public TileData Create(Transform root, HexPosition hex)
         {
@@ -25,7 +27,8 @@ namespace CodeBase.Gameplay.World.Tile
 
         private TilePrefabData CreatePrefabData(Vector2 position, Transform root)
         {
-            var prefab = _staticData.Prefab;
+            var tileStaticData = _staticDataProvider.Get<TileStaticData>();
+            var prefab = tileStaticData.Prefab;
             var gameObjectPosition = new Vector3(position.x, position.y, 0);
             var rotation = Quaternion.identity;
             var gameObject = Object.Instantiate(prefab, gameObjectPosition, rotation);

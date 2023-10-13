@@ -1,36 +1,24 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
-using CodeBase.Gameplay.World.Region.Data;
+﻿using CodeBase.Gameplay.World.Change;
+using CodeBase.Gameplay.World.Change.Handler;
+using CodeBase.Gameplay.World.Change.Recorder;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World
 {
-    public class WorldController
+    public class WorldController : IWorldController
     {
-        private readonly TerrainModel _terrainModel;
+        public WorldController(IWorldTerrainController terrain, IWorldChangeHandler changeHandler,
+            IWorldChangeRecorder changeRecorder)
+        {
+            Terrain = terrain;
+            ChangeHandler = changeHandler;
+            ChangeRecorder = changeRecorder;
+        }
 
-        public WorldController(TerrainModel terrainModel) => _terrainModel = terrainModel;
+        public IWorldTerrainController Terrain { get; }
 
-        public void CreateTile(HexPosition hex, RegionType regionType) => _terrainModel.CreateTile(hex, regionType);
-
-        public void DestroyTile(TileData tile) => _terrainModel.DestroyTile(tile);
-
-        public void RecalculateChangedRegions() => _terrainModel.RecalculateChangedRegions();
-
-        public bool IsHexInTerrain(HexPosition hex) => _terrainModel.IsHexInTerrain(hex);
+        public IWorldChangeHandler ChangeHandler { get; }
         
-        public bool TryGetTile(HexPosition hex, out TileData tile) => _terrainModel.TryGetTile(hex, out  tile);
-        
-        public void Record()
-        {
-        }
-
-        public void Next()
-        {
-        }
-
-        public void Back()
-        {
-        }
+        public IWorldChangeRecorder ChangeRecorder { get; }
     }
 }

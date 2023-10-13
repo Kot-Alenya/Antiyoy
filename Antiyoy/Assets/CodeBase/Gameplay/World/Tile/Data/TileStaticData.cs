@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Infrastructure.Services.StaticData;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Data
 {
     [CreateAssetMenu(menuName = "Configurations/Tile", fileName = "TileConfig", order = 0)]
-    public class TileStaticData : ScriptableObject
+    public class TileStaticData : ScriptableObject, IStaticData
     {
         public TilePrefabData Prefab;
     }

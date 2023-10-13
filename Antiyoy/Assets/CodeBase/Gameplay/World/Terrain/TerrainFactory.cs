@@ -6,7 +6,9 @@ using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Gameplay.World.Tile.Model;
 using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.World.Terrain
 {
@@ -14,35 +16,42 @@ namespace CodeBase.Gameplay.World.Terrain
     {
         private const string TerrainRootName = "Terrain";
 
-        private readonly TerrainStaticData _terrainStaticData;
+        private readonly IStaticDataProvider _staticDataProvider;
         private readonly TileFactory _tileFactory;
         private readonly RegionFactory _regionFactory;
+        private readonly DiContainer _container;
 
-        public TerrainFactory(StaticData staticData, TileFactory tileFactory, RegionFactory regionFactory)
+        public TerrainFactory(DiContainer container, IStaticDataProvider staticDataProvider, TileFactory tileFactory,
+            RegionFactory regionFactory)
         {
-            _terrainStaticData = staticData.TerrainStaticData;
+            _staticDataProvider = staticDataProvider;
             _tileFactory = tileFactory;
             _regionFactory = regionFactory;
+            _container = container;
         }
 
-        public TerrainModel Create()
+        public IWorldTerrainController Create()
         {
+            var terrainStaticData = _staticDataProvider.Get<TerrainStaticData>();
+
             var root = new GameObject(TerrainRootName).transform;
-            var tiles = new TileArray(_terrainStaticData.Size);
+            var tiles = new TileArray(terrainStaticData.Size);
             var tilesModel = new TilesModel(tiles, root, _tileFactory);
             var regionsModel = new RegionsModel(_regionFactory);
             var terrainModel = new TerrainModel(tilesModel, regionsModel);
 
-            CreateBackground(root, _terrainStaticData.Size);
+            _container.Bind<IWorldTerrainController>().FromInstance(terrainModel).AsSingle();
+
+            CreateBackground(root, terrainStaticData);
 
             return terrainModel;
         }
 
-        private void CreateBackground(Transform root, Vector2Int size)
+        private void CreateBackground(Transform root, TerrainStaticData terrainStaticData)
         {
-            var instance = Object.Instantiate(_terrainStaticData.BackgroundPrefabData, root);
+            var instance = Object.Instantiate(terrainStaticData.BackgroundPrefabData, root);
 
-            var maxArrayIndex = size - Vector2Int.one;
+            var maxArrayIndex = terrainStaticData.Size - Vector2Int.one;
             var halfTileSize = new Vector2(HexMath.InnerRadius, HexMath.OuterRadius);
             var lastPointOffset = maxArrayIndex.y % 2f == 0
                 ? Vector2.right * HexMath.InnerRadius

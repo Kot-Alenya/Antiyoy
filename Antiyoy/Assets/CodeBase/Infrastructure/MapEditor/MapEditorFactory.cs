@@ -1,39 +1,38 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.World;
+using CodeBase.Gameplay.World.Change;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.MapEditor.Data;
 using CodeBase.Infrastructure.MapEditor.UI;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.MapEditor
 {
     public class MapEditorFactory
     {
-        private readonly MapEditorPrefabData _prefabData;
-        private readonly WorldRecorder _recorder;
+        private readonly IStaticDataProvider _staticDataProvider;
 
-        public MapEditorFactory(MapEditorPrefabData prefabData, WorldRecorder recorder)
+        public MapEditorFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
+
+        public void Create(ICameraController camera, IWorldController world)
         {
-            _prefabData = prefabData;
-            _recorder = recorder;
-        }
+            var mapEditorStaticData = _staticDataProvider.Get<MapEditorStaticData>();
+            var prefab = mapEditorStaticData.Prefab;
+            var instance = Object.Instantiate(prefab);
+            var model = new MapEditorModel(world);
+            var controller = new MapEditorController(model, world);
 
-        public void Create(WorldController terrainController, CameraObject cameraObject)
-        {
-            var instance = Object.Instantiate(_prefabData);
-            var model = new MapEditorModel(terrainController);
-            var controller = new MapEditorController(model);
-
-            CreateInput(instance, cameraObject, controller);
+            CreateInput(instance, controller, camera);
             ConstructUI(instance, controller);
         }
 
-        private void CreateInput(MapEditorPrefabData instance, CameraObject cameraObject,
-            MapEditorController controller)
+        private void CreateInput(MapEditorPrefabData instance, MapEditorController controller, ICameraController camera)
         {
             var input = instance.gameObject.AddComponent<MapEditorInput>();
 
-            input.Constructor(cameraObject, controller);
+            input.Construct(camera, controller);
         }
 
         private void ConstructUI(MapEditorPrefabData instance, MapEditorController controller)
@@ -41,7 +40,7 @@ namespace CodeBase.Infrastructure.MapEditor
             foreach (var monoBehaviour in instance.UIElements)
             {
                 var element = (IMapEditorUIElement)monoBehaviour;
-                element.Constructor(controller);
+                element.Construct(controller);
             }
         }
     }

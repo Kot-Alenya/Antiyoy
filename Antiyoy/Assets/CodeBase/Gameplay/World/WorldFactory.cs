@@ -1,36 +1,50 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
+﻿using CodeBase.Gameplay.World.Change;
+using CodeBase.Gameplay.World.Change.Handler;
+using CodeBase.Gameplay.World.Change.Recorder;
+using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.World
 {
     public class WorldFactory
     {
+        private readonly DiContainer _container;
         private readonly TerrainFactory _terrainFactory;
 
-        public WorldFactory(TerrainFactory terrainFactory) => _terrainFactory = terrainFactory;
-
-        public WorldController Create()
+        public WorldFactory(DiContainer container, TerrainFactory terrainFactory)
         {
-            var terrainModel = _terrainFactory.Create();
-            var world = new WorldController(terrainModel);
-            
-            CreateTiles(world, terrainModel.Size);
-            world.RecalculateChangedRegions();
-
-            return world;
+            _container = container;
+            _terrainFactory = terrainFactory;
         }
 
-        private void CreateTiles(WorldController world, Vector2Int size)
+        public IWorldController Create()
         {
-            for (var y = 0; y < size.y; y++)
-            for (var x = 0; x < size.x; x++)
+            var terrain = CreateTerrainController();
+            var recorder = new WorldChangeRecorder();
+            var handler = new WorldChangeHandler(recorder, terrain);
+            var controller = new WorldController(terrain,handler,recorder);
+
+            return controller;
+        }
+
+        private IWorldTerrainController CreateTerrainController()
+        {
+            var terrain = _terrainFactory.Create();
+
+            for (var y = 0; y < terrain.Size.y; y++)
+            for (var x = 0; x < terrain.Size.x; x++)
             {
                 var arrayIndex = new Vector2Int(x, y);
                 var hex = HexMath.FromArrayIndex(arrayIndex);
-                world.CreateTile(hex, RegionType.Neutral);
+                terrain.TryCreateTile(hex, RegionType.Neutral);
             }
+
+            terrain.RecalculateChangedRegions();
+
+            return terrain;
         }
     }
 }

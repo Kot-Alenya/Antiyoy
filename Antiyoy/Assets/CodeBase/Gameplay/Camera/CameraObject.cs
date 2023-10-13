@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera
 {
-    public class CameraObject
+    public class CameraObject : ICameraController
     {
         private readonly CameraMovement _movement;
 

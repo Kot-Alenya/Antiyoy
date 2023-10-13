@@ -17,10 +17,12 @@ namespace CodeBase.Infrastructure
             _cameraFactory = cameraFactory;
         }
 
+        /*
         private void Start()
         {
             var terrain = _terrainFactory.Create();
             _cameraFactory.Create();
         }
+        */
     }
 }

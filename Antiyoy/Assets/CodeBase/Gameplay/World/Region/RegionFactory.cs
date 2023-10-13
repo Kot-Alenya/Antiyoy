@@ -1,28 +1,32 @@
-﻿using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Infrastructure;
+﻿using System;
+using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.World.Region
 {
     public class RegionFactory
     {
-        private readonly RegionStaticData _staticData;
+        private readonly IStaticDataProvider _staticDataProvider;
 
-        public RegionFactory(StaticData staticData) => _staticData = staticData.RegionStaticData;
+        public RegionFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public RegionData Create(RegionType type) => new(type, GetColor(type));
+        public RegionData Create(RegionType type) => new(type, GetRandomColor());
 
         private Color GetColor(RegionType regionType)
         {
-            return Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-            
-            /*return regionType switch
+            var regionStaticData = _staticDataProvider.Get<RegionStaticData>();
+            return regionType switch
             {
-                RegionType.Neutral => _staticData.NeutralColor,
-                RegionType.Red => _staticData.RedColor,
-                RegionType.Blue => _staticData.BlueColor,
+                RegionType.Neutral => regionStaticData.NeutralColor,
+                RegionType.Red => regionStaticData.RedColor,
+                RegionType.Blue => regionStaticData.BlueColor,
                 _ => throw new ArgumentOutOfRangeException(nameof(regionType), regionType, null)
-            };*/
+            };
         }
+
+        private Color GetRandomColor() => Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 }

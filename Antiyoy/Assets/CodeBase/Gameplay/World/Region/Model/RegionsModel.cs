@@ -4,7 +4,7 @@ using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Model
 {
-    public class RegionsModel
+    public class RegionsModel //список всех регионов (?)
     {
         private readonly RegionFactory _regionFactory;
         private readonly RegionsJoinTool _joinTool = new();

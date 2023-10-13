@@ -6,30 +6,30 @@ namespace CodeBase.Infrastructure.MapEditor
 {
     public class MapEditorInput : MonoBehaviour
     {
-        private CameraObject _cameraObject;
-        private MapEditorController _controller;
+        private MapEditorController _mapEditorController;
+        private ICameraController _cameraController;
 
-        public void Constructor(CameraObject cameraObject, MapEditorController controller)
+        public void Construct(ICameraController cameraController, MapEditorController controller)
         {
-            _cameraObject = cameraObject;
-            _controller = controller;
+            _cameraController = cameraController;
+            _mapEditorController = controller;
         }
 
         private void Update()
         {
             if (Input.GetMouseButtonUp(0))
-                _controller.ProcessTiles();
+                _mapEditorController.ProcessTiles();
 
             if (!Input.GetMouseButton(0))
                 return;
 
-            var ray = _cameraObject.Data.Camera.ScreenPointToRay(Input.mousePosition);
+            var ray = _cameraController.Data.Camera.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
             if (hit.transform == default)
                 return;
 
-            _controller.SelectTile(HexMath.FromWorldPosition(hit.point));
+            _mapEditorController.SelectTile(HexMath.FromWorldPosition(hit.point));
         }
     }
 }
