@@ -3,10 +3,10 @@ using CodeBase.Gameplay.World.Region.Data;
 
 namespace CodeBase.Gameplay.World.Data.Operation
 {
-    public struct WorldDestroyTileOperationData : IWorldOperationData
+    public readonly struct WorldDestroyTileOperationData : IWorldOperationData
     {
-        public HexPosition Hex;
-        public RegionType RegionType;
+        public readonly HexPosition Hex;
+        public readonly RegionType RegionType;
 
         public WorldDestroyTileOperationData(HexPosition hex, RegionType regionType)
         {

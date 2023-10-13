@@ -5,10 +5,8 @@ using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Gameplay.World.Tile.Model;
-using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.World.Terrain
 {
@@ -19,15 +17,12 @@ namespace CodeBase.Gameplay.World.Terrain
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly TileFactory _tileFactory;
         private readonly RegionFactory _regionFactory;
-        private readonly DiContainer _container;
 
-        public TerrainFactory(DiContainer container, IStaticDataProvider staticDataProvider, TileFactory tileFactory,
-            RegionFactory regionFactory)
+        public TerrainFactory(IStaticDataProvider staticDataProvider, TileFactory tileFactory, RegionFactory regionFactory)
         {
             _staticDataProvider = staticDataProvider;
             _tileFactory = tileFactory;
             _regionFactory = regionFactory;
-            _container = container;
         }
 
         public IWorldTerrainController Create()
@@ -39,8 +34,6 @@ namespace CodeBase.Gameplay.World.Terrain
             var tilesModel = new TilesModel(tiles, root, _tileFactory);
             var regionsModel = new RegionsModel(_regionFactory);
             var terrainModel = new TerrainModel(tilesModel, regionsModel);
-
-            _container.Bind<IWorldTerrainController>().FromInstance(terrainModel).AsSingle();
 
             CreateBackground(root, terrainStaticData);
 

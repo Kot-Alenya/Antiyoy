@@ -56,7 +56,5 @@ namespace CodeBase.Gameplay.World.Change.Recorder
             record = Array.Empty<IWorldOperationData>();
             return false;
         }
-
-        private bool IsReadIndexValid() => _readIndex >= 0 && _readIndex < _records.Count;
     }
 }
