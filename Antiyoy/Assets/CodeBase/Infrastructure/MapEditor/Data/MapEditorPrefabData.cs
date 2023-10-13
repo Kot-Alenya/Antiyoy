@@ -1,12 +1,11 @@
-﻿using AYellowpaper;
-using CodeBase.Infrastructure.MapEditor.UI;
-using UnityEngine;
+﻿using CodeBase.Infrastructure.MapEditor.UI;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 namespace CodeBase.Infrastructure.MapEditor.Data
 {
-    public class MapEditorPrefabData : MonoBehaviour
+    public class MapEditorPrefabData : SerializedMonoBehaviour
     {
-        [RequireInterface(typeof(IMapEditorUIElement))]
-        public MonoBehaviour[] UIElements;
+        [OdinSerialize] public IMapEditorUIElement[] UIElements;
     }
 }

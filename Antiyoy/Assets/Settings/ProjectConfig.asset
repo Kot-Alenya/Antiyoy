@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e426fcc459d94a08969ac00c780757cb, type: 3}
+  m_Name: ProjectConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
+    - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
+    - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+    - {fileID: 11400000, guid: d5be257df90411c4d9b0778fe14e5738, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: StaticDataToBind
+      Entry: 7
+      Data: 0|CodeBase.Infrastructure.Services.StaticData.IStaticData[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

@@ -37,11 +37,8 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void ConstructUI(MapEditorPrefabData instance, MapEditorController controller)
         {
-            foreach (var monoBehaviour in instance.UIElements)
-            {
-                var element = (IMapEditorUIElement)monoBehaviour;
+            foreach (var element in instance.UIElements) 
                 element.Construct(controller);
-            }
         }
     }
 }

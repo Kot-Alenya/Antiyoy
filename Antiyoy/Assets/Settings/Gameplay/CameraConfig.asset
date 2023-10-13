@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb3a17fbd34448d933de24b97a95f43, type: 3}
   m_Name: CameraConfig
   m_EditorClassIdentifier: 
-  ObjectPrefab: {fileID: 2159208019328989165, guid: c2a936dc13c389444ae6b0a54aa53f25, type: 3}
+  Prefab: {fileID: 2159208019328989165, guid: c2a936dc13c389444ae6b0a54aa53f25, type: 3}
   MoveVelocity: 2
   ZoomVelocity: 1
   MinZoomValue: 2

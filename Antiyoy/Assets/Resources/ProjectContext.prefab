@@ -74,9 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c70c39afe284f85a7335c6f30a407b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staticData:
-  - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
-  - {fileID: 11400000, guid: d5be257df90411c4d9b0778fe14e5738, type: 2}
-  - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
-  - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
-  - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+  StaticData: {fileID: 11400000, guid: 107f9c6ab0befd24ea311a63069dcd56, type: 2}

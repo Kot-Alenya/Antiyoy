@@ -1814,7 +1814,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &6938677134186403417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,13 +2268,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caff37148ddf4140856149654f3832eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIElements:
-  - {fileID: 3487523170256864474}
-  - {fileID: 6938677134524494876}
-  - {fileID: 7721849690553108251}
-  - {fileID: 4372568246809033944}
-  - {fileID: 9079660002368926769}
-  - {fileID: 2746676848688461359}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 3487523170256864474}
+    - {fileID: 6938677134524494876}
+    - {fileID: 7721849690553108251}
+    - {fileID: 4372568246809033944}
+    - {fileID: 9079660002368926769}
+    - {fileID: 2746676848688461359}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UIElements
+      Entry: 7
+      Data: 0|CodeBase.Infrastructure.MapEditor.UI.IMapEditorUIElement[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &6938677134585067534
 GameObject:
   m_ObjectHideFlags: 0
