@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de7f2a6ce144df28f9f744162ece4c0, type: 3}
-  m_Name: MapEditorConfig
+  m_Script: {fileID: -645759843, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
+  m_Name: GeneralDrawerConfig
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3804988188308542292, guid: 77c63ed7e26512147a29f807ba5aaac7, type: 3}
