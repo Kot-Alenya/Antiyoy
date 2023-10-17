@@ -5,6 +5,15 @@ namespace CodeBase.Gameplay.World.Region.Model
 {
     public class RegionsJoinTool
     {
+        private readonly RegionsCommonTool _commonTool;
+        private readonly RegionFactory _regionFactory;
+
+        public RegionsJoinTool(RegionFactory regionFactory, RegionsCommonTool commonTool)
+        {
+            _regionFactory = regionFactory;
+            _commonTool = commonTool;
+        }
+
         public bool TryJoinWithNeighbors(RegionData region, out RegionData result)
         {
             var regions = GetNeighborRegions(region, region.Type);
@@ -60,13 +69,10 @@ namespace CodeBase.Gameplay.World.Region.Model
 
         private void MoveTiles(RegionData fromRegion, RegionData toRegion)
         {
-            foreach (var tile in fromRegion.Tiles)
-            {
-                toRegion.Tiles.Add(tile);
-                tile.Region = toRegion;
-            }
-
-            fromRegion.Tiles.Clear();
+            foreach (var tile in fromRegion.Tiles) 
+                _commonTool.SetRegion(tile, toRegion);
+            
+            _regionFactory.Destroy(fromRegion);
         }
     }
 }

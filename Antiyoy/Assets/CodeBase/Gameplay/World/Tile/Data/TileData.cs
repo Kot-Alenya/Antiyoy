@@ -17,10 +17,5 @@ namespace CodeBase.Gameplay.World.Tile.Data
             Instance = instance;
             Hex = hex;
         }
-
-        public TileData Clone()
-        {
-            return default;
-        }
     }
 }

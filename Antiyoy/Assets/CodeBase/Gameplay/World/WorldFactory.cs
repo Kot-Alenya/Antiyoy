@@ -40,6 +40,8 @@ namespace CodeBase.Gameplay.World
                 var hex = HexMath.FromArrayIndex(arrayIndex);
                 terrain.TryCreateTile(hex, RegionType.Neutral);
             }
+            
+            terrain.RecalculateChangedRegions();
         }
     }
 }
