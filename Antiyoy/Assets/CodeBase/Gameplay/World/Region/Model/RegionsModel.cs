@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Model
 {
-    public class RegionsModel //список всех регионов (?)
+    public class RegionsModel
     {
         private readonly RegionFactory _regionFactory;
         private readonly RegionsJoinTool _joinTool = new();
@@ -14,7 +15,7 @@ namespace CodeBase.Gameplay.World.Region.Model
         public RegionsModel(RegionFactory regionFactory)
         {
             _regionFactory = regionFactory;
-            _splitTool = new(regionFactory);
+            _splitTool = new RegionsSplitTool(regionFactory);
         }
 
         public void Add(TileData tile, RegionType regionType)
@@ -22,48 +23,53 @@ namespace CodeBase.Gameplay.World.Region.Model
             var region = GetOrCreateRegionFromNeighbors(tile, regionType);
 
             region.Tiles.Add(tile);
-            SetRegion(tile, region);
-
-            _changedRegions.Add(region);
-        }
-
-        private void SetRegion(TileData tile, RegionData region)
-        {
             tile.Region = region;
-            tile.Instance.SpriteRenderer.color = region.Color;
+            
+            UpdateView(region);
+
+            if (!_changedRegions.Contains(region))
+                _changedRegions.Add(region);
         }
 
         public void Remove(TileData tile)
         {
             tile.Region.Tiles.Remove(tile);
 
-            _changedRegions.Add(tile.Region);
+            if (!_changedRegions.Contains(tile.Region))
+                _changedRegions.Add(tile.Region);
         }
 
         public void RecalculateChangedRegions()
         {
-            foreach (var region in _changedRegions)
-                if (region.Tiles.Count > 0)
-                    Recalculate(region);
+            var regionsToRecalculate = _changedRegions.OrderBy(r => r.Tiles.Count);
+
+            foreach (var region in regionsToRecalculate)
+                Recalculate(region);
 
             _changedRegions.Clear();
         }
 
         private void Recalculate(RegionData region)
         {
-            var result = new List<RegionData>();
+            var regionToSplit = _joinTool.TryJoinWithNeighbors(region, out var joinedRegion)
+                ? joinedRegion
+                : region;
 
-            if (_joinTool.TryJoinWithNeighbors(region, out var joinResult))
-                result.Add(joinResult);
-            else
-                result.Add(region);
+            var result = _splitTool.TrySplit(regionToSplit, out var splitResult)
+                ? splitResult
+                : new List<RegionData> { region };
 
-            if (_splitTool.TrySplit(result[0], out var splitResult))
-                result = splitResult;
+            foreach (var resultRegion in result)
+                UpdateView(resultRegion);
+        }
 
-            foreach (var reg in result)
-            foreach (var tile in reg.Tiles)
-                tile.Instance.DebugText.text = reg.Tiles.Count.ToString();
+        private void UpdateView(RegionData region)
+        {
+            foreach (var tile in region.Tiles)
+            {
+                tile.Instance.DebugText.text = region.Tiles.Count.ToString();
+                tile.Instance.SpriteRenderer.color = region.Color;
+            }
         }
 
         private RegionData GetOrCreateRegionFromNeighbors(TileData tile, RegionType regionType)

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Model
 {
@@ -64,16 +63,10 @@ namespace CodeBase.Gameplay.World.Region.Model
             foreach (var tile in fromRegion.Tiles)
             {
                 toRegion.Tiles.Add(tile);
-                SetRegion(tile, toRegion);
+                tile.Region = toRegion;
             }
 
             fromRegion.Tiles.Clear();
-        }
-
-        private void SetRegion(TileData tile, RegionData region)
-        {
-            tile.Region = region;
-            tile.Instance.SpriteRenderer.color = region.Color;
         }
     }
 }

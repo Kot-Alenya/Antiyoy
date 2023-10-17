@@ -21,18 +21,18 @@ namespace CodeBase.Gameplay.World
 
         public void Create()
         {
-            var terrain = CreateTerrain();
+            var terrain = _terrainFactory.Create();
             var recorder = new WorldChangeRecorder();
             var handler = new WorldChangeHandler(recorder, terrain);
             var controller = new WorldController(terrain, handler, recorder);
 
             _container.Bind<IWorldController>().FromInstance(controller).AsSingle();
+
+            FillTerrain(terrain);
         }
 
-        private IWorldTerrainController CreateTerrain()
+        private void FillTerrain(IWorldTerrainController terrain)
         {
-            var terrain = _terrainFactory.Create();
-
             for (var y = 0; y < terrain.Size.y; y++)
             for (var x = 0; x < terrain.Size.x; x++)
             {
@@ -40,10 +40,6 @@ namespace CodeBase.Gameplay.World
                 var hex = HexMath.FromArrayIndex(arrayIndex);
                 terrain.TryCreateTile(hex, RegionType.Neutral);
             }
-
-            terrain.RecalculateChangedRegions();
-
-            return terrain;
         }
     }
 }
