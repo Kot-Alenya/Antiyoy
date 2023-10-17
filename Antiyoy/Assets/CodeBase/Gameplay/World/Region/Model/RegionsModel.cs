@@ -11,6 +11,7 @@ namespace CodeBase.Gameplay.World.Region.Model
         private readonly RegionsJoinTool _joinTool = new();
         private readonly RegionsSplitTool _splitTool;
         private readonly List<RegionData> _changedRegions = new();
+        private readonly List<RegionData> _regions = new();
 
         public RegionsModel(RegionFactory regionFactory)
         {
@@ -24,7 +25,7 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             region.Tiles.Add(tile);
             tile.Region = region;
-            
+
             UpdateView(region);
 
             if (!_changedRegions.Contains(region))
@@ -44,12 +45,17 @@ namespace CodeBase.Gameplay.World.Region.Model
             var regionsToRecalculate = _changedRegions.OrderBy(r => r.Tiles.Count);
 
             foreach (var region in regionsToRecalculate)
-                Recalculate(region);
+            {
+                var recalculateResult = Recalculate(region);
+                
+                _regions.Remove(region);
+                _regions.AddRange(recalculateResult);
+            }
 
             _changedRegions.Clear();
         }
 
-        private void Recalculate(RegionData region)
+        private List<RegionData> Recalculate(RegionData region)
         {
             var regionToSplit = _joinTool.TryJoinWithNeighbors(region, out var joinedRegion)
                 ? joinedRegion
@@ -61,6 +67,8 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             foreach (var resultRegion in result)
                 UpdateView(resultRegion);
+
+            return result;
         }
 
         private void UpdateView(RegionData region)
