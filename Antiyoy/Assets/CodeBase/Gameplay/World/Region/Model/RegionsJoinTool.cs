@@ -69,9 +69,9 @@ namespace CodeBase.Gameplay.World.Region.Model
 
         private void MoveTiles(RegionData fromRegion, RegionData toRegion)
         {
-            foreach (var tile in fromRegion.Tiles) 
+            foreach (var tile in fromRegion.Tiles)
                 _commonTool.SetRegion(tile, toRegion);
-            
+
             _regionFactory.Destroy(fromRegion);
         }
     }

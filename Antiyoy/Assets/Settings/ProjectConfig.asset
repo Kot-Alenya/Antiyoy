@@ -21,6 +21,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
     - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
     - {fileID: 11400000, guid: d5be257df90411c4d9b0778fe14e5738, type: 2}
+    - {fileID: 11400000, guid: 24eedd56138f903448f08a59a339b9f6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,7 +32,7 @@ MonoBehaviour:
       Data: 0|CodeBase.Infrastructure.Services.StaticData.IStaticData[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 10
       Data: 0
@@ -47,6 +48,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 13
       Data: 

@@ -10,15 +10,16 @@ namespace CodeBase.Gameplay.World.Region
     public class RegionFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
-        
+        private int _currentMaxId;
+
         public RegionFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
         public List<RegionData> Regions { get; } = new();
-        
+
         public RegionData Create(RegionType type)
         {
-            var region = new RegionData(type, GetRandomColor());
-            
+            var region = new RegionData(type, GetRandomColor(), ++_currentMaxId);
+
             Regions.Add(region);
             return region;
         }

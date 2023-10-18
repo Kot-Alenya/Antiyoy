@@ -27,6 +27,6 @@ namespace CodeBase.Gameplay.World.Data.Hex
 
         public override int GetHashCode() => HashCode.Combine(Q, R);
 
-        public override string ToString() => $"{Q};{R};{S}";
+        public override string ToString() => $"({Q};{R})";
     }
 }

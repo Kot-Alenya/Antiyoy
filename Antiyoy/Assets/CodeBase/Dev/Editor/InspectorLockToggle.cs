@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace CodeBase.Utilities.Editor
+namespace CodeBase.Dev.Editor
 {
     public static class InspectorLockToggle
     {

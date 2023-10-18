@@ -58,7 +58,7 @@ namespace CodeBase.Gameplay.World.Region.Model
             var result = _splitTool.TrySplit(regionToSplit, out var splitResult)
                 ? splitResult
                 : new List<RegionData> { region };
-            
+
             foreach (var resultRegion in result)
                 UpdateDebug(resultRegion);
         }
