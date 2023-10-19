@@ -16,7 +16,7 @@ namespace CodeBase.Infrastructure.MapEditor
 
         [Inject]
         private void Constructor(WorldFactory worldFactory, CameraFactory cameraFactory,
-            MapEditorFactory mapEditorFactory,DebugWindowFactory debugWindowFactory)
+            MapEditorFactory mapEditorFactory, DebugWindowFactory debugWindowFactory)
         {
             _worldFactory = worldFactory;
             _cameraFactory = cameraFactory;

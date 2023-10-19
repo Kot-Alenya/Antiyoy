@@ -19,11 +19,11 @@ namespace CodeBase.Dev.DebugWindow
         {
             var staticData = _staticDataProvider.Get<DebugWindowStaticData>();
             var instance = Object.Instantiate(staticData.Prefab);
-            
+
             _container.Bind<IDebugWindowController>().To<DebugWindowController>().AsSingle()
                 .WithArguments(instance.Window);
             _container.InjectGameObject(instance.gameObject);
-            
+
             instance.Window.Close();
         }
     }
