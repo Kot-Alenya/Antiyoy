@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -9,10 +10,25 @@ namespace CodeBase.Gameplay.World.Region
     public class RegionFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
+        private int _currentMaxId;
 
         public RegionFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public RegionData Create(RegionType type) => new(type, GetRandomColor());
+        public List<RegionData> Regions { get; } = new();
+
+        public RegionData Create(RegionType type)
+        {
+            var region = new RegionData(type, GetRandomColor(), ++_currentMaxId);
+
+            Regions.Add(region);
+            return region;
+        }
+
+        public void Destroy(RegionData region)
+        {
+            region.Tiles.Clear();
+            Regions.Remove(region);
+        }
 
         private Color GetColor(RegionType regionType)
         {

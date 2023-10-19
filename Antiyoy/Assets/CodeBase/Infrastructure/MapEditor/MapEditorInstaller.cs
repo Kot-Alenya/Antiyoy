@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Dev.DebugWindow;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain;
@@ -15,6 +16,7 @@ namespace CodeBase.Infrastructure.MapEditor
             BindWorld();
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<MapEditorFactory>().AsSingle();
+            Container.Bind<DebugWindowFactory>().AsSingle();
         }
 
         private void BindWorld()

@@ -6,9 +6,14 @@ namespace CodeBase.Gameplay.World.Region.Model
 {
     public class RegionsSplitTool
     {
+        private readonly RegionsCommonTool _commonTool;
         private readonly RegionFactory _regionFactory;
 
-        public RegionsSplitTool(RegionFactory regionFactory) => _regionFactory = regionFactory;
+        public RegionsSplitTool(RegionFactory regionFactory, RegionsCommonTool commonTool)
+        {
+            _regionFactory = regionFactory;
+            _commonTool = commonTool;
+        }
 
         public bool TrySplit(RegionData region, out List<RegionData> result)
         {
@@ -93,18 +98,11 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             foreach (var tile in splitPart)
             {
-                newRegion.Tiles.Add(tile);
-                SetRegion(tile, newRegion);
-                baseRegion.Tiles.Remove(tile);
+                _commonTool.SetRegion(tile, newRegion);
+                _commonTool.RemoveRegion(tile, baseRegion);
             }
 
             return newRegion;
-        }
-
-        private void SetRegion(TileData tile, RegionData region)
-        {
-            tile.Region = region;
-            tile.Instance.SpriteRenderer.color = region.Color;
         }
     }
 }
