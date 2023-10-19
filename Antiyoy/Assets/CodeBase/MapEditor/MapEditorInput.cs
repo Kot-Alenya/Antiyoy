@@ -19,6 +19,14 @@ namespace CodeBase.MapEditor
 
         private void Update()
         {
+            if (Input.GetKey(KeyCode.LeftControl) && !Input.GetMouseButton(0))
+            {
+                if (Input.GetKeyDown(KeyCode.Z))
+                    _mapEditorController.ReturnBack();
+                else if (Input.GetKeyDown(KeyCode.Y))
+                    _mapEditorController.ReturnNext();
+            }
+
             if (Input.GetMouseButtonUp(0))
                 _mapEditorController.ProcessTiles();
 
