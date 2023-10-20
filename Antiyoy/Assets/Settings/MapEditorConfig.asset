@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de7f2a6ce144df28f9f744162ece4c0, type: 3}
   m_Name: MapEditorConfig
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3804988188308542292, guid: 77c63ed7e26512147a29f807ba5aaac7, type: 3}
+  Prefab: {fileID: 6157996624488819535, guid: 5aca566e38029a84cba762bd14b59b48, type: 3}

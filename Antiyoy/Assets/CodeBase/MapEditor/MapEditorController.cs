@@ -2,6 +2,7 @@ using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.MapEditor.Data;
+using CodeBase.MapEditor.UI;
 
 namespace CodeBase.MapEditor
 {
@@ -16,13 +17,11 @@ namespace CodeBase.MapEditor
             _world = world;
         }
 
-        public void CreateTilesMode(RegionType regionType)
-        {
-            _mapEditorModel.SetCurrentMode(MapEditorMode.CreateTiles);
-            _mapEditorModel.SetCurrentRegion(regionType);
-        }
+        public void SetMode(MapEditorMode mode) => _mapEditorModel.SetCurrentMode(mode);
 
-        public void DestroyTilesMode() => _mapEditorModel.SetCurrentMode(MapEditorMode.DestroyTiles);
+        public void SetRegionType(RegionType regionType) => _mapEditorModel.SetCurrentRegion(regionType);
+
+        public void SetEntityType(EntityType entityType) => _mapEditorModel.SetCurrentEntity(entityType);
 
         public void SelectTile(HexPosition hex) => _mapEditorModel.SelectTile(hex);
 

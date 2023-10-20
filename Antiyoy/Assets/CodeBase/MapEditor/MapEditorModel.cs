@@ -6,6 +6,7 @@ using CodeBase.Gameplay.World.Data.Operation;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.MapEditor.Data;
+using CodeBase.MapEditor.UI;
 
 namespace CodeBase.MapEditor
 {
@@ -16,6 +17,7 @@ namespace CodeBase.MapEditor
         private readonly List<HexPosition> _selectedHex = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
+        private EntityType _entityType;
 
         public MapEditorModel(IWorldController world) => _world = world;
 
@@ -23,14 +25,16 @@ namespace CodeBase.MapEditor
 
         public void SetCurrentRegion(RegionType region) => _currentRegion = region;
 
+        public void SetCurrentEntity(EntityType entityType) => _entityType = entityType;
+
         public void SelectTile(HexPosition hex)
         {
             if (!_world.Terrain.IsHexInTerrain(hex) || _selectedHex.Contains(hex))
                 return;
 
-            if (_currentMode == MapEditorMode.CreateTiles)
+            if (_currentMode == MapEditorMode.CreateTile)
                 CreateTile(hex);
-            else if (_currentMode == MapEditorMode.DestroyTiles)
+            else if (_currentMode == MapEditorMode.DestroyTile)
                 DestroyTile(hex);
 
             _selectedHex.Add(hex);
@@ -45,10 +49,10 @@ namespace CodeBase.MapEditor
             {
                 case MapEditorMode.None:
                     break;
-                case MapEditorMode.CreateTiles:
+                case MapEditorMode.CreateTile:
                     _world.Terrain.RecalculateChangedRegions();
                     break;
-                case MapEditorMode.DestroyTiles:
+                case MapEditorMode.DestroyTile:
                     _world.Terrain.RecalculateChangedRegions();
                     break;
                 default:
