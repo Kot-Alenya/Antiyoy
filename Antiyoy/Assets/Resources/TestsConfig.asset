@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b471ea10ca24e89bffe1cffd66e0730, type: 3}
   m_Name: TestsConfig
   m_EditorClassIdentifier: 
-  ProjectStaticData: {fileID: 11400000, guid: 107f9c6ab0befd24ea311a63069dcd56, type: 2}
+  ProjectStaticData: {fileID: 0}

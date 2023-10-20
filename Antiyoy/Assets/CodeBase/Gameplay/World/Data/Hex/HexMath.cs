@@ -29,27 +29,37 @@ namespace CodeBase.Gameplay.World.Data.Hex
 
         public static HexPosition FromWorldPosition(Vector2 position)
         {
-            var yOffset = OuterRadius * 3f / 2f;
-            var xOffset = InnerRadius * 2f;
-            var y = position.y / yOffset;
-            var x = position.x / xOffset;
+            var yTileOffset = OuterRadius - InnerRadius / 2f;
+            var threeTilesHeight = OuterRadius * 6f - yTileOffset * 2f;
+            var averageTileHeight = threeTilesHeight / 3f;
+            var yNormalized = position.y / averageTileHeight;
+            if (yNormalized < 0)
+                yNormalized -= 1;
 
-            var roundY = (int)(y + 0.5f);
+            var roundY = (int)yNormalized;
 
-            x = roundY % 2f == 0 ? x + InnerRadius : x;
+            var averageTileWidth = InnerRadius * 2f;
+            var xTileOffset = roundY % 2f == 0 ? InnerRadius : 0;
+            var xNormalized = (position.x + xTileOffset) / averageTileWidth;
 
-            var roundX = (int)(x + 0.5f);
+            if (xNormalized < 0)
+                xNormalized -= 1;
+
+            var roundX = (int)xNormalized;
 
             return FromArrayIndex(new Vector2Int(roundX, roundY));
         }
 
-        public static Vector2 ToWorldPosition(HexPosition position)
+        public static Vector2 ToWorldPosition(HexPosition hex)
         {
-            var index = ToArrayIndex(position);
+            var index = ToArrayIndex(hex);
             var x = index.x * InnerRadius * 2f;
             var y = index.y * OuterRadius * 3f / 2f;
 
             x = index.y % 2f == 0 ? x - InnerRadius : x;
+
+            x += InnerRadius;
+            y += OuterRadius;
 
             return new Vector2(x, y);
         }
