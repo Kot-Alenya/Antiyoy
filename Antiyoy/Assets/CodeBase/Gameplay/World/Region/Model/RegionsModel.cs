@@ -36,12 +36,13 @@ namespace CodeBase.Gameplay.World.Region.Model
             _commonTool.RemoveRegion(tile, tile.Region);
 
             if (!_changedRegions.Contains(tile.Region))
-                _changedRegions.Add(tile.Region);
+                if (tile.Region.Tiles.Count > 0)
+                    _changedRegions.Add(tile.Region);
         }
 
         public void RecalculateChangedRegions()
         {
-            var regionsToRecalculate = _changedRegions.OrderBy(r => r.Tiles.Count);
+            var regionsToRecalculate = _changedRegions.OrderBy(r => r.Income);
 
             foreach (var region in regionsToRecalculate)
                 Recalculate(region);
@@ -51,22 +52,26 @@ namespace CodeBase.Gameplay.World.Region.Model
 
         private void Recalculate(RegionData region)
         {
-            var regionToSplit = _joinTool.TryJoinWithNeighbors(region, out var joinedRegion)
-                ? joinedRegion
+            var regionToSplit = _joinTool.TryJoinWithNeighbors(region, out var joinRegion)
+                ? joinRegion
                 : region;
 
             var result = _splitTool.TrySplit(regionToSplit, out var splitResult)
                 ? splitResult
-                : new List<RegionData> { region };
-
+                : new List<RegionData> { regionToSplit };
+            
             foreach (var resultRegion in result)
-                UpdateDebug(resultRegion);
+                resultRegion.Income = GetIncome(resultRegion);
         }
 
-        private void UpdateDebug(RegionData region)
+        private int GetIncome(RegionData region)
         {
+            var income = 0;
+
             foreach (var tile in region.Tiles)
-                tile.Instance.DebugText.text = region.Tiles.Count.ToString();
+                income += 1;
+
+            return income;
         }
 
         private RegionData GetOrCreateRegionFromNeighbors(TileData tile, RegionType regionType)

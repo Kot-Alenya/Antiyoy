@@ -64,7 +64,8 @@ namespace CodeBase.Dev.DebugWindow
 
             var result = tabulation + $"Id: {tile.Region.Id}\n" +
                          tabulation + $"Size: {tile.Region.Tiles.Count}\n" +
-                         tabulation + $"Type: {tile.Region.Type}";
+                         tabulation + $"Type: {tile.Region.Type}\n" +
+                         tabulation + $"Income: {tile.Region.Income}";
 
             return result;
         }

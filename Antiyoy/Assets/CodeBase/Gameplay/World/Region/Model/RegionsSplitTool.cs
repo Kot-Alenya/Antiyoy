@@ -31,18 +31,6 @@ namespace CodeBase.Gameplay.World.Region.Model
             return true;
         }
 
-        private List<RegionData> Split(RegionData region, List<List<TileData>> splits)
-        {
-            var regions = new List<RegionData> { region };
-
-            splits.Remove(GetBiggestSplit(splits));
-
-            foreach (var split in splits)
-                regions.Add(CreateRegion(split, region));
-
-            return regions;
-        }
-
         private List<List<TileData>> GetSplits(RegionData regionData)
         {
             var splits = new List<List<TileData>>();
@@ -79,6 +67,18 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             splits.Add(passed);
             return splits;
+        }
+
+        private List<RegionData> Split(RegionData region, List<List<TileData>> splits)
+        {
+            var regions = new List<RegionData> { region };
+
+            splits.Remove(GetBiggestSplit(splits));
+
+            foreach (var split in splits)
+                regions.Add(CreateRegion(split, region));
+
+            return regions;
         }
 
         private List<TileData> GetBiggestSplit(List<List<TileData>> splits)

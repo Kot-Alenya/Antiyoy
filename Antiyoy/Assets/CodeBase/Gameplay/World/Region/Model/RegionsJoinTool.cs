@@ -55,7 +55,7 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             for (var i = 1; i < regions.Count; i++)
             {
-                if (regions[i].Tiles.Count > previous.Tiles.Count)
+                if (regions[i].Income > previous.Income)
                 {
                     MoveTiles(previous, regions[i]);
                     previous = regions[i];
