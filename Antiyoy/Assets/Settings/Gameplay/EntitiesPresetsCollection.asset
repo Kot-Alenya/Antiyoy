@@ -17,6 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: -4724356662714697873, guid: cc39d115639e3a444beeaa76926856fe, type: 3}
+    - {fileID: -4724356662714697873, guid: 6c57552dcd1d15b42b6c8c6c14f67a57, type: 3}
+    - {fileID: -4724356662714697873, guid: 6010765b7d0cd324aa2c5015d3a20884, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,12 +26,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Entities
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.MapEditor.UI.EntityType,
-        CodeBase],[CodeBase.Gameplay.World.Terrain.EntityPresetData, CodeBase]],
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.World.Entity.Data.EntityType,
+        CodeBase],[CodeBase.Gameplay.World.Entity.Data.EntityPresetData, CodeBase]],
         mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.MapEditor.UI.EntityType,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.World.Entity.Data.EntityType,
         CodeBase]], mscorlib
     - Name: 
       Entry: 12
@@ -42,7 +44,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -51,13 +53,55 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: 2|CodeBase.Gameplay.World.Terrain.EntityPresetData, CodeBase
+      Data: 2|CodeBase.Gameplay.World.Entity.Data.EntityPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 0
     - Name: Income
       Entry: 3
       Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: 3|CodeBase.Gameplay.World.Entity.Data.EntityPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 1
+    - Name: Income
+      Entry: 3
+      Data: -2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 4|CodeBase.Gameplay.World.Entity.Data.EntityPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 2
+    - Name: Income
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
