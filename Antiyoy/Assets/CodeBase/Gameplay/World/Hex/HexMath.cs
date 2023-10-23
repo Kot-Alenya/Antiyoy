@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Data.Hex
+namespace CodeBase.Gameplay.World.Hex
 {
     public static class HexMath
     {

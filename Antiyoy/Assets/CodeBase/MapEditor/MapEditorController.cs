@@ -1,7 +1,7 @@
-using CodeBase.Gameplay.World;
-using CodeBase.Gameplay.World.Data.Hex;
 using CodeBase.Gameplay.World.Entity.Data;
+using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Version;
 using CodeBase.MapEditor.Data;
 
 namespace CodeBase.MapEditor
@@ -9,12 +9,12 @@ namespace CodeBase.MapEditor
     public class MapEditorController : IMapEditorController
     {
         private readonly MapEditorModel _mapEditorModel;
-        private readonly IWorldController _world;
+        private readonly IWorldVersionController _versionController;
 
-        public MapEditorController(MapEditorModel mapEditorModel, IWorldController world)
+        public MapEditorController(MapEditorModel mapEditorModel, IWorldVersionController versionController)
         {
             _mapEditorModel = mapEditorModel;
-            _world = world;
+            _versionController = versionController;
         }
 
         public void SetMode(MapEditorMode mode) => _mapEditorModel.SetCurrentMode(mode);
@@ -27,8 +27,8 @@ namespace CodeBase.MapEditor
 
         public void ProcessTiles() => _mapEditorModel.ProcessTiles();
 
-        public void ReturnBack() => _world.ChangeHandler.ReturnWorldBack();
+        public void ReturnBack() => _versionController.ReturnWorldBack();
 
-        public void ReturnNext() => _world.ChangeHandler.ReturnWorldNext();
+        public void ReturnNext() => _versionController.ReturnWorldNext();
     }
 }

@@ -1,5 +1,5 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Hex;
 using UnityEngine;
 using Zenject;
 

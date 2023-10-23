@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Gameplay.World.Data.Hex
+namespace CodeBase.Gameplay.World.Hex
 {
     public struct HexPosition : IEquatable<HexPosition>
     {

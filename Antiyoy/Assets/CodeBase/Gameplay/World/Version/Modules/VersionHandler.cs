@@ -1,43 +1,15 @@
-﻿using CodeBase.Gameplay.World.Change.Recorder;
-using CodeBase.Gameplay.World.Data.Operation;
-using CodeBase.Gameplay.World.Terrain;
+﻿using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Version.Operation;
 
-namespace CodeBase.Gameplay.World.Change.Handler
+namespace CodeBase.Gameplay.World.Version.Modules
 {
-    public class WorldChangeHandler : IWorldChangeHandler
+    public class VersionHandler
     {
-        private readonly WorldChangeRecorder _recorder;
         private readonly IWorldTerrainController _terrainController;
 
-        public WorldChangeHandler(WorldChangeRecorder recorder, IWorldTerrainController terrainController)
-        {
-            _recorder = recorder;
-            _terrainController = terrainController;
-        }
+        public VersionHandler(IWorldTerrainController terrainController) => _terrainController = terrainController;
 
-        public void ReturnWorldBack()
-        {
-            if (!_recorder.TryBack(out var data))
-                return;
-
-            for (var i = data.Length - 1; i >= 0; i--)
-                Revert(data[i]);
-
-            _terrainController.RecalculateChangedRegions();
-        }
-
-        public void ReturnWorldNext()
-        {
-            if (!_recorder.TryNext(out var data))
-                return;
-
-            for (var i = 0; i < data.Length; i++)
-                Apply(data[i]);
-
-            _terrainController.RecalculateChangedRegions();
-        }
-
-        private void Revert(IWorldOperationData operation)
+        public void Revert(IWorldOperationData operation)
         {
             switch (operation)
             {
@@ -54,9 +26,11 @@ namespace CodeBase.Gameplay.World.Change.Handler
                     _terrainController.TryCreateEntity(data.Hex, data.EntityType);
                     break;
             }
+
+            _terrainController.RecalculateChangedRegions();
         }
 
-        private void Apply(IWorldOperationData operation)
+        public void Apply(IWorldOperationData operation)
         {
             switch (operation)
             {
@@ -73,6 +47,8 @@ namespace CodeBase.Gameplay.World.Change.Handler
                     _terrainController.TryDestroyEntity(data.Hex);
                     break;
             }
+
+            _terrainController.RecalculateChangedRegions();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using CodeBase.Gameplay.World.Change.Handler;
-using CodeBase.Gameplay.World.Change.Recorder;
-using CodeBase.Gameplay.World.Data.Hex;
+﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain;
 using UnityEngine;
@@ -22,11 +20,8 @@ namespace CodeBase.Gameplay.World
         public void Create()
         {
             var terrain = _terrainFactory.Create();
-            var recorder = new WorldChangeRecorder();
-            var handler = new WorldChangeHandler(recorder, terrain);
-            var controller = new WorldController(terrain, handler, recorder);
 
-            _container.Bind<IWorldController>().FromInstance(controller).AsSingle();
+            _container.Bind<IWorldController>().To<WorldController>().AsSingle();
 
             FillTerrain(terrain);
         }

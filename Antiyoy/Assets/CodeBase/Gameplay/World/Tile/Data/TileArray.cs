@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Hex;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Data

@@ -1,6 +1,6 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
-using CodeBase.Gameplay.World.Entity;
+﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Entity.Data;
+using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Tile.Data;

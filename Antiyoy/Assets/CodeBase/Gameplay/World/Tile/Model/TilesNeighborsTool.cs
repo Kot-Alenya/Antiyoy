@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Tile.Model

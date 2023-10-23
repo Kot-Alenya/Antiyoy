@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.World.Data.Operation
+﻿namespace CodeBase.Gameplay.World.Version.Operation
 {
     public interface IWorldOperationData
     {

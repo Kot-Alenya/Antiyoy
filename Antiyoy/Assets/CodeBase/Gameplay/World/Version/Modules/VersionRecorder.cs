@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World.Data.Operation;
+using CodeBase.Gameplay.World.Version.Operation;
 
-namespace CodeBase.Gameplay.World.Change.Recorder
+namespace CodeBase.Gameplay.World.Version.Modules
 {
-    public class WorldChangeRecorder : IWorldChangeRecorder
+    public class VersionRecorder
     {
         private readonly List<IWorldOperationData[]> _records = new();
-        private readonly List<IWorldOperationData> _buffer = new();
         private int _readIndex = -1;
+
+        public readonly List<IWorldOperationData> Buffer = new();
 
         public void Record(params IWorldOperationData[] operations)
         {
@@ -17,12 +18,12 @@ namespace CodeBase.Gameplay.World.Change.Recorder
             _records.Add(operations);
         }
 
-        public void AddToBuffer(IWorldOperationData operation) => _buffer.Add(operation);
+        public void AddToBuffer(IWorldOperationData operation) => Buffer.Add(operation);
 
         public void RecordFromBuffer()
         {
-            Record(_buffer.ToArray());
-            _buffer.Clear();
+            Record(Buffer.ToArray());
+            Buffer.Clear();
         }
 
         public void Clear()

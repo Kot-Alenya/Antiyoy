@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
+﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;

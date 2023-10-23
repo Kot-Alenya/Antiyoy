@@ -5,6 +5,7 @@ using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Tile;
+using CodeBase.Gameplay.World.Version;
 using CodeBase.MapEditor;
 using Zenject;
 
@@ -27,6 +28,7 @@ namespace CodeBase.Infrastructure.MapEditor
             Container.Bind<EntityFactory>().AsSingle();
             Container.Bind<TerrainFactory>().AsSingle();
             Container.Bind<WorldFactory>().AsSingle();
+            Container.Bind<WorldVersionControllerFactory>().AsSingle();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
-using CodeBase.Gameplay.World.Entity.Data;
+﻿using CodeBase.Gameplay.World.Entity.Data;
+using CodeBase.Gameplay.World.Hex;
 
-namespace CodeBase.Gameplay.World.Data.Operation
+namespace CodeBase.Gameplay.World.Version.Operation
 {
     public readonly struct WorldDestroyEntityOperationData : IWorldOperationData
     {

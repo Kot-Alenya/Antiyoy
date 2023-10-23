@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.World.Data.Hex
+﻿namespace CodeBase.Gameplay.World.Hex
 {
     public struct HexPositionDirections
     {

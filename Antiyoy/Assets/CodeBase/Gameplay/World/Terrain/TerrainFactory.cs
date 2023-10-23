@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.World.Data.Hex;
-using CodeBase.Gameplay.World.Entity;
+﻿using CodeBase.Gameplay.World.Entity;
+using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Terrain.Data;
