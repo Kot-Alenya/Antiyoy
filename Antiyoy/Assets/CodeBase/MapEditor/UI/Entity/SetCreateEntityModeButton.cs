@@ -1,7 +1,8 @@
-﻿using CodeBase.MapEditor.Data;
+﻿using CodeBase.Gameplay.World.Entity.Data;
+using CodeBase.MapEditor.Data;
 using UnityEngine;
 
-namespace CodeBase.MapEditor.UI
+namespace CodeBase.MapEditor.UI.Entity
 {
     public class SetCreateEntityModeButton : MapEditorButtonBase
     {

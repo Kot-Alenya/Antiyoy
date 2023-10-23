@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Dev.DebugWindow
+namespace CodeBase.Dev.DebugWindow.Data
 {
     public class DebugWindowPrefabData : MonoBehaviour
     {

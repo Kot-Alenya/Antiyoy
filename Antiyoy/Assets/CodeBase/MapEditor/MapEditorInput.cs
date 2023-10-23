@@ -19,27 +19,32 @@ namespace CodeBase.MapEditor
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.LeftControl) && !Input.GetMouseButton(0))
-            {
-                if (Input.GetKeyDown(KeyCode.Z))
-                    _mapEditorController.ReturnBack();
-                else if (Input.GetKeyDown(KeyCode.Y))
-                    _mapEditorController.ReturnNext();
-            }
+            ReturnWorld();
 
             if (Input.GetMouseButtonUp(0))
                 _mapEditorController.ProcessTiles();
 
-            if (!Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
+            {
+                var ray = _cameraController.GetRay(Input.mousePosition);
+                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                if (hit.transform == default)
+                    return;
+
+                _mapEditorController.SelectTile(HexMath.FromWorldPosition(hit.point));
+            }
+        }
+
+        private void ReturnWorld()
+        {
+            if (!Input.GetKey(KeyCode.LeftControl) || Input.GetMouseButton(0))
                 return;
 
-            var ray = _cameraController.GetRay(Input.mousePosition);
-            var hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-            if (hit.transform == default)
-                return;
-
-            _mapEditorController.SelectTile(HexMath.FromWorldPosition(hit.point));
+            if (Input.GetKeyDown(KeyCode.Z))
+                _mapEditorController.ReturnBack();
+            else if (Input.GetKeyDown(KeyCode.Y))
+                _mapEditorController.ReturnNext();
         }
     }
 }

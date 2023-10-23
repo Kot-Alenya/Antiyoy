@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.MapEditor.Data;
-using CodeBase.MapEditor.UI;
 
 namespace CodeBase.MapEditor
 {
@@ -10,9 +10,9 @@ namespace CodeBase.MapEditor
         public void SetMode(MapEditorMode mode);
 
         public void SetRegionType(RegionType regionType);
-        
+
         public void SetEntityType(EntityType entityType);
-        
+
         public void SelectTile(HexPosition hex);
 
         public void ProcessTiles();

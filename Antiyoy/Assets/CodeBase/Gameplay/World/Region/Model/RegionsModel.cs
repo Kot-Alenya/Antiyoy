@@ -27,17 +27,21 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             _commonTool.SetRegion(tile, region);
 
-            if (!_changedRegions.Contains(region))
-                _changedRegions.Add(region);
+            AddToChangedRegions(region);
         }
 
         public void Remove(TileData tile)
         {
             _commonTool.RemoveRegion(tile, tile.Region);
 
-            if (!_changedRegions.Contains(tile.Region))
-                if (tile.Region.Tiles.Count > 0)
-                    _changedRegions.Add(tile.Region);
+            AddToChangedRegions(tile.Region);
+        }
+
+        public void AddToChangedRegions(RegionData region)
+        {
+            if (!_changedRegions.Contains(region))
+                if (region.Tiles.Count > 0)
+                    _changedRegions.Add(region);
         }
 
         public void RecalculateChangedRegions()
@@ -59,7 +63,7 @@ namespace CodeBase.Gameplay.World.Region.Model
             var result = _splitTool.TrySplit(regionToSplit, out var splitResult)
                 ? splitResult
                 : new List<RegionData> { regionToSplit };
-            
+
             foreach (var resultRegion in result)
                 resultRegion.Income = GetIncome(resultRegion);
         }
@@ -69,7 +73,12 @@ namespace CodeBase.Gameplay.World.Region.Model
             var income = 0;
 
             foreach (var tile in region.Tiles)
-                income += 1;
+            {
+                if (tile.Entity != null)
+                    income += tile.Entity.Income;
+                else
+                    income += 1;
+            }
 
             return income;
         }

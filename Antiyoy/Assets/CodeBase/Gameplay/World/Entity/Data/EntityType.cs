@@ -1,8 +1,8 @@
-﻿namespace CodeBase.MapEditor.UI
+﻿namespace CodeBase.Gameplay.World.Entity.Data
 {
     public enum EntityType
     {
-        Capital = 0,
+        Farm = 0,
         Peasant = 1,
         Pine = 2
     }

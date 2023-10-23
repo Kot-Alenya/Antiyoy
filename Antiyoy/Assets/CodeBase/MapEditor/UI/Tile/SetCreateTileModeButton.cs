@@ -2,7 +2,7 @@
 using CodeBase.MapEditor.Data;
 using UnityEngine;
 
-namespace CodeBase.MapEditor.UI
+namespace CodeBase.MapEditor.UI.Tile
 {
     public class SetCreateTileModeButton : MapEditorButtonBase
     {

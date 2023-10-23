@@ -1,6 +1,6 @@
 using CodeBase.MapEditor.Data;
 
-namespace CodeBase.MapEditor.UI
+namespace CodeBase.MapEditor.UI.Tile
 {
     public class SetDestroyTileModeButton : MapEditorButtonBase
     {

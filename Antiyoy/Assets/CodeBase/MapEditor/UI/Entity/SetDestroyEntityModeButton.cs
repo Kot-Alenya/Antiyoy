@@ -1,6 +1,6 @@
 ﻿using CodeBase.MapEditor.Data;
 
-namespace CodeBase.MapEditor.UI
+namespace CodeBase.MapEditor.UI.Entity
 {
     public class SetDestroyEntityModeButton : MapEditorButtonBase
     {

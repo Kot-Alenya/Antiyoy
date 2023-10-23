@@ -1,4 +1,5 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 using UnityEngine;
@@ -18,5 +19,9 @@ namespace CodeBase.Gameplay.World.Terrain
         public bool TryDestroyTile(HexPosition hex);
 
         public void RecalculateChangedRegions();
+
+        public bool TryCreateEntity(HexPosition hex, EntityType entityType);
+
+        public bool TryDestroyEntity(HexPosition hex);
     }
 }

@@ -47,6 +47,12 @@ namespace CodeBase.Gameplay.World.Change.Handler
                 case WorldDestroyTileOperationData data:
                     _terrainController.TryCreateTile(data.Hex, data.RegionType);
                     break;
+                case WorldCreateEntityOperationData data:
+                    _terrainController.TryDestroyEntity(data.Hex);
+                    break;
+                case WorldDestroyEntityOperationData data:
+                    _terrainController.TryCreateEntity(data.Hex, data.EntityType);
+                    break;
             }
         }
 
@@ -59,6 +65,12 @@ namespace CodeBase.Gameplay.World.Change.Handler
                     break;
                 case WorldDestroyTileOperationData data:
                     _terrainController.TryDestroyTile(data.Hex);
+                    break;
+                case WorldCreateEntityOperationData data:
+                    _terrainController.TryCreateEntity(data.Hex, data.EntityType);
+                    break;
+                case WorldDestroyEntityOperationData data:
+                    _terrainController.TryDestroyEntity(data.Hex);
                     break;
             }
         }

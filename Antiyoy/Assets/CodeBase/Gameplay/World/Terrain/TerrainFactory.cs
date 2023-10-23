@@ -1,4 +1,5 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Terrain.Data;
@@ -17,13 +18,15 @@ namespace CodeBase.Gameplay.World.Terrain
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly TileFactory _tileFactory;
         private readonly RegionFactory _regionFactory;
+        private readonly EntityFactory _entityFactory;
 
         public TerrainFactory(IStaticDataProvider staticDataProvider, TileFactory tileFactory,
-            RegionFactory regionFactory)
+            RegionFactory regionFactory, EntityFactory entityFactory)
         {
             _staticDataProvider = staticDataProvider;
             _tileFactory = tileFactory;
             _regionFactory = regionFactory;
+            _entityFactory = entityFactory;
         }
 
         public IWorldTerrainController Create()
@@ -34,7 +37,7 @@ namespace CodeBase.Gameplay.World.Terrain
             var tiles = new TileArray(terrainStaticData.Size);
             var tilesModel = new TilesModel(tiles, root, _tileFactory);
             var regionsModel = new RegionsModel(_regionFactory);
-            var terrainModel = new TerrainModel(tilesModel, regionsModel);
+            var terrainModel = new TerrainModel(tilesModel, regionsModel, _entityFactory);
 
             CreateBackground(root, terrainStaticData);
 

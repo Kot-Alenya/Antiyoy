@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Region.Data;
 
 namespace CodeBase.Gameplay.World.Tile.Data
@@ -11,6 +12,7 @@ namespace CodeBase.Gameplay.World.Tile.Data
         public readonly HexPosition Hex;
 
         public RegionData Region;
+        public EntityData Entity;
 
         public TileData(TilePrefabData instance, HexPosition hex)
         {

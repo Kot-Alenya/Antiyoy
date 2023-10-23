@@ -1,4 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Tile.Data;
@@ -11,11 +13,13 @@ namespace CodeBase.Gameplay.World.Terrain
     {
         private readonly TilesModel _tilesModel;
         private readonly RegionsModel _regionsModel;
+        private readonly EntityFactory _entityFactory;
 
-        public TerrainModel(TilesModel tilesModel, RegionsModel regionsModel)
+        public TerrainModel(TilesModel tilesModel, RegionsModel regionsModel, EntityFactory entityFactory)
         {
             _tilesModel = tilesModel;
             _regionsModel = regionsModel;
+            _entityFactory = entityFactory;
         }
 
         public Vector2Int Size => _tilesModel.Size;
@@ -43,9 +47,41 @@ namespace CodeBase.Gameplay.World.Terrain
             _regionsModel.Remove(tile);
             _tilesModel.DestroyTile(tile);
 
+            if (tile.Entity != null)
+                _entityFactory.Destroy(tile.Entity);
+
             return true;
         }
 
         public void RecalculateChangedRegions() => _regionsModel.RecalculateChangedRegions();
+
+        public bool TryCreateEntity(HexPosition hex, EntityType entityType)
+        {
+            if (!_tilesModel.TryGetTile(hex, out var tile))
+                return false;
+
+            if (tile.Entity != null)
+                return false;
+
+            tile.Entity = _entityFactory.Create(entityType, tile.Instance.transform);
+            _regionsModel.AddToChangedRegions(tile.Region);
+
+            return true;
+        }
+
+        public bool TryDestroyEntity(HexPosition hex)
+        {
+            if (!_tilesModel.TryGetTile(hex, out var tile))
+                return false;
+
+            if (tile.Entity == null)
+                return false;
+
+            _entityFactory.Destroy(tile.Entity);
+            tile.Entity = null;
+            _regionsModel.AddToChangedRegions(tile.Region);
+
+            return true;
+        }
     }
 }

@@ -1,8 +1,8 @@
 using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Data.Hex;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.MapEditor.Data;
-using CodeBase.MapEditor.UI;
 
 namespace CodeBase.MapEditor
 {

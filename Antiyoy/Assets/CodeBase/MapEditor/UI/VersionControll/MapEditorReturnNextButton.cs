@@ -1,4 +1,4 @@
-﻿namespace CodeBase.MapEditor.UI
+﻿namespace CodeBase.MapEditor.UI.VersionControll
 {
     public class MapEditorReturnNextButton : MapEditorButtonBase
     {

@@ -12,7 +12,7 @@ namespace CodeBase.Gameplay.World.Region.Data
         public readonly int Id;
 
         public int Income;
-        
+
         public RegionData(RegionType type, Color color, int id)
         {
             Type = type;
