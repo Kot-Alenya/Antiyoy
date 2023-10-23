@@ -16,7 +16,7 @@ namespace CodeBase.Dev.Tests
                 .WithArguments(testConfig.ProjectStaticData.StaticDataToBind);
         }
 
-        public static IWorldTerrainController Terrain(DiContainer container)
+        public static ITerrain Terrain(DiContainer container)
         {
             StaticDataProvider(container);
 

@@ -4,8 +4,8 @@ namespace CodeBase.Gameplay.World
 {
     public class WorldController : IWorldController
     {
-        public WorldController(IWorldTerrainController terrain) => Terrain = terrain;
+        public WorldController(ITerrain terrain) => Terrain = terrain;
 
-        public IWorldTerrainController Terrain { get; }
+        public ITerrain Terrain { get; }
     }
 }

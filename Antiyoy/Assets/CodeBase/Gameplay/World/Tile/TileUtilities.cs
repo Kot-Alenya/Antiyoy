@@ -2,17 +2,13 @@
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Tile.Model
+namespace CodeBase.Gameplay.World.Tile
 {
-    public class TilesNeighborsTool
+    public static class TileUtilities
     {
-        private readonly TileArray _tiles;
-
-        public TilesNeighborsTool(TileArray tiles) => _tiles = tiles;
-
-        public void ConnectNeighbors(TileData tile)
+        public static void ConnectWithNeighbors(TileData tile, TileCollection tiles)
         {
-            var neighbours = GetNeighbours(tile.Hex);
+            var neighbours = GetNeighbours(tile.Hex, tiles);
 
             foreach (var neighbour in neighbours)
             {
@@ -21,7 +17,7 @@ namespace CodeBase.Gameplay.World.Tile.Model
             }
         }
 
-        public void DisconnectNeighbors(TileData tile)
+        public static void DisconnectFromNeighbors(TileData tile)
         {
             foreach (var neighbour in tile.Neighbors)
                 RemoveFromNeighbors(neighbour, tile);
@@ -29,7 +25,7 @@ namespace CodeBase.Gameplay.World.Tile.Model
             tile.Neighbors.Clear();
         }
 
-        private List<TileData> GetNeighbours(HexPosition rootHex)
+        private static List<TileData> GetNeighbours(HexPosition rootHex, TileCollection tiles)
         {
             var neighbours = new List<TileData>();
 
@@ -37,10 +33,10 @@ namespace CodeBase.Gameplay.World.Tile.Model
             {
                 var neighbourHex = rootHex + direction;
 
-                if (!_tiles.IsInArraySize(neighbourHex))
+                if (!tiles.IsInArraySize(neighbourHex))
                     continue;
 
-                var neighbour = _tiles.Get(neighbourHex);
+                var neighbour = tiles.Get(neighbourHex);
 
                 if (neighbour != null)
                     neighbours.Add(neighbour);
@@ -49,7 +45,7 @@ namespace CodeBase.Gameplay.World.Tile.Model
             return neighbours;
         }
 
-        private void RemoveFromNeighbors(TileData rootTile, TileData tileData)
+        private static void RemoveFromNeighbors(TileData rootTile, TileData tileData)
         {
             for (var i = 0; i < rootTile.Neighbors.Count; i++)
             {

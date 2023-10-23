@@ -1,10 +1,8 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World;
-using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.MapEditor;
 using Zenject;
@@ -23,9 +21,7 @@ namespace CodeBase.Infrastructure.MapEditor
 
         private void BindWorld()
         {
-            Container.Bind<TileFactory>().AsSingle();
             Container.Bind<RegionFactory>().AsSingle();
-            Container.Bind<EntityFactory>().AsSingle();
             Container.Bind<TerrainFactory>().AsSingle();
             Container.Bind<WorldFactory>().AsSingle();
             Container.Bind<WorldVersionControllerFactory>().AsSingle();

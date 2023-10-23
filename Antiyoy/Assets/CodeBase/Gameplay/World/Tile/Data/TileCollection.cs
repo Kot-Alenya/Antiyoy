@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Data
 {
-    public class TileArray : IEnumerable<TileData>
+    public class TileCollection : IEnumerable<TileData>
     {
         private readonly Vector2Int _size;
-        private TileData[] _tiles;
+        private readonly TileData[] _tiles;
 
-        public TileArray(Vector2Int size)
+        public TileCollection(Vector2Int size)
         {
             _tiles = new TileData[size.x * size.y];
             _size = size;

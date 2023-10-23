@@ -5,9 +5,9 @@ using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
-using CodeBase.Gameplay.World.Tile.Model;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.World.Terrain
 {
@@ -16,30 +16,36 @@ namespace CodeBase.Gameplay.World.Terrain
         private const string TerrainRootName = "Terrain";
 
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly TileFactory _tileFactory;
         private readonly RegionFactory _regionFactory;
         private readonly EntityFactory _entityFactory;
+        private readonly DiContainer _container;
 
-        public TerrainFactory(IStaticDataProvider staticDataProvider, TileFactory tileFactory,
-            RegionFactory regionFactory, EntityFactory entityFactory)
+        public TerrainFactory(IStaticDataProvider staticDataProvider, RegionFactory regionFactory,
+            DiContainer container)
         {
             _staticDataProvider = staticDataProvider;
-            _tileFactory = tileFactory;
             _regionFactory = regionFactory;
-            _entityFactory = entityFactory;
+            _container = container;
         }
 
-        public IWorldTerrainController Create()
+        public ITerrain Create()
         {
-            var terrainStaticData = _staticDataProvider.Get<TerrainStaticData>();
-
+            var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var root = new GameObject(TerrainRootName).transform;
-            var tiles = new TileArray(terrainStaticData.Size);
-            var tilesModel = new TilesModel(tiles, root, _tileFactory);
+            var tileCollection = new TileCollection(staticData.Size);
             var regionsModel = new RegionsModel(_regionFactory);
-            var terrainModel = new TerrainModel(tilesModel, regionsModel, _entityFactory);
+            var terrainModel = new TerrainModel(regionsModel, tileCollection);
 
-            CreateBackground(root, terrainStaticData);
+            CreateBackground(root, staticData);
+
+            _container.Bind<ITerrain>().FromInstance(terrainModel).AsSingle();
+
+            var entityFactory = _container.Instantiate<EntityFactory>(new object[] { regionsModel, tileCollection });
+
+            _container.Bind<IEntityFactory>().FromInstance(entityFactory).AsSingle();
+
+            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle()
+                .WithArguments(root, tileCollection, regionsModel, entityFactory);
 
             return terrainModel;
         }

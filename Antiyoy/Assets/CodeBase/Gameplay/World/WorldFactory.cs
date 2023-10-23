@@ -1,6 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Tile;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace CodeBase.Gameplay.World
     {
         private readonly DiContainer _container;
         private readonly TerrainFactory _terrainFactory;
+        private readonly ITileFactory _tileFactory;
 
         public WorldFactory(DiContainer container, TerrainFactory terrainFactory)
         {
@@ -23,17 +25,17 @@ namespace CodeBase.Gameplay.World
 
             _container.Bind<IWorldController>().To<WorldController>().AsSingle();
 
-            FillTerrain(terrain);
+            //FillTerrain(terrain);
         }
 
-        private void FillTerrain(IWorldTerrainController terrain)
+        private void FillTerrain(ITerrain terrain)
         {
             for (var y = 0; y < terrain.Size.y; y++)
             for (var x = 0; x < terrain.Size.x; x++)
             {
                 var arrayIndex = new Vector2Int(x, y);
                 var hex = HexMath.FromArrayIndex(arrayIndex);
-                terrain.TryCreateTile(hex, RegionType.Neutral);
+                _tileFactory.TryCreate(hex, RegionType.Neutral);
             }
 
             terrain.RecalculateChangedRegions();

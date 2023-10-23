@@ -32,9 +32,9 @@ namespace CodeBase.Infrastructure.MapEditor
         {
             _cameraFactory.Create();
             _worldFactory.Create();
+            _worldVersionControllerFactory.Create();
             _mapEditorFactory.Create();
             _debugWindowFactory.Create();
-            _worldVersionControllerFactory.Create();
         }
     }
 }
