@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region.Model;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Tile.Data;
 using UnityEngine;
 
@@ -7,12 +7,12 @@ namespace CodeBase.Gameplay.World.Terrain
 {
     public class TerrainModel : ITerrain
     {
-        private readonly RegionsModel _regionsModel;
+        private readonly ITerrainRegions _terrainRegions;
         private readonly TileCollection _tileCollection;
 
-        public TerrainModel(RegionsModel regionsModel, TileCollection tileCollection)
+        public TerrainModel(ITerrainRegions terrainRegions, TileCollection tileCollection)
         {
-            _regionsModel = regionsModel;
+            _terrainRegions = terrainRegions;
             _tileCollection = tileCollection;
         }
 
@@ -24,6 +24,6 @@ namespace CodeBase.Gameplay.World.Terrain
 
         public bool TryGetTile(HexPosition hex, out TileData tile) => _tileCollection.TryGet(hex, out tile);
 
-        public void RecalculateChangedRegions() => _regionsModel.RecalculateChangedRegions();
+        public void RecalculateChangedRegions() => _terrainRegions.RecalculateFromBufferAndClearBuffer();
     }
 }

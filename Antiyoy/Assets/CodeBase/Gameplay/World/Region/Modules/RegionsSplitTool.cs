@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Region.Model
+namespace CodeBase.Gameplay.World.Region.Modules
 {
     public class RegionsSplitTool
     {
@@ -98,8 +98,8 @@ namespace CodeBase.Gameplay.World.Region.Model
 
             foreach (var tile in splitPart)
             {
-                _commonTool.SetRegion(tile, newRegion);
-                _commonTool.RemoveRegion(tile, baseRegion);
+                _commonTool.SetTileToRegion(tile, newRegion);
+                _commonTool.RemoveTileFromRegion(tile, baseRegion);
             }
 
             return newRegion;

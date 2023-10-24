@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region.Model;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -10,14 +10,14 @@ namespace CodeBase.Gameplay.World.Entity
     public class EntityFactory : IEntityFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly RegionsModel _regionsModel;
+        private readonly ITerrainRegions _terrainRegions;
         private readonly TileCollection _tileCollection;
 
-        public EntityFactory(IStaticDataProvider staticDataProvider, RegionsModel regionsModel,
+        public EntityFactory(IStaticDataProvider staticDataProvider, ITerrainRegions terrainRegions,
             TileCollection tileCollection)
         {
             _staticDataProvider = staticDataProvider;
-            _regionsModel = regionsModel;
+            _terrainRegions = terrainRegions;
             _tileCollection = tileCollection;
         }
 
@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.World.Entity
             var entity = new EntityData(instance, entityType, preset.Income);
 
             rootTile.Entity = entity;
-            _regionsModel.AddToChangedRegions(rootTile.Region);
+            _terrainRegions.AddToRecalculateBuffer(rootTile.Region);
         }
 
         public void Destroy(TileData rootTile)
@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.World.Entity
             var entity = rootTile.Entity;
 
             rootTile.Entity = null;
-            _regionsModel.AddToChangedRegions(rootTile.Region);
+            _terrainRegions.AddToRecalculateBuffer(rootTile.Region);
 
             Object.Destroy(entity.Instance.gameObject);
         }

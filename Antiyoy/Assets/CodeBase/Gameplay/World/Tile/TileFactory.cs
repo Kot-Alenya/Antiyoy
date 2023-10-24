@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -14,16 +14,16 @@ namespace CodeBase.Gameplay.World.Tile
         private readonly Transform _tileRoot;
         private readonly TileCollection _tileCollection;
         private readonly EntityFactory _entityFactory;
-        private readonly RegionsModel _regionsModel;
+        private readonly ITerrainRegions _terrainRegions;
 
         public TileFactory(IStaticDataProvider staticDataProvider, Transform tileRoot, TileCollection tileCollection,
-            EntityFactory entityFactory, RegionsModel regionsModel)
+            EntityFactory entityFactory, ITerrainRegions terrainRegions)
         {
             _staticDataProvider = staticDataProvider;
             _tileRoot = tileRoot;
             _tileCollection = tileCollection;
             _entityFactory = entityFactory;
-            _regionsModel = regionsModel;
+            _terrainRegions = terrainRegions;
         }
 
         public void Create(HexPosition hex, RegionType regionType)
@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.World.Tile
 
             _tileCollection.Set(tile, hex);
             TileUtilities.ConnectWithNeighbors(tile, _tileCollection);
-            _regionsModel.Add(tile, regionType);
+            _terrainRegions.AddToRegion(tile, regionType);
         }
 
         public void Destroy(TileData tile)
@@ -43,7 +43,7 @@ namespace CodeBase.Gameplay.World.Tile
 
             TileUtilities.DisconnectFromNeighbors(tile);
             _tileCollection.Remove(tile.Hex);
-            _regionsModel.Remove(tile);
+            _terrainRegions.RemoveFromRegion(tile);
 
             Object.Destroy(tile.Instance.gameObject);
         }

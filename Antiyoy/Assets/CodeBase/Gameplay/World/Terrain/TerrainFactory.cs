@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
-using CodeBase.Gameplay.World.Region.Model;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
@@ -33,7 +32,7 @@ namespace CodeBase.Gameplay.World.Terrain
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var instance = CreateInstance(staticData);
             var tileCollection = new TileCollection(staticData.Size);
-            var regionsModel = new RegionsModel(_regionFactory);
+            var regionsModel = new TerrainRegions(_regionFactory);
             var terrainModel = new TerrainModel(regionsModel, tileCollection);
 
             _container.Bind<ITerrain>().FromInstance(terrainModel).AsSingle();

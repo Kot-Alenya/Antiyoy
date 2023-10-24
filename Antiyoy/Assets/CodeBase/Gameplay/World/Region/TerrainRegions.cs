@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Modules;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Region.Model
+namespace CodeBase.Gameplay.World.Region
 {
-    public class RegionsModel
+    public class TerrainRegions : ITerrainRegions
     {
         private readonly RegionFactory _regionFactory;
         private readonly RegionsJoinTool _joinTool;
@@ -13,38 +14,36 @@ namespace CodeBase.Gameplay.World.Region.Model
         private readonly RegionsCommonTool _commonTool;
         private readonly List<RegionData> _changedRegions = new();
 
-        public RegionsModel(RegionFactory regionFactory)
+        public TerrainRegions(RegionFactory regionFactory)
         {
             _regionFactory = regionFactory;
             _commonTool = new RegionsCommonTool(regionFactory);
             _splitTool = new RegionsSplitTool(regionFactory, _commonTool);
-            _joinTool = new RegionsJoinTool(regionFactory, _commonTool);
+            _joinTool = new RegionsJoinTool(_commonTool);
         }
 
-        public void Add(TileData tile, RegionType regionType)
+        public void AddToRegion(TileData tile, RegionType regionType)
         {
             var region = GetOrCreateRegionFromNeighbors(tile, regionType);
 
-            _commonTool.SetRegion(tile, region);
-
-            AddToChangedRegions(region);
+            _commonTool.SetTileToRegion(tile, region);
+            AddToRecalculateBuffer(region);
         }
 
-        public void Remove(TileData tile)
+        public void RemoveFromRegion(TileData tile)
         {
-            _commonTool.RemoveRegion(tile, tile.Region);
-
-            AddToChangedRegions(tile.Region);
+            _commonTool.RemoveTileFromRegion(tile, tile.Region);
+            AddToRecalculateBuffer(tile.Region);
         }
 
-        public void AddToChangedRegions(RegionData region)
+        public void AddToRecalculateBuffer(RegionData region)
         {
             if (!_changedRegions.Contains(region))
                 if (region.Tiles.Count > 0)
                     _changedRegions.Add(region);
         }
 
-        public void RecalculateChangedRegions()
+        public void RecalculateFromBufferAndClearBuffer()
         {
             var regionsToRecalculate = _changedRegions.OrderBy(r => r.Income);
 
