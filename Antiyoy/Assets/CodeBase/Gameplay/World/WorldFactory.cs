@@ -27,7 +27,8 @@ namespace CodeBase.Gameplay.World
 
             //FillTerrain(terrain);
         }
-
+        
+        /*
         private void FillTerrain(ITerrain terrain)
         {
             for (var y = 0; y < terrain.Size.y; y++)
@@ -40,5 +41,6 @@ namespace CodeBase.Gameplay.World
 
             terrain.RecalculateChangedRegions();
         }
+        */
     }
 }

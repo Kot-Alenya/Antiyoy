@@ -4,6 +4,7 @@ using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Version;
@@ -14,22 +15,24 @@ namespace CodeBase.MapEditor
 {
     public class MapEditorModel
     {
-        private readonly IWorldController _world;
         private readonly IWorldVersionController _versionController;
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
+        private readonly ITerrainTiles _terrainTiles;
+        private readonly ITerrainRegions _terrainRegions;
         private readonly List<HexPosition> _selectedHex = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
-        public MapEditorModel(IWorldController world, IWorldVersionController versionController,
-            ITileFactory tileFactory, IEntityFactory entityFactory)
+        public MapEditorModel(IWorldVersionController versionController, ITileFactory tileFactory,
+            IEntityFactory entityFactory, ITerrainTiles terrainTiles, ITerrainRegions terrainRegions)
         {
-            _world = world;
             _versionController = versionController;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
+            _terrainTiles = terrainTiles;
+            _terrainRegions = terrainRegions;
         }
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
@@ -40,7 +43,7 @@ namespace CodeBase.MapEditor
 
         public void SelectTile(HexPosition hex)
         {
-            if (!_world.Terrain.IsHexInTerrain(hex) || _selectedHex.Contains(hex))
+            if (!_terrainTiles.IsInTerrain(hex) || _selectedHex.Contains(hex))
                 return;
 
             switch (_currentMode)
@@ -79,7 +82,7 @@ namespace CodeBase.MapEditor
                 case MapEditorMode.DestroyTile:
                 case MapEditorMode.CreateEntity:
                 case MapEditorMode.DestroyEntity:
-                    _world.Terrain.RecalculateChangedRegions();
+                    _terrainRegions.RecalculateFromBufferAndClearBuffer();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -93,30 +96,30 @@ namespace CodeBase.MapEditor
         {
             DestroyTile(hex);
 
-            if (_tileFactory.TryCreate(hex, _currentRegion))
-                _versionController.AddToBuffer(new WorldCreateTileOperationData(hex, _currentRegion));
+            _tileFactory.Create(hex, _currentRegion);
+            _versionController.AddToBuffer(new WorldCreateTileOperationData(hex, _currentRegion));
         }
 
         private void DestroyTile(HexPosition hex)
         {
-            if (!_world.Terrain.TryGetTile(hex, out var tile))
+            if (!_terrainTiles.TryGet(hex, out var tile))
                 return;
 
             _versionController.AddToBuffer(new WorldDestroyTileOperationData(hex, tile.Region.Type));
-            _tileFactory.TryDestroy(hex);
+            _tileFactory.Destroy(tile);
         }
 
         private void CreateEntity(HexPosition hex)
         {
             DestroyEntity(hex);
 
-            if (_entityFactory.TryCreate(hex, _currentEntityType))
-                _versionController.AddToBuffer(new WorldCreateEntityOperationData(hex, _currentEntityType));
+            _entityFactory.Create(_terrainTiles.Get(hex), _currentEntityType);
+            _versionController.AddToBuffer(new WorldCreateEntityOperationData(hex, _currentEntityType));
         }
 
         private void DestroyEntity(HexPosition hex)
         {
-            if (!_world.Terrain.TryGetTile(hex, out var tile))
+            if (!_terrainTiles.TryGet(hex, out var tile))
                 return;
 
             if (tile.Entity != null)

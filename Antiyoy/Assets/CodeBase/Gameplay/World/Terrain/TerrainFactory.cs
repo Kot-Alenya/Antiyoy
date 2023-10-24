@@ -32,19 +32,14 @@ namespace CodeBase.Gameplay.World.Terrain
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var instance = CreateInstance(staticData);
             var tileCollection = new TileCollection(staticData.Size);
-            var regionsModel = new TerrainRegions(_regionFactory);
-            var terrainModel = new TerrainModel(regionsModel, tileCollection);
 
-            _container.Bind<ITerrain>().FromInstance(terrainModel).AsSingle();
+            _container.Bind<ITerrainRegions>().To<TerrainRegions>().AsSingle();
+            _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle().WithArguments(tileCollection);
+            _container.Bind<ITerrainTiles>().To<TerrainTiles>().AsSingle()
+                .WithArguments(tileCollection, instance.transform);
+            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle();
 
-            var entityFactory = _container.Instantiate<EntityFactory>(new object[] { regionsModel, tileCollection });
-
-            _container.Bind<IEntityFactory>().FromInstance(entityFactory).AsSingle();
-
-            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle()
-                .WithArguments(instance.transform, tileCollection, regionsModel, entityFactory);
-
-            return terrainModel;
+            return default;
         }
 
         private TerrainPrefabData CreateInstance(TerrainStaticData staticData)

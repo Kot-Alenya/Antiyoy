@@ -10,10 +10,10 @@ namespace CodeBase.Gameplay.World.Tile.Data
         public readonly List<TileData> Neighbors = new();
         public readonly TilePrefabData Instance;
         public readonly HexPosition Hex;
-
+        
         public RegionData Region;
         public EntityData Entity;
-
+        
         public TileData(TilePrefabData instance, HexPosition hex)
         {
             Instance = instance;

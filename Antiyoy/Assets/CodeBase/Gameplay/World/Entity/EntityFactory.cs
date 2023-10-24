@@ -26,7 +26,7 @@ namespace CodeBase.Gameplay.World.Entity
             var presets = _staticDataProvider.Get<EntitiesPresetsCollection>();
             var preset = presets.Entities[entityType];
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new EntityData(instance, entityType, preset.Income);
+            var entity = new EntityData(instance, rootTile, entityType, preset.Income);
 
             rootTile.Entity = entity;
             _terrainRegions.AddToRecalculateBuffer(rootTile.Region);
