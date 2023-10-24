@@ -31,12 +31,10 @@ namespace CodeBase.Gameplay.World.Terrain
         public ITerrain Create()
         {
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
-            var root = new GameObject(TerrainRootName).transform;
+            var instance = CreateInstance(staticData);
             var tileCollection = new TileCollection(staticData.Size);
             var regionsModel = new RegionsModel(_regionFactory);
             var terrainModel = new TerrainModel(regionsModel, tileCollection);
-
-            CreateBackground(root, staticData);
 
             _container.Bind<ITerrain>().FromInstance(terrainModel).AsSingle();
 
@@ -45,16 +43,22 @@ namespace CodeBase.Gameplay.World.Terrain
             _container.Bind<IEntityFactory>().FromInstance(entityFactory).AsSingle();
 
             _container.Bind<ITileFactory>().To<TileFactory>().AsSingle()
-                .WithArguments(root, tileCollection, regionsModel, entityFactory);
+                .WithArguments(instance.transform, tileCollection, regionsModel, entityFactory);
 
             return terrainModel;
         }
 
-        private void CreateBackground(Transform root, TerrainStaticData terrainStaticData)
+        private TerrainPrefabData CreateInstance(TerrainStaticData staticData)
         {
-            var instance = Object.Instantiate(terrainStaticData.BackgroundPrefabData, root);
+            var instance = Object.Instantiate(staticData.Prefab);
+            StretchBackground(instance.BackgroundTransform, staticData);
 
-            var maxArrayIndex = terrainStaticData.Size - Vector2Int.one;
+            return instance;
+        }
+
+        private void StretchBackground(Transform backgroundTransform, TerrainStaticData staticData)
+        {
+            var maxArrayIndex = staticData.Size - Vector2Int.one;
             var halfTileSize = new Vector2(HexMath.InnerRadius, HexMath.OuterRadius);
             var lastPointOffset = maxArrayIndex.y % 2f == 0
                 ? Vector2.right * HexMath.InnerRadius
@@ -69,10 +73,10 @@ namespace CodeBase.Gameplay.World.Terrain
             var scale = lastPoint - firstPoint;
 
             var center = firstPoint + scale / 2f;
-            var position = new Vector3(center.x, center.y, instance.Transform.position.z);
+            var position = new Vector3(center.x, center.y, backgroundTransform.position.z);
 
-            instance.Transform.localScale = scale;
-            instance.Transform.position = position;
+            backgroundTransform.localScale = scale;
+            backgroundTransform.position = position;
         }
     }
 }
