@@ -44,12 +44,11 @@ namespace CodeBase.Gameplay.World.Terrain
         private void CreateRegion()
         {
             _container.Bind<IRegionFactory>().To<RegionFactory>().AsSingle();
-            _container.Bind<IRegionCollection>().To<RegionCollection>().AsSingle();
-
+            _container.Bind<RegionCollection>().To<RegionCollection>().AsSingle();
+            _container.Bind<IRegionRebuilder>().To<RegionRebuilder>().AsSingle();
             _container.Bind<RegionSplitter>().AsSingle();
             _container.Bind<RegionJoiner>().AsSingle();
             _container.Bind<RegionIncomeRebuilder>().AsSingle();
-            _container.Bind<IRegionRebuilder>().To<RegionRebuilder>().AsSingle();
         }
 
         private TerrainPrefabData CreateInstance(TerrainStaticData staticData)

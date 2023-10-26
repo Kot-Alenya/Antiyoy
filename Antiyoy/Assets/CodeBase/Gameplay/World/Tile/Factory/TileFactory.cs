@@ -13,11 +13,11 @@ namespace CodeBase.Gameplay.World.Tile.Factory
     {
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly ITileCollection _tileCollection;
-        private readonly IRegionCollection _regionCollection;
+        private readonly RegionCollection _regionCollection;
         private readonly IEntityFactory _entityFactory;
 
         public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            IRegionCollection regionCollection, IEntityFactory entityFactory)
+            RegionCollection regionCollection, IEntityFactory entityFactory)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;

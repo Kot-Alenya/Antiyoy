@@ -5,7 +5,7 @@ using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Collection
 {
-    public class RegionCollection : IRegionCollection
+    public class RegionCollection
     {
         private readonly IRegionFactory _regionFactory;
         private readonly IRegionRebuilder _regionRebuilder;
