@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Tile;
+using CodeBase.Gameplay.World.Tile.Collection;
 using UnityEngine;
 using Zenject;
 

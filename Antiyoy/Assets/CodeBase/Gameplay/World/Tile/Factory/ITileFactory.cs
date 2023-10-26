@@ -10,8 +10,6 @@ namespace CodeBase.Gameplay.World.Tile.Factory
 
         public void Destroy(TileData tile);
 
-        public bool TryCreate(HexPosition hex, RegionType regionType);
-
-        public bool TryDestroy(HexPosition hex);
+        public void Destroy(HexPosition hex);
     }
 }

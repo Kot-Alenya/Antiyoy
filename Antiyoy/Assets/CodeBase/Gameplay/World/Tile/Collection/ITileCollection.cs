@@ -3,7 +3,7 @@ using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Tile.Data;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Tile
+namespace CodeBase.Gameplay.World.Tile.Collection
 {
     public interface ITileCollection : IEnumerable<TileData>
     {

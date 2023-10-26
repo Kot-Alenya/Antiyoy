@@ -2,13 +2,13 @@
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Tile
+namespace CodeBase.Gameplay.World.Tile.Collection
 {
-    public static class TileUtilities
+    public static class TileCollectionUtilities
     {
-        public static void ConnectWithNeighbors(TileData tile, TileArray tiles)
+        public static void ConnectWithNeighbors(TileData tile, ITileCollection tileCollection)
         {
-            var neighbours = GetNeighbours(tile.Hex, tiles);
+            var neighbours = GetNeighbours(tile.Hex, tileCollection);
 
             foreach (var neighbour in neighbours)
             {
@@ -25,7 +25,7 @@ namespace CodeBase.Gameplay.World.Tile
             tile.Neighbors.Clear();
         }
 
-        private static List<TileData> GetNeighbours(HexPosition rootHex, TileArray tiles)
+        private static List<TileData> GetNeighbours(HexPosition rootHex, ITileCollection tileCollection)
         {
             var neighbours = new List<TileData>();
 
@@ -33,10 +33,10 @@ namespace CodeBase.Gameplay.World.Tile
             {
                 var neighbourHex = rootHex + direction;
 
-                if (!tiles.IsInCollection(neighbourHex))
+                if (!tileCollection.IsInCollection(neighbourHex))
                     continue;
 
-                var neighbour = tiles.Get(neighbourHex);
+                var neighbour = tileCollection.Get(neighbourHex);
 
                 if (neighbour != null)
                     neighbours.Add(neighbour);

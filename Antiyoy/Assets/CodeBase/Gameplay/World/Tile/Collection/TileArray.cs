@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Tile.Data;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Tile.Data
+namespace CodeBase.Gameplay.World.Tile.Collection
 {
     public class TileArray : ITileCollection
     {
@@ -37,12 +38,12 @@ namespace CodeBase.Gameplay.World.Tile.Data
         public void Set(TileData tile, HexPosition hex)
         {
             _tiles[GetIndex(hex)] = tile;
-            TileUtilities.ConnectWithNeighbors(tile, this);
+            TileCollectionUtilities.ConnectWithNeighbors(tile, this);
         }
 
         public void Remove(HexPosition hex)
         {
-            TileUtilities.DisconnectFromNeighbors(_tiles[GetIndex(hex)]);
+            TileCollectionUtilities.DisconnectFromNeighbors(_tiles[GetIndex(hex)]);
             _tiles[GetIndex(hex)] = null;
         }
 

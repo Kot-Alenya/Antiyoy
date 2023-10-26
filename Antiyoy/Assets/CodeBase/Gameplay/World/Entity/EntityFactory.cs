@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Rebuild;
-using CodeBase.Gameplay.World.Tile;
+using CodeBase.Gameplay.World.Tile.Collection;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;

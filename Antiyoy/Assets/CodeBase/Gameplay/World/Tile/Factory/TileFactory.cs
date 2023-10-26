@@ -3,6 +3,7 @@ using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Collection;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Data;
+using CodeBase.Gameplay.World.Tile.Collection;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -43,6 +44,8 @@ namespace CodeBase.Gameplay.World.Tile.Factory
 
             Object.Destroy(tile.Instance.gameObject);
         }
+
+        public void Destroy(HexPosition hex) => Destroy(_tileCollection.Get(hex));
 
         public bool TryCreate(HexPosition hex, RegionType regionType)
         {

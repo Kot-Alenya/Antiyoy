@@ -23,10 +23,10 @@ namespace CodeBase.Gameplay.World.Version.Modules
             switch (operation)
             {
                 case WorldCreateTileOperationData data:
-                    _tileFactory.TryDestroy(data.Hex);
+                    _tileFactory.Destroy(data.Hex);
                     break;
                 case WorldDestroyTileOperationData data:
-                    _tileFactory.TryCreate(data.Hex, data.RegionType);
+                    _tileFactory.Create(data.Hex, data.RegionType);
                     break;
                 case WorldCreateEntityOperationData data:
                     _entityFactory.TryDestroy(data.Hex);
@@ -44,10 +44,10 @@ namespace CodeBase.Gameplay.World.Version.Modules
             switch (operation)
             {
                 case WorldCreateTileOperationData data:
-                    _tileFactory.TryCreate(data.Hex, data.RegionType);
+                    _tileFactory.Create(data.Hex, data.RegionType);
                     break;
                 case WorldDestroyTileOperationData data:
-                    _tileFactory.TryDestroy(data.Hex);
+                    _tileFactory.Destroy(data.Hex);
                     break;
                 case WorldCreateEntityOperationData data:
                     _entityFactory.Create(data.Hex, data.EntityType);
