@@ -9,15 +9,15 @@ namespace CodeBase.Dev.DebugWindow
     public class DebugWindowInput : MonoBehaviour
     {
         private ICameraController _cameraController;
-        private ITerrainTiles _terrainTiles;
+        private ITileCollection _tileCollection;
         private IDebugWindowController _debugWindowController;
 
         [Inject]
-        private void Construct(ICameraController cameraController, ITerrainTiles terrainTiles,
+        private void Construct(ICameraController cameraController, ITileCollection tileCollection,
             IDebugWindowController debugWindowController)
         {
             _cameraController = cameraController;
-            _terrainTiles = terrainTiles;
+            _tileCollection = tileCollection;
             _debugWindowController = debugWindowController;
         }
 
@@ -38,7 +38,7 @@ namespace CodeBase.Dev.DebugWindow
 
             var hitHex = HexMath.FromWorldPosition(hit.point);
 
-            if (_terrainTiles.TryGet(hitHex, out var tile))
+            if (_tileCollection.TryGet(hitHex, out var tile))
             {
                 window.Open();
                 window.UpdateInformation(tile);

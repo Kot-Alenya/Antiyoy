@@ -8,5 +8,9 @@ namespace CodeBase.Gameplay.World.Terrain.Data
     {
         public TerrainPrefabData Prefab;
         public Vector2Int Size;
+
+        public TerrainPrefabData Instance { get; private set; }
+
+        public void Initialize(TerrainPrefabData instance) => Instance = instance;
     }
 }

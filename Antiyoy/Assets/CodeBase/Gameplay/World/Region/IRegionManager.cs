@@ -3,7 +3,7 @@ using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region
 {
-    public interface ITerrainRegions
+    public interface IRegionManager
     {
         public void AddToRegion(TileData tile, RegionType regionType);
         

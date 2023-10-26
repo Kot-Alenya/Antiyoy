@@ -6,7 +6,7 @@ namespace CodeBase.Gameplay.World.Tile
 {
     public static class TileUtilities
     {
-        public static void ConnectWithNeighbors(TileData tile, TileCollection tiles)
+        public static void ConnectWithNeighbors(TileData tile, TileArray tiles)
         {
             var neighbours = GetNeighbours(tile.Hex, tiles);
 
@@ -25,7 +25,7 @@ namespace CodeBase.Gameplay.World.Tile
             tile.Neighbors.Clear();
         }
 
-        private static List<TileData> GetNeighbours(HexPosition rootHex, TileCollection tiles)
+        private static List<TileData> GetNeighbours(HexPosition rootHex, TileArray tiles)
         {
             var neighbours = new List<TileData>();
 
@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.World.Tile
             {
                 var neighbourHex = rootHex + direction;
 
-                if (!tiles.IsInArraySize(neighbourHex))
+                if (!tiles.IsInCollection(neighbourHex))
                     continue;
 
                 var neighbour = tiles.Get(neighbourHex);

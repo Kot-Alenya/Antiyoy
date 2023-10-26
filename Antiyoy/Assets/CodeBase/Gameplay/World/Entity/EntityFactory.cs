@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
@@ -10,15 +11,15 @@ namespace CodeBase.Gameplay.World.Entity
     public class EntityFactory : IEntityFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly ITerrainEntities _terrainEntities;
-        private readonly TileCollection _tileCollection;
+        private readonly ITileCollection _tileCollection;
+        private readonly IRegionManager _regionManager;
 
-        public EntityFactory(IStaticDataProvider staticDataProvider, TileCollection tileCollection,
-            ITerrainEntities terrainEntities)
+        public EntityFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
+            IRegionManager regionManager)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
-            _terrainEntities = terrainEntities;
+            _regionManager = regionManager;
         }
 
         public void Create(TileData rootTile, EntityType entityType)
@@ -28,12 +29,17 @@ namespace CodeBase.Gameplay.World.Entity
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
             var entity = new EntityData(instance, rootTile, entityType, preset.Income);
 
-            _terrainEntities.Set(entity, rootTile);
+            rootTile.Entity = entity;
+            _regionManager.AddToRecalculateBuffer(rootTile.Region);
         }
 
         public void Destroy(EntityData entity)
         {
-            _terrainEntities.Remove(entity);
+            var rootTile = entity.RootTile;
+
+            rootTile.Entity = null;
+            _regionManager.AddToRecalculateBuffer(rootTile.Region);
+
             Object.Destroy(entity.Instance.gameObject);
         }
 

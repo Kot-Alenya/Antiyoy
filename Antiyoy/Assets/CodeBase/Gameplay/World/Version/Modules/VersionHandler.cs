@@ -10,13 +10,13 @@ namespace CodeBase.Gameplay.World.Version.Modules
     {
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
-        private readonly ITerrainRegions _terrainRegions;
+        private readonly IRegionManager _regionManager;
 
-        public VersionHandler(ITileFactory tileFactory, IEntityFactory entityFactory, ITerrainRegions terrainRegions)
+        public VersionHandler(ITileFactory tileFactory, IEntityFactory entityFactory, IRegionManager regionManager)
         {
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
-            _terrainRegions = terrainRegions;
+            _regionManager = regionManager;
         }
 
         public void Revert(IWorldOperationData operation)
@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     break;
             }
 
-            _terrainRegions.RecalculateFromBufferAndClearBuffer();
+            _regionManager.RecalculateFromBufferAndClearBuffer();
         }
 
         public void Apply(IWorldOperationData operation)
@@ -58,7 +58,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     break;
             }
 
-            _terrainRegions.RecalculateFromBufferAndClearBuffer();
+            _regionManager.RecalculateFromBufferAndClearBuffer();
         }
     }
 }

@@ -6,7 +6,7 @@ using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region
 {
-    public class TerrainRegions : ITerrainRegions
+    public class RegionManager : IRegionManager
     {
         private readonly RegionFactory _regionFactory;
         private readonly RegionsJoinTool _joinTool;
@@ -14,7 +14,7 @@ namespace CodeBase.Gameplay.World.Region
         private readonly RegionsCommonTool _commonTool;
         private readonly List<RegionData> _changedRegions = new();
 
-        public TerrainRegions(RegionFactory regionFactory)
+        public RegionManager(RegionFactory regionFactory)
         {
             _regionFactory = regionFactory;
             _commonTool = new RegionsCommonTool(regionFactory);

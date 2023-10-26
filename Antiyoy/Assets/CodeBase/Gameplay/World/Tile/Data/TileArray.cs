@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Data
 {
-    public class TileCollection : IEnumerable<TileData>
+    public class TileArray : ITileCollection
     {
         private readonly Vector2Int _size;
         private readonly TileData[] _tiles;
 
-        public TileCollection(Vector2Int size)
+        public TileArray(Vector2Int size)
         {
             _tiles = new TileData[size.x * size.y];
             _size = size;
@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.World.Tile.Data
 
         public Vector2Int Size => _size;
 
-        public bool IsInArraySize(HexPosition hex)
+        public bool IsInCollection(HexPosition hex)
         {
             var index = HexMath.ToArrayIndex(hex);
 
@@ -34,15 +34,23 @@ namespace CodeBase.Gameplay.World.Tile.Data
             return index.y < _size.y;
         }
 
-        public void Set(TileData tile, HexPosition hex) => _tiles[GetIndex(hex)] = tile;
+        public void Set(TileData tile, HexPosition hex)
+        {
+            _tiles[GetIndex(hex)] = tile;
+            TileUtilities.ConnectWithNeighbors(tile, this);
+        }
 
-        public void Remove(HexPosition hex) => _tiles[GetIndex(hex)] = null;
+        public void Remove(HexPosition hex)
+        {
+            TileUtilities.DisconnectFromNeighbors(_tiles[GetIndex(hex)]);
+            _tiles[GetIndex(hex)] = null;
+        }
 
         public TileData Get(HexPosition hex) => _tiles[GetIndex(hex)];
 
         public bool TryGet(HexPosition hex, out TileData tile)
         {
-            if (IsInArraySize(hex))
+            if (IsInCollection(hex))
             {
                 tile = Get(hex);
                 return tile != null;

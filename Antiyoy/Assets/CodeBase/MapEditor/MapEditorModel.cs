@@ -18,21 +18,21 @@ namespace CodeBase.MapEditor
         private readonly IWorldVersionController _versionController;
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
-        private readonly ITerrainTiles _terrainTiles;
-        private readonly ITerrainRegions _terrainRegions;
+        private readonly ITileCollection _tileCollection;
+        private readonly IRegionManager _regionManager;
         private readonly List<HexPosition> _selectedHex = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
         public MapEditorModel(IWorldVersionController versionController, ITileFactory tileFactory,
-            IEntityFactory entityFactory, ITerrainTiles terrainTiles, ITerrainRegions terrainRegions)
+            IEntityFactory entityFactory, ITileCollection tileCollection, IRegionManager regionManager)
         {
             _versionController = versionController;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
-            _terrainTiles = terrainTiles;
-            _terrainRegions = terrainRegions;
+            _tileCollection = tileCollection;
+            _regionManager = regionManager;
         }
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
@@ -43,7 +43,7 @@ namespace CodeBase.MapEditor
 
         public void SelectTile(HexPosition hex)
         {
-            if (!_terrainTiles.IsInTerrain(hex) || _selectedHex.Contains(hex))
+            if (!_tileCollection.IsInCollection(hex) || _selectedHex.Contains(hex))
                 return;
 
             switch (_currentMode)
@@ -82,7 +82,7 @@ namespace CodeBase.MapEditor
                 case MapEditorMode.DestroyTile:
                 case MapEditorMode.CreateEntity:
                 case MapEditorMode.DestroyEntity:
-                    _terrainRegions.RecalculateFromBufferAndClearBuffer();
+                    _regionManager.RecalculateFromBufferAndClearBuffer();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -102,7 +102,7 @@ namespace CodeBase.MapEditor
 
         private void DestroyTile(HexPosition hex)
         {
-            if (!_terrainTiles.TryGet(hex, out var tile))
+            if (!_tileCollection.TryGet(hex, out var tile))
                 return;
 
             _versionController.AddToBuffer(new WorldDestroyTileOperationData(hex, tile.Region.Type));
@@ -113,13 +113,13 @@ namespace CodeBase.MapEditor
         {
             DestroyEntity(hex);
 
-            _entityFactory.Create(_terrainTiles.Get(hex), _currentEntityType);
+            _entityFactory.Create(_tileCollection.Get(hex), _currentEntityType);
             _versionController.AddToBuffer(new WorldCreateEntityOperationData(hex, _currentEntityType));
         }
 
         private void DestroyEntity(HexPosition hex)
         {
-            if (!_terrainTiles.TryGet(hex, out var tile))
+            if (!_tileCollection.TryGet(hex, out var tile))
                 return;
 
             if (tile.Entity != null)

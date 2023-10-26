@@ -21,9 +21,9 @@ namespace CodeBase.Gameplay.World
 
         public void Create()
         {
-            var terrain = _terrainFactory.Create();
+            _terrainFactory.Create();
 
-            _container.Bind<IWorldController>().To<WorldController>().AsSingle();
+            //_container.Bind<IWorldController>().To<WorldController>().AsSingle();
 
             //FillTerrain(terrain);
         }

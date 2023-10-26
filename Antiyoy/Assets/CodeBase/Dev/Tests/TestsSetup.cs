@@ -8,6 +8,7 @@ namespace CodeBase.Dev.Tests
 {
     public static class TestsSetup
     {
+        /*
         public static void StaticDataProvider(DiContainer container)
         {
             var testConfig = TestsCreate.TestConfig();
@@ -26,5 +27,6 @@ namespace CodeBase.Dev.Tests
 
             return container.Resolve<TerrainFactory>().Create();
         }
+        */
     }
 }

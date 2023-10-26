@@ -1,5 +1,8 @@
-﻿using CodeBase.Gameplay.World.Hex;
+﻿using CodeBase.Gameplay.World.Entity;
+using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -9,31 +12,41 @@ namespace CodeBase.Gameplay.World.Tile
     public class TileFactory : ITileFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly ITerrainTiles _terrainTiles;
+        private readonly ITileCollection _tileCollection;
+        private readonly IRegionManager _regionManager;
+        private readonly IEntityFactory _entityFactory;
 
-        public TileFactory(IStaticDataProvider staticDataProvider, ITerrainTiles terrainTiles)
+        public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
+            IRegionManager regionManager, IEntityFactory entityFactory)
         {
             _staticDataProvider = staticDataProvider;
-            _terrainTiles = terrainTiles;
+            _tileCollection = tileCollection;
+            _regionManager = regionManager;
+            _entityFactory = entityFactory;
         }
 
         public void Create(HexPosition hex, RegionType regionType)
         {
-            var instance = CreateInstance(hex, _terrainTiles.TilesRoot);
+            var terrainStaticData = _staticDataProvider.Get<TerrainStaticData>();
+            var instance = CreateInstance(hex, terrainStaticData.Instance.transform);
             var tile = new TileData(instance, hex);
 
-            _terrainTiles.Set(tile, hex, regionType);
+            _tileCollection.Set(tile, hex);
+            _regionManager.AddToRegion(tile, regionType);
         }
 
         public void Destroy(TileData tile)
         {
-            _terrainTiles.Remove(tile);
+            _entityFactory.TryDestroy(tile.Hex);
+            _tileCollection.Remove(tile.Hex);
+            _regionManager.RemoveFromRegion(tile);
+
             Object.Destroy(tile.Instance.gameObject);
         }
 
         public bool TryCreate(HexPosition hex, RegionType regionType)
         {
-            if (!_terrainTiles.TryGet(hex, out _))
+            if (!_tileCollection.TryGet(hex, out _))
             {
                 Create(hex, regionType);
                 return true;
@@ -44,7 +57,7 @@ namespace CodeBase.Gameplay.World.Tile
 
         public bool TryDestroy(HexPosition hex)
         {
-            if (_terrainTiles.TryGet(hex, out var tile))
+            if (_tileCollection.TryGet(hex, out var tile))
             {
                 Destroy(tile);
                 return true;
