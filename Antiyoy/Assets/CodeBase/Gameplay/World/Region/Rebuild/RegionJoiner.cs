@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Factory;
 
-namespace CodeBase.Gameplay.World.Region.Modules
+namespace CodeBase.Gameplay.World.Region.Rebuild
 {
-    public class RegionsJoinTool
+    public class RegionJoiner
     {
-        private readonly RegionsCommonTool _commonTool;
+        private readonly IRegionFactory _regionFactory;
+        private readonly List<RegionData> _neighborRegionsBuffer = new();
 
-        public RegionsJoinTool(RegionsCommonTool commonTool) => _commonTool = commonTool;
+        public RegionJoiner(IRegionFactory regionFactory) => _regionFactory = regionFactory;
 
         public bool TryJoinWithNeighbors(RegionData region, out RegionData result)
         {
@@ -26,7 +28,8 @@ namespace CodeBase.Gameplay.World.Region.Modules
 
         private List<RegionData> GetNeighborRegions(RegionData region, RegionType necessaryRegionType)
         {
-            var regions = new List<RegionData>();
+            _neighborRegionsBuffer.Clear();
+            var regions = _neighborRegionsBuffer;
 
             foreach (var rootTile in region.Tiles)
             foreach (var tile in rootTile.Neighbors)
@@ -52,11 +55,11 @@ namespace CodeBase.Gameplay.World.Region.Modules
             {
                 if (regions[i].Income > previous.Income)
                 {
-                    _commonTool.MoveTiles(previous, regions[i]);
+                    RegionTileUtilities.MoveTiles(previous, regions[i], _regionFactory);
                     previous = regions[i];
                 }
                 else
-                    _commonTool.MoveTiles(regions[i], previous);
+                    RegionTileUtilities.MoveTiles(regions[i], previous, _regionFactory);
             }
 
             return previous;

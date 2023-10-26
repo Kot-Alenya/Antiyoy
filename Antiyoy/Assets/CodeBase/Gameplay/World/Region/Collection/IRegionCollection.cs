@@ -1,16 +1,12 @@
 ﻿using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Region
+namespace CodeBase.Gameplay.World.Region.Collection
 {
-    public interface IRegionManager
+    public interface IRegionCollection
     {
         public void AddToRegion(TileData tile, RegionType regionType);
 
         public void RemoveFromRegion(TileData tile);
-
-        public void AddToRecalculateBuffer(RegionData region);
-
-        public void RecalculateFromBufferAndClearBuffer();
     }
 }

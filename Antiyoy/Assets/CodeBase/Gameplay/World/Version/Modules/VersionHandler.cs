@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.World.Entity;
-using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Rebuild;
 using CodeBase.Gameplay.World.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Operation;
 
@@ -9,13 +9,13 @@ namespace CodeBase.Gameplay.World.Version.Modules
     {
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
-        private readonly IRegionManager _regionManager;
+        private readonly IRegionRebuilder _regionRebuilder;
 
-        public VersionHandler(ITileFactory tileFactory, IEntityFactory entityFactory, IRegionManager regionManager)
+        public VersionHandler(ITileFactory tileFactory, IEntityFactory entityFactory, IRegionRebuilder regionRebuilder)
         {
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
-            _regionManager = regionManager;
+            _regionRebuilder = regionRebuilder;
         }
 
         public void Revert(IWorldOperationData operation)
@@ -36,7 +36,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     break;
             }
 
-            _regionManager.RecalculateFromBufferAndClearBuffer();
+            _regionRebuilder.RebuildFromBufferAndClearBuffer();
         }
 
         public void Apply(IWorldOperationData operation)
@@ -57,7 +57,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     break;
             }
 
-            _regionManager.RecalculateFromBufferAndClearBuffer();
+            _regionRebuilder.RebuildFromBufferAndClearBuffer();
         }
     }
 }

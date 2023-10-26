@@ -5,6 +5,7 @@ using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Rebuild;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Factory;
 using CodeBase.Gameplay.World.Version;
@@ -19,20 +20,20 @@ namespace CodeBase.MapEditor
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
         private readonly ITileCollection _tileCollection;
-        private readonly IRegionManager _regionManager;
+        private readonly IRegionRebuilder _regionRebuilder;
         private readonly List<HexPosition> _selectedHex = new();
         private MapEditorMode _currentMode;
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
         public MapEditorModel(IWorldVersionController versionController, ITileFactory tileFactory,
-            IEntityFactory entityFactory, ITileCollection tileCollection, IRegionManager regionManager)
+            IEntityFactory entityFactory, ITileCollection tileCollection, IRegionRebuilder regionRebuilder)
         {
             _versionController = versionController;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
             _tileCollection = tileCollection;
-            _regionManager = regionManager;
+            _regionRebuilder = regionRebuilder;
         }
 
         public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
@@ -82,7 +83,7 @@ namespace CodeBase.MapEditor
                 case MapEditorMode.DestroyTile:
                 case MapEditorMode.CreateEntity:
                 case MapEditorMode.DestroyEntity:
-                    _regionManager.RecalculateFromBufferAndClearBuffer();
+                    _regionRebuilder.RebuildFromBufferAndClearBuffer();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

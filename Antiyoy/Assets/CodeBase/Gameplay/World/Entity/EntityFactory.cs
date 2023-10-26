@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Rebuild;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
@@ -12,14 +12,14 @@ namespace CodeBase.Gameplay.World.Entity
     {
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly ITileCollection _tileCollection;
-        private readonly IRegionManager _regionManager;
+        private readonly IRegionRebuilder _regionRebuilder;
 
         public EntityFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            IRegionManager regionManager)
+            IRegionRebuilder regionRebuilder)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
-            _regionManager = regionManager;
+            _regionRebuilder = regionRebuilder;
         }
 
         public void Create(HexPosition hex, EntityType entityType) => Create(_tileCollection.Get(hex), entityType);
@@ -60,7 +60,7 @@ namespace CodeBase.Gameplay.World.Entity
             var entity = new EntityData(instance, rootTile, entityType, preset.Income);
 
             rootTile.Entity = entity;
-            _regionManager.AddToRecalculateBuffer(rootTile.Region);
+            _regionRebuilder.AddToRebuildBuffer(rootTile.Region);
         }
 
         private void Destroy(EntityData entity)
@@ -68,7 +68,7 @@ namespace CodeBase.Gameplay.World.Entity
             var rootTile = entity.RootTile;
 
             rootTile.Entity = null;
-            _regionManager.AddToRecalculateBuffer(rootTile.Region);
+            _regionRebuilder.AddToRebuildBuffer(rootTile.Region);
 
             Object.Destroy(entity.Instance.gameObject);
         }

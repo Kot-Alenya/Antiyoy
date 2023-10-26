@@ -1,7 +1,8 @@
 ﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Collection;
 using CodeBase.Gameplay.World.Region.Factory;
+using CodeBase.Gameplay.World.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
@@ -33,12 +34,22 @@ namespace CodeBase.Gameplay.World.Terrain
             var tileArray = new TileArray(staticData.Size);
 
             staticData.Initialize(instance);
+            CreateRegion();
 
             _container.Bind<ITileCollection>().FromInstance(tileArray).AsSingle();
-            _container.Bind<IRegionFactory>().To<RegionFactory>().AsSingle();
-            _container.Bind<IRegionManager>().To<RegionManager>().AsSingle();
             _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
             _container.Bind<ITileFactory>().To<TileFactory>().AsSingle();
+        }
+
+        private void CreateRegion()
+        {
+            _container.Bind<IRegionFactory>().To<RegionFactory>().AsSingle();
+            _container.Bind<IRegionCollection>().To<RegionCollection>().AsSingle();
+
+            _container.Bind<RegionSplitter>().AsSingle();
+            _container.Bind<RegionJoiner>().AsSingle();
+            _container.Bind<RegionIncomeRebuilder>().AsSingle();
+            _container.Bind<IRegionRebuilder>().To<RegionRebuilder>().AsSingle();
         }
 
         private TerrainPrefabData CreateInstance(TerrainStaticData staticData)

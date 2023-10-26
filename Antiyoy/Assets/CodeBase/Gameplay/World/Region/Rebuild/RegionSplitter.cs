@@ -3,18 +3,13 @@ using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Region.Factory;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Region.Modules
+namespace CodeBase.Gameplay.World.Region.Rebuild
 {
-    public class RegionsSplitTool
+    public class RegionSplitter
     {
-        private readonly RegionsCommonTool _commonTool;
         private readonly IRegionFactory _regionFactory;
 
-        public RegionsSplitTool(IRegionFactory regionFactory, RegionsCommonTool commonTool)
-        {
-            _regionFactory = regionFactory;
-            _commonTool = commonTool;
-        }
+        public RegionSplitter(IRegionFactory regionFactory) => _regionFactory = regionFactory;
 
         public bool TrySplit(RegionData region, out List<RegionData> result)
         {
@@ -99,8 +94,8 @@ namespace CodeBase.Gameplay.World.Region.Modules
 
             foreach (var tile in splitPart)
             {
-                _commonTool.SetTileToRegion(tile, newRegion);
-                _commonTool.RemoveTileFromRegion(tile, baseRegion);
+                RegionTileUtilities.SetTileToRegion(tile, newRegion);
+                RegionTileUtilities.RemoveTileFromRegion(tile, baseRegion, _regionFactory);
             }
 
             return newRegion;

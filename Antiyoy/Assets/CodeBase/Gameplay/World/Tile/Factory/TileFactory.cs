@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Collection;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile.Data;
@@ -13,15 +13,15 @@ namespace CodeBase.Gameplay.World.Tile.Factory
     {
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly ITileCollection _tileCollection;
-        private readonly IRegionManager _regionManager;
+        private readonly IRegionCollection _regionCollection;
         private readonly IEntityFactory _entityFactory;
 
         public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            IRegionManager regionManager, IEntityFactory entityFactory)
+            IRegionCollection regionCollection, IEntityFactory entityFactory)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
-            _regionManager = regionManager;
+            _regionCollection = regionCollection;
             _entityFactory = entityFactory;
         }
 
@@ -32,14 +32,14 @@ namespace CodeBase.Gameplay.World.Tile.Factory
             var tile = new TileData(instance, hex);
 
             _tileCollection.Set(tile, hex);
-            _regionManager.AddToRegion(tile, regionType);
+            _regionCollection.AddToRegion(tile, regionType);
         }
 
         public void Destroy(TileData tile)
         {
             _entityFactory.TryDestroy(tile.Hex);
             _tileCollection.Remove(tile.Hex);
-            _regionManager.RemoveFromRegion(tile);
+            _regionCollection.RemoveFromRegion(tile);
 
             Object.Destroy(tile.Instance.gameObject);
         }

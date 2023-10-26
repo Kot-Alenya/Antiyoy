@@ -9,5 +9,6 @@ namespace CodeBase.Gameplay.World.Region.Data
         public Color NeutralColor;
         public Color RedColor;
         public Color BlueColor;
+        public int DefaultTileIncome;
     }
 }
