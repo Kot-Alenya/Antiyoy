@@ -1,6 +1,8 @@
 ﻿using CodeBase.Gameplay.World.Entity;
+using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
@@ -10,6 +12,65 @@ using Zenject;
 
 namespace CodeBase.Gameplay.World.Terrain
 {
+    public interface IWorldTerrainController
+    {
+        public Vector2Int Size { get; }
+
+        public bool IsInTerrain(HexPosition hex);
+
+        public ITerrainTiles Tiles { get; } //tiles collection?
+
+        public ITerrainRegions Regions { get; } //regions manager?
+
+        //TILE
+        public TileData GetTile(HexPosition hex);
+
+        public bool TryGetTile(HexPosition hex, out TileData tile);
+
+        public void SetTile(TileData tile, HexPosition hex, RegionType regionType);
+
+        public void RemoveTile(TileData tile);
+        //
+
+        //ENTITY -
+        public void SetEntity(EntityData entity, TileData rootTile);
+        public void RemoveEntity(EntityData entity);
+
+        //Regions
+        public void AddToRegion(TileData tile, RegionType regionType);
+
+        public void RemoveFromRegion(TileData tile);
+
+        public void AddToRecalculateBuffer(RegionData region);
+
+        public void RecalculateFromBufferAndClearBuffer();
+    }
+
+    public interface ITerrainManager
+    {
+        //регионы
+        public void AddToRegion(TileData tile, RegionType regionType);
+
+        public void RemoveFromRegion(TileData tile);
+
+        public void AddToRecalculateBuffer(RegionData region);
+
+        public void RecalculateFromBufferAndClearBuffer();
+
+        //тайлы
+        public Transform TilesRoot { get; }
+
+        public bool IsInTerrain(HexPosition hex);
+
+        public void Set(TileData tile, HexPosition hex, RegionType regionType);
+
+        public void Remove(TileData tile);
+
+        public TileData Get(HexPosition hex);
+
+        public bool TryGet(HexPosition hex, out TileData tile);
+    }
+
     public class TerrainFactory
     {
         private const string TerrainRootName = "Terrain";
@@ -33,6 +94,7 @@ namespace CodeBase.Gameplay.World.Terrain
             var instance = CreateInstance(staticData);
             var tileCollection = new TileCollection(staticData.Size);
 
+            _container.Bind<ITerrainEntities>().To<TerrainEntities>().AsSingle();
             _container.Bind<ITerrainRegions>().To<TerrainRegions>().AsSingle();
             _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle().WithArguments(tileCollection);
             _container.Bind<ITerrainTiles>().To<TerrainTiles>().AsSingle()

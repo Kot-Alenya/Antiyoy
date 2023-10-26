@@ -8,7 +8,7 @@ namespace CodeBase.Gameplay.World.Entity
     {
         public void Create(TileData rootTile, EntityType entityType);
 
-        public void Destroy(TileData rootTile);
+        public void Destroy(EntityData entity);
 
         public bool TryCreate(HexPosition hex, EntityType entityType);
 
