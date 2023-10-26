@@ -22,26 +22,9 @@ namespace CodeBase.Gameplay.World.Entity
             _regionManager = regionManager;
         }
 
-        public void Create(TileData rootTile, EntityType entityType)
-        {
-            var presets = _staticDataProvider.Get<EntitiesPresetsCollection>();
-            var preset = presets.Entities[entityType];
-            var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new EntityData(instance, rootTile, entityType, preset.Income);
+        public void Create(HexPosition hex, EntityType entityType) => Create(_tileCollection.Get(hex), entityType);
 
-            rootTile.Entity = entity;
-            _regionManager.AddToRecalculateBuffer(rootTile.Region);
-        }
-
-        public void Destroy(EntityData entity)
-        {
-            var rootTile = entity.RootTile;
-
-            rootTile.Entity = null;
-            _regionManager.AddToRecalculateBuffer(rootTile.Region);
-
-            Object.Destroy(entity.Instance.gameObject);
-        }
+        public void Destroy(HexPosition hex) => Destroy(_tileCollection.Get(hex).Entity);
 
         public bool TryCreate(HexPosition hex, EntityType entityType)
         {
@@ -67,6 +50,27 @@ namespace CodeBase.Gameplay.World.Entity
             }
 
             return true;
+        }
+
+        private void Create(TileData rootTile, EntityType entityType)
+        {
+            var presets = _staticDataProvider.Get<EntitiesPresetsCollection>();
+            var preset = presets.Entities[entityType];
+            var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
+            var entity = new EntityData(instance, rootTile, entityType, preset.Income);
+
+            rootTile.Entity = entity;
+            _regionManager.AddToRecalculateBuffer(rootTile.Region);
+        }
+
+        private void Destroy(EntityData entity)
+        {
+            var rootTile = entity.RootTile;
+
+            rootTile.Entity = null;
+            _regionManager.AddToRecalculateBuffer(rootTile.Region);
+
+            Object.Destroy(entity.Instance.gameObject);
         }
     }
 }

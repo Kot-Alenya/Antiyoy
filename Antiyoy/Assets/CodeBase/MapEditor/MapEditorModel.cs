@@ -113,7 +113,7 @@ namespace CodeBase.MapEditor
         {
             DestroyEntity(hex);
 
-            _entityFactory.Create(_tileCollection.Get(hex), _currentEntityType);
+            _entityFactory.Create(hex, _currentEntityType);
             _versionController.AddToBuffer(new WorldCreateEntityOperationData(hex, _currentEntityType));
         }
 
@@ -125,7 +125,7 @@ namespace CodeBase.MapEditor
             if (tile.Entity != null)
             {
                 _versionController.AddToBuffer(new WorldDestroyEntityOperationData(hex, tile.Entity.Type));
-                _entityFactory.TryDestroy(hex);
+                _entityFactory.Destroy(hex);
             }
         }
     }

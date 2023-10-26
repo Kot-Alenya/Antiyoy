@@ -15,15 +15,12 @@ namespace CodeBase.Gameplay.World.Terrain
         private const string TerrainRootName = "Terrain";
 
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly RegionFactory _regionFactory;
-        private readonly EntityFactory _entityFactory;
         private readonly DiContainer _container;
 
-        public TerrainFactory(IStaticDataProvider staticDataProvider, RegionFactory regionFactory,
+        public TerrainFactory(IStaticDataProvider staticDataProvider,
             DiContainer container)
         {
             _staticDataProvider = staticDataProvider;
-            _regionFactory = regionFactory;
             _container = container;
         }
 
