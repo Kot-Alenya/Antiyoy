@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Factory;
 using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Modules
@@ -7,9 +8,9 @@ namespace CodeBase.Gameplay.World.Region.Modules
     public class RegionsSplitTool
     {
         private readonly RegionsCommonTool _commonTool;
-        private readonly RegionFactory _regionFactory;
+        private readonly IRegionFactory _regionFactory;
 
-        public RegionsSplitTool(RegionFactory regionFactory, RegionsCommonTool commonTool)
+        public RegionsSplitTool(IRegionFactory regionFactory, RegionsCommonTool commonTool)
         {
             _regionFactory = regionFactory;
             _commonTool = commonTool;

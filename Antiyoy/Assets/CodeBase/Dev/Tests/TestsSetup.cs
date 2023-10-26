@@ -1,10 +1,4 @@
-﻿using CodeBase.Gameplay.World.Region;
-using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Tile;
-using CodeBase.Infrastructure.Services.StaticData;
-using Zenject;
-
-namespace CodeBase.Dev.Tests
+﻿namespace CodeBase.Dev.Tests
 {
     public static class TestsSetup
     {

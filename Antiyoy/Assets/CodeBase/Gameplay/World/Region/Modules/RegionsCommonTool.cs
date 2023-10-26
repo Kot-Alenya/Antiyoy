@@ -1,13 +1,14 @@
 ﻿using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Factory;
 using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region.Modules
 {
     public class RegionsCommonTool
     {
-        private readonly RegionFactory _regionFactory;
+        private readonly IRegionFactory _regionFactory;
 
-        public RegionsCommonTool(RegionFactory regionFactory) => _regionFactory = regionFactory;
+        public RegionsCommonTool(IRegionFactory regionFactory) => _regionFactory = regionFactory;
 
         public void SetTileToRegion(TileData tile, RegionData region)
         {
@@ -23,10 +24,10 @@ namespace CodeBase.Gameplay.World.Region.Modules
             if (region.Tiles.Count <= 0)
                 _regionFactory.Destroy(tile.Region);
         }
-        
+
         public void MoveTiles(RegionData fromRegion, RegionData toRegion)
         {
-            foreach (var tile in fromRegion.Tiles) 
+            foreach (var tile in fromRegion.Tiles)
                 SetTileToRegion(tile, toRegion);
 
             _regionFactory.Destroy(fromRegion);

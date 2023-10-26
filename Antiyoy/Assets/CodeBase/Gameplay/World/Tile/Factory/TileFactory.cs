@@ -7,7 +7,7 @@ using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Tile
+namespace CodeBase.Gameplay.World.Tile.Factory
 {
     public class TileFactory : ITileFactory
     {

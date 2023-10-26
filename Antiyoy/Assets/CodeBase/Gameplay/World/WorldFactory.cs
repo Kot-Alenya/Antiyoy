@@ -1,8 +1,5 @@
-﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Tile;
-using UnityEngine;
+﻿using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Tile.Factory;
 using Zenject;
 
 namespace CodeBase.Gameplay.World
@@ -27,7 +24,7 @@ namespace CodeBase.Gameplay.World
 
             //FillTerrain(terrain);
         }
-        
+
         /*
         private void FillTerrain(ITerrain terrain)
         {

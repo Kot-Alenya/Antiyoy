@@ -1,34 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CodeBase.Gameplay.World.Region
+namespace CodeBase.Gameplay.World.Region.Factory
 {
-    public class RegionFactory
+    public class RegionFactory : IRegionFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
         private int _currentMaxId;
 
         public RegionFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public List<RegionData> Regions { get; } = new();
-
         public RegionData Create(RegionType type)
         {
-            var region = new RegionData(type, GetRandomColor(), ++_currentMaxId);
+            var regionId = ++_currentMaxId;
+            var region = new RegionData(type, GetRandomColor(), regionId);
 
-            Regions.Add(region);
             return region;
         }
 
-        public void Destroy(RegionData region)
-        {
-            region.Tiles.Clear();
-            Regions.Remove(region);
-        }
+        public void Destroy(RegionData region) => region.Tiles.Clear();
 
         private Color GetColor(RegionType regionType)
         {

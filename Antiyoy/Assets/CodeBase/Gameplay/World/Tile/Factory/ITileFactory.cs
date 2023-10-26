@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Tile
+namespace CodeBase.Gameplay.World.Tile.Factory
 {
     public interface ITileFactory
     {

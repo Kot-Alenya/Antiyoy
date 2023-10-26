@@ -1,9 +1,4 @@
-﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain;
-using NUnit.Framework;
-using Zenject;
-
-namespace CodeBase.Dev.Tests.World
+﻿namespace CodeBase.Dev.Tests.World
 {
     /*
     [TestFixture]

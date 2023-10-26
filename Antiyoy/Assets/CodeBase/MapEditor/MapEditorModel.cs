@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Entity.Data;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Region.Data;
 using CodeBase.Gameplay.World.Tile;
+using CodeBase.Gameplay.World.Tile.Factory;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.Gameplay.World.Version.Operation;
 using CodeBase.MapEditor.Data;

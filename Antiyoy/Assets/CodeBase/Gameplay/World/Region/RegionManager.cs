@@ -1,20 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.World.Region.Data;
+using CodeBase.Gameplay.World.Region.Factory;
 using CodeBase.Gameplay.World.Region.Modules;
 using CodeBase.Gameplay.World.Tile.Data;
 
 namespace CodeBase.Gameplay.World.Region
 {
+    public class RegionUtilities
+    {
+        private readonly IRegionFactory _regionFactory;
+
+        public RegionUtilities(IRegionFactory regionFactory) => _regionFactory = regionFactory;
+
+        public RegionData GetRegionFromNeighborsOrCreateNew(TileData tile, RegionType regionType)
+        {
+            foreach (var neighbour in tile.Neighbors)
+                if (neighbour.Region.Type == regionType)
+                    return neighbour.Region;
+
+            return _regionFactory.Create(regionType);
+        }
+
+        public void SetTileToRegion(TileData tile, RegionData region)
+        {
+            region.Tiles.Add(tile);
+            tile.Region = region;
+            tile.Instance.SpriteRenderer.color = region.Color;
+        }
+
+        public void RemoveTileFromRegion(TileData tile, RegionData region)
+        {
+            region.Tiles.Remove(tile);
+
+            if (region.Tiles.Count <= 0)
+                _regionFactory.Destroy(tile.Region);
+        }
+    }
+
     public class RegionManager : IRegionManager
     {
-        private readonly RegionFactory _regionFactory;
+        private readonly IRegionFactory _regionFactory;
         private readonly RegionsJoinTool _joinTool;
         private readonly RegionsSplitTool _splitTool;
         private readonly RegionsCommonTool _commonTool;
-        private readonly List<RegionData> _changedRegions = new();
+        private readonly List<RegionData> _regionsToRecalculate = new();
+        //private readonly RegionUtilities _regionUtilities = new();
 
-        public RegionManager(RegionFactory regionFactory)
+        public RegionManager(IRegionFactory regionFactory)
         {
             _regionFactory = regionFactory;
             _commonTool = new RegionsCommonTool(regionFactory);
@@ -24,7 +57,7 @@ namespace CodeBase.Gameplay.World.Region
 
         public void AddToRegion(TileData tile, RegionType regionType)
         {
-            var region = GetOrCreateRegionFromNeighbors(tile, regionType);
+            var region = GetRegionFromNeighborsOrCreateNew(tile, regionType);
 
             _commonTool.SetTileToRegion(tile, region);
             AddToRecalculateBuffer(region);
@@ -38,19 +71,19 @@ namespace CodeBase.Gameplay.World.Region
 
         public void AddToRecalculateBuffer(RegionData region)
         {
-            if (!_changedRegions.Contains(region))
+            if (!_regionsToRecalculate.Contains(region))
                 if (region.Tiles.Count > 0)
-                    _changedRegions.Add(region);
+                    _regionsToRecalculate.Add(region);
         }
 
         public void RecalculateFromBufferAndClearBuffer()
         {
-            var regionsToRecalculate = _changedRegions.OrderBy(r => r.Income);
+            var regionsToRecalculate = _regionsToRecalculate.OrderBy(r => r.Income);
 
             foreach (var region in regionsToRecalculate)
                 Recalculate(region);
 
-            _changedRegions.Clear();
+            _regionsToRecalculate.Clear();
         }
 
         private void Recalculate(RegionData region)
@@ -82,7 +115,7 @@ namespace CodeBase.Gameplay.World.Region
             return income;
         }
 
-        private RegionData GetOrCreateRegionFromNeighbors(TileData tile, RegionType regionType)
+        private RegionData GetRegionFromNeighborsOrCreateNew(TileData tile, RegionType regionType)
         {
             foreach (var neighbour in tile.Neighbors)
                 if (neighbour.Region.Type == regionType)

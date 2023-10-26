@@ -1,9 +1,11 @@
 ﻿using CodeBase.Gameplay.World.Entity;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region;
+using CodeBase.Gameplay.World.Region.Factory;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Tile.Data;
+using CodeBase.Gameplay.World.Tile.Factory;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
@@ -33,7 +35,8 @@ namespace CodeBase.Gameplay.World.Terrain
             staticData.Initialize(instance);
 
             _container.Bind<ITileCollection>().FromInstance(tileArray).AsSingle();
-            _container.Bind<IRegionManager>().To<RegionManager>().AsSingle(); //factory binded in installer.
+            _container.Bind<IRegionFactory>().To<RegionFactory>().AsSingle();
+            _container.Bind<IRegionManager>().To<RegionManager>().AsSingle();
             _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
             _container.Bind<ITileFactory>().To<TileFactory>().AsSingle();
         }

@@ -5,10 +5,10 @@ namespace CodeBase.Gameplay.World.Entity
 {
     public interface IEntityFactory
     {
-        public void Create(HexPosition hex, EntityType entityType);
+        void Create(HexPosition hex, EntityType entityType);
 
-        public void Destroy(HexPosition hex);
+        void Destroy(HexPosition hex);
 
-        public bool TryDestroy(HexPosition hex);
+        bool TryDestroy(HexPosition hex);
     }
 }
