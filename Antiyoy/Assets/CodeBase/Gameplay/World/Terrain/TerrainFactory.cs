@@ -14,13 +14,10 @@ namespace CodeBase.Gameplay.World.Terrain
 {
     public class TerrainFactory
     {
-        private const string TerrainRootName = "Terrain";
-
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly DiContainer _container;
 
-        public TerrainFactory(IStaticDataProvider staticDataProvider,
-            DiContainer container)
+        public TerrainFactory(IStaticDataProvider staticDataProvider, DiContainer container)
         {
             _staticDataProvider = staticDataProvider;
             _container = container;
@@ -30,12 +27,11 @@ namespace CodeBase.Gameplay.World.Terrain
         {
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var instance = CreateInstance(staticData);
-            var tileArray = new TileArray(staticData.Size);
-
             staticData.Initialize(instance);
+            
             CreateRegion();
 
-            _container.Bind<ITileCollection>().FromInstance(tileArray).AsSingle();
+            _container.Bind<ITileCollection>().To<TileArray>().AsSingle();
             _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
             _container.Bind<ITileFactory>().To<TileFactory>().AsSingle();
         }

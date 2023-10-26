@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile.Data;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile.Collection
@@ -11,8 +13,10 @@ namespace CodeBase.Gameplay.World.Tile.Collection
         private readonly Vector2Int _size;
         private readonly TileData[] _tiles;
 
-        public TileArray(Vector2Int size)
+        public TileArray(IStaticDataProvider staticDataProvider)
         {
+            var size = staticDataProvider.Get<TerrainStaticData>().Size;
+
             _tiles = new TileData[size.x * size.y];
             _size = size;
         }
