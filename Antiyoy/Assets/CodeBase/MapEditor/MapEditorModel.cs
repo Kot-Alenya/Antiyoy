@@ -7,15 +7,15 @@ using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Version;
 using CodeBase.Gameplay.World.Version.Operation;
+using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.MapEditor.Data;
 
 namespace CodeBase.MapEditor
 {
     public class MapEditorModel
     {
-        private readonly IWorldVersionController _versionController;
+        private readonly IWorldVersionRecorder _worldVersionRecorder;
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
         private readonly ITileCollection _tileCollection;
@@ -25,10 +25,10 @@ namespace CodeBase.MapEditor
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
-        public MapEditorModel(IWorldVersionController versionController, ITileFactory tileFactory,
+        public MapEditorModel(IWorldVersionRecorder worldVersionRecorder, ITileFactory tileFactory,
             IEntityFactory entityFactory, ITileCollection tileCollection, IRegionRebuilder regionRebuilder)
         {
-            _versionController = versionController;
+            _worldVersionRecorder = worldVersionRecorder;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
             _tileCollection = tileCollection;
@@ -88,7 +88,7 @@ namespace CodeBase.MapEditor
                     throw new ArgumentOutOfRangeException();
             }
 
-            _versionController.RecordFromBufferAndClearBuffer();
+            _worldVersionRecorder.RecordFromBufferAndClearBuffer();
             _selectedHex.Clear();
         }
 
@@ -97,7 +97,7 @@ namespace CodeBase.MapEditor
             DestroyTile(hex);
 
             _tileFactory.Create(hex, _currentRegion);
-            _versionController.AddToBuffer(new WorldCreateTileOperationData(hex, _currentRegion));
+            _worldVersionRecorder.AddToBuffer(new CreateTileOperationData(hex, _currentRegion));
         }
 
         private void DestroyTile(HexPosition hex)
@@ -106,9 +106,9 @@ namespace CodeBase.MapEditor
                 return;
 
             if (tile.Entity != null)
-                _versionController.AddToBuffer(new WorldDestroyEntityOperationData(hex, tile.Entity.Type));
+                _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(hex, tile.Entity.Type));
 
-            _versionController.AddToBuffer(new WorldDestroyTileOperationData(hex, tile.Region.Type));
+            _worldVersionRecorder.AddToBuffer(new DestroyTileOperationData(hex, tile.Region.Type));
             _tileFactory.Destroy(tile);
         }
 
@@ -117,7 +117,7 @@ namespace CodeBase.MapEditor
             DestroyEntity(hex);
 
             _entityFactory.Create(hex, _currentEntityType);
-            _versionController.AddToBuffer(new WorldCreateEntityOperationData(hex, _currentEntityType));
+            _worldVersionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _currentEntityType));
         }
 
         private void DestroyEntity(HexPosition hex)
@@ -127,7 +127,7 @@ namespace CodeBase.MapEditor
 
             if (tile.Entity != null)
             {
-                _versionController.AddToBuffer(new WorldDestroyEntityOperationData(hex, tile.Entity.Type));
+                _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(hex, tile.Entity.Type));
                 _entityFactory.Destroy(hex);
             }
         }

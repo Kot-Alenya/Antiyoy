@@ -1,7 +1,8 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Version;
+using CodeBase.Gameplay.World.Version.Handler;
+using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Services.StateMachine;
 using CodeBase.Infrastructure.Services.StateMachine.Factory;
 using CodeBase.MapEditor;
@@ -24,7 +25,8 @@ namespace CodeBase.Infrastructure.MapEditor
         private void BindWorld()
         {
             Container.Bind<ITerrainFactory>().To<TerrainFactory>().AsSingle();
-            Container.Bind<WorldVersionControllerFactory>().AsSingle();
+            Container.Bind<IWorldVersionHandler>().To<WorldVersionHandler>().AsSingle();
+            Container.Bind<IWorldVersionRecorder>().To<WorldVersionRecorder>().AsSingle();
         }
 
         private void BindStateMachine()

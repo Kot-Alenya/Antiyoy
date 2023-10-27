@@ -3,12 +3,12 @@ using CodeBase.Gameplay.World.Terrain.Region.Data;
 
 namespace CodeBase.Gameplay.World.Version.Operation
 {
-    public readonly struct WorldCreateTileOperationData : IWorldOperationData
+    public readonly struct CreateTileOperationData : IOperationData
     {
         public readonly HexPosition Hex;
         public readonly RegionType RegionType;
 
-        public WorldCreateTileOperationData(HexPosition hex, RegionType regionType)
+        public CreateTileOperationData(HexPosition hex, RegionType regionType)
         {
             Hex = hex;
             RegionType = regionType;
