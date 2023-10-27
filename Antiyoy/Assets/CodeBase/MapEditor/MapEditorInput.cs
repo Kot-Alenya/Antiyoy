@@ -1,5 +1,7 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.MapEditor.Data;
 using UnityEngine;
 using Zenject;
 
@@ -9,12 +11,14 @@ namespace CodeBase.MapEditor
     {
         private IMapEditorController _mapEditorController;
         private ICameraController _cameraController;
+        private IStaticDataProvider _staticDataProvider;
 
         [Inject]
-        private void Construct(ICameraController cameraController, IMapEditorController mapEditorController)
+        private void Construct(ICameraController cameraController, IMapEditorController mapEditorController,IStaticDataProvider staticDataProvider)
         {
             _cameraController = cameraController;
             _mapEditorController = mapEditorController;
+            _staticDataProvider = staticDataProvider;
         }
 
         private void Update()
@@ -38,12 +42,14 @@ namespace CodeBase.MapEditor
 
         private void ReturnWorld()
         {
-            if (!Input.GetKey(KeyCode.LeftControl) || Input.GetMouseButton(0))
+            var staticData = _staticDataProvider.Get<MapEditorStaticData>();
+
+            if (!Input.GetKey(staticData.ReturnWorldFirstKey) || Input.GetMouseButton(0))
                 return;
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(staticData.ReturnWorldBackSecondKey))
                 _mapEditorController.ReturnBack();
-            else if (Input.GetKeyDown(KeyCode.Y))
+            else if (Input.GetKeyDown(staticData.ReturnWorldNextSecondKey))
                 _mapEditorController.ReturnNext();
         }
     }

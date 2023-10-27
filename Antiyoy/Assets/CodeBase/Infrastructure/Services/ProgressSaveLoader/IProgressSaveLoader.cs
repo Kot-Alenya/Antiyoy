@@ -5,7 +5,7 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
     public interface IProgressSaveLoader
     {
         public void RegisterWatcher(IProgressWatcher watcher);
-        
+
         public void UnRegisterWatcher(IProgressWatcher watcher);
 
         public void ClearWatchers();

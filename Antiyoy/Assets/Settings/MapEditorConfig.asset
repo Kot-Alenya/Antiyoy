@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: MapEditorConfig
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6157996624488819535, guid: 5aca566e38029a84cba762bd14b59b48, type: 3}
+  ReturnWorldFirstKey: 304
+  ReturnWorldBackSecondKey: 122
+  ReturnWorldNextSecondKey: 118

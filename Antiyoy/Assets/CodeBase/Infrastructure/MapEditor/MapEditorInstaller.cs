@@ -13,7 +13,6 @@ using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Services.StateMachine;
 using CodeBase.Infrastructure.Services.StateMachine.Factory;
 using CodeBase.MapEditor;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Infrastructure.MapEditor
