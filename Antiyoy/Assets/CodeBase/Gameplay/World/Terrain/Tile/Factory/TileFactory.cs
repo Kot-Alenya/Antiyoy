@@ -13,16 +13,17 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly ITileCollection _tileCollection;
         private readonly RegionCollection _regionCollection;
-        private readonly Transform _tileRoot;
+        private Transform _tileRoot;
 
         public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            RegionCollection regionCollection, Transform tileRoot)
+            RegionCollection regionCollection)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
             _regionCollection = regionCollection;
-            _tileRoot = tileRoot;
         }
+
+        public void Initialize(Transform tileRoot) => _tileRoot = tileRoot;
 
         public void Create(HexPosition hex, RegionType regionType)
         {

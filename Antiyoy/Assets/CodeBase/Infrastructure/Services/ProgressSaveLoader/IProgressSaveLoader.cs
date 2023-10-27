@@ -10,8 +10,8 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
 
         public void ClearWatchers();
 
-        public void Save<T>() where T : IProgressData, new();
+        public void Save<T>(string key) where T : ProgressData, new();
 
-        public void Load<T>() where T : IProgressData, new();
+        public void Load<T>(string key) where T : ProgressData, new();
     }
 }

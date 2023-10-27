@@ -7,16 +7,13 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
 {
     public interface ITileCollection : IEnumerable<TileData>
     {
-        public Vector2Int Size { get; }
-
-        public bool IsInCollection(HexPosition hex);
-
-        public void Set(TileData tile, HexPosition hex);
-
-        public void Remove(HexPosition hex);
-
-        public TileData Get(HexPosition hex);
-
-        public bool TryGet(HexPosition hex, out TileData tile);
+        Vector2Int Size { get; }
+        int Count { get; }
+        bool IsInCollection(HexPosition hex);
+        void Set(TileData tile, HexPosition hex);
+        void Remove(HexPosition hex);
+        TileData Get(HexPosition hex);
+        TileData Get(int index);
+        bool TryGet(HexPosition hex, out TileData tile);
     }
 }

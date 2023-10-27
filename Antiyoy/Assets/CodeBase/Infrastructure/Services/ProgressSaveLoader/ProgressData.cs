@@ -1,6 +1,6 @@
 namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
 {
-    public interface IProgressData
+    public abstract class ProgressData
     {
     }
 }

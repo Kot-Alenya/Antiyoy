@@ -23,9 +23,9 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
 
         public void ClearWatchers() => _watchers.Clear();
 
-        public void Load<T>() where T : IProgressData, new()
+        public void Load<T>(string key) where T : ProgressData, new()
         {
-            var filePath = GetFilePath<T>();
+            var filePath = GetFilePath(key);
 
             if (!File.Exists(filePath))
                 return;
@@ -41,7 +41,7 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
                     progressReader.OnProgressLoad(data);
         }
 
-        public void Save<T>() where T : IProgressData, new()
+        public void Save<T>(string key) where T : ProgressData, new()
         {
             var data = new T();
 
@@ -49,11 +49,10 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
                 if (watcher is IProgressWriter<T> progressWriter)
                     progressWriter.OnProgressSave(data);
 
-            using var streamWriter = new StreamWriter(GetFilePath<T>(), false);
+            using var streamWriter = new StreamWriter(GetFilePath(key), false);
             streamWriter.Write(JsonUtility.ToJson(data));
         }
 
-        private static string GetFilePath<T>() where T : IProgressData
-            => $"{StoragePath}/{typeof(T).Name + Extension}";
+        private static string GetFilePath(string key) => $"{StoragePath}/{key + Extension}";
     }
 }

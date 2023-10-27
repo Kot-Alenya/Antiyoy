@@ -23,6 +23,8 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
 
         public Vector2Int Size => _size;
 
+        public int Count => _tiles.Length;
+
         public bool IsInCollection(HexPosition hex)
         {
             var index = HexMath.ToArrayIndex(hex);
@@ -52,6 +54,7 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
         }
 
         public TileData Get(HexPosition hex) => _tiles[GetIndex(hex)];
+        public TileData Get(int index) => _tiles[index];
 
         public bool TryGet(HexPosition hex, out TileData tile)
         {

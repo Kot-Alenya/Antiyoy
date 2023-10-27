@@ -2,8 +2,9 @@
 {
     public enum EntityType
     {
-        Farm = 0,
-        Peasant = 1,
-        Pine = 2
+        None = 0,
+        Farm = 1,
+        Peasant = 2,
+        Pine = 3
     }
 }

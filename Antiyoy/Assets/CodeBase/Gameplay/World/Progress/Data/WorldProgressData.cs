@@ -1,12 +1,12 @@
 ﻿using System;
-using CodeBase.Gameplay.World.Hex;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 
-namespace CodeBase.Gameplay.World
+namespace CodeBase.Gameplay.World.Progress.Data
 {
     [Serializable]
-    public class WorldProgressData : IProgressData
+    public class WorldProgressData : ProgressData
     {
-        public SavedTileData[] TileSavedData;
+        public SavedTileData[] SavedTiles;
+        public SavedVector2Int TerrainSize;
     }
 }

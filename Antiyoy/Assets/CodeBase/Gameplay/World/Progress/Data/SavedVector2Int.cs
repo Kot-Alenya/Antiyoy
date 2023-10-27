@@ -3,9 +3,9 @@
 namespace CodeBase.Gameplay.World.Progress.Data
 {
     [Serializable]
-    public struct SavedHexPosition
+    public struct SavedVector2Int
     {
-        public int Q;
-        public int R;
+        public int X;
+        public int Y;
     }
 }

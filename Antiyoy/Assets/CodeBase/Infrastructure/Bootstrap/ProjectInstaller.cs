@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Services.StaticData;
+﻿using CodeBase.Infrastructure.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.StaticData;
 using Zenject;
 
 namespace CodeBase.Infrastructure.Bootstrap
@@ -9,6 +10,7 @@ namespace CodeBase.Infrastructure.Bootstrap
 
         public override void InstallBindings()
         {
+            Container.Bind<IProgressSaveLoader>().To<ProgressSaveLoader>().AsSingle();
             Container.Bind<IStaticDataProvider>().To<StaticDataProvider>().AsSingle()
                 .WithArguments(StaticData.StaticDataToBind);
         }

@@ -1,26 +1,20 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Data;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Region;
-using CodeBase.Gameplay.World.Terrain.Region.Factory;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.World.Terrain
 {
     public class TerrainFactory : ITerrainFactory
     {
         private readonly IStaticDataProvider _staticDataProvider;
-        private readonly DiContainer _container;
+        private readonly ITileFactory _tileFactory;
 
-        public TerrainFactory(IStaticDataProvider staticDataProvider, DiContainer container)
+        public TerrainFactory(IStaticDataProvider staticDataProvider, ITileFactory tileFactory)
         {
             _staticDataProvider = staticDataProvider;
-            _container = container;
+            _tileFactory = tileFactory;
         }
 
         public void Create()
@@ -28,9 +22,7 @@ namespace CodeBase.Gameplay.World.Terrain
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var instance = CreateInstance(staticData);
 
-            BindRegion();
-            BindTile(instance.transform);
-            BindEntity();
+            _tileFactory.Initialize(instance.transform);
         }
 
         private TerrainPrefabData CreateInstance(TerrainStaticData staticData)
@@ -63,23 +55,5 @@ namespace CodeBase.Gameplay.World.Terrain
             backgroundTransform.localScale = scale;
             backgroundTransform.position = position;
         }
-
-        private void BindRegion()
-        {
-            _container.Bind<IRegionFactory>().To<RegionFactory>().AsSingle();
-            _container.Bind<RegionCollection>().To<RegionCollection>().AsSingle();
-            _container.Bind<IRegionRebuilder>().To<RegionRebuilder>().AsSingle();
-            _container.Bind<RegionSplitter>().AsSingle();
-            _container.Bind<RegionJoiner>().AsSingle();
-            _container.Bind<RegionIncomeRebuilder>().AsSingle();
-        }
-
-        private void BindTile(Transform tileRoot)
-        {
-            _container.Bind<ITileCollection>().To<TileArray>().AsSingle();
-            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle().WithArguments(tileRoot);
-        }
-
-        private void BindEntity() => _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
     }
 }

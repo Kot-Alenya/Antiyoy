@@ -7,18 +7,13 @@ namespace CodeBase.MapEditor
 {
     public interface IMapEditorController
     {
-        public void SetMode(MapEditorMode mode);
-
-        public void SetRegionType(RegionType regionType);
-
-        public void SetEntityType(EntityType entityType);
-
-        public void SelectTile(HexPosition hex);
-
-        public void ProcessTiles();
-
-        public void ReturnBack();
-
-        public void ReturnNext();
+        void SetMode(MapEditorMode mode);
+        void SetRegionType(RegionType regionType);
+        void SetEntityType(EntityType entityType);
+        void SelectTile(HexPosition hex);
+        void ProcessTiles();
+        void ReturnBack();
+        void ReturnNext();
+        void SaveWorld();
     }
 }

@@ -1,11 +1,13 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
 {
     public interface ITileFactory
     {
+        void Initialize(Transform tileRoot);
         void Create(HexPosition hex, RegionType regionType);
         void Destroy(TileData tile);
         void Destroy(HexPosition hex);

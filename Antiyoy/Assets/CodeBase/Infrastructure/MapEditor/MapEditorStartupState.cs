@@ -1,6 +1,8 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 using CodeBase.MapEditor;
 
@@ -12,14 +14,19 @@ namespace CodeBase.Infrastructure.MapEditor
         private readonly MapEditorFactory _mapEditorFactory;
         private readonly DebugWindowFactory _debugWindowFactory;
         private readonly ITerrainFactory _terrainFactory;
+        private readonly IProgressSaveLoader _progressSaveLoader;
+        private readonly WorldProgressSaver _worldProgressSaver;
 
         public MapEditorStartupState(CameraFactory cameraFactory, MapEditorFactory mapEditorFactory,
-            DebugWindowFactory debugWindowFactory, ITerrainFactory terrainFactory)
+            DebugWindowFactory debugWindowFactory, ITerrainFactory terrainFactory,
+            IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver)
         {
             _cameraFactory = cameraFactory;
             _mapEditorFactory = mapEditorFactory;
             _debugWindowFactory = debugWindowFactory;
             _terrainFactory = terrainFactory;
+            _progressSaveLoader = progressSaveLoader;
+            _worldProgressSaver = worldProgressSaver;
         }
 
         public void Enter()
@@ -28,6 +35,8 @@ namespace CodeBase.Infrastructure.MapEditor
             _cameraFactory.Create();
             _mapEditorFactory.Create();
             _debugWindowFactory.Create();
+
+            _progressSaveLoader.RegisterWatcher(_worldProgressSaver);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿mapEditor: 
+﻿rename RegionType to TeamType/TeamColor (?)
+change hotkeys to return next/back
+
+mapEditor: 
     worldExport;
 
 bootstrap & hub
