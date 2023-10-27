@@ -36,6 +36,8 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuild
             _rebuildBuffer.Clear();
         }
 
+        public void RebuildIncome(RegionData region) => _regionIncomeRebuilder.RebuildIncome(region);
+
         private void Rebuild(RegionData region)
         {
             var regionToSplit = _regionJoiner.TryJoinWithNeighbors(region, out var joinRegion)

@@ -4,8 +4,8 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuild
 {
     public interface IRegionRebuilder
     {
-        public void AddToRebuildBuffer(RegionData region);
-
-        public void RebuildFromBufferAndClearBuffer();
+        void AddToRebuildBuffer(RegionData region);
+        void RebuildFromBufferAndClearBuffer();
+        void RebuildIncome(RegionData region);
     }
 }

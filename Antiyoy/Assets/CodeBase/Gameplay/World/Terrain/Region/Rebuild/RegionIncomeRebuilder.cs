@@ -11,6 +11,8 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuild
         public RegionIncomeRebuilder(IStaticDataProvider staticDataProvider) =>
             _staticDataProvider = staticDataProvider;
 
+        public void RebuildIncome(RegionData region) => region.Income = GetIncome(region);
+
         public void RebuildIncome(List<RegionData> regions)
         {
             foreach (var region in regions)

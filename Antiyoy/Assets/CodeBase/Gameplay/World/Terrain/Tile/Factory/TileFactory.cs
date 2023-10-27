@@ -33,14 +33,14 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
             var tile = new TileData(instance, hex);
 
             _tileCollection.Set(tile, hex);
-            _regionCollection.AddToRegion(tile, regionType);
+            _regionCollection.AddTileToRegion(tile, regionType);
         }
 
         public void Destroy(TileData tile)
         {
             _entityFactory.TryDestroy(tile.Hex);
             _tileCollection.Remove(tile.Hex);
-            _regionCollection.RemoveFromRegion(tile);
+            _regionCollection.RemoveTileFromRegion(tile);
 
             Object.Destroy(tile.Instance.gameObject);
         }

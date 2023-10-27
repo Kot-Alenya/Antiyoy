@@ -60,7 +60,7 @@ namespace CodeBase.Gameplay.World.Terrain.Entity
             var entity = new EntityData(instance, rootTile, entityType, preset.Income);
 
             rootTile.Entity = entity;
-            _regionRebuilder.AddToRebuildBuffer(rootTile.Region);
+            _regionRebuilder.RebuildIncome(rootTile.Region);
         }
 
         private void Destroy(EntityData entity)
@@ -68,7 +68,7 @@ namespace CodeBase.Gameplay.World.Terrain.Entity
             var rootTile = entity.RootTile;
 
             rootTile.Entity = null;
-            _regionRebuilder.AddToRebuildBuffer(rootTile.Region);
+            _regionRebuilder.RebuildIncome(rootTile.Region);
 
             Object.Destroy(entity.Instance.gameObject);
         }

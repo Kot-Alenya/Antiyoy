@@ -16,18 +16,22 @@ namespace CodeBase.Gameplay.World.Terrain.Region
             _regionRebuilder = regionRebuilder;
         }
 
-        public void AddToRegion(TileData tile, RegionType regionType)
+        public void AddTileToRegion(TileData tile, RegionType regionType)
         {
             var region = GetRegionFromNeighborsOrCreateNew(tile, regionType);
 
             RegionTileUtilities.SetTileToRegion(tile, region);
             _regionRebuilder.AddToRebuildBuffer(region);
+            _regionRebuilder.RebuildIncome(region);
         }
 
-        public void RemoveFromRegion(TileData tile)
+        public void RemoveTileFromRegion(TileData tile)
         {
-            RegionTileUtilities.RemoveTileFromRegion(tile, tile.Region, _regionFactory);
-            _regionRebuilder.AddToRebuildBuffer(tile.Region);
+            var region = tile.Region;
+
+            RegionTileUtilities.RemoveTileFromRegion(tile, region, _regionFactory);
+            _regionRebuilder.AddToRebuildBuffer(region);
+            _regionRebuilder.RebuildIncome(region);
         }
 
         private RegionData GetRegionFromNeighborsOrCreateNew(TileData tile, RegionType regionType)
