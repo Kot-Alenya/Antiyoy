@@ -1,6 +1,4 @@
-﻿integrate worldVersion in terrain as connected operations;(?)
-
-mapEditor: 
+﻿mapEditor: 
     worldExport;
 
 bootstrap & hub

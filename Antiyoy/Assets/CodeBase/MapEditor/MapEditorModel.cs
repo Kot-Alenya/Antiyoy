@@ -106,7 +106,7 @@ namespace CodeBase.MapEditor
                 return;
 
             if (tile.Entity != null)
-                _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(hex, tile.Entity.Type));
+                DestroyEntity(hex);
 
             _worldVersionRecorder.AddToBuffer(new DestroyTileOperationData(hex, tile.Region.Type));
             _tileFactory.Destroy(tile);

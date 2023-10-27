@@ -46,16 +46,16 @@ namespace CodeBase.Gameplay.World.Version.Handler
             switch (operation)
             {
                 case CreateTileOperationData data:
-                    _tileFactory.Destroy(data.Hex);
+                    _tileFactory.TryDestroy(data.Hex);
                     break;
                 case DestroyTileOperationData data:
-                    _tileFactory.Create(data.Hex, data.RegionType);
+                    _tileFactory.TryCreate(data.Hex, data.RegionType);
                     break;
                 case CreateEntityOperationData data:
-                    _entityFactory.Destroy(data.Hex);
+                    _entityFactory.TryDestroy(data.Hex);
                     break;
                 case DestroyEntityOperationData data:
-                    _entityFactory.Create(data.Hex, data.EntityType);
+                    _entityFactory.TryCreate(data.Hex, data.EntityType);
                     break;
             }
 
@@ -67,16 +67,16 @@ namespace CodeBase.Gameplay.World.Version.Handler
             switch (operation)
             {
                 case CreateTileOperationData data:
-                    _tileFactory.Create(data.Hex, data.RegionType);
+                    _tileFactory.TryCreate(data.Hex, data.RegionType);
                     break;
                 case DestroyTileOperationData data:
-                    _tileFactory.Destroy(data.Hex);
+                    _tileFactory.TryDestroy(data.Hex);
                     break;
                 case CreateEntityOperationData data:
-                    _entityFactory.Create(data.Hex, data.EntityType);
+                    _entityFactory.TryCreate(data.Hex, data.EntityType);
                     break;
                 case DestroyEntityOperationData data:
-                    _entityFactory.Destroy(data.Hex);
+                    _entityFactory.TryDestroy(data.Hex);
                     break;
             }
 

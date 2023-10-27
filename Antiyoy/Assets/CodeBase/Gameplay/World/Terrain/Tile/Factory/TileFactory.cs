@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity;
 using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
@@ -14,16 +13,14 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly ITileCollection _tileCollection;
         private readonly RegionCollection _regionCollection;
-        private readonly IEntityFactory _entityFactory;
         private readonly Transform _tileRoot;
 
         public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            RegionCollection regionCollection, IEntityFactory entityFactory, Transform tileRoot)
+            RegionCollection regionCollection, Transform tileRoot)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
             _regionCollection = regionCollection;
-            _entityFactory = entityFactory;
             _tileRoot = tileRoot;
         }
 
@@ -38,7 +35,6 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
 
         public void Destroy(TileData tile)
         {
-            _entityFactory.TryDestroy(tile.Hex);
             _tileCollection.Remove(tile.Hex);
             _regionCollection.RemoveTileFromRegion(tile);
 
