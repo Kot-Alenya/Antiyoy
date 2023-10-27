@@ -1,5 +1,8 @@
 ﻿bugFix;
 
+remove regionRebuilder interface as useless.
+integrate worldVersion in terrain as connected operations;(?)
+
 mapEditor: 
     worldExport;
 

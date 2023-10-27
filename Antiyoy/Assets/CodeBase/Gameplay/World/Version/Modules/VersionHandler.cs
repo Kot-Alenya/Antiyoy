@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     _tileFactory.Create(data.Hex, data.RegionType);
                     break;
                 case WorldCreateEntityOperationData data:
-                    _entityFactory.TryDestroy(data.Hex);
+                    _entityFactory.Destroy(data.Hex);
                     break;
                 case WorldDestroyEntityOperationData data:
                     _entityFactory.Create(data.Hex, data.EntityType);
@@ -53,7 +53,7 @@ namespace CodeBase.Gameplay.World.Version.Modules
                     _entityFactory.Create(data.Hex, data.EntityType);
                     break;
                 case WorldDestroyEntityOperationData data:
-                    _entityFactory.TryDestroy(data.Hex);
+                    _entityFactory.Destroy(data.Hex);
                     break;
             }
 

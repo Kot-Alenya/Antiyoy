@@ -105,6 +105,9 @@ namespace CodeBase.MapEditor
             if (!_tileCollection.TryGet(hex, out var tile))
                 return;
 
+            if (tile.Entity != null)
+                _versionController.AddToBuffer(new WorldDestroyEntityOperationData(hex, tile.Entity.Type));
+
             _versionController.AddToBuffer(new WorldDestroyTileOperationData(hex, tile.Region.Type));
             _tileFactory.Destroy(tile);
         }

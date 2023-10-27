@@ -6,10 +6,10 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Factory
 {
     public interface ITileFactory
     {
-        public void Create(HexPosition hex, RegionType regionType);
-
-        public void Destroy(TileData tile);
-
-        public void Destroy(HexPosition hex);
+        void Create(HexPosition hex, RegionType regionType);
+        void Destroy(TileData tile);
+        void Destroy(HexPosition hex);
+        bool TryCreate(HexPosition hex, RegionType regionType);
+        bool TryDestroy(HexPosition hex);
     }
 }
