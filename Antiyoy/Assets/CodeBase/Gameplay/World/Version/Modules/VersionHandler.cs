@@ -1,6 +1,6 @@
-﻿using CodeBase.Gameplay.World.Entity;
-using CodeBase.Gameplay.World.Region.Rebuild;
-using CodeBase.Gameplay.World.Tile.Factory;
+﻿using CodeBase.Gameplay.World.Terrain.Entity;
+using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
+using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Operation;
 
 namespace CodeBase.Gameplay.World.Version.Modules

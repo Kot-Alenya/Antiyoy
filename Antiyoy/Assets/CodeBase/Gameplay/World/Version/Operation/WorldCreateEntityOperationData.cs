@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.World.Entity.Data;
-using CodeBase.Gameplay.World.Hex;
+﻿using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Terrain.Entity.Data;
 
 namespace CodeBase.Gameplay.World.Version.Operation
 {

@@ -1,12 +1,10 @@
-using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Infrastructure.Level
 {
     public class LevelStartup : MonoBehaviour
     {
+        /*
         private WorldFactory _terrainFactory;
         private CameraFactory _cameraFactory;
 
@@ -17,7 +15,7 @@ namespace CodeBase.Infrastructure.Level
             _cameraFactory = cameraFactory;
         }
 
-        /*
+
         private void Start()
         {
             var terrain = _terrainFactory.Create();
