@@ -2,7 +2,6 @@
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Region.Collection;
 using CodeBase.Gameplay.World.Region.Data;
-using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Tile.Collection;
 using CodeBase.Gameplay.World.Tile.Data;
 using CodeBase.Infrastructure.Services.StaticData;
@@ -16,20 +15,21 @@ namespace CodeBase.Gameplay.World.Tile.Factory
         private readonly ITileCollection _tileCollection;
         private readonly RegionCollection _regionCollection;
         private readonly IEntityFactory _entityFactory;
+        private readonly Transform _tileRoot;
 
         public TileFactory(IStaticDataProvider staticDataProvider, ITileCollection tileCollection,
-            RegionCollection regionCollection, IEntityFactory entityFactory)
+            RegionCollection regionCollection, IEntityFactory entityFactory, Transform tileRoot)
         {
             _staticDataProvider = staticDataProvider;
             _tileCollection = tileCollection;
             _regionCollection = regionCollection;
             _entityFactory = entityFactory;
+            _tileRoot = tileRoot;
         }
 
         public void Create(HexPosition hex, RegionType regionType)
         {
-            var terrainStaticData = _staticDataProvider.Get<TerrainStaticData>();
-            var instance = CreateInstance(hex, terrainStaticData.Instance.transform);
+            var instance = CreateInstance(hex, _tileRoot);
             var tile = new TileData(instance, hex);
 
             _tileCollection.Set(tile, hex);

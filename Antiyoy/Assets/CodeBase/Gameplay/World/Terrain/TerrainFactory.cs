@@ -27,13 +27,12 @@ namespace CodeBase.Gameplay.World.Terrain
         {
             var staticData = _staticDataProvider.Get<TerrainStaticData>();
             var instance = CreateInstance(staticData);
-            staticData.Initialize(instance);
-            
+
             CreateRegion();
 
             _container.Bind<ITileCollection>().To<TileArray>().AsSingle();
             _container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
-            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle();
+            _container.Bind<ITileFactory>().To<TileFactory>().AsSingle().WithArguments(instance.transform);
         }
 
         private void CreateRegion()
