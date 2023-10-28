@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.UI;
-using Zenject;
+﻿using Zenject;
 
 namespace CodeBase.Gameplay.Player
 {

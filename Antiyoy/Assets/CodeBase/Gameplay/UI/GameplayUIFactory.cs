@@ -7,7 +7,7 @@ namespace CodeBase.Gameplay.UI
         private readonly DiContainer _container;
         private readonly GameplayUIPrefabData _prefab;
 
-        public GameplayUIFactory(DiContainer container,GameplayUIPrefabData prefab)
+        public GameplayUIFactory(DiContainer container, GameplayUIPrefabData prefab)
         {
             _container = container;
             _prefab = prefab;
