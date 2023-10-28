@@ -12,6 +12,6 @@ namespace CodeBase.Infrastructure.Bootstrap.GameLoading
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private void Start() => _stateMachine.SwitchTo<GameHubState>();
+        private void Start() => _stateMachine.SwitchTo<HubState>();
     }
 }

@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Gameplay
+namespace CodeBase.Infrastructure.Gameplay.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {

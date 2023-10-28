@@ -1,3 +1,4 @@
+using CodeBase.Infrastructure.Gameplay.States;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using Zenject;
 

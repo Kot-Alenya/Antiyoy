@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 1439439301179385197}
   - component: {fileID: 1809116186276413998}
   m_Layer: 5
-  m_Name: GameHubCanvas
+  m_Name: HubCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

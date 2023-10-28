@@ -2,12 +2,12 @@
 
 namespace CodeBase.Infrastructure.Hub.UI
 {
-    public class GameHubUIFactory
+    public class HubUIFactory
     {
         private readonly DiContainer _container;
-        private readonly GameHubUIPrefabData _prefab;
+        private readonly HubUIPrefabData _prefab;
 
-        public GameHubUIFactory(DiContainer container, GameHubUIPrefabData prefab)
+        public HubUIFactory(DiContainer container, HubUIPrefabData prefab)
         {
             _container = container;
             _prefab = prefab;

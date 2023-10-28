@@ -10,7 +10,7 @@ using CodeBase.Gameplay.Version.Handler;
 using CodeBase.Gameplay.Version.Recorder;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Gameplay
+namespace CodeBase.Infrastructure.Gameplay.Installers
 {
     public class GameplayWorldInstaller : MonoInstaller
     {

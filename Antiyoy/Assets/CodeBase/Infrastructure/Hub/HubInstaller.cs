@@ -4,14 +4,14 @@ using Zenject;
 
 namespace CodeBase.Infrastructure.Hub
 {
-    public class GameHubInstaller : MonoInstaller
+    public class HubInstaller : MonoInstaller
     {
-        [SerializeField] private GameHubUIPrefabData _uiPrefab;
+        [SerializeField] private HubUIPrefabData _uiPrefab;
 
         public override void InstallBindings()
         {
-            Container.Bind<GameHubUIFactory>().AsSingle().WithArguments(_uiPrefab);
-            Container.BindInterfacesTo<GameHubStartup>().AsSingle();
+            Container.Bind<HubUIFactory>().AsSingle().WithArguments(_uiPrefab);
+            Container.BindInterfacesTo<HubStartup>().AsSingle();
         }
     }
 }

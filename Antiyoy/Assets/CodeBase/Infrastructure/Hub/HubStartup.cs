@@ -3,11 +3,11 @@ using Zenject;
 
 namespace CodeBase.Infrastructure.Hub
 {
-    public class GameHubStartup : IInitializable
+    public class HubStartup : IInitializable
     {
-        private readonly GameHubUIFactory _uiFactory;
+        private readonly HubUIFactory _uiFactory;
 
-        private GameHubStartup(GameHubUIFactory uiFactory) => _uiFactory = uiFactory;
+        private HubStartup(HubUIFactory uiFactory) => _uiFactory = uiFactory;
 
         public void Initialize() => _uiFactory.Create();
     }

@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.Hub
 {
-    public class GameHubState : IEnterState
+    public class HubState : IEnterState
     {
         private readonly ISceneLoader _sceneLoader;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        public GameHubState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
+        public HubState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
         {
             _sceneLoader = sceneLoader;
             _staticDataProvider = staticDataProvider;
@@ -20,7 +20,7 @@ namespace CodeBase.Infrastructure.Hub
         public void Enter()
         {
             var scenesNameConfig = _staticDataProvider.Get<ProjectScenesNameConfig>();
-            _sceneLoader.LoadAsync(scenesNameConfig.GameHub, LoadSceneMode.Additive);
+            _sceneLoader.LoadAsync(scenesNameConfig.GameHub, LoadSceneMode.Single);
         }
     }
 }

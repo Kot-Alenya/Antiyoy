@@ -1,8 +1,9 @@
 ﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
+using CodeBase.Infrastructure.WorldEditor.States;
 using CodeBase.Utilities.UI;
 using Zenject;
 
-namespace CodeBase.Infrastructure.WorldEditor
+namespace CodeBase.Infrastructure.WorldEditor.UI
 {
     public class LoadWorldEditorButton : ButtonBase
     {
