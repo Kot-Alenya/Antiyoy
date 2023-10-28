@@ -3,7 +3,7 @@ using CodeBase.Infrastructure.Project.Services.StateMachine;
 using CodeBase.Utilities.UI;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Gameplay.UI
+namespace CodeBase.Gameplay.UI.LeaveAndLoad
 {
     public class GameplayLoadButton : ButtonBase
     {

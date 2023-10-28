@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Progress;
 using CodeBase.Gameplay.Progress.Data;
 using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.UI;
 using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 
@@ -14,23 +15,26 @@ namespace CodeBase.Infrastructure.Gameplay.States
         private readonly IProgressSaveLoader _progressSaveLoader;
         private readonly WorldProgressSaver _worldProgressSaver;
         private readonly WorldProgressLoader _worldProgressLoader;
+        private readonly GameplayUIFactory _gameplayUIFactory;
 
         public GameplayStartupState(CameraFactory cameraFactory, ITerrainFactory terrainFactory,
             IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver,
-            WorldProgressLoader worldProgressLoader)
+            WorldProgressLoader worldProgressLoader, GameplayUIFactory gameplayUIFactory)
         {
             _cameraFactory = cameraFactory;
             _terrainFactory = terrainFactory;
             _progressSaveLoader = progressSaveLoader;
             _worldProgressSaver = worldProgressSaver;
             _worldProgressLoader = worldProgressLoader;
+            _gameplayUIFactory = gameplayUIFactory;
         }
 
         public void Enter()
         {
             _terrainFactory.Create();
             _cameraFactory.Create();
-
+            _gameplayUIFactory.Create();
+            
             _progressSaveLoader.RegisterWatcher(_worldProgressSaver);
             _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
 

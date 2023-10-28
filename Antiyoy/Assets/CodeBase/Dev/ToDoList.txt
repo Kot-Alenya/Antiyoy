@@ -1,8 +1,7 @@
 ﻿геймплей: загрузка мира => вобор игрока(всегда игрок - крассный) => захват регионов, победа.
 
-leave gameplay/worldEditor buttons.
-
-gameplay logic:
+gameplay:
+    canvas
     player;
     grabbing regions;
     win;
