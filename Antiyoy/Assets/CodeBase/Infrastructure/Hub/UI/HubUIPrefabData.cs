@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Infrastructure.GameHub.UI
+namespace CodeBase.Infrastructure.Hub.UI
 {
     public class GameHubUIPrefabData : MonoBehaviour
     {

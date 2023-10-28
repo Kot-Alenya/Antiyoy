@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Data;
-using CodeBase.Infrastructure.Project.Services.StaticData;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile.Collection

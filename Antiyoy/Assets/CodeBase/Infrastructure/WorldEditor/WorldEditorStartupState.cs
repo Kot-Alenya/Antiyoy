@@ -42,7 +42,7 @@ namespace CodeBase.Infrastructure.WorldEditor
 
             _progressSaveLoader.RegisterWatcher(_worldProgressSaver);
             _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
-            
+
             _progressSaveLoader.Load<WorldProgressData>("World");
         }
     }

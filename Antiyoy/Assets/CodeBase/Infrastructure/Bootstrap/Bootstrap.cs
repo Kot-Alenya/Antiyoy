@@ -1,9 +1,9 @@
-using CodeBase.Infrastructure.GameLoading;
+using CodeBase.Infrastructure.Bootstrap.GameLoading;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Project.Bootstrap
+namespace CodeBase.Infrastructure.Bootstrap
 {
     public class Bootstrap : MonoBehaviour
     {

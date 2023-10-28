@@ -1,7 +1,7 @@
-﻿using CodeBase.Infrastructure.GameHub.UI;
+﻿using CodeBase.Infrastructure.Hub.UI;
 using Zenject;
 
-namespace CodeBase.Infrastructure.GameHub
+namespace CodeBase.Infrastructure.Hub
 {
     public class GameHubStartup : IInitializable
     {

@@ -1,10 +1,10 @@
-﻿using CodeBase.Infrastructure.Project.Services.StaticData;
+﻿using CodeBase.Infrastructure.Project.Services.StaticData.Data;
 using UnityEngine;
 
 namespace CodeBase.Dev.DebugWindow.Data
 {
     [CreateAssetMenu(menuName = "Configurations/DebugWindow", fileName = "DebugWindowConfig", order = 0)]
-    public class DebugWindowStaticData : ScriptableObject, IStaticData
+    public class DebugWindowStaticData : ScriptableObjectStaticData
     {
         public DebugWindowPrefabData Prefab;
     }

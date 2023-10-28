@@ -4,6 +4,5 @@ namespace CodeBase.Gameplay.Player
 {
     public class PlayerInput : MonoBehaviour
     {
-        
     }
 }

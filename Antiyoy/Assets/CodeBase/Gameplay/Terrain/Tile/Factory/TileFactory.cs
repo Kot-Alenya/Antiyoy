@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile.Collection;

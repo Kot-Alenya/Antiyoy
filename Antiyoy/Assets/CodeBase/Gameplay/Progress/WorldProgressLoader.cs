@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Progress
         private readonly IRegionRebuilder _regionRebuilder;
 
         public WorldProgressLoader(ITileCollection tileCollection, ITileFactory tileFactory,
-            IEntityFactory entityFactory,IRegionRebuilder regionRebuilder)
+            IEntityFactory entityFactory, IRegionRebuilder regionRebuilder)
         {
             _tileCollection = tileCollection;
             _tileFactory = tileFactory;
@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.Progress
                 if (savedTile.EntityType != EntityType.None)
                     _entityFactory.Create(hex, savedTile.EntityType);
             }
-            
+
             _regionRebuilder.RebuildFromBufferAndClearBuffer();
         }
     }

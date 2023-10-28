@@ -1,9 +1,9 @@
-﻿using CodeBase.Infrastructure.GameHub;
+﻿using CodeBase.Infrastructure.Hub;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure.GameLoading
+namespace CodeBase.Infrastructure.Bootstrap.GameLoading
 {
     public class GameLoadingStartup : MonoBehaviour
     {

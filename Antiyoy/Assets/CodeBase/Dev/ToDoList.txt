@@ -12,7 +12,3 @@ refactoring:
     worldEditor ui;
     rename RegionType to PlayerType/PlayerColor (?);
     world save/load key to static!
-    split installers (?);
-    static data from interfaces to SO!
-    is debug window actually need IStaticData config from dataProvider?
-    refactoring staticDataProvider. 

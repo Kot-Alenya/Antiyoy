@@ -1,18 +1,21 @@
-﻿namespace CodeBase.Infrastructure.Project.Services.StaticData
+﻿using System;
+using System.Collections.Generic;
+using CodeBase.Infrastructure.Project.Services.StaticData.Data;
+
+namespace CodeBase.Infrastructure.Project.Services.StaticData
 {
     public class StaticDataProvider : IStaticDataProvider
     {
-        private readonly IStaticData[] _data;
+        private readonly Dictionary<Type, IStaticData> _data = new();
 
-        public StaticDataProvider(params IStaticData[] data) => _data = data;
+        public StaticDataProvider(params IStaticData[] dataToProvide) => SetOrReplace(dataToProvide);
 
-        public T Get<T>() where T : IStaticData
+        public T Get<T>() where T : IStaticData => (T)_data[typeof(T)];
+
+        private void SetOrReplace(params IStaticData[] dataToProvide)
         {
-            foreach (var data in _data)
-                if (data is T requiredData)
-                    return requiredData;
-
-            return default;
+            foreach (var data in dataToProvide)
+                _data[data.GetType()] = data;
         }
     }
 }

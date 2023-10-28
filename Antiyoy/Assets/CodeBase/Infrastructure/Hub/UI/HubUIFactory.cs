@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace CodeBase.Infrastructure.GameHub.UI
+namespace CodeBase.Infrastructure.Hub.UI
 {
     public class GameHubUIFactory
     {

@@ -1,10 +1,10 @@
-﻿using CodeBase.Infrastructure.Project.Services.StaticData;
+﻿using CodeBase.Infrastructure.Project.Services.StaticData.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera.Data
 {
     [CreateAssetMenu(menuName = "Configurations/Camera", fileName = "CameraConfig", order = 0)]
-    public class CameraStaticData : ScriptableObject, IStaticData
+    public class CameraStaticData : ScriptableObjectStaticData
     {
         public CameraPrefabData Prefab;
         public float MoveVelocity;

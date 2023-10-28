@@ -4,7 +4,7 @@ using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Infrastructure.GameHub
+namespace CodeBase.Infrastructure.Hub
 {
     public class GameHubState : IEnterState
     {
