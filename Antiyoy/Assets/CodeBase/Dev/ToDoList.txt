@@ -1,13 +1,13 @@
 ﻿rename RegionType to TeamType/TeamColor (?)
 
 control IStaticData bind!
+rename level to Gameplay;
+rename mapEditor to WorldEditor;
 
-bootstrap & hub
-    loadWorld (goto gameplay);
-    mapEditor load;
-    
 gameplay logic:
-    players;
+    players/teams?;
     capturing regions;
     win;
     lose;
+
+worldEditor refactoring;

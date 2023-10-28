@@ -8,6 +8,7 @@ namespace CodeBase.Infrastructure.Project.Data
     {
         public string GameLoading;
         public string GameHub;
+        public string Gameplay;
         public string WorldEditor;
     }
 }

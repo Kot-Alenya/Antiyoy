@@ -4,14 +4,14 @@ using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Infrastructure.GameHub
+namespace CodeBase.Infrastructure.MapEditor
 {
-    public class GameHubLoadingState : IEnterState
+    public class WorldEditorState : IEnterState
     {
         private readonly ISceneLoader _sceneLoader;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        public GameHubLoadingState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
+        public WorldEditorState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
         {
             _sceneLoader = sceneLoader;
             _staticDataProvider = staticDataProvider;
@@ -20,7 +20,7 @@ namespace CodeBase.Infrastructure.GameHub
         public void Enter()
         {
             var scenesNameConfig = _staticDataProvider.Get<ProjectScenesNameConfig>();
-            _sceneLoader.LoadAsync(scenesNameConfig.GameHub, LoadSceneMode.Additive);
+            _sceneLoader.Load(scenesNameConfig.WorldEditor, LoadSceneMode.Single);
         }
     }
 }

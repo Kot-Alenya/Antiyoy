@@ -1,17 +1,14 @@
-﻿using CodeBase.Infrastructure.MapEditor;
-using CodeBase.Infrastructure.Project.Services.StateMachine;
-using UnityEngine;
+﻿using CodeBase.Infrastructure.GameHub.UI;
 using Zenject;
 
 namespace CodeBase.Infrastructure.GameHub
 {
-    public class GameHubStartup : MonoBehaviour
+    public class GameHubStartup : IInitializable
     {
-        private IStateMachine _stateMachine;
+        private readonly GameHubUIFactory _uiFactory;
 
-        [Inject]
-        private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
+        private GameHubStartup(GameHubUIFactory uiFactory) => _uiFactory = uiFactory;
 
-        private void Start() => _stateMachine.SwitchTo<WorldEditorLoadingState>();
+        public void Initialize() => _uiFactory.Create();
     }
 }
