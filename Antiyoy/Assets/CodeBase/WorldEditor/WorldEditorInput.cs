@@ -1,5 +1,5 @@
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 using CodeBase.WorldEditor.Data;
 using UnityEngine;

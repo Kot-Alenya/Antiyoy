@@ -1,7 +1,7 @@
 ﻿rename RegionType to PlayerType/PlayerColor (?)
 
 gameplay logic:
-    players/teams?;
+    player;
     capturing regions;
     win;
     lose;

@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Terrain.Tile.Data;
+﻿using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Utilities.UI;
 using TMPro;
 using UnityEngine;

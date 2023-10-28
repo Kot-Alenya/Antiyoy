@@ -1,7 +1,7 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Progress;
-using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.Progress;
+using CodeBase.Gameplay.Terrain;
 using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 using CodeBase.WorldEditor;

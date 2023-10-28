@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Region.Factory;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
+using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.Terrain.Region.Factory;
+using CodeBase.Gameplay.Terrain.Tile.Factory;
 using Zenject;
 
 namespace CodeBase.Infrastructure.Gameplay

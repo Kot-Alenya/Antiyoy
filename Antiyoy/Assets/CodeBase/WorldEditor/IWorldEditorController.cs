@@ -1,6 +1,6 @@
-﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
+﻿using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Terrain.Entity.Data;
+using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.WorldEditor.Data;
 
 namespace CodeBase.WorldEditor

@@ -1,16 +1,16 @@
 ﻿using System;
 using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Progress;
-using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Region;
-using CodeBase.Gameplay.World.Terrain.Region.Factory;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Version.Handler;
-using CodeBase.Gameplay.World.Version.Recorder;
+using CodeBase.Gameplay.Progress;
+using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.Terrain.Entity;
+using CodeBase.Gameplay.Terrain.Region;
+using CodeBase.Gameplay.Terrain.Region.Factory;
+using CodeBase.Gameplay.Terrain.Region.Rebuild;
+using CodeBase.Gameplay.Terrain.Tile.Collection;
+using CodeBase.Gameplay.Terrain.Tile.Factory;
+using CodeBase.Gameplay.Version.Handler;
+using CodeBase.Gameplay.Version.Recorder;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using CodeBase.Infrastructure.Project.Services.StateMachine.Factory;
 using CodeBase.Infrastructure.Project.Services.StaticData;
@@ -28,7 +28,7 @@ namespace CodeBase.Infrastructure.WorldEditor
         {
             BindStateMachine();
             BindWorld();
-            
+
             Container.Bind<IStaticDataProvider>().To<StaticDataProvider>().AsSingle().WithArguments(_dataToProvide);
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<WorldEditorFactory>().AsSingle();

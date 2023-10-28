@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Terrain.Entity.Data;
+﻿using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.WorldEditor.Data;
 using UnityEngine;
 

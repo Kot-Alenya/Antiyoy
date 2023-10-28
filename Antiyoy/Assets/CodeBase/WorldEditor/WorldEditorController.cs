@@ -1,8 +1,8 @@
-using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Progress.Data;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Gameplay.World.Version.Handler;
+using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Progress.Data;
+using CodeBase.Gameplay.Terrain.Entity.Data;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Version.Handler;
 using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
 using CodeBase.WorldEditor.Data;
 

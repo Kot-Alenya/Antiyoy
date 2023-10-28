@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Version.Operation;
-using CodeBase.Gameplay.World.Version.Recorder;
+using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Terrain.Entity;
+using CodeBase.Gameplay.Terrain.Entity.Data;
+using CodeBase.Gameplay.Terrain.Region.Data;
+using CodeBase.Gameplay.Terrain.Region.Rebuild;
+using CodeBase.Gameplay.Terrain.Tile.Collection;
+using CodeBase.Gameplay.Terrain.Tile.Factory;
+using CodeBase.Gameplay.Version.Operation;
+using CodeBase.Gameplay.Version.Recorder;
 using CodeBase.WorldEditor.Data;
 
 namespace CodeBase.WorldEditor
