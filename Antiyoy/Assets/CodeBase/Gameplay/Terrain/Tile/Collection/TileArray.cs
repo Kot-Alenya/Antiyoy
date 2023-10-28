@@ -4,19 +4,18 @@ using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Infrastructure.Project.Services.StaticData;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile.Collection
 {
     public class TileArray : ITileCollection
     {
-        private readonly Vector2Int _size;
-        private readonly TileData[] _tiles;
+        private Vector2Int _size;
+        private TileData[] _tiles;
 
-        public TileArray(IStaticDataProvider staticDataProvider)
+        public void Initialize(Vector2Int size)
         {
-            var size = staticDataProvider.Get<TerrainStaticData>().Size;
-
             _tiles = new TileData[size.x * size.y];
             _size = size;
         }

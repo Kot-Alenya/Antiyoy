@@ -9,6 +9,7 @@ namespace CodeBase.Gameplay.Terrain.Tile.Collection
     {
         Vector2Int Size { get; }
         int Count { get; }
+        void Initialize(Vector2Int size);
         bool IsInCollection(HexPosition hex);
         void Set(TileData tile, HexPosition hex);
         void Remove(HexPosition hex);

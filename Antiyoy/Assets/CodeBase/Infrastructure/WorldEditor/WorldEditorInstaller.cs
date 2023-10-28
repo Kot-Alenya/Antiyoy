@@ -52,6 +52,7 @@ namespace CodeBase.Infrastructure.WorldEditor
             Container.Bind<IWorldVersionHandler>().To<WorldVersionHandler>().AsSingle();
             Container.Bind<IWorldVersionRecorder>().To<WorldVersionRecorder>().AsSingle();
             Container.Bind<WorldProgressSaver>().AsSingle();
+            Container.Bind<WorldProgressLoader>().AsSingle();
         }
 
         private void BindRegion()

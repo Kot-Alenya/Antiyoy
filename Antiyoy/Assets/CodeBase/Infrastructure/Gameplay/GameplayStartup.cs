@@ -1,26 +1,14 @@
-using UnityEngine;
+using CodeBase.Infrastructure.Project.Services.StateMachine;
+using Zenject;
 
 namespace CodeBase.Infrastructure.Gameplay
 {
-    public class GameplayStartup : MonoBehaviour
+    public class GameplayStartup : IInitializable
     {
-        /*
-        private WorldFactory _terrainFactory;
-        private CameraFactory _cameraFactory;
+        private readonly IStateMachine _stateMachine;
 
-        [Inject]
-        private void Constructor(WorldFactory terrainFactory, CameraFactory cameraFactory)
-        {
-            _terrainFactory = terrainFactory;
-            _cameraFactory = cameraFactory;
-        }
+        public GameplayStartup(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-
-        private void Start()
-        {
-            var terrain = _terrainFactory.Create();
-            _cameraFactory.Create();
-        }
-        */
+        public void Initialize() => _stateMachine.SwitchTo<GameplayStartupState>();
     }
 }

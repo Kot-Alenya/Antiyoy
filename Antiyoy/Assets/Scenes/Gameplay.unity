@@ -123,6 +123,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &34666881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34666884}
+  - component: {fileID: 34666883}
+  - component: {fileID: 34666882}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &34666882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34666881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &34666883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34666881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &34666884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34666881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1806076624
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +202,6 @@ GameObject:
   - component: {fileID: 1806076626}
   - component: {fileID: 1806076628}
   - component: {fileID: 1806076627}
-  - component: {fileID: 1806076625}
   m_Layer: 0
   m_Name: Startup
   m_TagString: Untagged
@@ -142,19 +209,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1806076625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806076624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18841e83a79340c42a77f1a48ca33c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _capitalPrefab: {fileID: 2135119658838515929, guid: 4e0553d880ff79643bb76129fc340a0e, type: 3}
 --- !u!4 &1806076626
 Transform:
   m_ObjectHideFlags: 0
@@ -182,11 +236,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93bfa0107442438735c01f94e9379b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staticData:
-    TileStaticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
-    TerrainStaticData: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
-    CameraStaticData: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
-    RegionStaticData: {fileID: 11400000, guid: db758305f6e64174d9c4df98b1bc3bab, type: 2}
+  _serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+    - {fileID: 11400000, guid: 984651c71f094ec4e9b68715ef41b5db, type: 2}
+    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
+    - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
+    - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _dataToProvide
+      Entry: 7
+      Data: 0|CodeBase.Infrastructure.Project.Services.StaticData.IStaticData[],
+        CodeBase
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!114 &1806076628
 MonoBehaviour:
   m_ObjectHideFlags: 0
