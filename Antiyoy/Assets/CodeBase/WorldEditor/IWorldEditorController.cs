@@ -1,13 +1,13 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.MapEditor.Data;
+using CodeBase.WorldEditor.Data;
 
-namespace CodeBase.MapEditor
+namespace CodeBase.WorldEditor
 {
-    public interface IMapEditorController
+    public interface IWorldEditorController
     {
-        void SetMode(MapEditorMode mode);
+        void SetMode(WorldEditorMode mode);
         void SetRegionType(RegionType regionType);
         void SetEntityType(EntityType entityType);
         void SelectTile(HexPosition hex);

@@ -1,24 +1,24 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Infrastructure.Project.Services.StaticData;
-using CodeBase.MapEditor.Data;
+using CodeBase.WorldEditor.Data;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.MapEditor
+namespace CodeBase.WorldEditor
 {
-    public class MapEditorInput : MonoBehaviour
+    public class WorldEditorInput : MonoBehaviour
     {
-        private IMapEditorController _mapEditorController;
+        private IWorldEditorController _worldEditorController;
         private ICameraController _cameraController;
         private IStaticDataProvider _staticDataProvider;
 
         [Inject]
-        private void Construct(ICameraController cameraController, IMapEditorController mapEditorController,
+        private void Construct(ICameraController cameraController, IWorldEditorController worldEditorController,
             IStaticDataProvider staticDataProvider)
         {
             _cameraController = cameraController;
-            _mapEditorController = mapEditorController;
+            _worldEditorController = worldEditorController;
             _staticDataProvider = staticDataProvider;
         }
 
@@ -27,7 +27,7 @@ namespace CodeBase.MapEditor
             ReturnWorld();
 
             if (Input.GetMouseButtonUp(0))
-                _mapEditorController.ProcessTiles();
+                _worldEditorController.ProcessTiles();
 
             if (Input.GetMouseButton(0))
             {
@@ -37,21 +37,21 @@ namespace CodeBase.MapEditor
                 if (hit.transform == default)
                     return;
 
-                _mapEditorController.SelectTile(HexMath.FromWorldPosition(hit.point));
+                _worldEditorController.SelectTile(HexMath.FromWorldPosition(hit.point));
             }
         }
 
         private void ReturnWorld()
         {
-            var staticData = _staticDataProvider.Get<MapEditorStaticData>();
+            var staticData = _staticDataProvider.Get<WorldEditorStaticData>();
 
             if (!Input.GetKey(staticData.ReturnWorldFirstKey) || Input.GetMouseButton(0))
                 return;
 
             if (Input.GetKeyDown(staticData.ReturnWorldBackSecondKey))
-                _mapEditorController.ReturnBack();
+                _worldEditorController.ReturnBack();
             else if (Input.GetKeyDown(staticData.ReturnWorldNextSecondKey))
-                _mapEditorController.ReturnNext();
+                _worldEditorController.ReturnNext();
         }
     }
 }

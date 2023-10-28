@@ -9,11 +9,11 @@ using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Operation;
 using CodeBase.Gameplay.World.Version.Recorder;
-using CodeBase.MapEditor.Data;
+using CodeBase.WorldEditor.Data;
 
-namespace CodeBase.MapEditor
+namespace CodeBase.WorldEditor
 {
-    public class MapEditorModel
+    public class WorldEditorModel
     {
         private readonly IWorldVersionRecorder _worldVersionRecorder;
         private readonly ITileFactory _tileFactory;
@@ -21,11 +21,11 @@ namespace CodeBase.MapEditor
         private readonly ITileCollection _tileCollection;
         private readonly IRegionRebuilder _regionRebuilder;
         private readonly List<HexPosition> _selectedHex = new();
-        private MapEditorMode _currentMode;
+        private WorldEditorMode _currentMode;
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
-        public MapEditorModel(IWorldVersionRecorder worldVersionRecorder, ITileFactory tileFactory,
+        public WorldEditorModel(IWorldVersionRecorder worldVersionRecorder, ITileFactory tileFactory,
             IEntityFactory entityFactory, ITileCollection tileCollection, IRegionRebuilder regionRebuilder)
         {
             _worldVersionRecorder = worldVersionRecorder;
@@ -35,7 +35,7 @@ namespace CodeBase.MapEditor
             _regionRebuilder = regionRebuilder;
         }
 
-        public void SetCurrentMode(MapEditorMode mode) => _currentMode = mode;
+        public void SetCurrentMode(WorldEditorMode mode) => _currentMode = mode;
 
         public void SetCurrentRegion(RegionType region) => _currentRegion = region;
 
@@ -48,18 +48,18 @@ namespace CodeBase.MapEditor
 
             switch (_currentMode)
             {
-                case MapEditorMode.None:
+                case WorldEditorMode.None:
                     break;
-                case MapEditorMode.CreateTile:
+                case WorldEditorMode.CreateTile:
                     CreateTile(hex);
                     break;
-                case MapEditorMode.DestroyTile:
+                case WorldEditorMode.DestroyTile:
                     DestroyTile(hex);
                     break;
-                case MapEditorMode.CreateEntity:
+                case WorldEditorMode.CreateEntity:
                     CreateEntity(hex);
                     break;
-                case MapEditorMode.DestroyEntity:
+                case WorldEditorMode.DestroyEntity:
                     DestroyEntity(hex);
                     break;
                 default:
@@ -76,12 +76,12 @@ namespace CodeBase.MapEditor
 
             switch (_currentMode)
             {
-                case MapEditorMode.None:
+                case WorldEditorMode.None:
                     break;
-                case MapEditorMode.CreateTile:
-                case MapEditorMode.DestroyTile:
-                case MapEditorMode.CreateEntity:
-                case MapEditorMode.DestroyEntity:
+                case WorldEditorMode.CreateTile:
+                case WorldEditorMode.DestroyTile:
+                case WorldEditorMode.CreateEntity:
+                case WorldEditorMode.DestroyEntity:
                     _regionRebuilder.RebuildFromBufferAndClearBuffer();
                     break;
                 default:

@@ -4,33 +4,33 @@ using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Version.Handler;
 using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
-using CodeBase.MapEditor.Data;
+using CodeBase.WorldEditor.Data;
 
-namespace CodeBase.MapEditor
+namespace CodeBase.WorldEditor
 {
-    public class MapEditorController : IMapEditorController
+    public class WorldEditorController : IWorldEditorController
     {
-        private readonly MapEditorModel _mapEditorModel;
+        private readonly WorldEditorModel _worldEditorModel;
         private readonly IWorldVersionHandler _worldVersionHandler;
         private readonly IProgressSaveLoader _progressSaveLoader;
 
-        public MapEditorController(MapEditorModel mapEditorModel, IWorldVersionHandler worldVersionHandler,
+        public WorldEditorController(WorldEditorModel worldEditorModel, IWorldVersionHandler worldVersionHandler,
             IProgressSaveLoader progressSaveLoader)
         {
-            _mapEditorModel = mapEditorModel;
+            _worldEditorModel = worldEditorModel;
             _worldVersionHandler = worldVersionHandler;
             _progressSaveLoader = progressSaveLoader;
         }
 
-        public void SetMode(MapEditorMode mode) => _mapEditorModel.SetCurrentMode(mode);
+        public void SetMode(WorldEditorMode mode) => _worldEditorModel.SetCurrentMode(mode);
 
-        public void SetRegionType(RegionType regionType) => _mapEditorModel.SetCurrentRegion(regionType);
+        public void SetRegionType(RegionType regionType) => _worldEditorModel.SetCurrentRegion(regionType);
 
-        public void SetEntityType(EntityType entityType) => _mapEditorModel.SetCurrentEntity(entityType);
+        public void SetEntityType(EntityType entityType) => _worldEditorModel.SetCurrentEntity(entityType);
 
-        public void SelectTile(HexPosition hex) => _mapEditorModel.SelectTile(hex);
+        public void SelectTile(HexPosition hex) => _worldEditorModel.SelectTile(hex);
 
-        public void ProcessTiles() => _mapEditorModel.ProcessTiles();
+        public void ProcessTiles() => _worldEditorModel.ProcessTiles();
 
         public void ReturnBack() => _worldVersionHandler.ReturnBack();
 

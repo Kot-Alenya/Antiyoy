@@ -1,12 +1,12 @@
 ﻿using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 
-namespace CodeBase.MapEditor.Data
+namespace CodeBase.WorldEditor.Data
 {
     [CreateAssetMenu(menuName = "Configurations/MapEditor", fileName = "MapEditorConfig", order = 0)]
-    public class MapEditorStaticData : ScriptableObject, IStaticData
+    public class WorldEditorStaticData : ScriptableObject, IStaticData
     {
-        public MapEditorPrefabData Prefab;
+        public WorldEditorPrefabData Prefab;
         public KeyCode ReturnWorldFirstKey;
         public KeyCode ReturnWorldBackSecondKey;
         public KeyCode ReturnWorldNextSecondKey;

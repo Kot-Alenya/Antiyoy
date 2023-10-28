@@ -1,6 +1,6 @@
-namespace CodeBase.MapEditor.Data
+namespace CodeBase.WorldEditor.Data
 {
-    public enum MapEditorMode
+    public enum WorldEditorMode
     {
         None = 0,
         CreateTile = 1,

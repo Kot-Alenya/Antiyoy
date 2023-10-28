@@ -1,16 +1,16 @@
 ﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
-using CodeBase.Utilities.UI;
+using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure.MapEditor
+namespace CodeBase.Infrastructure.WorldEditor
 {
-    public class LoadWorldEditorButton : ButtonBase
+    public class WorldEditorStartup : MonoBehaviour
     {
         private IStateMachine _stateMachine;
 
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private protected override void OnClick() => _stateMachine.SwitchTo<WorldEditorState>();
+        private void Start() => _stateMachine.SwitchTo<WorldEditorStartupState>();
     }
 }

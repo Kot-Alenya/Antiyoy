@@ -12,12 +12,12 @@ using CodeBase.Gameplay.World.Version.Handler;
 using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using CodeBase.Infrastructure.Project.Services.StateMachine.Factory;
-using CodeBase.MapEditor;
+using CodeBase.WorldEditor;
 using Zenject;
 
-namespace CodeBase.Infrastructure.MapEditor
+namespace CodeBase.Infrastructure.WorldEditor
 {
-    public class MapEditorInstaller : MonoInstaller
+    public class WorldEditorInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
@@ -25,7 +25,7 @@ namespace CodeBase.Infrastructure.MapEditor
             BindWorld();
 
             Container.Bind<CameraFactory>().AsSingle();
-            Container.Bind<MapEditorFactory>().AsSingle();
+            Container.Bind<WorldEditorFactory>().AsSingle();
             Container.Bind<DebugWindowFactory>().AsSingle();
         }
 
