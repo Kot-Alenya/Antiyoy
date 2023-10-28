@@ -1,3 +1,4 @@
+using CodeBase.Infrastructure.GameLoading;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,6 @@ namespace CodeBase.Infrastructure.Project.Bootstrap
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private void Start() => _stateMachine.SwitchTo<BootstrapState>();
+        private void Start() => _stateMachine.SwitchTo<GameLoadingState>();
     }
 }

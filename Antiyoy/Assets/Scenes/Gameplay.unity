@@ -202,6 +202,9 @@ GameObject:
   - component: {fileID: 1806076626}
   - component: {fileID: 1806076628}
   - component: {fileID: 1806076627}
+  - component: {fileID: 1806076629}
+  - component: {fileID: 1806076631}
+  - component: {fileID: 1806076630}
   m_Layer: 0
   m_Name: Startup
   m_TagString: Untagged
@@ -236,48 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf93bfa0107442438735c01f94e9379b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
-    - {fileID: 11400000, guid: 984651c71f094ec4e9b68715ef41b5db, type: 2}
-    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
-    - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
-    - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _dataToProvide
-      Entry: 7
-      Data: 0|CodeBase.Infrastructure.Project.Services.StaticData.IStaticData[],
-        CodeBase
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!114 &1806076628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +254,9 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1806076627}
+  - {fileID: 1806076629}
+  - {fileID: 1806076631}
+  - {fileID: 1806076630}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -310,3 +274,85 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!114 &1806076629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806076624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90e56621bd14a2c870eee0a86705e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1806076630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806076624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a0f1c88d74b60b3ac98e19b903e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1806076631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806076624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9b85bc5cc14935a58067d26a268264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 24eedd56138f903448f08a59a339b9f6, type: 2}
+    - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+    - {fileID: 11400000, guid: 984651c71f094ec4e9b68715ef41b5db, type: 2}
+    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
+    - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
+    - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _dataToProvide
+      Entry: 7
+      Data: 0|CodeBase.Infrastructure.Project.Services.StaticData.IStaticData[],
+        CodeBase
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

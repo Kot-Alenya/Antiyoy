@@ -1,5 +1,7 @@
 ﻿геймплей: загрузка мира => вобор игрока(всегда игрок - крассный) => захват регионов, победа.
 
+leave gameplay/worldEditor buttons.
+
 gameplay logic:
     player;
     grabbing regions;
@@ -8,6 +10,9 @@ gameplay logic:
     
 refactoring:
     worldEditor ui;
-    split installers (?);
     rename RegionType to PlayerType/PlayerColor (?);
     world save/load key to static!
+    split installers (?);
+    static data from interfaces to SO!
+    is debug window actually need IStaticData config from dataProvider?
+    refactoring staticDataProvider. 
