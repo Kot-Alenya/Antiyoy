@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;

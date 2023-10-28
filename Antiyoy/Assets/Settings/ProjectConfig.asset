@@ -17,23 +17,25 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
-    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
     - {fileID: 11400000, guid: 984651c71f094ec4e9b68715ef41b5db, type: 2}
+    - {fileID: 11400000, guid: 77073d841e66aa649989bf8f57b9ff80, type: 2}
     - {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
     - {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
-    - {fileID: 11400000, guid: d5be257df90411c4d9b0778fe14e5738, type: 2}
+    - {fileID: 11400000, guid: b5e889d85e5e4864cbfa800a22d6ff3d, type: 2}
     - {fileID: 11400000, guid: 24eedd56138f903448f08a59a339b9f6, type: 2}
+    - {fileID: 11400000, guid: d5be257df90411c4d9b0778fe14e5738, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: StaticDataToBind
+    - Name: Value
       Entry: 7
-      Data: 0|CodeBase.Infrastructure.Services.StaticData.IStaticData[], CodeBase
+      Data: 0|CodeBase.Infrastructure.Project.Services.StaticData.IStaticData[],
+        CodeBase
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 8
     - Name: 
       Entry: 10
       Data: 0
@@ -55,6 +57,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
     - Name: 
       Entry: 13
       Data: 

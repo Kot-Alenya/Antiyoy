@@ -1,6 +1,6 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using CodeBase.MapEditor.Data;
 using UnityEngine;
 using Zenject;
@@ -14,7 +14,8 @@ namespace CodeBase.MapEditor
         private IStaticDataProvider _staticDataProvider;
 
         [Inject]
-        private void Construct(ICameraController cameraController, IMapEditorController mapEditorController,IStaticDataProvider staticDataProvider)
+        private void Construct(ICameraController cameraController, IMapEditorController mapEditorController,
+            IStaticDataProvider staticDataProvider)
         {
             _cameraController = cameraController;
             _mapEditorController = mapEditorController;

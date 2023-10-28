@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 
 namespace CodeBase.Gameplay.World.Terrain.Region.Rebuild
 {

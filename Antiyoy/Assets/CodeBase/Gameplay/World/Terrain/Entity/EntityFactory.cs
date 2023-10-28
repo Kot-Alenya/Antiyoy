@@ -3,7 +3,7 @@ using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain.Entity

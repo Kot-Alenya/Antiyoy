@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Bootstrap;
+﻿using CodeBase.Infrastructure.Project.Data;
 using UnityEngine;
 
 namespace CodeBase.Dev.Tests
@@ -6,6 +6,6 @@ namespace CodeBase.Dev.Tests
     [CreateAssetMenu(menuName = "Configurations/Tests", fileName = "TestsConfig", order = 0)]
     public class TestStaticData : ScriptableObject
     {
-        public ProjectStaticData ProjectStaticData;
+        public ProjectDataToBindConfig ProjectDataToBindConfig;
     }
 }

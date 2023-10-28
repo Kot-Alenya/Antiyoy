@@ -10,8 +10,8 @@ using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Handler;
 using CodeBase.Gameplay.World.Version.Recorder;
-using CodeBase.Infrastructure.Services.StateMachine;
-using CodeBase.Infrastructure.Services.StateMachine.Factory;
+using CodeBase.Infrastructure.Project.Services.StateMachine;
+using CodeBase.Infrastructure.Project.Services.StateMachine.Factory;
 using CodeBase.MapEditor;
 using Zenject;
 

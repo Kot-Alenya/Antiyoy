@@ -1,8 +1,6 @@
 ﻿rename RegionType to TeamType/TeamColor (?)
-change hotkeys to return next/back
 
-mapEditor: 
-    worldExport;
+control IStaticData bind!
 
 bootstrap & hub
     loadWorld (goto gameplay);

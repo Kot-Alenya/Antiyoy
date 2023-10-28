@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Progress.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
-using CodeBase.Infrastructure.Services.ProgressSaveLoader.Watcher;
+using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader.Watcher;
 
 namespace CodeBase.Gameplay.World.Progress
 {

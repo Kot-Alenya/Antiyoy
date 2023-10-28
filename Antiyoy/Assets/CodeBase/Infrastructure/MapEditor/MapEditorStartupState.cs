@@ -2,8 +2,8 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Infrastructure.Services.ProgressSaveLoader;
-using CodeBase.Infrastructure.Services.StateMachine.States;
+using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 using CodeBase.MapEditor;
 
 namespace CodeBase.Infrastructure.MapEditor

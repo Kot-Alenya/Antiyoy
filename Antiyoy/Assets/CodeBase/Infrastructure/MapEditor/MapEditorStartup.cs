@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Services.StateMachine;
+﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 

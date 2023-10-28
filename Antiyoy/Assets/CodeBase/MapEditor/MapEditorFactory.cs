@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using CodeBase.MapEditor.Data;
 using UnityEngine;
 using Zenject;

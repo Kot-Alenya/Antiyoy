@@ -1,5 +1,5 @@
 ﻿using CodeBase.Dev.DebugWindow.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 using Zenject;
 

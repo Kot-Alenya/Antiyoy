@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain.Tile.Collection

@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Services.StaticData;
+﻿using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Camera.Data

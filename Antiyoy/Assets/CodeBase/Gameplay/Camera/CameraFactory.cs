@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.Camera.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
