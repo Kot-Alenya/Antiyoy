@@ -4,7 +4,7 @@ using CodeBase.Infrastructure.Project.Services.StateMachine.States;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Infrastructure.Level
+namespace CodeBase.Infrastructure.Gameplay
 {
     public class GameplayState : IEnterState
     {

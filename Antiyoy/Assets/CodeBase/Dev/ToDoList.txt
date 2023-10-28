@@ -1,8 +1,7 @@
 ﻿rename RegionType to TeamType/TeamColor (?)
 
-control IStaticData bind!
-rename level to Gameplay;
 rename mapEditor to WorldEditor;
+control IStaticData bind!
 
 gameplay logic:
     players/teams?;

@@ -2,7 +2,7 @@
 using CodeBase.Utilities.UI;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Level
+namespace CodeBase.Infrastructure.Gameplay
 {
     public class LoadGameplayButton : ButtonBase
     {

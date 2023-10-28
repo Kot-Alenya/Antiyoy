@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Level
+namespace CodeBase.Infrastructure.Gameplay
 {
-    public class LevelStartup : MonoBehaviour
+    public class GameplayStartup : MonoBehaviour
     {
         /*
         private WorldFactory _terrainFactory;

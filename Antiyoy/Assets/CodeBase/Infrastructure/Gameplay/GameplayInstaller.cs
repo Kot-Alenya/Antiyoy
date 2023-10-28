@@ -4,9 +4,9 @@ using CodeBase.Gameplay.World.Terrain.Region.Factory;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Level
+namespace CodeBase.Infrastructure.Gameplay
 {
-    public class LevelInstaller : MonoInstaller
+    public class GameplayInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
