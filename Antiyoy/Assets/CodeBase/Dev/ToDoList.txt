@@ -1,6 +1,4 @@
-﻿rename RegionType to TeamType/TeamColor (?)
-
-control IStaticData bind!
+﻿rename RegionType to PlayerType/PlayerColor (?)
 
 gameplay logic:
     players/teams?;

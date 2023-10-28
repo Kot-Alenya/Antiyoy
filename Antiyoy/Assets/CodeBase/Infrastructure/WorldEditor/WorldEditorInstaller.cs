@@ -1,4 +1,5 @@
-﻿using CodeBase.Dev.DebugWindow;
+﻿using System;
+using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
@@ -12,21 +13,27 @@ using CodeBase.Gameplay.World.Version.Handler;
 using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Project.Services.StateMachine;
 using CodeBase.Infrastructure.Project.Services.StateMachine.Factory;
+using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Utilities.Zenject;
 using CodeBase.WorldEditor;
-using Zenject;
+using Sirenix.Serialization;
 
 namespace CodeBase.Infrastructure.WorldEditor
 {
-    public class WorldEditorInstaller : MonoInstaller
+    public class WorldEditorInstaller : SerializedMonoInstaller
     {
+        [NonSerialized, OdinSerialize] private IStaticData[] _dataToProvide;
+
         public override void InstallBindings()
         {
             BindStateMachine();
             BindWorld();
-
+            
+            Container.Bind<IStaticDataProvider>().To<StaticDataProvider>().AsSingle().WithArguments(_dataToProvide);
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<WorldEditorFactory>().AsSingle();
             Container.Bind<DebugWindowFactory>().AsSingle();
+            Container.BindInterfacesTo<WorldEditorStartup>().AsSingle();
         }
 
         private void BindStateMachine()

@@ -1,16 +1,14 @@
 ﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Infrastructure.WorldEditor
 {
-    public class WorldEditorStartup : MonoBehaviour
+    public class WorldEditorStartup : IInitializable
     {
-        private IStateMachine _stateMachine;
+        private readonly IStateMachine _stateMachine;
 
-        [Inject]
-        private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
+        public WorldEditorStartup(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private void Start() => _stateMachine.SwitchTo<WorldEditorStartupState>();
+        public void Initialize() => _stateMachine.SwitchTo<WorldEditorStartupState>();
     }
 }

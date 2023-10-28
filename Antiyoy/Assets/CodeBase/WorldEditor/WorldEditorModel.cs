@@ -116,8 +116,8 @@ namespace CodeBase.WorldEditor
         {
             DestroyEntity(hex);
 
-            _entityFactory.Create(hex, _currentEntityType);
-            _worldVersionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _currentEntityType));
+            if (_entityFactory.TryCreate(hex, _currentEntityType))
+                _worldVersionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _currentEntityType));
         }
 
         private void DestroyEntity(HexPosition hex)

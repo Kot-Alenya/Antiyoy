@@ -74,4 +74,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c70c39afe284f85a7335c6f30a407b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataToBind: {fileID: 11400000, guid: 107f9c6ab0befd24ea311a63069dcd56, type: 2}
+  _serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _dataToBind
+      Entry: 7
+      Data: 0|CodeBase.Infrastructure.Project.Services.StaticData.IStaticData[],
+        CodeBase
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

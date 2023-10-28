@@ -10,8 +10,8 @@ namespace CodeBase.Infrastructure.GameHub
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<GameHubStartup>().AsSingle();
             Container.Bind<GameHubUIFactory>().AsSingle().WithArguments(_uiPrefab);
+            Container.BindInterfacesTo<GameHubStartup>().AsSingle();
         }
     }
 }
