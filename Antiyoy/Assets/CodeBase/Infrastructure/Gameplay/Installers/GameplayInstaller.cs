@@ -1,5 +1,4 @@
-﻿using CodeBase.Dev.DebugWindow;
-using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.UI;
 using UnityEngine;
@@ -14,7 +13,6 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<DebugWindowFactory>().AsSingle();
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<GameplayUIFactory>().AsSingle().WithArguments(_gameplayUIPrefab);
             Container.Bind<PlayerUIFactory>().AsSingle().WithArguments(_playerUIPrefab);

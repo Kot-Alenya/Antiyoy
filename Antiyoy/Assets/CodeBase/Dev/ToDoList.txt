@@ -1,9 +1,13 @@
 ﻿геймплей: загрузка мира => вобор игрока(всегда игрок - крассный) => захват регионов, победа.
 
+debug state (?)
+
 gameplay:
-    canvas
-    player;
-    grabbing regions;
+    player ui;
+    playerData;
+    select region;
+    select entity;
+    move entity(grabbing regions);
     win;
     ai (?);
     
