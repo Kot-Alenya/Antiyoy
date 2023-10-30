@@ -6,8 +6,8 @@ namespace CodeBase.Utilities.UI
     {
         public bool IsOpen { get; private set; }
 
-        public virtual void Open() => IsOpen = true;
+        public virtual void Show() => IsOpen = true;
 
-        public virtual void Close() => IsOpen = false;
+        public virtual void Hide() => IsOpen = false;
     }
 }

@@ -3,7 +3,6 @@
 debug state (?)
 
 gameplay:
-    player ui;
     playerData;
     select region;
     select entity;
@@ -15,3 +14,4 @@ refactoring:
     worldEditor ui;
     rename RegionType to PlayerType/PlayerColor (?);
     world save/load key to static!
+    more states;

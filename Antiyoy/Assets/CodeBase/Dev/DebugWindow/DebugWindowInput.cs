@@ -32,7 +32,7 @@ namespace CodeBase.Dev.DebugWindow
 
             if (hit.transform == default)
             {
-                window.Close();
+                window.Hide();
                 return;
             }
 
@@ -40,11 +40,11 @@ namespace CodeBase.Dev.DebugWindow
 
             if (_tileCollection.TryGet(hitHex, out var tile))
             {
-                window.Open();
+                window.Show();
                 window.UpdateInformation(tile);
             }
             else
-                window.Close();
+                window.Hide();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CodeBase.Dev.DebugWindow
                 .WithArguments(instance.Window);
             _container.InjectGameObject(instance.gameObject);
 
-            instance.Window.Close();
+            instance.Window.Hide();
         }
     }
 }

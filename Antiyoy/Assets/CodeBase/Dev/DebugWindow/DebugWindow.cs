@@ -9,16 +9,16 @@ namespace CodeBase.Dev.DebugWindow
     {
         [SerializeField] private TextMeshProUGUI _windowText;
 
-        public override void Open()
+        public override void Show()
         {
             gameObject.SetActive(true);
-            base.Open();
+            base.Show();
         }
 
-        public override void Close()
+        public override void Hide()
         {
             gameObject.SetActive(false);
-            base.Close();
+            base.Hide();
         }
 
         public void UpdateInformation(TileData tile)
