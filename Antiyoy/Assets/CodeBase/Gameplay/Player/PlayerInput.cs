@@ -1,8 +1,10 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.Player.Controller;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
 using CodeBase.Gameplay.Terrain.Tile.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace CodeBase.Gameplay.Player
@@ -24,6 +26,9 @@ namespace CodeBase.Gameplay.Player
 
         private void Update()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             if (Input.GetMouseButton(0))
             {
                 if (TryGetTile(out var tile))

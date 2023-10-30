@@ -39,7 +39,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _cameraFactory.Create();
             _gameplayUIFactory.Create();
             _playerFactory.Create();
-            
+
             _progressSaveLoader.RegisterWatcher(_worldProgressSaver);
             _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
 

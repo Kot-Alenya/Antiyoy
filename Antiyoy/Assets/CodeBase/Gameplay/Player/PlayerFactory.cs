@@ -1,4 +1,7 @@
-﻿using Zenject;
+﻿using CodeBase.Gameplay.Player.Controller;
+using CodeBase.Gameplay.Player.Data;
+using CodeBase.Infrastructure.Project.Services.StaticData;
+using Zenject;
 
 namespace CodeBase.Gameplay.Player
 {
@@ -6,21 +9,38 @@ namespace CodeBase.Gameplay.Player
     {
         private readonly DiContainer _container;
         private readonly PlayerPrefabData _playerPrefabData;
-        private readonly IPlayerController _playerController;
+        private readonly IStaticDataProvider _staticDataProvider;
 
         public PlayerFactory(DiContainer container, PlayerPrefabData playerPrefabData,
-            IPlayerController playerController)
+            IStaticDataProvider staticDataProvider)
         {
             _container = container;
             _playerPrefabData = playerPrefabData;
-            _playerController = playerController;
+            _staticDataProvider = staticDataProvider;
         }
 
         public void Create()
         {
+            var controller = CreateController();
             var instance = _container.InstantiatePrefabForComponent<PlayerPrefabData>(_playerPrefabData);
-            
-            _playerController.Initialize(instance.PlayerUIWindow);
+
+            instance.PlayerUIWindow.Initialize();
+            controller.Initialize(instance.PlayerUIWindow);
+        }
+
+        private IPlayerController CreateController()
+        {
+            var preset = _staticDataProvider.Get<PlayerStaticData>();
+            var data = new PlayerData
+            {
+                RegionType = preset.DefaultRegionType,
+                CoinsCount = preset.DefaultCoinsCount
+            };
+            var controller = _container.Instantiate<PlayerController>(new object[] { data });
+
+            _container.Bind<IPlayerController>().FromInstance(controller).AsSingle();
+
+            return controller;
         }
     }
 }
