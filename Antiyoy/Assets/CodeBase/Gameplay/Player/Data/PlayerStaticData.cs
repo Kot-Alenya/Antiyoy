@@ -9,5 +9,7 @@ namespace CodeBase.Gameplay.Player.Data
     {
         public RegionType DefaultRegionType;
         public int DefaultCoinsCount;
+        public Color SelectedRegionBorderColor;
+        public Color UnSelectedRegionBorderColor;
     }
 }
