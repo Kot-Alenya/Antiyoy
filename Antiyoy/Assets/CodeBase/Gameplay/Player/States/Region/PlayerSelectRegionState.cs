@@ -39,7 +39,13 @@ namespace CodeBase.Gameplay.Player.States.Region
             _playerInput.OnPlayerInput += HandleInput;
         }
 
-        public void Exit() => _playerInput.OnPlayerInput -= HandleInput;
+        public void Exit()
+        {
+            _playerInput.OnPlayerInput -= HandleInput;
+            
+            _selectionView.UnSelectRegion(_playerData.CurrentRegion);
+            _uiMediator.HideUIWindow();
+        }
 
         private void HandleInput(HexPosition hex)
         {
@@ -55,9 +61,6 @@ namespace CodeBase.Gameplay.Player.States.Region
                 _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                     new PlayerSelectRegionStateData(tile.Region));
             }
-
-            //if(tile.Entity != null)
-            //    _playerStateMachine.SwitchTo<PlayerSelectEntityState>();
         }
     }
 }

@@ -875,11 +875,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Borders
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.Hex.HexDirections,
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.Hex.HexDirectionType,
         CodeBase],[UnityEngine.SpriteRenderer, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.Hex.HexDirections,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.Hex.HexDirectionType,
         CodeBase]], mscorlib
     - Name: 
       Entry: 12

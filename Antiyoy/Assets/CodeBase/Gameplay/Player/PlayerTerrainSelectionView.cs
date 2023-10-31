@@ -1,7 +1,9 @@
-﻿using CodeBase.Gameplay.Hex;
+﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
+using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player
@@ -44,6 +46,22 @@ namespace CodeBase.Gameplay.Player
             foreach (var tile in region.Tiles)
             foreach (var border in tile.Instance.Borders)
                 border.Value.color = playerStaticData.UnSelectedRegionBorderColor;
+        }
+
+        public void SelectTiles(List<TileData> tiles)
+        {
+            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
+
+            foreach (var tile in tiles)
+                tile.Instance.SpriteRenderer.color += playerStaticData.SelectedTileAdditionalColor;
+        }
+
+        public void UnSelectTiles(List<TileData> tiles)
+        {
+            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
+
+            foreach (var tile in tiles)
+                tile.Instance.SpriteRenderer.color -= playerStaticData.SelectedTileAdditionalColor;
         }
     }
 }
