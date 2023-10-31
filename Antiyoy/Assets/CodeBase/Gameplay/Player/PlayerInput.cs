@@ -12,15 +12,15 @@ namespace CodeBase.Gameplay.Player
     public class PlayerInput : MonoBehaviour
     {
         private ICameraController _cameraController;
-        private IPlayerController _playerController;
+        private PlayerModel _playerModel;
         private ITileCollection _tileCollection;
 
         [Inject]
-        private void Construct(ICameraController cameraController, IPlayerController playerController,
+        private void Construct(ICameraController cameraController, PlayerModel playerModel,
             ITileCollection tileCollection)
         {
             _cameraController = cameraController;
-            _playerController = playerController;
+            _playerModel = playerModel;
             _tileCollection = tileCollection;
         }
 
@@ -32,9 +32,9 @@ namespace CodeBase.Gameplay.Player
             if (Input.GetMouseButton(0))
             {
                 if (TryGetTile(out var tile))
-                    _playerController.SelectTile(tile);
+                    _playerModel.SelectTile(tile);
                 else
-                    _playerController.UnSelectTile();
+                    _playerModel.UnSelectTile();
             }
         }
 

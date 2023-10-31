@@ -1,15 +1,19 @@
-﻿using CodeBase.Gameplay.Terrain.Entity.Data;
+﻿using CodeBase.Gameplay.Player.Controller;
+using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Utilities.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Player.UI
 {
     public class PlayerCreateEntityButton : ButtonBase
     {
         [SerializeField] private EntityType _entityType;
+        private IPlayerUIMediator _uiMediator;
 
-        private protected override void OnClick()
-        {
-        }
+        [Inject]
+        private void Construct(IPlayerUIMediator uiMediator) => _uiMediator = uiMediator;
+
+        private protected override void OnClick() => _uiMediator.CreateEntity(_entityType);
     }
 }

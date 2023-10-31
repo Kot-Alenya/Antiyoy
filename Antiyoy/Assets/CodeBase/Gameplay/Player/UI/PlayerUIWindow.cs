@@ -1,30 +1,39 @@
-﻿using CodeBase.Utilities.UI;
+﻿using CodeBase.Gameplay.Player.Controller;
+using CodeBase.Gameplay.Terrain.Entity.Data;
+using CodeBase.Utilities.UI;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Player.UI
 {
-    public class PlayerUIWindow : WindowBase
+    public class PlayerUIWindow : WindowBase, IPlayerUIMediator
     {
         [SerializeField] private TextMeshProUGUI _playerCoinsCount;
         [SerializeField] private TextMeshProUGUI _playerIncome;
+        private PlayerModel _playerModel;
 
-        public void Initialize() => Hide();
+        [Inject]
+        private void Construct(PlayerModel playerModel) => _playerModel = playerModel;
 
-        public override void Show()
+        public void Initialize() => HideUIWindow();
+
+        public void ShowUIWindow()
         {
             base.Show();
             gameObject.SetActive(true);
         }
 
-        public override void Hide()
+        public void HideUIWindow()
         {
-            base.Show();
+            base.Hide();
             gameObject.SetActive(false);
         }
 
         public void SetCoinsCount(int coinsCount) => _playerCoinsCount.text = coinsCount.ToString();
 
         public void SetIncomeCount(int incomeCount) => _playerIncome.text = $"+ {incomeCount.ToString()}";
+        
+        public void CreateEntity(EntityType entityType) => _playerModel.CreateEntity(entityType);
     }
 }
