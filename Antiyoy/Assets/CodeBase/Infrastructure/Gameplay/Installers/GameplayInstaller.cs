@@ -1,6 +1,7 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.Player.Data;
+using CodeBase.Gameplay.Player.States;
 using CodeBase.Gameplay.UI;
 using UnityEngine;
 using Zenject;
@@ -16,8 +17,16 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
         {
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<GameplayUIFactory>().AsSingle().WithArguments(_gameplayUIPrefab);
-            Container.Bind<PlayerFactory>().AsSingle().WithArguments(_playerPrefabData);
             Container.BindInterfacesTo<GameplayStartup>().AsSingle();
+
+            BindPlayer();
+        }
+
+        private void BindPlayer()
+        {
+            Container.Bind<PlayerTerrainSelectionView>().AsSingle();
+            Container.Bind<PlayerStateMachine>().AsSingle();
+            Container.Bind<PlayerFactory>().AsSingle().WithArguments(_playerPrefabData);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using CodeBase.Gameplay.Player.Controller;
-using CodeBase.Gameplay.Player.Data;
+﻿using CodeBase.Gameplay.Player.Data;
+using CodeBase.Gameplay.Player.Input;
+using CodeBase.Gameplay.Player.States;
+using CodeBase.Gameplay.Player.UI;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 using UnityEngine;
 using Zenject;
@@ -11,28 +13,33 @@ namespace CodeBase.Gameplay.Player
         private readonly DiContainer _container;
         private readonly PlayerPrefabData _playerPrefabData;
         private readonly IStaticDataProvider _staticDataProvider;
+        private readonly PlayerStateMachine _playerStateMachine;
 
         public PlayerFactory(DiContainer container, PlayerPrefabData playerPrefabData,
-            IStaticDataProvider staticDataProvider)
+            IStaticDataProvider staticDataProvider, PlayerStateMachine playerStateMachine)
         {
             _container = container;
             _playerPrefabData = playerPrefabData;
             _staticDataProvider = staticDataProvider;
+            _playerStateMachine = playerStateMachine;
         }
 
         public void Create()
         {
-            var model = CreateModel();
             var instance = Object.Instantiate(_playerPrefabData);
-
-            _container.Bind<IPlayerUIMediator>().FromInstance(instance.PlayerUIWindow).AsSingle();
-            _container.InjectGameObject(instance.gameObject);
+            var data = CreatePlayerData();
 
             instance.PlayerUIWindow.Initialize();
-            model.Initialize(instance.PlayerUIWindow);
+
+            _container.Bind<IPlayerUIMediator>().FromInstance(instance.PlayerUIWindow).AsSingle();
+            _container.Bind<IPlayerInput>().FromInstance(instance.PlayerInput).AsSingle();
+            _container.Bind<PlayerData>().FromInstance(data).AsSingle();
+            _container.InjectGameObject(instance.gameObject);
+
+            _playerStateMachine.SwitchTo<PlayerDefaultState>();
         }
 
-        private PlayerModel CreateModel()
+        private PlayerData CreatePlayerData()
         {
             var preset = _staticDataProvider.Get<PlayerStaticData>();
             var data = new PlayerData
@@ -40,11 +47,8 @@ namespace CodeBase.Gameplay.Player
                 RegionType = preset.DefaultRegionType,
                 CoinsCount = preset.DefaultCoinsCount
             };
-            var model = _container.Instantiate<PlayerModel>(new object[] { data });
 
-            _container.Bind<PlayerModel>().FromInstance(model).AsSingle();
-
-            return model;
+            return data;
         }
     }
 }

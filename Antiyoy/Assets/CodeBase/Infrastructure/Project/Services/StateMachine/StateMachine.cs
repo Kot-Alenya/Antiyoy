@@ -10,15 +10,27 @@ namespace CodeBase.Infrastructure.Project.Services.StateMachine
 
         public StateMachine(IStateFactory factory) => _factory = factory;
 
-        public void SwitchTo<T>() where T : IState
+        public void SwitchTo<T>() where T : IEnterState
         {
             if (_currentState is IExitState exitState)
                 exitState.Exit();
 
-            _currentState = _factory.Create<T>();
+            var state = _factory.Create<T>();
+            state.Enter();
 
-            if (_currentState is IEnterState enterState)
-                enterState.Enter();
+            _currentState = state;
+        }
+
+        public void SwitchTo<TState, TParameter>(TParameter parameter) where TState : IEnterState<TParameter>
+            where TParameter : IStateParameter
+        {
+            if (_currentState is IExitState exitState)
+                exitState.Exit();
+
+            var state = _factory.Create<TState>();
+            state.Enter(parameter);
+
+            _currentState = state;
         }
     }
 }

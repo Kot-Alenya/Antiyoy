@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.Player.Controller;
-using CodeBase.Gameplay.Terrain.Entity.Data;
+﻿using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Utilities.UI;
 using UnityEngine;
 using Zenject;

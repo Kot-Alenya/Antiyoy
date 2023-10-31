@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Player.Controller;
+﻿using CodeBase.Gameplay.Player.States;
+using CodeBase.Gameplay.Player.States.Entity;
 using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Utilities.UI;
 using TMPro;
@@ -11,10 +12,11 @@ namespace CodeBase.Gameplay.Player.UI
     {
         [SerializeField] private TextMeshProUGUI _playerCoinsCount;
         [SerializeField] private TextMeshProUGUI _playerIncome;
-        private PlayerModel _playerModel;
+        
+        private PlayerStateMachine _playerStateMachine;
 
         [Inject]
-        private void Construct(PlayerModel playerModel) => _playerModel = playerModel;
+        private void Construct(PlayerStateMachine playerStateMachine) => _playerStateMachine = playerStateMachine;
 
         public void Initialize() => HideUIWindow();
 
@@ -33,7 +35,9 @@ namespace CodeBase.Gameplay.Player.UI
         public void SetCoinsCount(int coinsCount) => _playerCoinsCount.text = coinsCount.ToString();
 
         public void SetIncomeCount(int incomeCount) => _playerIncome.text = $"+ {incomeCount.ToString()}";
-        
-        public void CreateEntity(EntityType entityType) => _playerModel.CreateEntity(entityType);
+
+        public void CreateEntity(EntityType entityType) =>
+            _playerStateMachine.SwitchTo<PlayerCreateEntityState, PlayerCreateEntityStateData>(
+                new PlayerCreateEntityStateData(entityType));
     }
 }

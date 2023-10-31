@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Terrain.Entity.Data;
 
-namespace CodeBase.Gameplay.Player.Controller
+namespace CodeBase.Gameplay.Player.UI
 {
     public interface IPlayerUIMediator
     {

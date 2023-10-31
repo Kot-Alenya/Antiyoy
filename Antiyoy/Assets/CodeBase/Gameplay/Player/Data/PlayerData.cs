@@ -6,5 +6,6 @@ namespace CodeBase.Gameplay.Player.Data
     {
         public RegionType RegionType;
         public int CoinsCount;
+        public RegionData CurrentRegion;
     }
 }
