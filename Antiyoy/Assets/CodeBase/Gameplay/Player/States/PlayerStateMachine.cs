@@ -1,6 +1,6 @@
-﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
-using CodeBase.Infrastructure.Project.Services.StateMachine.Factory;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+﻿using CodeBase.Infrastructure.Services.StateMachine;
+using CodeBase.Infrastructure.Services.StateMachine.Factory;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States
 {

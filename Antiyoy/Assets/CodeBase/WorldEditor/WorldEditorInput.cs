@@ -1,6 +1,6 @@
 using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Hex;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.WorldEditor.Data;
 using UnityEngine;
 using Zenject;

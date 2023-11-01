@@ -11,8 +11,8 @@ using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Gameplay.Terrain.Tile.Factory;
 using CodeBase.Gameplay.Version.Operation;
 using CodeBase.Gameplay.Version.Recorder;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Entity
 {

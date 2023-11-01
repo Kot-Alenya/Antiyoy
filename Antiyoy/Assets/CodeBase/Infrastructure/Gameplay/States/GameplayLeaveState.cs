@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.Hub;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
-using CodeBase.Infrastructure.Project.Services.StateMachine;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.StateMachine;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Infrastructure.Gameplay.States
 {
@@ -19,7 +19,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
         public void Enter()
         {
             _progressSaveLoader.ClearWatchers();
-            _stateMachine.SwitchTo<HubState>();
+            _stateMachine.SwitchTo<HubLoadingState>();
         }
     }
 }

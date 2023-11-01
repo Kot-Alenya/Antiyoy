@@ -5,8 +5,8 @@ using CodeBase.Gameplay.Progress.Data;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.UI;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Infrastructure.Gameplay.States
 {
@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
         public GameplayStartupState(CameraFactory cameraFactory, ITerrainFactory terrainFactory,
             IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver,
             WorldProgressLoader worldProgressLoader, GameplayUIFactory gameplayUIFactory,
-            PlayerFactory playerFactory,RegionCoinsCounter regionCoinsCounter)
+            PlayerFactory playerFactory, RegionCoinsCounter regionCoinsCounter)
         {
             _cameraFactory = cameraFactory;
             _terrainFactory = terrainFactory;
@@ -47,7 +47,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
 
             _progressSaveLoader.Load<WorldProgressData>("World");
-            
+
             _regionCoinsCounter.RecountAllRegions();
         }
     }

@@ -26,12 +26,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Entities
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityType,
-        CodeBase],[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData,
-        CodeBase]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.Terrain.Entity.Data.EntityType,
+        CodeBase],[CodeBase.Gameplay.Terrain.Entity.Data.EntityPresetData, CodeBase]],
+        mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityType,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.Terrain.Entity.Data.EntityType,
         CodeBase]], mscorlib
     - Name: 
       Entry: 12
@@ -53,13 +53,16 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 2|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 2|CodeBase.Gameplay.Terrain.Entity.Data.EntityPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 0
     - Name: Income
       Entry: 3
       Data: 3
+    - Name: Cost
+      Entry: 3
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -74,13 +77,16 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 3|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 3|CodeBase.Gameplay.Terrain.Entity.Data.EntityPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 1
     - Name: Income
       Entry: 3
       Data: -3
+    - Name: Cost
+      Entry: 3
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -95,13 +101,16 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 4|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 4|CodeBase.Gameplay.Terrain.Entity.Data.EntityPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 2
     - Name: Income
       Entry: 3
       Data: -1
+    - Name: Cost
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

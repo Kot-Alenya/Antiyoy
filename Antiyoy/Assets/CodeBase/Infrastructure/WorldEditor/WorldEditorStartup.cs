@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
+﻿using CodeBase.Infrastructure.Services.StateMachine;
 using CodeBase.Infrastructure.WorldEditor.States;
 using Zenject;
 

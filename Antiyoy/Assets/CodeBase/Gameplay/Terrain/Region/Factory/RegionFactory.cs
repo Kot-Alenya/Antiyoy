@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.Terrain.Region.Data;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,9 +20,9 @@ namespace CodeBase.Gameplay.Terrain.Region.Factory
         {
             var regionId = ++_currentMaxId;
             var region = new RegionData(type, GetRandomColor(), regionId);
-            
+
             Regions.Add(region);
-            
+
             return region;
         }
 

@@ -1,7 +1,7 @@
-﻿using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
-using CodeBase.Infrastructure.Project.Services.SceneLoader;
-using CodeBase.Infrastructure.Project.Services.StaticData;
-using CodeBase.Infrastructure.Project.Services.StaticData.Data;
+﻿using CodeBase.Infrastructure.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.SceneLoader;
+using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData.Data;
 using UnityEngine;
 using Zenject;
 

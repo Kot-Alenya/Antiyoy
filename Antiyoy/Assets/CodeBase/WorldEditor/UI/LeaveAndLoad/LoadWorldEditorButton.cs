@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Project.Services.StateMachine;
+﻿using CodeBase.Infrastructure.Services.StateMachine;
 using CodeBase.Infrastructure.WorldEditor.States;
 using CodeBase.Utilities.UI;
 using Zenject;
@@ -12,6 +12,6 @@ namespace CodeBase.WorldEditor.UI.LeaveAndLoad
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private protected override void OnClick() => _stateMachine.SwitchTo<WorldEditorState>();
+        private protected override void OnClick() => _stateMachine.SwitchTo<WorldEditorLoadingState>();
     }
 }

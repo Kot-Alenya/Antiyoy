@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Region
 {

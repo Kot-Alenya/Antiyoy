@@ -3,8 +3,8 @@ using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Progress;
 using CodeBase.Gameplay.Progress.Data;
 using CodeBase.Gameplay.Terrain;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 using CodeBase.WorldEditor;
 
 namespace CodeBase.Infrastructure.WorldEditor.States

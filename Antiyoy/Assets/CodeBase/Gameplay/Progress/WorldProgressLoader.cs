@@ -4,7 +4,7 @@ using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Gameplay.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
 using CodeBase.Gameplay.Terrain.Tile.Factory;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader.Watcher;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader.Watcher;
 
 namespace CodeBase.Gameplay.Progress
 {

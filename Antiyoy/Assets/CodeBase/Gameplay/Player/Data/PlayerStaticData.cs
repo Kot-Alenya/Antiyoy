@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.Terrain.Region.Data;
-using CodeBase.Infrastructure.Project.Services.StaticData.Data;
+using CodeBase.Infrastructure.Services.StaticData.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Player.Data

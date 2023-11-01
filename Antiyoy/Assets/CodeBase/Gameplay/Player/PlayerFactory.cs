@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States;
 using CodeBase.Gameplay.Player.UI;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 

@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Region;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States
 {

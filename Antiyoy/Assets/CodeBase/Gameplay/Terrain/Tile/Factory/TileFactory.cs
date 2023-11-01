@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
 using CodeBase.Gameplay.Terrain.Tile.Data;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile.Factory

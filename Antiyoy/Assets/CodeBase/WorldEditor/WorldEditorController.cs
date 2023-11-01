@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Progress.Data;
 using CodeBase.Gameplay.Terrain.Entity.Data;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Version.Handler;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.WorldEditor.Data;
 
 namespace CodeBase.WorldEditor

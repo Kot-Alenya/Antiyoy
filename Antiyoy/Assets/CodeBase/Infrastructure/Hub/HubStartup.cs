@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Hub.UI;
+﻿using CodeBase.Hub.UI;
 using Zenject;
 
 namespace CodeBase.Infrastructure.Hub

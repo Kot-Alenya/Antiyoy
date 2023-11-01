@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Factory;
-using CodeBase.Infrastructure.Project.Services.StaticData;
+using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain

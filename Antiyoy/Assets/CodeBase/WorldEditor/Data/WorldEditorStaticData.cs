@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Project.Services.StaticData.Data;
+﻿using CodeBase.Infrastructure.Services.StaticData.Data;
 using UnityEngine;
 
 namespace CodeBase.WorldEditor.Data

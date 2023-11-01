@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Infrastructure.Project.Services.StaticData.Data;
+using CodeBase.Infrastructure.Services.StaticData.Data;
 using Sirenix.Serialization;
 using UnityEngine;
 

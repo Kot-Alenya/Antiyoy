@@ -1,5 +1,5 @@
 ﻿using CodeBase.Infrastructure.Gameplay.States;
-using CodeBase.Infrastructure.Project.Services.StateMachine;
+using CodeBase.Infrastructure.Services.StateMachine;
 using CodeBase.Utilities.UI;
 using Zenject;
 

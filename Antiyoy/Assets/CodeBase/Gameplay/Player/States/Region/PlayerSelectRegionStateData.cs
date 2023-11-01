@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.Terrain.Region.Data;
-using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States.Region
 {

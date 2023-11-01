@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
+using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 
 namespace CodeBase.Gameplay.Progress.Data
 {

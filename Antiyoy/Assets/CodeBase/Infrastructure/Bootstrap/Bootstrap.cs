@@ -1,5 +1,4 @@
-using CodeBase.Infrastructure.Bootstrap.GameLoading;
-using CodeBase.Infrastructure.Project.Services.StateMachine;
+using CodeBase.Infrastructure.Services.StateMachine;
 using UnityEngine;
 using Zenject;
 
