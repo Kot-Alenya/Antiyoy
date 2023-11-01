@@ -35,7 +35,7 @@ namespace CodeBase.Gameplay.Hex
                 return HexDirectionType.West;
             if (direction == Northwest)
                 return HexDirectionType.Northwest;
-            
+
             throw new SystemException("Invalid hex direction!");
         }
     }

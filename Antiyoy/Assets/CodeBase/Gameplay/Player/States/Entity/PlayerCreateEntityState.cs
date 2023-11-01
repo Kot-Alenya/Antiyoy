@@ -120,7 +120,6 @@ namespace CodeBase.Gameplay.Player.States.Entity
         {
             _entityFactory.Destroy(entity.RootTile.Hex);
             _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(entity.RootTile.Hex, entity.Type));
-
         }
 
         private void CreateEntity(HexPosition hex)

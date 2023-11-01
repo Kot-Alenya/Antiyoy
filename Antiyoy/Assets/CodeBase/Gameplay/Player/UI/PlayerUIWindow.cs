@@ -12,7 +12,7 @@ namespace CodeBase.Gameplay.Player.UI
     {
         [SerializeField] private TextMeshProUGUI _playerCoinsCount;
         [SerializeField] private TextMeshProUGUI _playerIncome;
-        
+
         private PlayerStateMachine _playerStateMachine;
 
         [Inject]

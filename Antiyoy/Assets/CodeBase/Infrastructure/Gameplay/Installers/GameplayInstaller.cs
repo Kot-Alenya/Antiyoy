@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.Player.Data;
-using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States;
 using CodeBase.Gameplay.Player.States.Entity;
 using CodeBase.Gameplay.Player.States.Region;

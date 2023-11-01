@@ -15,8 +15,8 @@ namespace CodeBase.Gameplay.Hex
             R = r;
         }
 
-        public static HexPosition operator +(HexPosition a, HexPosition b) => new(a.Q + b.Q, a.R + b.R);        
-        
+        public static HexPosition operator +(HexPosition a, HexPosition b) => new(a.Q + b.Q, a.R + b.R);
+
         public static HexPosition operator -(HexPosition a, HexPosition b) => new(a.Q - b.Q, a.R - b.R);
 
         public static bool operator ==(HexPosition a, HexPosition b) => a.Equals(b);

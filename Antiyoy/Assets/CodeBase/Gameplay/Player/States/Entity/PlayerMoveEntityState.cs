@@ -6,7 +6,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
     {
         public void Enter()
         {
-            
+
         }
 
         public void Exit()

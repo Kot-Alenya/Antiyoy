@@ -1,6 +1,5 @@
 ﻿using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Terrain.Entity.Data;
-using CodeBase.Gameplay.Terrain.Tile.Data;
 
 namespace CodeBase.Gameplay.Terrain.Entity
 {
