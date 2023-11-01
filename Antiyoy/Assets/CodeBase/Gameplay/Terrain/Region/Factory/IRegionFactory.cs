@@ -1,11 +1,14 @@
-﻿using CodeBase.Gameplay.Terrain.Region.Data;
+﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Terrain.Region.Data;
 
 namespace CodeBase.Gameplay.Terrain.Region.Factory
 {
     public interface IRegionFactory
     {
-        RegionData Create(RegionType type);
+        public List<RegionData> Regions { get; }
 
-        void Destroy(RegionData region);
+        public RegionData Create(RegionType type);
+
+        public void Destroy(RegionData region);
     }
 }

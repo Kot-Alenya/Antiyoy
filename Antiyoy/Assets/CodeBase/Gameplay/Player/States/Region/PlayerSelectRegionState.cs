@@ -33,7 +33,7 @@ namespace CodeBase.Gameplay.Player.States.Region
             _playerData.CurrentRegion = parameter.Region;
             _focusView.FocusRegion(parameter.Region);
             _uiMediator.SetIncomeCount(parameter.Region.Income);
-            _uiMediator.SetCoinsCount(_playerData.CoinsCount);
+            _uiMediator.SetCoinsCount(parameter.Region.CoinsCount);
             _uiMediator.ShowUIWindow();
 
             _playerInput.OnPlayerInput += HandleInput;

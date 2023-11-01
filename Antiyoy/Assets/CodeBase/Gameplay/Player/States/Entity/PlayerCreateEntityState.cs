@@ -12,6 +12,7 @@ using CodeBase.Gameplay.Terrain.Tile.Factory;
 using CodeBase.Gameplay.Version.Operation;
 using CodeBase.Gameplay.Version.Recorder;
 using CodeBase.Infrastructure.Project.Services.StateMachine.States;
+using CodeBase.Infrastructure.Project.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Entity
 {
@@ -26,6 +27,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         private readonly IRegionRebuilder _regionRebuilder;
         private readonly PlayerStateMachine _playerStateMachine;
         private readonly IWorldVersionRecorder _worldVersionRecorder;
+        private readonly IStaticDataProvider _staticDataProvider;
 
         private List<TileData> _tilesToCreateEntities;
         private EntityType _entityTypeToCreate;
@@ -33,7 +35,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         public PlayerCreateEntityState(IPlayerInput playerInput, ITileCollection tileCollection,
             PlayerTileFocusView focusView, PlayerData playerData, IEntityFactory entityFactory,
             ITileFactory tileFactory, IRegionRebuilder regionRebuilder, PlayerStateMachine playerStateMachine,
-            IWorldVersionRecorder worldVersionRecorder)
+            IWorldVersionRecorder worldVersionRecorder, IStaticDataProvider staticDataProvider)
         {
             _playerInput = playerInput;
             _tileCollection = tileCollection;
@@ -44,6 +46,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
             _regionRebuilder = regionRebuilder;
             _playerStateMachine = playerStateMachine;
             _worldVersionRecorder = worldVersionRecorder;
+            _staticDataProvider = staticDataProvider;
         }
 
         public void Enter(PlayerCreateEntityStateData parameter)
@@ -65,6 +68,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         private void HandleInput(HexPosition hex)
         {
             var currentRegion = _playerData.CurrentRegion;
+            var entityPreset = _staticDataProvider.Get<EntitiesPresetsCollection>().Entities[_entityTypeToCreate];
 
             if (_tileCollection.TryGet(hex, out var tile))
             {

@@ -3,6 +3,7 @@ using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.Progress;
 using CodeBase.Gameplay.Progress.Data;
 using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.UI;
 using CodeBase.Infrastructure.Project.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Project.Services.StateMachine.States;
@@ -18,11 +19,12 @@ namespace CodeBase.Infrastructure.Gameplay.States
         private readonly WorldProgressLoader _worldProgressLoader;
         private readonly GameplayUIFactory _gameplayUIFactory;
         private readonly PlayerFactory _playerFactory;
+        private readonly RegionCoinsCounter _regionCoinsCounter;
 
         public GameplayStartupState(CameraFactory cameraFactory, ITerrainFactory terrainFactory,
             IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver,
             WorldProgressLoader worldProgressLoader, GameplayUIFactory gameplayUIFactory,
-            PlayerFactory playerFactory)
+            PlayerFactory playerFactory,RegionCoinsCounter regionCoinsCounter)
         {
             _cameraFactory = cameraFactory;
             _terrainFactory = terrainFactory;
@@ -31,6 +33,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _worldProgressLoader = worldProgressLoader;
             _gameplayUIFactory = gameplayUIFactory;
             _playerFactory = playerFactory;
+            _regionCoinsCounter = regionCoinsCounter;
         }
 
         public void Enter()
@@ -44,6 +47,8 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
 
             _progressSaveLoader.Load<WorldProgressData>("World");
+            
+            _regionCoinsCounter.RecountAllRegions();
         }
     }
 }

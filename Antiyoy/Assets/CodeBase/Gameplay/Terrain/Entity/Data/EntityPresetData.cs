@@ -7,5 +7,6 @@ namespace CodeBase.Gameplay.Terrain.Entity.Data
     {
         public EntityPrefabData Prefab;
         public int Income;
+        public int Cost;
     }
 }

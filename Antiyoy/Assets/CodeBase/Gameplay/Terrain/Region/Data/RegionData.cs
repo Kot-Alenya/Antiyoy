@@ -12,7 +12,8 @@ namespace CodeBase.Gameplay.Terrain.Region.Data
         public readonly int Id;
 
         public int Income;
-
+        public int CoinsCount;
+        
         public RegionData(RegionType type, Color color, int id)
         {
             Type = type;

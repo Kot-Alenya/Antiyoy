@@ -25,6 +25,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
             Container.Bind<IEntityFactory>().To<EntityFactory>().AsSingle();
             Container.Bind<ITerrainFactory>().To<TerrainFactory>().AsSingle();
+            Container.Bind<RegionCoinsCounter>().AsSingle();
         }
 
         private void BindProgress()
