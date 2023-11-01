@@ -28,7 +28,7 @@ namespace CodeBase.Gameplay.Player
         {
             var instance = Object.Instantiate(_playerPrefabData);
             var data = CreatePlayerData();
-
+            
             instance.PlayerUIWindow.Initialize();
 
             _container.Bind<IPlayerUIMediator>().FromInstance(instance.PlayerUIWindow).AsSingle();

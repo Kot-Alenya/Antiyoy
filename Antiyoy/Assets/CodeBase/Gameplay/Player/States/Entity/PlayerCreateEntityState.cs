@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
     {
         private readonly IPlayerInput _playerInput;
         private readonly ITileCollection _tileCollection;
-        private readonly PlayerTerrainSelectionView _selectionView;
+        private readonly PlayerTileFocusView _focusView;
         private readonly PlayerData _playerData;
         private readonly IEntityFactory _entityFactory;
         private readonly ITileFactory _tileFactory;
@@ -28,12 +28,12 @@ namespace CodeBase.Gameplay.Player.States.Entity
         private EntityType _entityTypeToCreate;
 
         public PlayerCreateEntityState(IPlayerInput playerInput, ITileCollection tileCollection,
-            PlayerTerrainSelectionView selectionView, PlayerData playerData, IEntityFactory entityFactory,
+            PlayerTileFocusView focusView, PlayerData playerData, IEntityFactory entityFactory,
             ITileFactory tileFactory, IRegionRebuilder regionRebuilder, PlayerStateMachine playerStateMachine)
         {
             _playerInput = playerInput;
             _tileCollection = tileCollection;
-            _selectionView = selectionView;
+            _focusView = focusView;
             _playerData = playerData;
             _entityFactory = entityFactory;
             _tileFactory = tileFactory;
@@ -43,56 +43,58 @@ namespace CodeBase.Gameplay.Player.States.Entity
 
         public void Enter(PlayerCreateEntityStateData parameter)
         {
-            _tilesToCreateEntities = GetTilesToCreateEntities(parameter.EntityType);
+            _tilesToCreateEntities = GetTilesToCreateEntity();
             _entityTypeToCreate = parameter.EntityType;
-            _selectionView.SelectTiles(_tilesToCreateEntities);
+            _focusView.FocusAllTiles();
+            _focusView.UnFocusTiles(_tilesToCreateEntities);
 
             _playerInput.OnPlayerInput += HandleInput;
         }
 
         public void Exit()
         {
-            _selectionView.UnSelectTiles(_tilesToCreateEntities);
-
+            _focusView.UnFocusAllTiles();
             _playerInput.OnPlayerInput -= HandleInput;
         }
 
         private void HandleInput(HexPosition hex)
         {
+            var currentRegion = _playerData.CurrentRegion;
+
             if (_tileCollection.TryGet(hex, out var tile))
             {
                 if (_tilesToCreateEntities.Contains(tile))
                 {
-                    _selectionView.UnSelectTiles(_tilesToCreateEntities);
-                    _tilesToCreateEntities.Clear();
                     CreateEntity(tile);
+                    currentRegion = _tileCollection.Get(hex).Region;
                 }
             }
 
-            _playerStateMachine.SwitchTo<PlayerDefaultState>();
+            _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
+                new PlayerSelectRegionStateData(currentRegion));
         }
 
-        private List<TileData> GetTilesToCreateEntities(EntityType entityType)
+        private List<TileData> GetTilesToCreateEntity()
         {
-            var tiles = new List<TileData>(_playerData.CurrentRegion.Tiles);
+            var tilesToCreateEntity = new List<TileData>();
 
-            if (entityType == EntityType.Farm)
-                return tiles;
+            foreach (var tile in _playerData.CurrentRegion.Tiles)
+            {
+                if (tile.Entity == null)
+                    tilesToCreateEntity.Add(tile);
 
-            foreach (var regionTile in _playerData.CurrentRegion.Tiles)
-            foreach (var regionNeighborTile in regionTile.Neighbors)
-                if (!tiles.Contains(regionNeighborTile))
-                    tiles.Add(regionNeighborTile);
+                foreach (var neighbor in tile.Neighbors)
+                    if (neighbor.Region.Type != _playerData.RegionType)
+                        if (!tilesToCreateEntity.Contains(neighbor))
+                            tilesToCreateEntity.Add(neighbor);
+            }
 
-            return tiles;
+            return tilesToCreateEntity;
         }
 
         private void CreateEntity(TileData tile)
         {
             var hex = tile.Hex;
-
-            if (tile.Entity != null)
-                return;
 
             if (tile.Region != _playerData.CurrentRegion)
             {

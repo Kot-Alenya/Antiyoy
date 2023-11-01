@@ -3,14 +3,13 @@
 debug state (?)
 
 gameplay:
-    playerData;
-    select region;
     select entity;
     move entity(grabbing regions);
     win;
     ai (?);
     
 refactoring:
+    player.
     worldEditor ui;
     rename RegionType to PlayerType/PlayerColor (?);
     world save/load key to static!

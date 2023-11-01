@@ -11,6 +11,7 @@ namespace CodeBase.Gameplay.Terrain.Tile.Data
     {
         public TextMeshProUGUI DebugText;
         public SpriteRenderer SpriteRenderer;
+        public SpriteRenderer HideMaskSpriteRenderer;
         [OdinSerialize] public Dictionary<HexDirectionType, SpriteRenderer> Borders;
     }
 }

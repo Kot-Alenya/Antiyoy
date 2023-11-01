@@ -10,18 +10,18 @@ namespace CodeBase.Gameplay.Player.States.Region
     public class PlayerSelectRegionState : IEnterState<PlayerSelectRegionStateData>, IExitState
     {
         private readonly PlayerData _playerData;
-        private readonly PlayerTerrainSelectionView _selectionView;
+        private readonly PlayerRegionFocusView _focusView;
         private readonly IPlayerUIMediator _uiMediator;
         private readonly IPlayerInput _playerInput;
         private readonly ITileCollection _tileCollection;
         private readonly PlayerStateMachine _playerStateMachine;
 
-        public PlayerSelectRegionState(PlayerData playerData, PlayerTerrainSelectionView selectionView,
+        public PlayerSelectRegionState(PlayerData playerData, PlayerRegionFocusView focusView,
             IPlayerUIMediator uiMediator, IPlayerInput playerInput, ITileCollection tileCollection,
             PlayerStateMachine playerStateMachine)
         {
             _playerData = playerData;
-            _selectionView = selectionView;
+            _focusView = focusView;
             _uiMediator = uiMediator;
             _playerInput = playerInput;
             _tileCollection = tileCollection;
@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Player.States.Region
         public void Enter(PlayerSelectRegionStateData parameter)
         {
             _playerData.CurrentRegion = parameter.Region;
-            _selectionView.SelectRegion(parameter.Region);
+            _focusView.FocusRegion(parameter.Region);
             _uiMediator.SetIncomeCount(parameter.Region.Income);
             _uiMediator.SetCoinsCount(_playerData.CoinsCount);
             _uiMediator.ShowUIWindow();
@@ -42,8 +42,8 @@ namespace CodeBase.Gameplay.Player.States.Region
         public void Exit()
         {
             _playerInput.OnPlayerInput -= HandleInput;
-            
-            _selectionView.UnSelectRegion(_playerData.CurrentRegion);
+
+            _focusView.UnFocusRegion(_playerData.CurrentRegion);
             _uiMediator.HideUIWindow();
         }
 
@@ -51,16 +51,16 @@ namespace CodeBase.Gameplay.Player.States.Region
         {
             if (!_tileCollection.TryGet(hex, out var tile))
                 _playerStateMachine.SwitchTo<PlayerDefaultState>();
-            
+
             else if (tile.Region.Type != _playerData.RegionType)
                 _playerStateMachine.SwitchTo<PlayerDefaultState>();
-            
+
             else if (tile.Region != _playerData.CurrentRegion)
-            {
-                _playerStateMachine.SwitchTo<PlayerDefaultState>();
                 _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                     new PlayerSelectRegionStateData(tile.Region));
-            }
+
+            //else if (tile.Entity != null)
+            //    _playerStateMachine.SwitchTo<PlayerMoveEntityState>();
         }
     }
 }

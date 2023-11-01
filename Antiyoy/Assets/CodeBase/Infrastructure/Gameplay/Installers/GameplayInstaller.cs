@@ -1,7 +1,10 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.Player.Data;
+using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States;
+using CodeBase.Gameplay.Player.States.Entity;
+using CodeBase.Gameplay.Player.States.Region;
 using CodeBase.Gameplay.UI;
 using UnityEngine;
 using Zenject;
@@ -24,7 +27,8 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
         private void BindPlayer()
         {
-            Container.Bind<PlayerTerrainSelectionView>().AsSingle();
+            Container.Bind<PlayerRegionFocusView>().AsSingle();
+            Container.Bind<PlayerTileFocusView>().AsSingle();
             Container.Bind<PlayerStateMachine>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle().WithArguments(_playerPrefabData);
         }

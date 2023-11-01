@@ -21,7 +21,7 @@ namespace CodeBase.Gameplay.Player.Input
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (UnityEngine.Input.GetMouseButton(0))
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
                 var ray = _cameraController.GetRay(UnityEngine.Input.mousePosition);
                 var hit = Physics2D.Raycast(ray.origin, ray.direction);

@@ -11,6 +11,5 @@ namespace CodeBase.Gameplay.Player.Data
         public int DefaultCoinsCount;
         public Color SelectedRegionBorderColor;
         public Color UnSelectedRegionBorderColor;
-        public Color SelectedTileAdditionalColor;
     }
 }

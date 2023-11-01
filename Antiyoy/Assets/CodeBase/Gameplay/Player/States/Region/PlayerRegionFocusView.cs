@@ -1,25 +1,23 @@
-﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Hex;
+﻿using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Terrain.Region.Data;
 using CodeBase.Gameplay.Terrain.Tile.Collection;
-using CodeBase.Gameplay.Terrain.Tile.Data;
 using CodeBase.Infrastructure.Project.Services.StaticData;
 
-namespace CodeBase.Gameplay.Player
+namespace CodeBase.Gameplay.Player.States.Region
 {
-    public class PlayerTerrainSelectionView
+    public class PlayerRegionFocusView
     {
         private readonly ITileCollection _tileCollection;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        public PlayerTerrainSelectionView(ITileCollection tileCollection, IStaticDataProvider staticDataProvider)
+        public PlayerRegionFocusView(ITileCollection tileCollection, IStaticDataProvider staticDataProvider)
         {
             _tileCollection = tileCollection;
             _staticDataProvider = staticDataProvider;
         }
 
-        public void SelectRegion(RegionData region)
+        public void FocusRegion(RegionData region)
         {
             var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
 
@@ -39,29 +37,13 @@ namespace CodeBase.Gameplay.Player
             }
         }
 
-        public void UnSelectRegion(RegionData region)
+        public void UnFocusRegion(RegionData region)
         {
             var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
 
             foreach (var tile in region.Tiles)
             foreach (var border in tile.Instance.Borders)
                 border.Value.color = playerStaticData.UnSelectedRegionBorderColor;
-        }
-
-        public void SelectTiles(List<TileData> tiles)
-        {
-            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
-
-            foreach (var tile in tiles)
-                tile.Instance.SpriteRenderer.color += playerStaticData.SelectedTileAdditionalColor;
-        }
-
-        public void UnSelectTiles(List<TileData> tiles)
-        {
-            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
-
-            foreach (var tile in tiles)
-                tile.Instance.SpriteRenderer.color -= playerStaticData.SelectedTileAdditionalColor;
         }
     }
 }
