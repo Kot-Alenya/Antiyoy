@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Progress
 {
-    public static class WorldSavedDataExtensions
+    public static class SavedDataExtensions
     {
         public static SavedTileData ToSaved(this TileData tile)
         {
