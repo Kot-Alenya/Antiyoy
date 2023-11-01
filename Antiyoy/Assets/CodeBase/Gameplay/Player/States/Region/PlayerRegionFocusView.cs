@@ -37,11 +37,11 @@ namespace CodeBase.Gameplay.Player.States.Region
             }
         }
 
-        public void UnFocusRegion(RegionData region)
+        public void UnFocusAllRegion()
         {
             var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
 
-            foreach (var tile in region.Tiles)
+            foreach (var tile in _tileCollection)
             foreach (var border in tile.Instance.Borders)
                 border.Value.color = playerStaticData.UnSelectedRegionBorderColor;
         }

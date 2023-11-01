@@ -43,7 +43,7 @@ namespace CodeBase.Gameplay.Player.States.Region
         {
             _playerInput.OnPlayerInput -= HandleInput;
 
-            _focusView.UnFocusRegion(_playerData.CurrentRegion);
+            _focusView.UnFocusAllRegion();
             _uiMediator.HideUIWindow();
         }
 
