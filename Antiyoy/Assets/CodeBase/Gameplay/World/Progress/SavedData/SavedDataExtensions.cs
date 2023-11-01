@@ -1,9 +1,8 @@
 ﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Progress.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Progress
+namespace CodeBase.Gameplay.World.Progress.SavedData
 {
     public static class SavedDataExtensions
     {

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
+using CodeBase.Gameplay.World.Tile;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Factory
+namespace CodeBase.Gameplay.World.Region
 {
     public class RegionObject
     {

@@ -2,7 +2,6 @@
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.UI;
 using CodeBase.Gameplay.World.Progress;
-using CodeBase.Gameplay.World.Progress.Data;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader;

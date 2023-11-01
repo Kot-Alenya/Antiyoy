@@ -1,12 +1,12 @@
 ﻿using CodeBase.Gameplay.World.Progress;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Entity;
 using CodeBase.Gameplay.World.Terrain.Region;
-using CodeBase.Gameplay.World.Terrain.Region.Factory;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Tile.Factory;
+using CodeBase.Gameplay.World.Tile;
 using CodeBase.Gameplay.World.Version;
 using Zenject;
 

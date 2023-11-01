@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Gameplay.World.Progress.Data
+namespace CodeBase.Gameplay.World.Progress.SavedData
 {
     [Serializable]
     public struct SavedVector2Int

@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Progress.Data;
+﻿using CodeBase.Gameplay.World.Progress.SavedData;
 using CodeBase.Gameplay.World.Terrain.Entity;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;

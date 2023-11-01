@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain.Entity;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Gameplay.World.NewTerrain.Data
+namespace CodeBase.Gameplay.World.Terrain.Entity.Data
 {
     [Serializable]
     public class EntityPresetData

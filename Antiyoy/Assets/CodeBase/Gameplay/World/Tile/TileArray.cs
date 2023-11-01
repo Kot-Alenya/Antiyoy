@@ -4,7 +4,7 @@ using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
+namespace CodeBase.Gameplay.World.Tile
 {
     public class TileArray : IEnumerable<TileData>
     {

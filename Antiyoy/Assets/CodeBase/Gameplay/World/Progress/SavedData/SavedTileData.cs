@@ -1,8 +1,7 @@
 ﻿using System;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Region;
 
-namespace CodeBase.Gameplay.World.Progress.Data
+namespace CodeBase.Gameplay.World.Progress.SavedData
 {
     [Serializable]
     public struct SavedTileData

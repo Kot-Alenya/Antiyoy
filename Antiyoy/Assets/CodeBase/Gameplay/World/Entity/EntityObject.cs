@@ -1,15 +1,16 @@
-﻿using CodeBase.Gameplay.World.Terrain.Tile.Data;
+﻿
+using CodeBase.Gameplay.World.Tile;
 
 namespace CodeBase.Gameplay.World.Terrain.Entity.Data
 {
-    public class EntityData
+    public class EntityObject
     {
         public readonly EntityPrefabData Instance;
-        public readonly TileData RootTile;
+        public readonly TileObject RootTile;
         public readonly EntityType Type;
         public readonly int Income;
 
-        public EntityData(EntityPrefabData instance, TileData rootTile, EntityType type, int income)
+        public EntityObject(EntityPrefabData instance, TileObject rootTile, EntityType type, int income)
         {
             Instance = instance;
             RootTile = rootTile;

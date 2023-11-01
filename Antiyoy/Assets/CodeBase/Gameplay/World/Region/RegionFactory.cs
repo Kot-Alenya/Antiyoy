@@ -1,9 +1,8 @@
-﻿using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Infrastructure.Services.StaticData;
+﻿using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Factory
+namespace CodeBase.Gameplay.World.Region
 {
     public class RegionFactory
     {

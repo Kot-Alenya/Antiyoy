@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.World.Terrain.Region.Data
+﻿namespace CodeBase.Gameplay.World.Region
 {
     public enum RegionType
     {

@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Services.StaticData.Data;
+﻿using CodeBase.Gameplay.World.Tile.Data;
+using CodeBase.Infrastructure.Services.StaticData.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain.Tile.Data

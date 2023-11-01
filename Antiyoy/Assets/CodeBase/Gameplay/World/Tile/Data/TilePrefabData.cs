@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Terrain.Tile.Data
+namespace CodeBase.Gameplay.World.Tile.Data
 {
     public class TilePrefabData : SerializedMonoBehaviour
     {
