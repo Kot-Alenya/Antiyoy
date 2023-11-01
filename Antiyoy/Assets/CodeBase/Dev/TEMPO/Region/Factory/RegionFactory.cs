@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Factory
+namespace CodeBase.Dev.TEMPO.Region.Factory
 {
     public class RegionFactory : IRegionFactory
     {

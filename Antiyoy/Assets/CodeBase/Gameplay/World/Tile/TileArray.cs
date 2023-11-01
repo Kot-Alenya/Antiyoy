@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
 {
-    public class TileArray : ITileCollection
+    public class TileArray : IEnumerable<TileData>
     {
         private Vector2Int _size;
         private TileData[] _tiles;
@@ -19,9 +19,7 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
 
         public Vector2Int Size => _size;
 
-        public int Count => _tiles.Length;
-
-        public bool IsInCollection(HexPosition hex)
+        public bool IsInArray(HexPosition hex)
         {
             var index = HexMath.ToArrayIndex(hex);
 
@@ -37,24 +35,11 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
             return index.y < _size.y;
         }
 
-        public void Set(TileData tile, HexPosition hex)
-        {
-            _tiles[GetIndex(hex)] = tile;
-            TileCollectionUtilities.ConnectWithNeighbors(tile, this);
-        }
-
-        public void Remove(HexPosition hex)
-        {
-            TileCollectionUtilities.DisconnectFromNeighbors(_tiles[GetIndex(hex)]);
-            _tiles[GetIndex(hex)] = null;
-        }
-
         public TileData Get(HexPosition hex) => _tiles[GetIndex(hex)];
-        public TileData Get(int index) => _tiles[index];
 
         public bool TryGet(HexPosition hex, out TileData tile)
         {
-            if (IsInCollection(hex))
+            if (IsInArray(hex))
             {
                 tile = Get(hex);
                 return tile != null;

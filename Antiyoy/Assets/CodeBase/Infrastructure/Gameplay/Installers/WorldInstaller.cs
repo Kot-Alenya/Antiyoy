@@ -6,6 +6,7 @@ using CodeBase.Gameplay.World.Terrain.Region.Factory;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
+using CodeBase.Gameplay.World.Tile.Factory;
 using CodeBase.Gameplay.World.Version;
 using Zenject;
 
