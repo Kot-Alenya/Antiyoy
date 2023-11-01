@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Terrain.Tile.Collection;
-using CodeBase.Gameplay.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
 namespace CodeBase.Gameplay.Player.States.Entity
 {

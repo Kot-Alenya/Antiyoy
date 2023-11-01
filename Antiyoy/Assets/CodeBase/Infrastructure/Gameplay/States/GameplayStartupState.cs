@@ -1,10 +1,10 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
-using CodeBase.Gameplay.Progress;
-using CodeBase.Gameplay.Progress.Data;
-using CodeBase.Gameplay.Terrain;
-using CodeBase.Gameplay.Terrain.Region;
 using CodeBase.Gameplay.UI;
+using CodeBase.Gameplay.World.Progress;
+using CodeBase.Gameplay.World.Progress.Data;
+using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 

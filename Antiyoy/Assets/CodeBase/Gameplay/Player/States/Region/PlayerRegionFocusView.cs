@@ -1,7 +1,7 @@
-﻿using CodeBase.Gameplay.Hex;
-using CodeBase.Gameplay.Player.Data;
-using CodeBase.Gameplay.Terrain.Region.Data;
-using CodeBase.Gameplay.Terrain.Tile.Collection;
+﻿using CodeBase.Gameplay.Player.Data;
+using CodeBase.Gameplay.World.Hex;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Infrastructure.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Region

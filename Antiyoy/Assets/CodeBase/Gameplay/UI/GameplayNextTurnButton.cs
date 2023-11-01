@@ -12,9 +12,6 @@ namespace CodeBase.Gameplay.UI
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private protected override void OnClick()
-        {
-            _stateMachine.SwitchTo<GameplayNextTurnState>();
-        }
+        private protected override void OnClick() => _stateMachine.SwitchTo<GameplayNextTurnState>();
     }
 }

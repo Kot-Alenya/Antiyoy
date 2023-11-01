@@ -1,4 +1,5 @@
 using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.WorldEditor.Controller;
 using CodeBase.WorldEditor.Data;
 using UnityEngine;
 using Zenject;

@@ -14,3 +14,4 @@ refactoring:
     rename RegionType to PlayerType/PlayerColor (?);
     world save/load key to static!
     more states;
+    hub refactoring;

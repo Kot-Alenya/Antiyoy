@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Player.States;
-using CodeBase.Gameplay.Terrain.Region;
-using CodeBase.Gameplay.Version.Recorder;
+using CodeBase.Gameplay.World.Terrain.Region;
+using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Infrastructure.Gameplay.States

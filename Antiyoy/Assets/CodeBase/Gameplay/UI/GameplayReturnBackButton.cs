@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.Player.States;
-using CodeBase.Gameplay.Version.Handler;
+using CodeBase.Gameplay.World.Version.Handler;
 using CodeBase.Utilities.UI;
 using Zenject;
 

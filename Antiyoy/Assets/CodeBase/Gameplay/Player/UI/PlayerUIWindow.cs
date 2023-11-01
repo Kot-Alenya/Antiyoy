@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Player.States;
 using CodeBase.Gameplay.Player.States.Entity;
-using CodeBase.Gameplay.Terrain.Entity.Data;
+using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Utilities.UI;
 using TMPro;
 using UnityEngine;

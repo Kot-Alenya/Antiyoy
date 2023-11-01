@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.World.Hex;
 
 namespace CodeBase.Gameplay.Player.Input
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Hex;
+using CodeBase.Gameplay.World.Hex;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;

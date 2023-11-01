@@ -1,4 +1,4 @@
-﻿using CodeBase.Hub.UI;
+﻿using CodeBase.Hub;
 using UnityEngine;
 using Zenject;
 
