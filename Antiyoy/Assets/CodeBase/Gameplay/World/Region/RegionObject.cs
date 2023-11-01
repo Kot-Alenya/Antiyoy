@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Data
+namespace CodeBase.Gameplay.World.Terrain.Region.Factory
 {
-    public class RegionData
+    public class RegionObject
     {
-        public readonly List<TileData> Tiles = new();
+        public readonly List<TileObject> Tiles = new();
         public readonly RegionType Type;
         public readonly Color Color;
         public readonly int Id;
@@ -14,7 +15,7 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Data
         public int Income;
         public int CoinsCount;
 
-        public RegionData(RegionType type, Color color, int id)
+        public RegionObject(RegionType type, Color color, int id)
         {
             Type = type;
             Color = color;
