@@ -2,7 +2,7 @@
 
 namespace CodeBase.Gameplay.World.Hex
 {
-    public struct HexPositionDirections
+    public struct HexPositionDirectionUtilities
     {
         private static readonly HexPosition Northeast = new(0, 1);
         private static readonly HexPosition East = new(1, 0);

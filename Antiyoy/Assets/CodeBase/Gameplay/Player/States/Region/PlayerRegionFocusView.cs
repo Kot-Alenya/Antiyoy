@@ -22,10 +22,10 @@ namespace CodeBase.Gameplay.Player.States.Region
             var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
 
             foreach (var tile in region.Tiles)
-            foreach (var direction in HexPositionDirections.Directions)
+            foreach (var direction in HexPositionDirectionUtilities.Directions)
             {
                 var neighbourHex = tile.Hex + direction;
-                var directionType = HexPositionDirections.GetDirectionType(direction);
+                var directionType = HexPositionDirectionUtilities.GetDirectionType(direction);
 
                 if (_tileCollection.TryGet(neighbourHex, out var neighbor))
                 {

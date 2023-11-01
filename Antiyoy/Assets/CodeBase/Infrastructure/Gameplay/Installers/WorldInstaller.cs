@@ -6,8 +6,7 @@ using CodeBase.Gameplay.World.Terrain.Region.Factory;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Version.Handler;
-using CodeBase.Gameplay.World.Version.Recorder;
+using CodeBase.Gameplay.World.Version;
 using Zenject;
 
 namespace CodeBase.Infrastructure.Gameplay.Installers
@@ -36,8 +35,8 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
         private void BindVersion()
         {
-            Container.Bind<IWorldVersionHandler>().To<WorldVersionHandler>().AsSingle();
-            Container.Bind<IWorldVersionRecorder>().To<WorldVersionRecorder>().AsSingle();
+            Container.Bind<IVersionHandler>().To<WorldVersionHandler>().AsSingle();
+            Container.Bind<IVersionRecorder>().To<WorldVersionRecorder>().AsSingle();
         }
 
         private void BindRegion()

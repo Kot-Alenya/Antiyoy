@@ -10,7 +10,6 @@ using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Operation;
-using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 using CodeBase.Infrastructure.Services.StaticData;
 
@@ -26,7 +25,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         private readonly ITileFactory _tileFactory;
         private readonly IRegionRebuilder _regionRebuilder;
         private readonly PlayerStateMachine _playerStateMachine;
-        private readonly IWorldVersionRecorder _worldVersionRecorder;
+        private readonly IVersionRecorder _versionRecorder;
         private readonly IStaticDataProvider _staticDataProvider;
 
         private List<TileData> _tilesToCreateEntities;
@@ -35,7 +34,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         public PlayerCreateEntityState(IPlayerInput playerInput, ITileCollection tileCollection,
             PlayerTileFocusView focusView, PlayerData playerData, IEntityFactory entityFactory,
             ITileFactory tileFactory, IRegionRebuilder regionRebuilder, PlayerStateMachine playerStateMachine,
-            IWorldVersionRecorder worldVersionRecorder, IStaticDataProvider staticDataProvider)
+            IVersionRecorder versionRecorder, IStaticDataProvider staticDataProvider)
         {
             _playerInput = playerInput;
             _tileCollection = tileCollection;
@@ -45,7 +44,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
             _tileFactory = tileFactory;
             _regionRebuilder = regionRebuilder;
             _playerStateMachine = playerStateMachine;
-            _worldVersionRecorder = worldVersionRecorder;
+            _versionRecorder = versionRecorder;
             _staticDataProvider = staticDataProvider;
         }
 
@@ -117,31 +116,31 @@ namespace CodeBase.Gameplay.Player.States.Entity
             CreateEntity(hex);
 
             _regionRebuilder.RebuildFromBufferAndClearBuffer();
-            _worldVersionRecorder.RecordFromBufferAndClearBuffer();
+            _versionRecorder.RecordFromBufferAndClearBuffer();
         }
 
         private void DestroyEntity(EntityData entity)
         {
             _entityFactory.Destroy(entity.RootTile.Hex);
-            _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(entity.RootTile.Hex, entity.Type));
+            _versionRecorder.AddToBuffer(new DestroyEntityOperationData(entity.RootTile.Hex, entity.Type));
         }
 
         private void CreateEntity(HexPosition hex)
         {
             _entityFactory.Create(hex, _entityTypeToCreate);
-            _worldVersionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _entityTypeToCreate));
+            _versionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _entityTypeToCreate));
         }
 
         private void DestroyTile(TileData tile)
         {
             _tileFactory.Destroy(tile.Hex);
-            _worldVersionRecorder.AddToBuffer(new DestroyTileOperationData(tile.Hex, tile.Region.Type));
+            _versionRecorder.AddToBuffer(new DestroyTileOperationData(tile.Hex, tile.Region.Type));
         }
 
         private void CreateTile(HexPosition hex)
         {
             _tileFactory.Create(hex, _playerData.RegionType);
-            _worldVersionRecorder.AddToBuffer(new CreateTileOperationData(hex, _playerData.RegionType));
+            _versionRecorder.AddToBuffer(new CreateTileOperationData(hex, _playerData.RegionType));
         }
     }
 }

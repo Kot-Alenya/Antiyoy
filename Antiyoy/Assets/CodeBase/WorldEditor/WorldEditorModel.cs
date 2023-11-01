@@ -8,14 +8,13 @@ using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
 using CodeBase.Gameplay.World.Terrain.Tile.Collection;
 using CodeBase.Gameplay.World.Terrain.Tile.Factory;
 using CodeBase.Gameplay.World.Version.Operation;
-using CodeBase.Gameplay.World.Version.Recorder;
 using CodeBase.WorldEditor.Data;
 
 namespace CodeBase.WorldEditor
 {
     public class WorldEditorModel
     {
-        private readonly IWorldVersionRecorder _worldVersionRecorder;
+        private readonly IVersionRecorder _versionRecorder;
         private readonly ITileFactory _tileFactory;
         private readonly IEntityFactory _entityFactory;
         private readonly ITileCollection _tileCollection;
@@ -25,10 +24,10 @@ namespace CodeBase.WorldEditor
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
-        public WorldEditorModel(IWorldVersionRecorder worldVersionRecorder, ITileFactory tileFactory,
+        public WorldEditorModel(IVersionRecorder versionRecorder, ITileFactory tileFactory,
             IEntityFactory entityFactory, ITileCollection tileCollection, IRegionRebuilder regionRebuilder)
         {
-            _worldVersionRecorder = worldVersionRecorder;
+            _versionRecorder = versionRecorder;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
             _tileCollection = tileCollection;
@@ -88,7 +87,7 @@ namespace CodeBase.WorldEditor
                     throw new ArgumentOutOfRangeException();
             }
 
-            _worldVersionRecorder.RecordFromBufferAndClearBuffer();
+            _versionRecorder.RecordFromBufferAndClearBuffer();
             _selectedHex.Clear();
         }
 
@@ -97,7 +96,7 @@ namespace CodeBase.WorldEditor
             DestroyTile(hex);
 
             _tileFactory.Create(hex, _currentRegion);
-            _worldVersionRecorder.AddToBuffer(new CreateTileOperationData(hex, _currentRegion));
+            _versionRecorder.AddToBuffer(new CreateTileOperationData(hex, _currentRegion));
         }
 
         private void DestroyTile(HexPosition hex)
@@ -108,7 +107,7 @@ namespace CodeBase.WorldEditor
             if (tile.Entity != null)
                 DestroyEntity(hex);
 
-            _worldVersionRecorder.AddToBuffer(new DestroyTileOperationData(hex, tile.Region.Type));
+            _versionRecorder.AddToBuffer(new DestroyTileOperationData(hex, tile.Region.Type));
             _tileFactory.Destroy(tile);
         }
 
@@ -117,7 +116,7 @@ namespace CodeBase.WorldEditor
             DestroyEntity(hex);
 
             if (_entityFactory.TryCreate(hex, _currentEntityType))
-                _worldVersionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _currentEntityType));
+                _versionRecorder.AddToBuffer(new CreateEntityOperationData(hex, _currentEntityType));
         }
 
         private void DestroyEntity(HexPosition hex)
@@ -127,7 +126,7 @@ namespace CodeBase.WorldEditor
 
             if (tile.Entity != null)
             {
-                _worldVersionRecorder.AddToBuffer(new DestroyEntityOperationData(hex, tile.Entity.Type));
+                _versionRecorder.AddToBuffer(new DestroyEntityOperationData(hex, tile.Entity.Type));
                 _entityFactory.Destroy(hex);
             }
         }

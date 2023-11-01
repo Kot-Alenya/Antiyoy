@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Collection
         {
             var neighbours = new List<TileData>();
 
-            foreach (var direction in HexPositionDirections.Directions)
+            foreach (var direction in HexPositionDirectionUtilities.Directions)
             {
                 var neighbourHex = rootHex + direction;
 

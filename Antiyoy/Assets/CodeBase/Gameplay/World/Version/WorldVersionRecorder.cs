@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.World.Version.Operation;
 
-namespace CodeBase.Gameplay.World.Version.Recorder
+namespace CodeBase.Gameplay.World.Version
 {
-    public class WorldVersionRecorder : IWorldVersionRecorder
+    public class WorldVersionRecorder
     {
-        private readonly List<IOperationData[]> _records = new();
+        private readonly List<IWorldVersionOperation[]> _records = new();
         private int _readIndex = -1;
 
-        public readonly List<IOperationData> Buffer = new();
+        private readonly List<IWorldVersionOperation> _buffer = new();
 
-        public void Record(params IOperationData[] operations)
+        private void Record(params IWorldVersionOperation[] operations)
         {
             _readIndex++;
             _records.RemoveRange(_readIndex, _records.Count - _readIndex);
             _records.Add(operations);
         }
 
-        public void AddToBuffer(IOperationData operation) => Buffer.Add(operation);
+        public void AddToBuffer(IWorldVersionOperation operation) => _buffer.Add(operation);
 
         public void RecordFromBufferAndClearBuffer()
         {
-            Record(Buffer.ToArray());
-            Buffer.Clear();
+            Record(_buffer.ToArray());
+            _buffer.Clear();
         }
 
         public void ClearRecords()
@@ -32,7 +31,7 @@ namespace CodeBase.Gameplay.World.Version.Recorder
             _readIndex = -1;
         }
 
-        public bool TryGetPreviousRecord(out IOperationData[] record)
+        public bool TryGetPreviousRecord(out IWorldVersionOperation[] record)
         {
             if (_readIndex >= 0)
             {
@@ -41,11 +40,11 @@ namespace CodeBase.Gameplay.World.Version.Recorder
                 return true;
             }
 
-            record = Array.Empty<IOperationData>();
+            record = Array.Empty<IWorldVersionOperation>();
             return false;
         }
 
-        public bool TryGetNextRecord(out IOperationData[] record)
+        public bool TryGetNextRecord(out IWorldVersionOperation[] record)
         {
             if (_readIndex < _records.Count - 1)
             {
@@ -54,7 +53,7 @@ namespace CodeBase.Gameplay.World.Version.Recorder
                 return true;
             }
 
-            record = Array.Empty<IOperationData>();
+            record = Array.Empty<IWorldVersionOperation>();
             return false;
         }
     }
