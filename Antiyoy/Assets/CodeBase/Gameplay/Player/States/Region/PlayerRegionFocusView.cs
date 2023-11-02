@@ -1,18 +1,19 @@
 ﻿using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Region
 {
     public class PlayerRegionFocusView
     {
-        private readonly ITileCollection _tileCollection;
+        private readonly ITerrain _terrain;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        public PlayerRegionFocusView(ITileCollection tileCollection, IStaticDataProvider staticDataProvider)
+        public PlayerRegionFocusView(IStaticDataProvider staticDataProvider, ITerrain terrain)
         {
-            _tileCollection = tileCollection;
+            _terrain = terrain;
             _staticDataProvider = staticDataProvider;
         }
 
@@ -26,7 +27,7 @@ namespace CodeBase.Gameplay.Player.States.Region
                 var neighbourHex = tile.Hex + direction;
                 var directionType = HexPositionDirectionUtilities.GetDirectionType(direction);
 
-                if (_tileCollection.TryGet(neighbourHex, out var neighbor))
+                if (_terrain.TryGetTile(neighbourHex, out var neighbor))
                 {
                     if (neighbor.Region.Type != region.Type)
                         tile.Instance.Borders[directionType].color = playerStaticData.SelectedRegionBorderColor;
@@ -40,7 +41,7 @@ namespace CodeBase.Gameplay.Player.States.Region
         {
             var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
 
-            foreach (var tile in _tileCollection)
+            foreach (var tile in _terrain)
             foreach (var border in tile.Instance.Borders)
                 border.Value.color = playerStaticData.UnSelectedRegionBorderColor;
         }

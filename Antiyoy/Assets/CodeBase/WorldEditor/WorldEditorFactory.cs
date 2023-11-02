@@ -21,10 +21,7 @@ namespace CodeBase.WorldEditor
         {
             var mapEditorStaticData = _staticDataProvider.Get<WorldEditorStaticData>();
             var instance = Object.Instantiate(mapEditorStaticData.Prefab);
-            var model = _container.Instantiate<WorldEditorModel>();
-            var controller = _container.Instantiate<WorldEditorController>(new object[] { model });
-
-            _container.Bind<IWorldEditorController>().FromInstance(controller).AsSingle();
+            
             _container.InjectGameObject(instance.gameObject);
         }
     }

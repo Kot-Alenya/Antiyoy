@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Region;
+﻿using CodeBase.Gameplay.World.Terrain.Region.Data;
 
 namespace CodeBase.Gameplay.Player.Data
 {

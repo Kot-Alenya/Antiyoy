@@ -1,6 +1,7 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
 using CodeBase.WorldEditor;
+using CodeBase.WorldEditor.Controller;
 using Zenject;
 
 namespace CodeBase.Infrastructure.WorldEditor
@@ -12,7 +13,9 @@ namespace CodeBase.Infrastructure.WorldEditor
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<WorldEditorFactory>().AsSingle();
             Container.Bind<DebugWindowFactory>().AsSingle();
-
+            Container.Bind<WorldEditorModel>().AsSingle();
+            Container.Bind<IWorldEditorController>().To<WorldEditorController>().AsSingle();
+            
             Container.BindInterfacesTo<WorldEditorStartup>().AsSingle();
         }
     }

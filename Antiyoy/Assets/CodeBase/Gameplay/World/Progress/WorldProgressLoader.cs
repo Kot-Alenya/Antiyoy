@@ -1,24 +1,22 @@
-﻿using CodeBase.Gameplay.World.Progress.SavedData;
+﻿using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
+using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
+using CodeBase.Gameplay.World.Terrain.Tile;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader.Watcher;
 
 namespace CodeBase.Gameplay.World.Progress
 {
     public class WorldProgressLoader : IProgressReader<WorldProgressData>
     {
-        private readonly ITileCollection _tileCollection;
-        private readonly ITileFactory _tileFactory;
-        private readonly IEntityFactory _entityFactory;
-        private readonly IRegionRebuilder _regionRebuilder;
+        private readonly ITerrain _terrain;
+        private readonly TileFactory _tileFactory;
+        private readonly EntityFactory _entityFactory;
+        private readonly RegionRebuilder _regionRebuilder;
 
-        public WorldProgressLoader(ITileCollection tileCollection, ITileFactory tileFactory,
-            IEntityFactory entityFactory, IRegionRebuilder regionRebuilder)
+        public WorldProgressLoader(ITerrain terrain, TileFactory tileFactory,
+            EntityFactory entityFactory, RegionRebuilder regionRebuilder)
         {
-            _tileCollection = tileCollection;
+            _terrain = terrain;
             _tileFactory = tileFactory;
             _entityFactory = entityFactory;
             _regionRebuilder = regionRebuilder;
@@ -26,7 +24,8 @@ namespace CodeBase.Gameplay.World.Progress
 
         public void OnProgressLoad(WorldProgressData progress)
         {
-            _tileCollection.Initialize(progress.TerrainSize.FromSaved());
+            /*
+            _terrain.Initialize(progress.TerrainSize.FromSaved());
 
             foreach (var savedTile in progress.SavedTiles)
             {
@@ -39,6 +38,7 @@ namespace CodeBase.Gameplay.World.Progress
             }
 
             _regionRebuilder.RebuildFromBufferAndClearBuffer();
+            */
         }
     }
 }

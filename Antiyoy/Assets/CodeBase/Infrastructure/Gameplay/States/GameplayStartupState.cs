@@ -3,7 +3,6 @@ using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.UI;
 using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
@@ -12,18 +11,17 @@ namespace CodeBase.Infrastructure.Gameplay.States
     public class GameplayStartupState : IEnterState
     {
         private readonly CameraFactory _cameraFactory;
-        private readonly ITerrainFactory _terrainFactory;
+        private readonly TerrainFactory _terrainFactory;
         private readonly IProgressSaveLoader _progressSaveLoader;
         private readonly WorldProgressSaver _worldProgressSaver;
         private readonly WorldProgressLoader _worldProgressLoader;
         private readonly GameplayUIFactory _gameplayUIFactory;
         private readonly PlayerFactory _playerFactory;
-        private readonly RegionCoinsCounter _regionCoinsCounter;
 
-        public GameplayStartupState(CameraFactory cameraFactory, ITerrainFactory terrainFactory,
+        public GameplayStartupState(CameraFactory cameraFactory, TerrainFactory terrainFactory,
             IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver,
             WorldProgressLoader worldProgressLoader, GameplayUIFactory gameplayUIFactory,
-            PlayerFactory playerFactory, RegionCoinsCounter regionCoinsCounter)
+            PlayerFactory playerFactory)
         {
             _cameraFactory = cameraFactory;
             _terrainFactory = terrainFactory;
@@ -32,7 +30,6 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _worldProgressLoader = worldProgressLoader;
             _gameplayUIFactory = gameplayUIFactory;
             _playerFactory = playerFactory;
-            _regionCoinsCounter = regionCoinsCounter;
         }
 
         public void Enter()
@@ -47,7 +44,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
 
             _progressSaveLoader.Load<WorldProgressData>("World");
 
-            _regionCoinsCounter.RecountAllRegions();
+            //_regionCoinsCounter.RecountAllRegions();
         }
     }
 }

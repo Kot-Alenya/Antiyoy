@@ -1,8 +1,6 @@
 ﻿using CodeBase.Dev.DebugWindow;
 using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 using CodeBase.WorldEditor;
 
@@ -13,23 +11,15 @@ namespace CodeBase.Infrastructure.WorldEditor.States
         private readonly CameraFactory _cameraFactory;
         private readonly WorldEditorFactory _worldEditorFactory;
         private readonly DebugWindowFactory _debugWindowFactory;
-        private readonly ITerrainFactory _terrainFactory;
-        private readonly IProgressSaveLoader _progressSaveLoader;
-        private readonly WorldProgressSaver _worldProgressSaver;
-        private readonly WorldProgressLoader _worldProgressLoader;
+        private readonly TerrainFactory _terrainFactory;
 
         public WorldEditorStartupState(CameraFactory cameraFactory, WorldEditorFactory worldEditorFactory,
-            DebugWindowFactory debugWindowFactory, ITerrainFactory terrainFactory,
-            IProgressSaveLoader progressSaveLoader, WorldProgressSaver worldProgressSaver,
-            WorldProgressLoader worldProgressLoader)
+            DebugWindowFactory debugWindowFactory, TerrainFactory terrainFactory)
         {
             _cameraFactory = cameraFactory;
             _worldEditorFactory = worldEditorFactory;
             _debugWindowFactory = debugWindowFactory;
             _terrainFactory = terrainFactory;
-            _progressSaveLoader = progressSaveLoader;
-            _worldProgressSaver = worldProgressSaver;
-            _worldProgressLoader = worldProgressLoader;
         }
 
         public void Enter()
@@ -38,11 +28,6 @@ namespace CodeBase.Infrastructure.WorldEditor.States
             _cameraFactory.Create();
             _worldEditorFactory.Create();
             _debugWindowFactory.Create();
-
-            _progressSaveLoader.RegisterWatcher(_worldProgressSaver);
-            _progressSaveLoader.RegisterWatcher(_worldProgressLoader);
-
-            _progressSaveLoader.Load<WorldProgressData>("World");
         }
     }
 }

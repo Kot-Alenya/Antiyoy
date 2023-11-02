@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Region;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States
@@ -12,13 +12,13 @@ namespace CodeBase.Gameplay.Player.States
         private readonly PlayerData _playerData;
         private readonly PlayerStateMachine _playerStateMachine;
         private readonly IPlayerInput _playerInput;
-        private readonly ITileCollection _tileCollection;
+        private readonly ITerrain _terrain;
 
         public PlayerDefaultState(PlayerData playerData, PlayerStateMachine playerStateMachine,
-            IPlayerInput playerInput, ITileCollection tileCollection)
+            IPlayerInput playerInput, ITerrain terrain)
         {
             _playerInput = playerInput;
-            _tileCollection = tileCollection;
+            _terrain = terrain;
             _playerData = playerData;
             _playerStateMachine = playerStateMachine;
         }
@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.Player.States
 
         private void HandleInput(HexPosition hex)
         {
-            if (_tileCollection.TryGet(hex, out var tile))
+            if (_terrain.TryGetTile(hex, out var tile))
                 if (tile.Region.Type == _playerData.RegionType)
                     _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                         new PlayerSelectRegionStateData(tile.Region));

@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Player.Data;
-using CodeBase.Gameplay.Player.Input;
-using CodeBase.Gameplay.Player.States.Region;
-using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuild;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
-using CodeBase.Gameplay.World.Terrain.Tile.Data;
-using CodeBase.Gameplay.World.Terrain.Tile.Factory;
-using CodeBase.Gameplay.World.Version.Operation;
+﻿using System;
 using CodeBase.Infrastructure.Services.StateMachine.States;
-using CodeBase.Infrastructure.Services.StaticData;
 
 namespace CodeBase.Gameplay.Player.States.Entity
 {
     public class PlayerCreateEntityState : IEnterState<PlayerCreateEntityStateData>, IExitState
     {
+        public void Enter(PlayerCreateEntityStateData parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Exit()
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
         private readonly IPlayerInput _playerInput;
         private readonly ITileCollection _tileCollection;
         private readonly PlayerTileFocusView _focusView;
@@ -28,7 +27,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         private readonly IVersionRecorder _versionRecorder;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        private List<TileData> _tilesToCreateEntities;
+        private List<TileObject> _tilesToCreateEntities;
         private EntityType _entityTypeToCreate;
 
         public PlayerCreateEntityState(IPlayerInput playerInput, ITileCollection tileCollection,
@@ -142,5 +141,6 @@ namespace CodeBase.Gameplay.Player.States.Entity
             _tileFactory.Create(hex, _playerData.RegionType);
             _versionRecorder.AddToBuffer(new CreateTileOperationData(hex, _playerData.RegionType));
         }
+            */
     }
 }

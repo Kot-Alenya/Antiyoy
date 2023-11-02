@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain;
 using UnityEngine;
 using Zenject;
 
@@ -9,15 +9,15 @@ namespace CodeBase.Dev.DebugWindow
     public class DebugWindowInput : MonoBehaviour
     {
         private ICameraController _cameraController;
-        private ITileCollection _tileCollection;
+        private ITerrain _terrain;
         private IDebugWindowController _debugWindowController;
 
         [Inject]
-        private void Construct(ICameraController cameraController, ITileCollection tileCollection,
+        private void Construct(ICameraController cameraController, ITerrain terrain,
             IDebugWindowController debugWindowController)
         {
             _cameraController = cameraController;
-            _tileCollection = tileCollection;
+            _terrain = terrain;
             _debugWindowController = debugWindowController;
         }
 
@@ -38,7 +38,7 @@ namespace CodeBase.Dev.DebugWindow
 
             var hitHex = HexMath.FromWorldPosition(hit.point);
 
-            if (_tileCollection.TryGet(hitHex, out var tile))
+            if (_terrain.TryGetTile(hitHex, out var tile))
             {
                 window.Show();
                 window.UpdateInformation(tile);

@@ -5,19 +5,19 @@ namespace CodeBase.Gameplay.World.Version
 {
     public class WorldVersionRecorder
     {
-        private readonly List<IWorldVersionOperation[]> _records = new();
+        private readonly List<IWorldVersionOperationData[]> _records = new();
         private int _readIndex = -1;
 
-        private readonly List<IWorldVersionOperation> _buffer = new();
+        private readonly List<IWorldVersionOperationData> _buffer = new();
 
-        private void Record(params IWorldVersionOperation[] operations)
+        private void Record(params IWorldVersionOperationData[] operations)
         {
             _readIndex++;
             _records.RemoveRange(_readIndex, _records.Count - _readIndex);
             _records.Add(operations);
         }
 
-        public void AddToBuffer(IWorldVersionOperation operation) => _buffer.Add(operation);
+        public void AddToBuffer(IWorldVersionOperationData operationHandler) => _buffer.Add(operationHandler);
 
         public void RecordFromBufferAndClearBuffer()
         {
@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.World.Version
             _readIndex = -1;
         }
 
-        public bool TryGetPreviousRecord(out IWorldVersionOperation[] record)
+        public bool TryGetPreviousRecord(out IWorldVersionOperationData[] record)
         {
             if (_readIndex >= 0)
             {
@@ -40,11 +40,11 @@ namespace CodeBase.Gameplay.World.Version
                 return true;
             }
 
-            record = Array.Empty<IWorldVersionOperation>();
+            record = Array.Empty<IWorldVersionOperationData>();
             return false;
         }
 
-        public bool TryGetNextRecord(out IWorldVersionOperation[] record)
+        public bool TryGetNextRecord(out IWorldVersionOperationData[] record)
         {
             if (_readIndex < _records.Count - 1)
             {
@@ -53,7 +53,7 @@ namespace CodeBase.Gameplay.World.Version
                 return true;
             }
 
-            record = Array.Empty<IWorldVersionOperation>();
+            record = Array.Empty<IWorldVersionOperationData>();
             return false;
         }
     }

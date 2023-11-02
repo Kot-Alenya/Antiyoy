@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Progress.SavedData;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader.Watcher;
 
 namespace CodeBase.Gameplay.World.Progress
 {
     public class WorldProgressSaver : IProgressWriter<WorldProgressData>
     {
-        private readonly ITileCollection _tileCollection;
+        private readonly ITerrain _tileCollection;
 
-        public WorldProgressSaver(ITileCollection tileCollection) => _tileCollection = tileCollection;
+        public WorldProgressSaver(ITerrain tileCollection) => _tileCollection = tileCollection;
 
         public void OnProgressSave(WorldProgressData progress)
         {

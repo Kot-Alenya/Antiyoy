@@ -1,7 +1,8 @@
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Progress;
-using CodeBase.Gameplay.World.Region;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Version;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader;
 using CodeBase.WorldEditor.Data;
 
@@ -10,14 +11,14 @@ namespace CodeBase.WorldEditor.Controller
     public class WorldEditorController : IWorldEditorController
     {
         private readonly WorldEditorModel _worldEditorModel;
-        private readonly IVersionHandler _versionHandler;
+        private readonly WorldVersionManager _worldVersionManager;
         private readonly IProgressSaveLoader _progressSaveLoader;
 
-        public WorldEditorController(WorldEditorModel worldEditorModel, IVersionHandler versionHandler,
+        public WorldEditorController(WorldEditorModel worldEditorModel, WorldVersionManager worldVersionManager,
             IProgressSaveLoader progressSaveLoader)
         {
             _worldEditorModel = worldEditorModel;
-            _versionHandler = versionHandler;
+            _worldVersionManager = worldVersionManager;
             _progressSaveLoader = progressSaveLoader;
         }
 
@@ -31,9 +32,9 @@ namespace CodeBase.WorldEditor.Controller
 
         public void ProcessTiles() => _worldEditorModel.ProcessTiles();
 
-        public void ReturnBack() => _versionHandler.ReturnBack();
+        public void ReturnBack() => _worldVersionManager.ReturnBack();
 
-        public void ReturnNext() => _versionHandler.ReturnNext();
+        public void ReturnNext() => _worldVersionManager.ReturnNext();
 
         public void SaveWorld() => _progressSaveLoader.Save<WorldProgressData>("World");
     }

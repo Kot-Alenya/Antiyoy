@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.UI;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Tile.Collection;
+using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States.Region
@@ -13,18 +13,18 @@ namespace CodeBase.Gameplay.Player.States.Region
         private readonly PlayerRegionFocusView _focusView;
         private readonly IPlayerUIMediator _uiMediator;
         private readonly IPlayerInput _playerInput;
-        private readonly ITileCollection _tileCollection;
+        private readonly ITerrain _terrain;
         private readonly PlayerStateMachine _playerStateMachine;
 
         public PlayerSelectRegionState(PlayerData playerData, PlayerRegionFocusView focusView,
-            IPlayerUIMediator uiMediator, IPlayerInput playerInput, ITileCollection tileCollection,
+            IPlayerUIMediator uiMediator, IPlayerInput playerInput, ITerrain terrain,
             PlayerStateMachine playerStateMachine)
         {
             _playerData = playerData;
             _focusView = focusView;
             _uiMediator = uiMediator;
             _playerInput = playerInput;
-            _tileCollection = tileCollection;
+            _terrain = terrain;
             _playerStateMachine = playerStateMachine;
         }
 
@@ -49,7 +49,7 @@ namespace CodeBase.Gameplay.Player.States.Region
 
         private void HandleInput(HexPosition hex)
         {
-            if (!_tileCollection.TryGet(hex, out var tile))
+            if (!_terrain.TryGetTile(hex, out var tile))
                 _playerStateMachine.SwitchTo<PlayerDefaultState>();
 
             else if (tile.Region.Type != _playerData.RegionType)
