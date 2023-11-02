@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Tile
 {
-    public class TileArray : IEnumerable<TileData>
+    public class TileArray : IEnumerable<TileObject>
     {
-        private Vector2Int _size;
-        private TileData[] _tiles;
+        private readonly TileObject[] _tiles;
+        private readonly Vector2Int _size;
 
-        public void Initialize(Vector2Int size)
+        public TileArray(Vector2Int size)
         {
-            _tiles = new TileData[size.x * size.y];
+            _tiles = new TileObject[size.x * size.y];
             _size = size;
         }
 
@@ -35,23 +35,27 @@ namespace CodeBase.Gameplay.World.Tile
             return index.y < _size.y;
         }
 
-        public TileData Get(HexPosition hex) => _tiles[GetIndex(hex)];
+        public void Set(TileObject tile, HexPosition hex) => _tiles[GetIndex(hex)] = tile;
 
-        public bool TryGet(HexPosition hex, out TileData tile)
+        public void Remove(HexPosition hex) => _tiles[GetIndex(hex)] = null;
+        
+        public TileObject Get(HexPosition hex) => _tiles[GetIndex(hex)];
+
+        public bool TryGet(HexPosition hex, out TileObject tile)
         {
-            if (IsInArray(hex))
+            if (IsInArray(hex) && Get(hex) != null)
             {
                 tile = Get(hex);
-                return tile != null;
+                return true;
             }
 
-            tile = null;
+            tile = default;
             return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IEnumerator<TileData> GetEnumerator() => ((IEnumerable<TileData>)_tiles).GetEnumerator();
+        public IEnumerator<TileObject> GetEnumerator() => ((IEnumerable<TileObject>)_tiles).GetEnumerator();
 
         private int GetIndex(HexPosition hex)
         {

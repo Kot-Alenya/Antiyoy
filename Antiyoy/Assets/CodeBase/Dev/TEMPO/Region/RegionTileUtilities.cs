@@ -1,4 +1,6 @@
-﻿using CodeBase.Gameplay.World.Terrain.Tile.Data;
+﻿using CodeBase.Dev.TEMPO.Region.Data;
+using CodeBase.Dev.TEMPO.Region.Factory;
+using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
 namespace CodeBase.Dev.TEMPO.Region
 {
