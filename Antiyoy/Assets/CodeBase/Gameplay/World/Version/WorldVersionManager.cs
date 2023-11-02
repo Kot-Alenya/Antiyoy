@@ -20,7 +20,7 @@
         {
             if (!_worldVersionRecorder.TryGetNextRecord(out var record))
                 return;
-
+            
             for (var i = 0; i < record.Length; i++)
                 record[i].Handler.Apply(record[i]);
         }

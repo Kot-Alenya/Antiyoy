@@ -97,7 +97,7 @@ namespace CodeBase.WorldEditor
 
             _terrain.CreateEntity(_terrain.GetTile(hex), _currentEntityType);
             _worldVersionRecorder.AddToBuffer(
-                _entityVersionOperationFactory.GetDestroyOperation(hex, _currentEntityType));
+                _entityVersionOperationFactory.GetCreateOperation(hex, _currentEntityType));
         }
 
         private void TryDestroyEntity(HexPosition hex)

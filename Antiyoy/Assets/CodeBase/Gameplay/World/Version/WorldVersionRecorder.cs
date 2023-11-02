@@ -6,23 +6,18 @@ namespace CodeBase.Gameplay.World.Version
     public class WorldVersionRecorder
     {
         private readonly List<IWorldVersionOperationData[]> _records = new();
-        private int _readIndex = -1;
-
         private readonly List<IWorldVersionOperationData> _buffer = new();
-
-        private void Record(params IWorldVersionOperationData[] operations)
-        {
-            _readIndex++;
-            _records.RemoveRange(_readIndex, _records.Count - _readIndex);
-            _records.Add(operations);
-        }
+        private int _readIndex = -1;
 
         public void AddToBuffer(IWorldVersionOperationData operationHandler) => _buffer.Add(operationHandler);
 
         public void RecordFromBufferAndClearBuffer()
         {
-            Record(_buffer.ToArray());
-            _buffer.Clear();
+            if (_buffer.Count > 0)
+            {
+                Record(_buffer.ToArray());
+                _buffer.Clear();
+            }
         }
 
         public void ClearRecords()
@@ -55,6 +50,13 @@ namespace CodeBase.Gameplay.World.Version
 
             record = Array.Empty<IWorldVersionOperationData>();
             return false;
+        }
+
+        private void Record(params IWorldVersionOperationData[] operations)
+        {
+            _readIndex++;
+            _records.RemoveRange(_readIndex, _records.Count - _readIndex);
+            _records.Add(operations);
         }
     }
 }
