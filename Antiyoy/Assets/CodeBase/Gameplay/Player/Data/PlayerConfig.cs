@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CodeBase.Gameplay.Player.Data
 {
     [CreateAssetMenu(menuName = "Configurations/Player", fileName = "PlayerStaticData", order = 0)]
-    public class PlayerStaticData : ScriptableObjectStaticData
+    public class PlayerConfig : ScriptableObjectStaticData
     {
         public RegionType DefaultRegionType;
         public int DefaultCoinsCount;

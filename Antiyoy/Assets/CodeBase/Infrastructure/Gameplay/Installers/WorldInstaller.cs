@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.World.Progress;
+﻿using CodeBase.Gameplay.World;
+using CodeBase.Gameplay.World.Progress;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Entity;
 using CodeBase.Gameplay.World.Terrain.Entity.Operation;
@@ -18,6 +19,8 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
             BindTerrain();
             BindVersion();
             BindProgress();
+
+            Container.Bind<WorldFactory>().AsSingle();
         }
 
         private void BindTerrain()

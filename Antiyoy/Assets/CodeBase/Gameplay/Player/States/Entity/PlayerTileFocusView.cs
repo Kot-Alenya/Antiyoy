@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
@@ -6,26 +7,29 @@ namespace CodeBase.Gameplay.Player.States.Entity
 {
     public class PlayerTileFocusView
     {
+        private readonly PlayerData _playerData;
         private readonly ITerrain _terrain;
 
-        public PlayerTileFocusView(ITerrain terrain) => _terrain = terrain;
-
-        public void FocusAllTiles()
+        public PlayerTileFocusView(PlayerData playerData, ITerrain terrain)
         {
-            //foreach (var tile in _terrain)
-            //    tile.Instance.HideMaskSpriteRenderer.enabled = true;
+            _playerData = playerData;
+            _terrain = terrain;
         }
 
         public void UnFocusAllTiles()
         {
-            //foreach (var tile in _terrain)
-            //    tile.Instance.HideMaskSpriteRenderer.enabled = false;
+            _playerData.Instance.ShadowField.SetActive(false);
+            
+            foreach (var tile in _terrain)
+                tile.Instance.SpriteMask.enabled = false;
         }
 
-        public void UnFocusTiles(List<TileData> tiles)
+        public void FocusTiles(List<TileData> tiles)
         {
-            //foreach (var tile in tiles)
-            //    tile.Instance.HideMaskSpriteRenderer.enabled = false;
+            _playerData.Instance.ShadowField.SetActive(true);
+
+            foreach (var tile in tiles)
+                tile.Instance.SpriteMask.enabled = true;
         }
     }
 }

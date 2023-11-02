@@ -8,5 +8,6 @@ namespace CodeBase.Gameplay.Player.Data
     {
         public PlayerUIWindow PlayerUIWindow;
         public PlayerInput PlayerInput;
+        public GameObject ShadowField;
     }
 }

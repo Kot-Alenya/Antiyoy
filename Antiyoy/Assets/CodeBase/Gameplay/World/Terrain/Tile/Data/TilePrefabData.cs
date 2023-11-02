@@ -10,5 +10,6 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Data
     {
         [OdinSerialize] public Dictionary<HexDirectionType, SpriteRenderer> Borders;
         public SpriteRenderer SpriteRenderer;
+        public SpriteMask SpriteMask;
     }
 }

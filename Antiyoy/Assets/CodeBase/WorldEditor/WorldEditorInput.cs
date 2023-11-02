@@ -32,8 +32,7 @@ namespace CodeBase.WorldEditor
 
             if (Input.GetMouseButton(0))
             {
-                var ray = _cameraController.GetRay(Input.mousePosition);
-                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+                var hit = _cameraController.RaycastFromMouseScreenPoint();
 
                 if (hit.transform == default)
                     return;

@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.Player.States.Region
 
         public void FocusRegion(RegionData region)
         {
-            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
+            var playerStaticData = _staticDataProvider.Get<PlayerConfig>();
 
             foreach (var tile in region.Tiles)
             foreach (var direction in HexPositionDirectionUtilities.Directions)
@@ -39,7 +39,7 @@ namespace CodeBase.Gameplay.Player.States.Region
 
         public void UnFocusAllRegion()
         {
-            var playerStaticData = _staticDataProvider.Get<PlayerStaticData>();
+            var playerStaticData = _staticDataProvider.Get<PlayerConfig>();
 
             foreach (var tile in _terrain)
             foreach (var border in tile.Instance.Borders)

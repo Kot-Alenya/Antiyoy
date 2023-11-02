@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Entity.Operation;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
-using CodeBase.Gameplay.World.Terrain.Tile.Operation;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.WorldEditor.Data;
 
@@ -15,21 +14,17 @@ namespace CodeBase.WorldEditor
     {
         private readonly ITerrain _terrain;
         private readonly WorldVersionRecorder _worldVersionRecorder;
-        private readonly TileVersionOperationFactory _tileVersionOperationFactory;
-        private readonly EntityVersionOperationFactory _entityVersionOperationFactory;
+        private readonly WorldFactory _worldFactory;
         private readonly List<HexPosition> _selectedHex = new();
         private WorldEditorMode _currentMode;
         private RegionType _currentRegion;
         private EntityType _currentEntityType;
 
-        public WorldEditorModel(ITerrain terrain, WorldVersionRecorder worldVersionRecorder,
-            TileVersionOperationFactory tileVersionOperationFactory,
-            EntityVersionOperationFactory entityVersionOperationFactory)
+        public WorldEditorModel(ITerrain terrain, WorldVersionRecorder worldVersionRecorder, WorldFactory worldFactory)
         {
             _terrain = terrain;
             _worldVersionRecorder = worldVersionRecorder;
-            _tileVersionOperationFactory = tileVersionOperationFactory;
-            _entityVersionOperationFactory = entityVersionOperationFactory;
+            _worldFactory = worldFactory;
         }
 
         public void SetCurrentMode(WorldEditorMode mode) => _currentMode = mode;
@@ -48,16 +43,16 @@ namespace CodeBase.WorldEditor
                 case WorldEditorMode.None:
                     break;
                 case WorldEditorMode.CreateTile:
-                    CreateTile(hex);
+                    _worldFactory.CreateTile(hex, _currentRegion);
                     break;
                 case WorldEditorMode.DestroyTile:
-                    TryDestroyTile(hex);
+                    _worldFactory.TryDestroyTile(hex);
                     break;
                 case WorldEditorMode.CreateEntity:
-                    CreateEntity(hex);
+                    _worldFactory.CreateEntity(hex, _currentEntityType);
                     break;
                 case WorldEditorMode.DestroyEntity:
-                    TryDestroyEntity(hex);
+                    _worldFactory.TryDestroyEntity(hex);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -70,47 +65,6 @@ namespace CodeBase.WorldEditor
         {
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
             _selectedHex.Clear();
-        }
-
-        private void CreateTile(HexPosition hex)
-        {
-            TryDestroyTile(hex);
-
-            _terrain.CreateTile(hex, _currentRegion);
-            _worldVersionRecorder.AddToBuffer(_tileVersionOperationFactory.GetCreateOperation(hex, _currentRegion));
-        }
-
-        private void TryDestroyTile(HexPosition hex)
-        {
-            if (!_terrain.TryGetTile(hex, out var tile))
-                return;
-
-            TryDestroyEntity(hex);
-
-            _terrain.DestroyTile(tile);
-            _worldVersionRecorder.AddToBuffer(_tileVersionOperationFactory.GetDestroyOperation(hex, _currentRegion));
-        }
-
-        private void CreateEntity(HexPosition hex)
-        {
-            TryDestroyEntity(hex);
-
-            _terrain.CreateEntity(_terrain.GetTile(hex), _currentEntityType);
-            _worldVersionRecorder.AddToBuffer(
-                _entityVersionOperationFactory.GetCreateOperation(hex, _currentEntityType));
-        }
-
-        private void TryDestroyEntity(HexPosition hex)
-        {
-            if (!_terrain.TryGetTile(hex, out var tile))
-                return;
-
-            if (tile.Entity != null)
-            {
-                _terrain.DestroyEntity(tile.Entity);
-                _worldVersionRecorder.AddToBuffer(
-                    _entityVersionOperationFactory.GetDestroyOperation(hex, _currentEntityType));
-            }
         }
     }
 }

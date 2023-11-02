@@ -26,8 +26,7 @@ namespace CodeBase.Dev.DebugWindow
             if (!Input.GetMouseButtonDown(1))
                 return;
 
-            var ray = _cameraController.GetRay(Input.mousePosition);
-            var hit = Physics2D.Raycast(ray.origin, ray.direction);
+            var hit = _cameraController.RaycastFromMouseScreenPoint();
             var window = _debugWindowController.Window;
 
             if (hit.transform == default)

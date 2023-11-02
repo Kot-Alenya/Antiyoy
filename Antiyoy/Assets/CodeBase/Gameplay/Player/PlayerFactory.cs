@@ -27,7 +27,7 @@ namespace CodeBase.Gameplay.Player
         public void Create()
         {
             var instance = Object.Instantiate(_playerPrefabData);
-            var data = CreatePlayerData();
+            var data = CreatePlayerData(instance);
 
             instance.PlayerUIWindow.Initialize();
 
@@ -39,12 +39,11 @@ namespace CodeBase.Gameplay.Player
             _playerStateMachine.SwitchTo<PlayerDefaultState>();
         }
 
-        private PlayerData CreatePlayerData()
+        private PlayerData CreatePlayerData(PlayerPrefabData instance)
         {
-            var preset = _staticDataProvider.Get<PlayerStaticData>();
-            var data = new PlayerData
+            var preset = _staticDataProvider.Get<PlayerConfig>();
+            var data = new PlayerData(instance, preset.DefaultRegionType)
             {
-                RegionType = preset.DefaultRegionType,
                 CoinsCount = preset.DefaultCoinsCount
             };
 

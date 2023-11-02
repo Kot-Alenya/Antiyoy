@@ -23,8 +23,7 @@ namespace CodeBase.Gameplay.Player.Input
 
             if (UnityEngine.Input.GetMouseButtonDown(0))
             {
-                var ray = _cameraController.GetRay(UnityEngine.Input.mousePosition);
-                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+                var hit = _cameraController.RaycastAllFromMouseScreenPointAndGetNearestBySortingOrder();
                 var hitPoint = hit.transform == default ? Vector2.one * float.MinValue : hit.point;
 
                 OnPlayerInput?.Invoke(HexMath.FromWorldPosition(hitPoint));

@@ -4,8 +4,15 @@ namespace CodeBase.Gameplay.Player.Data
 {
     public class PlayerData
     {
-        public RegionType RegionType;
-        public int CoinsCount;
+        public readonly PlayerPrefabData Instance;
+        public readonly RegionType RegionType;
         public RegionData CurrentRegion;
+        public int CoinsCount;
+
+        public PlayerData(PlayerPrefabData instance, RegionType regionType)
+        {
+            Instance = instance;
+            RegionType = regionType;
+        }
     }
 }
