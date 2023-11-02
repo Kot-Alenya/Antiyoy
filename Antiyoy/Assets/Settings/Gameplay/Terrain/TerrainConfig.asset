@@ -22,4 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Prefab: {fileID: 2565520810442341372, guid: 5a0199fac9256de4bb945b18110d6a75, type: 3}
-  Size: {x: 5, y: 5}
+  DefaultSize: {x: 5, y: 5}

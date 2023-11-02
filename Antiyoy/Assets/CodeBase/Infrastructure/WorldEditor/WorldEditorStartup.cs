@@ -10,6 +10,6 @@ namespace CodeBase.Infrastructure.WorldEditor
 
         public WorldEditorStartup(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        public void Initialize() => _stateMachine.SwitchTo<WorldEditorStartupState>();
+        public void Initialize() => _stateMachine.SwitchTo<WorldEditorLoadWorldState>();
     }
 }

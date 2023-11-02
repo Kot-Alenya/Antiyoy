@@ -34,7 +34,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
 
         public void Enter()
         {
-            _terrainFactory.Create();
+            //_terrainFactory.Create();
             _cameraFactory.Create();
             _gameplayUIFactory.Create();
             _playerFactory.Create();

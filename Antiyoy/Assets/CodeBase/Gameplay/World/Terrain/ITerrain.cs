@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Tile;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace CodeBase.Gameplay.World.Terrain
     public interface ITerrain : IEnumerable<TileData>
     {
         public Vector2Int Size { get; }
+
+        public void Initialize(TileArray tileArray);
 
         public bool IsInTerrain(HexPosition hex);
 

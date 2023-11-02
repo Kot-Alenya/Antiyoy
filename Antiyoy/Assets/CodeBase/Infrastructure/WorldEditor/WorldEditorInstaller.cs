@@ -11,11 +11,12 @@ namespace CodeBase.Infrastructure.WorldEditor
         public override void InstallBindings()
         {
             Container.Bind<CameraFactory>().AsSingle();
-            Container.Bind<WorldEditorFactory>().AsSingle();
             Container.Bind<DebugWindowFactory>().AsSingle();
+
+            Container.Bind<WorldEditorFactory>().AsSingle();
             Container.Bind<WorldEditorModel>().AsSingle();
             Container.Bind<IWorldEditorController>().To<WorldEditorController>().AsSingle();
-            
+
             Container.BindInterfacesTo<WorldEditorStartup>().AsSingle();
         }
     }

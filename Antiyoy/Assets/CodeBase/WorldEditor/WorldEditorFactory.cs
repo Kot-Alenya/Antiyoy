@@ -1,5 +1,4 @@
 using CodeBase.Infrastructure.Services.StaticData;
-using CodeBase.WorldEditor.Controller;
 using CodeBase.WorldEditor.Data;
 using UnityEngine;
 using Zenject;
@@ -21,7 +20,7 @@ namespace CodeBase.WorldEditor
         {
             var mapEditorStaticData = _staticDataProvider.Get<WorldEditorStaticData>();
             var instance = Object.Instantiate(mapEditorStaticData.Prefab);
-            
+
             _container.InjectGameObject(instance.gameObject);
         }
     }

@@ -7,6 +7,6 @@ namespace CodeBase.Gameplay.World.Terrain.Data
     public class TerrainConfig : ScriptableObjectStaticData
     {
         public TerrainPrefabData Prefab;
-        public Vector2Int Size;
+        public Vector2Int DefaultSize;
     }
 }

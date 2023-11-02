@@ -14,19 +14,17 @@ namespace CodeBase.Gameplay.World.Terrain
 {
     public class TerrainObject : ITerrain
     {
-        private readonly TileArray _tileArray;
         private readonly TileFactory _tileFactory;
         private readonly TileConnector _tileConnector;
         private readonly EntityFactory _entityFactory;
         private readonly RegionFactory _regionFactory;
         private readonly RegionRebuilder _regionRebuilder;
         private readonly RegionConnector _regionConnector;
+        private TileArray _tileArray;
 
-        public TerrainObject(TileArray tileArray, TileFactory tileFactory, TileConnector tileConnector,
-            EntityFactory entityFactory, RegionFactory regionFactory, RegionRebuilder regionRebuilder,
-            RegionConnector regionConnector)
+        public TerrainObject(TileFactory tileFactory, TileConnector tileConnector, EntityFactory entityFactory,
+            RegionFactory regionFactory, RegionRebuilder regionRebuilder, RegionConnector regionConnector)
         {
-            _tileArray = tileArray;
             _tileFactory = tileFactory;
             _regionFactory = regionFactory;
             _regionRebuilder = regionRebuilder;
@@ -36,6 +34,8 @@ namespace CodeBase.Gameplay.World.Terrain
         }
 
         public Vector2Int Size => _tileArray.Size;
+
+        public void Initialize(TileArray tileArray) => _tileArray = tileArray;
 
         public bool IsInTerrain(HexPosition hex) => _tileArray.IsInArray(hex);
 
