@@ -19,6 +19,10 @@ MonoBehaviour:
     - {fileID: -4724356662714697873, guid: cc39d115639e3a444beeaa76926856fe, type: 3}
     - {fileID: -4724356662714697873, guid: 6c57552dcd1d15b42b6c8c6c14f67a57, type: 3}
     - {fileID: -4724356662714697873, guid: 6010765b7d0cd324aa2c5015d3a20884, type: 3}
+    - {fileID: 6214659323934326926, guid: f2e360d8dbf2d3048a04a94c3e6ffc3c, type: 3}
+    - {fileID: 744388126975805290, guid: 7910911a5113f594887a14c33999cba2, type: 3}
+    - {fileID: 8047377957402820054, guid: b946a2e5b9a88bc4ab2a64821d248e1f, type: 3}
+    - {fileID: 1038506597755780547, guid: 537010568a463ee44ae68847eabef30a, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -26,12 +30,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Presets
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityType,
-        CodeBase],[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData,
-        CodeBase]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitType,
+        CodeBase],[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase]],
+        mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.World.Terrain.Entity.Data.EntityType,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitType,
         CodeBase]], mscorlib
     - Name: 
       Entry: 12
@@ -44,7 +48,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 8
     - Name: 
       Entry: 7
       Data: 
@@ -53,7 +57,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: 2|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 2|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
     - Name: Prefab
       Entry: 6
       Data: 
@@ -63,6 +67,9 @@ MonoBehaviour:
     - Name: Cost
       Entry: 3
       Data: 0
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -77,7 +84,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 3|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 3|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 0
@@ -85,6 +92,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
     - Name: Cost
+      Entry: 3
+      Data: 4
+    - Name: CostIncreaseFactor
       Entry: 3
       Data: 4
     - Name: 
@@ -101,7 +111,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 4|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 4|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 1
@@ -111,6 +121,9 @@ MonoBehaviour:
     - Name: Cost
       Entry: 3
       Data: 10
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -125,7 +138,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 5|CodeBase.Gameplay.World.Terrain.Entity.Data.EntityPresetData, CodeBase
+      Data: 5|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
     - Name: Prefab
       Entry: 10
       Data: 2
@@ -133,6 +146,117 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: Cost
+      Entry: 3
+      Data: 0
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: 6|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 3
+    - Name: Income
+      Entry: 3
+      Data: -4
+    - Name: Cost
+      Entry: 3
+      Data: 20
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 7
+      Data: 7|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 4
+    - Name: Income
+      Entry: 3
+      Data: -16
+    - Name: Cost
+      Entry: 3
+      Data: 30
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 7
+      Data: 8|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 5
+    - Name: Income
+      Entry: 3
+      Data: -32
+    - Name: Cost
+      Entry: 3
+      Data: 40
+    - Name: CostIncreaseFactor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: 9|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
+    - Name: Prefab
+      Entry: 10
+      Data: 6
+    - Name: Income
+      Entry: 3
+      Data: 0
+    - Name: Cost
+      Entry: 3
+      Data: 0
+    - Name: CostIncreaseFactor
       Entry: 3
       Data: 0
     - Name: 

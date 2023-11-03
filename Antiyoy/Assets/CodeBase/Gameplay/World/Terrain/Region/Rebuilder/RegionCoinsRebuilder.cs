@@ -30,16 +30,26 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
             if (region.CoinsCount < 0)
             {
                 region.CoinsCount = 0;
-                RemoveCombatUnits(region);
+                KillCombatUnits(region);
                 _regionIncomeRebuilder.Rebuild(region);
             }
         }
 
-        private void RemoveCombatUnits(RegionData region)
+        private void KillCombatUnits(RegionData region)
         {
             foreach (var tile in region.Tiles)
-                if (tile.Unit.Type == UnitType.Peasant)
-                    _terrain.DestroyUnit(tile.Unit);
+            {
+                switch (tile.Unit.Type)
+                {
+                    case UnitType.Peasant:
+                    case UnitType.Spearman:
+                    case UnitType.Baron:
+                    case UnitType.Knight:
+                        _terrain.DestroyUnit(tile.Unit);
+                        _terrain.CreateUnit(tile, UnitType.Grave, false);
+                        break;
+                }
+            }
         }
     }
 }

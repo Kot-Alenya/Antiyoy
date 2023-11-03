@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 2938084696214586041}
-  _entityType: 2
+  _unitType: 2
 --- !u!1 &7597132184924610152
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 7597132185151087027}
-  _entityType: 1
+  _unitType: 0
 --- !u!1 &7597132185533816368
 GameObject:
   m_ObjectHideFlags: 0

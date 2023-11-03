@@ -3,8 +3,15 @@
     public enum UnitType
     {
         None = 0,
-        Farm = 1,
+
+        //Combat
         Peasant = 2,
-        Pine = 3
+        Spearman = 5,
+        Baron = 6,
+        Knight = 7,
+        
+        Farm = 1,
+        Pine = 3,
+        Grave = 4
     }
 }

@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
             var config = _staticDataProvider.Get<UnitsConfig>();
             var preset = config.Presets[unitType];
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new UnitData()
+            var entity = new UnitData
             {
                 Instance = instance,
                 Preset = preset,
