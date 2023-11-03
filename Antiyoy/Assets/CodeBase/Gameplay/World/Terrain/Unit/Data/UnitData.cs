@@ -8,9 +8,6 @@ namespace CodeBase.Gameplay.World.Terrain.Unit.Data
         public UnitPresetData Preset;
         public TileData RootTile;
         public UnitType Type;
-        public int Income;
-        public int Cost;
-        public int CostIncreaseFactor;
         public bool IsCanMove;
     }
 }

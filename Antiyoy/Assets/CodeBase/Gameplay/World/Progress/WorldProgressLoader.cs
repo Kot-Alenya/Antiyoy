@@ -53,11 +53,12 @@ namespace CodeBase.Gameplay.World.Progress
             foreach (var savedTile in progress.SavedTiles)
             {
                 var hex = savedTile.Hex.FromSaved();
+                var unit = savedTile.Unit;
 
                 _terrain.CreateTile(hex, savedTile.RegionType);
 
-                if (savedTile.UnitType != UnitType.None)
-                    _terrain.CreateUnit(_terrain.GetTile(hex), savedTile.UnitType, true);
+                if (unit.Type != UnitType.None)
+                    _terrain.CreateUnit(_terrain.GetTile(hex), unit.Type, unit.IsCanMove);
             }
         }
     }

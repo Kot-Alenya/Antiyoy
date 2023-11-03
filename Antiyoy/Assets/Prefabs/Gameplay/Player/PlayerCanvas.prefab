@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 7597132185151087027}
-  _unitType: 0
+  _unitType: 1
 --- !u!1 &7597132185533816368
 GameObject:
   m_ObjectHideFlags: 0

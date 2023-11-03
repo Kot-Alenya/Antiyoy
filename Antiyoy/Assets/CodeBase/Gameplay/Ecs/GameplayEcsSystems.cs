@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.Ecs.Systems;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.ExtendedSystems;
 
 namespace CodeBase.Gameplay.Ecs
 {
@@ -19,11 +20,12 @@ namespace CodeBase.Gameplay.Ecs
         {
             _systems = new EcsSystems(_world);
             _systems
+                .AddWorld(_world, nameof(GameplayEcsWorld))
                 .Add(_systemFactory.Create<ReplaceGraveSystem>())
                 .Add(_systemFactory.Create<CoinCountSystem>())
                 .Add(_systemFactory.Create<KillStarvingUnitSystem>())
+                .DelHere<RegionStarvationEvent>()
                 .Add(_systemFactory.Create<SetUnitCanMoveSystem>())
-                //.DelHere<RegionStarvationEvent>()
                 .Init();
         }
 

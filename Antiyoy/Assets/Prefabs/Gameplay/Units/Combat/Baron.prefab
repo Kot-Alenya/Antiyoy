@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1002194094326791037}
   - component: {fileID: 6257052582953626120}
   - component: {fileID: 744388126975805290}
+  - component: {fileID: -2034347893617351857}
   m_Layer: 0
   m_Name: Baron
   m_TagString: Untagged
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e7e25d967a476089874aaa37698dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-2034347893617351857
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3903933396793123054}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

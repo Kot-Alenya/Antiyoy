@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
             var config = _staticDataProvider.Get<UnitsConfig>();
             var preset = config.Presets[unitType];
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new UnitData
+            var unit = new UnitData
             {
                 Instance = instance,
                 Preset = preset,
@@ -25,7 +25,10 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
                 IsCanMove = isCanMove
             };
 
-            return entity;
+            if (isCanMove)
+                unit.Instance.Animator.CanMove();
+            
+            return unit;
         }
 
         public void Destroy(UnitData unit) => Object.Destroy(unit.Instance.gameObject);

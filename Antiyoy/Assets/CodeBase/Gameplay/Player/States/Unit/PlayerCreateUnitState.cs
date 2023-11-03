@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Region;
@@ -23,8 +24,9 @@ namespace CodeBase.Gameplay.Player.States.Unit
         private readonly WorldFactory _worldFactory;
         private readonly ITerrain _terrain;
 
-        private List<TileData> _tilesToCreateUnits;
         private UnitType _unitTypeToCreate;
+        private List<TileData> _tilesToCreateUnitAndCanMove;
+        private List<TileData> _tilesToCreateUnitAndCantMove;
 
         public PlayerCreateUnitState(PlayerStateMachine playerStateMachine, PlayerData playerData,
             IPlayerInput playerInput, PlayerTileFocusView focusView, WorldVersionRecorder worldVersionRecorder,
@@ -41,9 +43,12 @@ namespace CodeBase.Gameplay.Player.States.Unit
 
         public void Enter(PlayerCreateUnitStateData parameter)
         {
-            _tilesToCreateUnits = GetTilesToCreateUnit();
             _unitTypeToCreate = parameter.UnitType;
-            _focusView.FocusTiles(_tilesToCreateUnits);
+            _tilesToCreateUnitAndCanMove = GetTilesToCreateUnitAndCanMove();
+            _tilesToCreateUnitAndCantMove = GetTilesToCreateUnitAndCantMove();
+
+            var tilesToFocus = _tilesToCreateUnitAndCanMove.Concat(_tilesToCreateUnitAndCantMove).ToList();
+            _focusView.FocusTiles(tilesToFocus);
 
             _playerInput.OnPlayerInput += HandleInput;
         }
@@ -60,36 +65,78 @@ namespace CodeBase.Gameplay.Player.States.Unit
 
             if (_terrain.TryGetTile(hex, out var tile))
             {
-                if (_tilesToCreateUnits.Contains(tile))
-                {
-                    CreateUnit(tile);
-                    currentRegion = _terrain.GetTile(hex).Region;
-                }
+                if (!IsCombatUnit(_unitTypeToCreate))
+                    CreateUnit(tile, false);
+                else if (_tilesToCreateUnitAndCanMove.Contains(tile))
+                    CreateUnit(tile, true);
+                else if (_tilesToCreateUnitAndCantMove.Contains(tile))
+                    CreateUnit(tile, false);
+
+                currentRegion = _terrain.GetTile(hex).Region;
             }
 
             _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                 new PlayerSelectRegionStateData(currentRegion));
         }
 
-        private List<TileData> GetTilesToCreateUnit()
+        private bool IsCombatUnit(UnitType unitType)
         {
-            var tilesToCreateEntity = new List<TileData>();
+            switch (unitType)
+            {
+                case UnitType.Peasant:
+                case UnitType.Spearman:
+                case UnitType.Baron:
+                case UnitType.Knight:
+                    return true;
+            }
+
+            return false;
+        }
+
+        private List<TileData> GetTilesToCreateUnitAndCanMove()
+        {
+            var tiles = new List<TileData>();
 
             foreach (var tile in _playerData.CurrentRegion.Tiles)
             {
-                if (tile.Unit.Type == UnitType.None)
-                    tilesToCreateEntity.Add(tile);
+                switch (tile.Unit.Type)
+                {
+                    case UnitType.None:
+                    case UnitType.Peasant:
+                    case UnitType.Spearman:
+                    case UnitType.Baron:
+                        tiles.Add(tile);
+                        break;
+                }
+            }
+
+            return tiles;
+        }
+
+        private List<TileData> GetTilesToCreateUnitAndCantMove()
+        {
+            var tiles = new List<TileData>();
+
+            foreach (var tile in _playerData.CurrentRegion.Tiles)
+            {
+                switch (tile.Unit.Type)
+                {
+                    case UnitType.Pine:
+                    case UnitType.Grave:
+                        tiles.Add(tile);
+                        break;
+                }
 
                 foreach (var neighbor in tile.Neighbors)
                     if (neighbor.Region.Type != _playerData.RegionType)
-                        if (!tilesToCreateEntity.Contains(neighbor))
-                            tilesToCreateEntity.Add(neighbor);
+                        if (!tiles.Contains(neighbor))
+                            tiles.Add(neighbor);
             }
 
-            return tilesToCreateEntity;
+            return tiles;
         }
 
-        private void CreateUnit(TileData tile)
+        private void CreateUnit(TileData tile, bool isCanMove)
         {
             var hex = tile.Hex;
 
@@ -101,7 +148,7 @@ namespace CodeBase.Gameplay.Player.States.Unit
                 _worldFactory.CreateTile(hex, _playerData.RegionType);
             }
 
-            _worldFactory.CreateUnit(hex, _unitTypeToCreate, true);
+            _worldFactory.CreateUnit(hex, _unitTypeToCreate, isCanMove);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
         }
     }

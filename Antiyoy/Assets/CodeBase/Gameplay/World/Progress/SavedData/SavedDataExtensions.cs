@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Progress.SavedData
@@ -12,7 +13,7 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
             {
                 Hex = tile.Hex.ToSaved(),
                 RegionType = tile.Region.Type,
-                UnitType = tile.Unit.Type
+                Unit = tile.Unit.ToSaved() 
             };
 
             return saved;
@@ -27,6 +28,15 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
             };
         }
 
+        public static SavedUnitData ToSaved(this UnitData unit)
+        {
+            return new SavedUnitData
+            {
+                Type = unit.Type,
+                IsCanMove = unit.IsCanMove
+            };
+        }
+        
         public static HexPosition FromSaved(this SavedHexPosition saved) => new(saved.Q, saved.R);
 
         public static SavedVector2Int ToSaved(this Vector2Int vector2Int)
