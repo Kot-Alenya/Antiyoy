@@ -12,6 +12,6 @@ namespace CodeBase.Gameplay.Player.UI
 
         public void SetIncomeCount(int incomeCount);
 
-        public void CreateEntity(EntityType entityType);
+        public void CreateUnit(UnitType unitType);
     }
 }

@@ -25,7 +25,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
         private void BindTerrain()
         {
-            BindEntity();
+            BindUnit();
             BindTile();
             BindRegion();
 
@@ -42,12 +42,12 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
             Container.Bind<DestroyTileOperationHandler>().AsSingle();
         }
 
-        private void BindEntity()
+        private void BindUnit()
         {
-            Container.Bind<EntityFactory>().AsSingle();
-            Container.Bind<EntityVersionOperationFactory>().AsSingle();
-            Container.Bind<CreateEntityOperationHandler>().AsSingle();
-            Container.Bind<DestroyEntityOperationHandler>().AsSingle();
+            Container.Bind<UnitFactory>().AsSingle();
+            Container.Bind<UnitVersionOperationFactory>().AsSingle();
+            Container.Bind<CreateUnitOperationHandler>().AsSingle();
+            Container.Bind<DestroyUnitOperationHandler>().AsSingle();
         }
 
         private void BindRegion()

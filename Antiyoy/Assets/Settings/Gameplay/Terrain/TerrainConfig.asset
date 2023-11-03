@@ -21,5 +21,5 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2565520810442341372, guid: 5a0199fac9256de4bb945b18110d6a75, type: 3}
   DefaultSize: {x: 5, y: 5}

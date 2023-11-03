@@ -9,6 +9,6 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
     {
         public SavedHexPosition Hex;
         public RegionType RegionType;
-        public EntityType EntityType;
+        public UnitType UnitType;
     }
 }

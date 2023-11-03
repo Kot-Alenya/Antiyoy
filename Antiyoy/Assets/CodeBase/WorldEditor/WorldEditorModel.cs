@@ -18,7 +18,7 @@ namespace CodeBase.WorldEditor
         private readonly List<HexPosition> _selectedHex = new();
         private WorldEditorMode _currentMode;
         private RegionType _currentRegion;
-        private EntityType _currentEntityType;
+        private UnitType _currentUnitType;
 
         public WorldEditorModel(ITerrain terrain, WorldVersionRecorder worldVersionRecorder, WorldFactory worldFactory)
         {
@@ -31,7 +31,7 @@ namespace CodeBase.WorldEditor
 
         public void SetCurrentRegion(RegionType region) => _currentRegion = region;
 
-        public void SetCurrentEntity(EntityType entityType) => _currentEntityType = entityType;
+        public void SetCurrentUnit(UnitType unitType) => _currentUnitType = unitType;
 
         public void SelectTile(HexPosition hex)
         {
@@ -48,11 +48,11 @@ namespace CodeBase.WorldEditor
                 case WorldEditorMode.DestroyTile:
                     _worldFactory.TryDestroyTile(hex);
                     break;
-                case WorldEditorMode.CreateEntity:
-                    _worldFactory.CreateEntity(hex, _currentEntityType);
+                case WorldEditorMode.CreateUnit:
+                    _worldFactory.CreateUnit(hex, _currentUnitType);
                     break;
-                case WorldEditorMode.DestroyEntity:
-                    _worldFactory.TryDestroyEntity(hex);
+                case WorldEditorMode.DestroyUnit:
+                    _worldFactory.TryDestroyUnit(hex);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

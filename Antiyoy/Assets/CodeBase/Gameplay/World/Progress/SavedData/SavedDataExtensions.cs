@@ -14,8 +14,8 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
                 RegionType = tile.Region.Type,
             };
 
-            if (tile.Entity != null)
-                saved.EntityType = tile.Entity.Type;
+            if (tile.Unit != null)
+                saved.UnitType = tile.Unit.Type;
 
             return saved;
         }

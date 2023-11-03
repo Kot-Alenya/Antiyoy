@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.World.Progress
         private readonly ITerrain _terrain;
         private readonly IStaticDataProvider _staticDataProvider;
         private readonly TileFactory _tileFactory;
-        private readonly EntityFactory _entityFactory;
+        private readonly UnitFactory _unitFactory;
 
         public WorldProgressLoader(TerrainFactory terrainFactory, TileFactory tileFactory, ITerrain terrain,
             IStaticDataProvider staticDataProvider)
@@ -56,8 +56,8 @@ namespace CodeBase.Gameplay.World.Progress
 
                 _terrain.CreateTile(hex, savedTile.RegionType);
 
-                if (savedTile.EntityType != EntityType.None)
-                    _terrain.CreateEntity(_terrain.GetTile(hex), savedTile.EntityType);
+                if (savedTile.UnitType != UnitType.None)
+                    _terrain.CreateUnit(_terrain.GetTile(hex), savedTile.UnitType);
             }
         }
     }

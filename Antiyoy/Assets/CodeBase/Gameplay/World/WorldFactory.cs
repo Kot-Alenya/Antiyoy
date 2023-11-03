@@ -13,16 +13,16 @@ namespace CodeBase.Gameplay.World
         private readonly ITerrain _terrain;
         private readonly WorldVersionRecorder _worldVersionRecorder;
         private readonly TileVersionOperationFactory _tileVersionOperationFactory;
-        private readonly EntityVersionOperationFactory _entityVersionOperationFactory;
+        private readonly UnitVersionOperationFactory _unitVersionOperationFactory;
 
         public WorldFactory(ITerrain terrain, WorldVersionRecorder worldVersionRecorder,
             TileVersionOperationFactory tileVersionOperationFactory,
-            EntityVersionOperationFactory entityVersionOperationFactory)
+            UnitVersionOperationFactory unitVersionOperationFactory)
         {
             _terrain = terrain;
             _worldVersionRecorder = worldVersionRecorder;
             _tileVersionOperationFactory = tileVersionOperationFactory;
-            _entityVersionOperationFactory = entityVersionOperationFactory;
+            _unitVersionOperationFactory = unitVersionOperationFactory;
         }
 
         public void CreateTile(HexPosition hex, RegionType regionType)
@@ -38,33 +38,33 @@ namespace CodeBase.Gameplay.World
             if (!_terrain.TryGetTile(hex, out var tile))
                 return;
 
-            TryDestroyEntity(hex);
+            TryDestroyUnit(hex);
 
             _worldVersionRecorder.AddToBuffer(_tileVersionOperationFactory.GetDestroyOperation(hex, tile.Region.Type));
             _terrain.DestroyTile(tile);
         }
 
-        public void CreateEntity(HexPosition hex, EntityType entityType)
+        public void CreateUnit(HexPosition hex, UnitType unitType)
         {
-            TryDestroyEntity(hex);
+            TryDestroyUnit(hex);
 
-            _terrain.CreateEntity(_terrain.GetTile(hex), entityType);
+            _terrain.CreateUnit(_terrain.GetTile(hex), unitType);
             _worldVersionRecorder.AddToBuffer(
-                _entityVersionOperationFactory.GetCreateOperation(hex, entityType));
+                _unitVersionOperationFactory.GetCreateOperation(hex, unitType));
         }
 
-        public void TryDestroyEntity(HexPosition hex)
+        public void TryDestroyUnit(HexPosition hex)
         {
             if (!_terrain.TryGetTile(hex, out var tile))
                 return;
 
-            if (tile.Entity == null)
+            if (tile.Unit == null)
                 return;
 
             _worldVersionRecorder.AddToBuffer(
-                _entityVersionOperationFactory.GetDestroyOperation(hex, tile.Entity.Type));
+                _unitVersionOperationFactory.GetDestroyOperation(hex, tile.Unit.Type));
 
-            _terrain.DestroyEntity(tile.Entity);
+            _terrain.DestroyUnit(tile.Unit);
         }
     }
 }

@@ -36,8 +36,8 @@ namespace CodeBase.Gameplay.Player.UI
 
         public void SetIncomeCount(int incomeCount) => _playerIncome.text = $"{incomeCount.ToString()}";
 
-        public void CreateEntity(EntityType entityType) =>
-            _playerStateMachine.SwitchTo<PlayerCreateEntityState, PlayerCreateEntityStateData>(
-                new PlayerCreateEntityStateData(entityType));
+        public void CreateUnit(UnitType unitType) =>
+            _playerStateMachine.SwitchTo<PlayerCreateUnitState, PlayerCreateUnitStateData>(
+                new PlayerCreateUnitStateData(unitType));
     }
 }

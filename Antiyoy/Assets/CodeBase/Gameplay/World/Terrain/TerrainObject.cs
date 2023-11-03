@@ -16,14 +16,14 @@ namespace CodeBase.Gameplay.World.Terrain
     {
         private readonly TileFactory _tileFactory;
         private readonly TileConnector _tileConnector;
-        private readonly EntityFactory _entityFactory;
+        private readonly UnitFactory _unitFactory;
         private readonly RegionFactory _regionFactory;
         private readonly RegionGeometryRebuilder _regionGeometryRebuilder;
         private readonly RegionIncomeRebuilder _incomeRebuilder;
         private readonly RegionConnector _regionConnector;
         private TileArray _tileArray;
 
-        public TerrainObject(TileFactory tileFactory, TileConnector tileConnector, EntityFactory entityFactory,
+        public TerrainObject(TileFactory tileFactory, TileConnector tileConnector, UnitFactory unitFactory,
             RegionFactory regionFactory, RegionGeometryRebuilder regionGeometryRebuilder,
             RegionIncomeRebuilder incomeRebuilder, RegionConnector regionConnector)
         {
@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.World.Terrain
             _regionFactory = regionFactory;
             _regionGeometryRebuilder = regionGeometryRebuilder;
             _incomeRebuilder = incomeRebuilder;
-            _entityFactory = entityFactory;
+            _unitFactory = unitFactory;
             _regionConnector = regionConnector;
             _tileConnector = tileConnector;
         }
@@ -68,19 +68,19 @@ namespace CodeBase.Gameplay.World.Terrain
             _incomeRebuilder.Rebuild(_regionGeometryRebuilder.Rebuild(region));
         }
 
-        public void CreateEntity(TileData rootTile, EntityType entityType)
+        public void CreateUnit(TileData rootTile, UnitType unitType)
         {
-            var entity = _entityFactory.Create(rootTile, entityType);
-            rootTile.Entity = entity;
+            var entity = _unitFactory.Create(rootTile, unitType);
+            rootTile.Unit = entity;
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 
-        public void DestroyEntity(EntityData entity)
+        public void DestroyUnit(UnitData unit)
         {
-            var rootTile = entity.RootTile;
+            var rootTile = unit.RootTile;
 
-            _entityFactory.Destroy(entity);
-            rootTile.Entity = null;
+            _unitFactory.Destroy(unit);
+            rootTile.Unit = null;
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 

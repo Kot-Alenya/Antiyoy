@@ -20,14 +20,14 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
 
         private int GetIncome(RegionData region)
         {
-            var entitiesConfig = _staticDataProvider.Get<EntitiesConfig>();
-            var defaultTileIncome = entitiesConfig.Presets[EntityType.None].Income;
+            var entitiesConfig = _staticDataProvider.Get<UnitsConfig>();
+            var defaultTileIncome = entitiesConfig.Presets[UnitType.None].Income;
             var income = 0;
 
             foreach (var tile in region.Tiles)
             {
-                if (tile.Entity != null)
-                    income += tile.Entity.Preset.Income;
+                if (tile.Unit != null)
+                    income += tile.Unit.Preset.Income;
                 else
                     income += defaultTileIncome;
             }

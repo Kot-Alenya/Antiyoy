@@ -38,9 +38,9 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
         private void RemoveCombatUnits(RegionData region)
         {
             foreach (var tile in region.Tiles)
-                if (tile.Entity != null)
-                    if (tile.Entity.Type == EntityType.Peasant)
-                        _terrain.DestroyEntity(tile.Entity);
+                if (tile.Unit != null)
+                    if (tile.Unit.Type == UnitType.Peasant)
+                        _terrain.DestroyUnit(tile.Unit);
         }
     }
 }

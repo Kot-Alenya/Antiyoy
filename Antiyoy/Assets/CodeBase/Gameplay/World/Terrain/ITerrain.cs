@@ -20,9 +20,9 @@ namespace CodeBase.Gameplay.World.Terrain
 
         public void DestroyTile(TileData tile);
 
-        public void CreateEntity(TileData rootTile, EntityType entityType);
+        public void CreateUnit(TileData rootTile, UnitType unitType);
 
-        public void DestroyEntity(EntityData entity);
+        public void DestroyUnit(UnitData unit);
 
         public TileData GetTile(HexPosition hex);
 

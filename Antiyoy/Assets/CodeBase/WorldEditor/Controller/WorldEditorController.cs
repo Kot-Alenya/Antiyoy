@@ -26,7 +26,7 @@ namespace CodeBase.WorldEditor.Controller
 
         public void SetRegionType(RegionType regionType) => _worldEditorModel.SetCurrentRegion(regionType);
 
-        public void SetEntityType(EntityType entityType) => _worldEditorModel.SetCurrentEntity(entityType);
+        public void SetUnitType(UnitType unitType) => _worldEditorModel.SetCurrentUnit(unitType);
 
         public void SelectTile(HexPosition hex) => _worldEditorModel.SelectTile(hex);
 

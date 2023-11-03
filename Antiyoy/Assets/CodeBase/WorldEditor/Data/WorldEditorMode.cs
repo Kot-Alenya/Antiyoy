@@ -5,7 +5,7 @@ namespace CodeBase.WorldEditor.Data
         None = 0,
         CreateTile = 1,
         DestroyTile = 2,
-        CreateEntity = 3,
-        DestroyEntity = 4
+        CreateUnit = 3,
+        DestroyUnit = 4
     }
 }

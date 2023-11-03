@@ -11,7 +11,7 @@ namespace CodeBase.WorldEditor.Controller
 
         public void SetRegionType(RegionType regionType);
 
-        public void SetEntityType(EntityType entityType);
+        public void SetUnitType(UnitType unitType);
 
         public void SelectTile(HexPosition hex);
 
