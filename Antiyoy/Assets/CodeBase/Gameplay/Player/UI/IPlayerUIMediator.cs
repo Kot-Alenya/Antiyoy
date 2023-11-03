@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.World.Terrain.Entity.Data;
+﻿using CodeBase.Gameplay.World.Terrain.Unit.Data;
 
 namespace CodeBase.Gameplay.Player.UI
 {

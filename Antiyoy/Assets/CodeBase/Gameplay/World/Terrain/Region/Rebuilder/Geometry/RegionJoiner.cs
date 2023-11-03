@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
+namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder.Geometry
 {
     public class RegionJoiner
     {

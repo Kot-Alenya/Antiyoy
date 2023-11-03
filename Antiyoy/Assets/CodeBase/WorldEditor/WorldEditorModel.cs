@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.WorldEditor.Data;
 
@@ -49,7 +49,7 @@ namespace CodeBase.WorldEditor
                     _worldFactory.TryDestroyTile(hex);
                     break;
                 case WorldEditorMode.CreateUnit:
-                    _worldFactory.CreateUnit(hex, _currentUnitType);
+                    _worldFactory.CreateUnit(hex, _currentUnitType, false);
                     break;
                 case WorldEditorMode.DestroyUnit:
                     _worldFactory.TryDestroyUnit(hex);

@@ -1,9 +1,9 @@
 ﻿using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Entity.Operation;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Operation;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Operation;
 using CodeBase.Gameplay.World.Version;
 
 namespace CodeBase.Gameplay.World
@@ -44,13 +44,13 @@ namespace CodeBase.Gameplay.World
             _terrain.DestroyTile(tile);
         }
 
-        public void CreateUnit(HexPosition hex, UnitType unitType)
+        public void CreateUnit(HexPosition hex, UnitType unitType, bool isCanMove)
         {
             TryDestroyUnit(hex);
 
-            _terrain.CreateUnit(_terrain.GetTile(hex), unitType);
+            _terrain.CreateUnit(_terrain.GetTile(hex), unitType, isCanMove);
             _worldVersionRecorder.AddToBuffer(
-                _unitVersionOperationFactory.GetCreateOperation(hex, unitType));
+                _unitVersionOperationFactory.GetCreateOperation(hex, unitType, isCanMove));
         }
 
         public void TryDestroyUnit(HexPosition hex)
@@ -58,11 +58,11 @@ namespace CodeBase.Gameplay.World
             if (!_terrain.TryGetTile(hex, out var tile))
                 return;
 
-            if (tile.Unit == null)
+            if (tile.Unit.Type == UnitType.None)
                 return;
 
             _worldVersionRecorder.AddToBuffer(
-                _unitVersionOperationFactory.GetDestroyOperation(hex, tile.Unit.Type));
+                _unitVersionOperationFactory.GetDestroyOperation(hex, tile.Unit.Type, tile.Unit.IsCanMove));
 
             _terrain.DestroyUnit(tile.Unit);
         }

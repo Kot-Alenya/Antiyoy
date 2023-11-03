@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Region.Data;
+﻿using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 
 namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
 {
@@ -38,9 +38,8 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
         private void RemoveCombatUnits(RegionData region)
         {
             foreach (var tile in region.Tiles)
-                if (tile.Unit != null)
-                    if (tile.Unit.Type == UnitType.Peasant)
-                        _terrain.DestroyUnit(tile.Unit);
+                if (tile.Unit.Type == UnitType.Peasant)
+                    _terrain.DestroyUnit(tile.Unit);
         }
     }
 }

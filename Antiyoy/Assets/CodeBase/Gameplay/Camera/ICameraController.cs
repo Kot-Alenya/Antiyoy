@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.Camera
         public void Zoom(bool isIncrease);
 
         public RaycastHit2D RaycastFromMouseScreenPoint();
-        
+
         public RaycastHit2D RaycastAllFromMouseScreenPointAndGetNearestBySortingOrder();
     }
 }

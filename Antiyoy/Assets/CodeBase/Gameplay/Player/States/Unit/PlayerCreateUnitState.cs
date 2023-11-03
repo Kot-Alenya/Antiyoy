@@ -5,12 +5,12 @@ using CodeBase.Gameplay.Player.States.Region;
 using CodeBase.Gameplay.World;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
-namespace CodeBase.Gameplay.Player.States.Entity
+namespace CodeBase.Gameplay.Player.States.Unit
 {
     public class PlayerCreateUnitState : IEnterState<PlayerCreateUnitStateData>, IExitState
     {
@@ -77,7 +77,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
 
             foreach (var tile in _playerData.CurrentRegion.Tiles)
             {
-                if (tile.Unit == null)
+                if (tile.Unit.Type == UnitType.None)
                     tilesToCreateEntity.Add(tile);
 
                 foreach (var neighbor in tile.Neighbors)
@@ -101,7 +101,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
                 _worldFactory.CreateTile(hex, _playerData.RegionType);
             }
 
-            _worldFactory.CreateUnit(hex, _unitTypeToCreate);
+            _worldFactory.CreateUnit(hex, _unitTypeToCreate, true);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
         }
     }

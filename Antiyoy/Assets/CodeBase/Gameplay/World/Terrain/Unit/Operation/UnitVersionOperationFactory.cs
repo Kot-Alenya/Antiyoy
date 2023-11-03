@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 
-namespace CodeBase.Gameplay.World.Terrain.Entity.Operation
+namespace CodeBase.Gameplay.World.Terrain.Unit.Operation
 {
     public class UnitVersionOperationFactory
     {
@@ -15,10 +15,10 @@ namespace CodeBase.Gameplay.World.Terrain.Entity.Operation
             _destroyUnitOperationHandler = destroyUnitOperationHandler;
         }
 
-        public UnitOperationData GetCreateOperation(HexPosition hex, UnitType unitType) =>
-            new(hex, unitType, _createUnitOperationHandler);
+        public UnitOperationData GetCreateOperation(HexPosition hex, UnitType unitType, bool isCanMove) =>
+            new(hex, unitType, _createUnitOperationHandler, isCanMove);
 
-        public UnitOperationData GetDestroyOperation(HexPosition hex, UnitType unitType) =>
-            new(hex, unitType, _destroyUnitOperationHandler);
+        public UnitOperationData GetDestroyOperation(HexPosition hex, UnitType unitType, bool isCanMove) =>
+            new(hex, unitType, _destroyUnitOperationHandler, isCanMove);
     }
 }

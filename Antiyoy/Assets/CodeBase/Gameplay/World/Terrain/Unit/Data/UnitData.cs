@@ -1,22 +1,16 @@
 ﻿using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Terrain.Entity.Data
+namespace CodeBase.Gameplay.World.Terrain.Unit.Data
 {
-    public class UnitData
+    public struct UnitData
     {
-        public readonly UnitPrefabData Instance;
-        public readonly TileData RootTile;
-        public readonly UnitType Type;
-        public readonly UnitPresetData Preset;
+        public UnitPrefabData Instance;
+        public UnitPresetData Preset;
+        public TileData RootTile;
+        public UnitType Type;
+        public int Income;
+        public int Cost;
+        public int CostIncreaseFactor;
         public bool IsCanMove;
-
-        public UnitData(UnitPrefabData instance, TileData rootTile, UnitType type, UnitPresetData preset, bool isCanMove)
-        {
-            Instance = instance;
-            RootTile = rootTile;
-            Type = type;
-            Preset = preset;
-            IsCanMove = isCanMove;
-        }
     }
 }

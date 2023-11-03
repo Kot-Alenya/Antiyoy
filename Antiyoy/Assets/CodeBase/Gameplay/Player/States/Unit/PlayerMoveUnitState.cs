@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.Services.StateMachine.States;
 
-namespace CodeBase.Gameplay.Player.States.Entity
+namespace CodeBase.Gameplay.Player.States.Unit
 {
     public class PlayerMoveUnitState : IEnterState, IExitState
     {

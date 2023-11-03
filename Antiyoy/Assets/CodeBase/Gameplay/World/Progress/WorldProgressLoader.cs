@@ -1,9 +1,9 @@
 ﻿using CodeBase.Gameplay.World.Progress.SavedData;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Data;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Tile;
+using CodeBase.Gameplay.World.Terrain.Unit;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.ProgressSaveLoader.Watcher;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -57,7 +57,7 @@ namespace CodeBase.Gameplay.World.Progress
                 _terrain.CreateTile(hex, savedTile.RegionType);
 
                 if (savedTile.UnitType != UnitType.None)
-                    _terrain.CreateUnit(_terrain.GetTile(hex), savedTile.UnitType);
+                    _terrain.CreateUnit(_terrain.GetTile(hex), savedTile.UnitType, true);
             }
         }
     }

@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.World.Terrain;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
-namespace CodeBase.Gameplay.Player.States.Entity
+namespace CodeBase.Gameplay.Player.States.Unit
 {
     public class PlayerTileFocusView
     {
@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.Player.States.Entity
         public void UnFocusAllTiles()
         {
             _playerData.Instance.ShadowField.SetActive(false);
-            
+
             foreach (var tile in _terrain)
                 tile.Instance.SpriteMask.enabled = false;
         }

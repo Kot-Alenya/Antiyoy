@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.UI;
-using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 

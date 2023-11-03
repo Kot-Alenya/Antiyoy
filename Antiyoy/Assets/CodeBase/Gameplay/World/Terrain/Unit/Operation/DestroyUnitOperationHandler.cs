@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.World.Version;
 
-namespace CodeBase.Gameplay.World.Terrain.Entity.Operation
+namespace CodeBase.Gameplay.World.Terrain.Unit.Operation
 {
     public class DestroyUnitOperationHandler : IWorldVersionOperationHandler
     {
@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.World.Terrain.Entity.Operation
         {
             var revertData = (UnitOperationData)data;
 
-            _terrain.CreateUnit(_terrain.GetTile(revertData.Hex), revertData.UnitType);
+            _terrain.CreateUnit(_terrain.GetTile(revertData.Hex), revertData.UnitType, revertData.IsCanMove);
         }
     }
 }

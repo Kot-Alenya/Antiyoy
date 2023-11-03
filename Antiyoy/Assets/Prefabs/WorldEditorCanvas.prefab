@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 5416003037384645755}
-  _entityType: 3
+  _unitType: 3
 --- !u!1 &4381451160435476044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 3863225147487177917}
-  _entityType: 1
+  _unitType: 1
 --- !u!1 &5570176173110824009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,7 +1907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectableButton: {fileID: 7370896334535566847}
-  _entityType: 2
+  _unitType: 2
 --- !u!1 &5710393493177757772
 GameObject:
   m_ObjectHideFlags: 0

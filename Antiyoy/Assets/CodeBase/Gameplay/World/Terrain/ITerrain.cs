@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Tile;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain
@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.World.Terrain
 
         public void DestroyTile(TileData tile);
 
-        public void CreateUnit(TileData rootTile, UnitType unitType);
+        public void CreateUnit(TileData rootTile, UnitType unitType, bool isCanMove);
 
         public void DestroyUnit(UnitData unit);
 

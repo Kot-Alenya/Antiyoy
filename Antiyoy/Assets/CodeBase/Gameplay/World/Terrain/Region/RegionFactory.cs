@@ -13,13 +13,13 @@ namespace CodeBase.Gameplay.World.Terrain.Region
         public RegionFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
         public List<RegionData> Regions { get; } = new();
-        
+
         public RegionData Create(RegionType type)
         {
             var regionId = ++_currentMaxId;
             var region = new RegionData(type, GetRandomColor(), regionId);
             Regions.Add(region);
-            
+
             return region;
         }
 

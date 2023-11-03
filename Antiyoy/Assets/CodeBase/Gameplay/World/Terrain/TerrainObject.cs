@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Gameplay.World.Hex;
-using CodeBase.Gameplay.World.Terrain.Entity;
-using CodeBase.Gameplay.World.Terrain.Entity.Data;
 using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
+using CodeBase.Gameplay.World.Terrain.Region.Rebuilder.Geometry;
 using CodeBase.Gameplay.World.Terrain.Tile;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Unit;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.World.Terrain
@@ -68,9 +69,9 @@ namespace CodeBase.Gameplay.World.Terrain
             _incomeRebuilder.Rebuild(_regionGeometryRebuilder.Rebuild(region));
         }
 
-        public void CreateUnit(TileData rootTile, UnitType unitType)
+        public void CreateUnit(TileData rootTile, UnitType unitType, bool isCanMove)
         {
-            var entity = _unitFactory.Create(rootTile, unitType);
+            var entity = _unitFactory.Create(rootTile, unitType, isCanMove);
             rootTile.Unit = entity;
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
@@ -80,7 +81,7 @@ namespace CodeBase.Gameplay.World.Terrain
             var rootTile = unit.RootTile;
 
             _unitFactory.Destroy(unit);
-            rootTile.Unit = null;
+            rootTile.Unit.Type = UnitType.None;
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 

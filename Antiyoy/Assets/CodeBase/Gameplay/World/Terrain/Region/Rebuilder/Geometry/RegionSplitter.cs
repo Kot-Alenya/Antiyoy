@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
+namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder.Geometry
 {
     public class RegionSplitter
     {

@@ -1,9 +1,9 @@
-﻿using CodeBase.Gameplay.World.Terrain.Entity.Data;
-using CodeBase.Gameplay.World.Terrain.Tile.Data;
+﻿using CodeBase.Gameplay.World.Terrain.Tile.Data;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.World.Terrain.Entity
+namespace CodeBase.Gameplay.World.Terrain.Unit
 {
     public class UnitFactory
     {
@@ -11,12 +11,19 @@ namespace CodeBase.Gameplay.World.Terrain.Entity
 
         public UnitFactory(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public UnitData Create(TileData rootTile, UnitType unitType)
+        public UnitData Create(TileData rootTile, UnitType unitType, bool isCanMove)
         {
             var config = _staticDataProvider.Get<UnitsConfig>();
             var preset = config.Presets[unitType];
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new UnitData(instance, rootTile, unitType, preset, true);
+            var entity = new UnitData()
+            {
+                Instance = instance,
+                Preset = preset,
+                RootTile = rootTile,
+                Type = unitType,
+                IsCanMove = isCanMove
+            };
 
             return entity;
         }
