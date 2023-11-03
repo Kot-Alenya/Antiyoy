@@ -8,15 +8,15 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
     public class RegionIncomeRebuilder
     {
         private readonly IStaticDataProvider _staticDataProvider;
+        public RegionIncomeRebuilder(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public RegionIncomeRebuilder(IStaticDataProvider staticDataProvider) =>
-            _staticDataProvider = staticDataProvider;
-
-        public void RebuildIncome(List<RegionData> regions)
+        public void Rebuild(List<RegionData> regions)
         {
             foreach (var region in regions)
-                region.Income = GetIncome(region);
+                Rebuild(region);
         }
+        
+        public void Rebuild(RegionData region) => region.Income = GetIncome(region);
 
         private int GetIncome(RegionData region)
         {

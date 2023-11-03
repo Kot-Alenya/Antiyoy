@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 0fc11afd40864f74834f22a55f50a900, type: 3}
   m_Name: TerrainConfig
   m_EditorClassIdentifier: CodeBase:CodeBase.Gameplay.World.Terrain.Data:TerrainConfig
   serializationData:
@@ -21,5 +21,5 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Prefab: {fileID: 2565520810442341372, guid: 5a0199fac9256de4bb945b18110d6a75, type: 3}
+  Prefab: {fileID: 0}
   DefaultSize: {x: 5, y: 5}

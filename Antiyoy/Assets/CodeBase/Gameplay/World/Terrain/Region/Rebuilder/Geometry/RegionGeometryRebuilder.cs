@@ -3,21 +3,18 @@ using CodeBase.Gameplay.World.Terrain.Region.Data;
 
 namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
 {
-    public class RegionRebuilder
+    public class RegionGeometryRebuilder
     {
         private readonly RegionJoiner _regionJoiner;
         private readonly RegionSplitter _regionSplitter;
-        private readonly RegionIncomeRebuilder _incomeRebuilder;
 
-        public RegionRebuilder(RegionJoiner regionJoiner, RegionSplitter regionSplitter,
-            RegionIncomeRebuilder incomeRebuilder)
+        public RegionGeometryRebuilder(RegionJoiner regionJoiner, RegionSplitter regionSplitter)
         {
             _regionJoiner = regionJoiner;
             _regionSplitter = regionSplitter;
-            _incomeRebuilder = incomeRebuilder;
         }
 
-        public void Rebuild(RegionData region)
+        public List<RegionData> Rebuild(RegionData region)
         {
             var regionToSplit = _regionJoiner.TryJoinWithNeighbors(region, out var joinRegion)
                 ? joinRegion
@@ -27,7 +24,7 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
                 ? splitResult
                 : new List<RegionData> { regionToSplit };
 
-            _incomeRebuilder.RebuildIncome(result);
+            return result;
         }
     }
 }

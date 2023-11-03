@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.Player.UI
 
         public void SetCoinsCount(int coinsCount) => _playerCoinsCount.text = coinsCount.ToString();
 
-        public void SetIncomeCount(int incomeCount) => _playerIncome.text = $"+ {incomeCount.ToString()}";
+        public void SetIncomeCount(int incomeCount) => _playerIncome.text = $"{incomeCount.ToString()}";
 
         public void CreateEntity(EntityType entityType) =>
             _playerStateMachine.SwitchTo<PlayerCreateEntityState, PlayerCreateEntityStateData>(

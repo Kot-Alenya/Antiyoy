@@ -55,10 +55,11 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
             Container.Bind<RegionFactory>().AsSingle();
             Container.Bind<RegionConnector>().AsSingle();
 
-            Container.Bind<RegionRebuilder>().AsSingle();
+            Container.Bind<RegionGeometryRebuilder>().AsSingle();
             Container.Bind<RegionJoiner>().AsSingle();
             Container.Bind<RegionSplitter>().AsSingle();
             Container.Bind<RegionIncomeRebuilder>().AsSingle();
+            Container.Bind<RegionCoinsRebuilder>().AsSingle();
         }
 
         private void BindVersion()

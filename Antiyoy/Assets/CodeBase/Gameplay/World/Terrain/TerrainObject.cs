@@ -18,16 +18,19 @@ namespace CodeBase.Gameplay.World.Terrain
         private readonly TileConnector _tileConnector;
         private readonly EntityFactory _entityFactory;
         private readonly RegionFactory _regionFactory;
-        private readonly RegionRebuilder _regionRebuilder;
+        private readonly RegionGeometryRebuilder _regionGeometryRebuilder;
+        private readonly RegionIncomeRebuilder _incomeRebuilder;
         private readonly RegionConnector _regionConnector;
         private TileArray _tileArray;
 
         public TerrainObject(TileFactory tileFactory, TileConnector tileConnector, EntityFactory entityFactory,
-            RegionFactory regionFactory, RegionRebuilder regionRebuilder, RegionConnector regionConnector)
+            RegionFactory regionFactory, RegionGeometryRebuilder regionGeometryRebuilder,
+            RegionIncomeRebuilder incomeRebuilder, RegionConnector regionConnector)
         {
             _tileFactory = tileFactory;
             _regionFactory = regionFactory;
-            _regionRebuilder = regionRebuilder;
+            _regionGeometryRebuilder = regionGeometryRebuilder;
+            _incomeRebuilder = incomeRebuilder;
             _entityFactory = entityFactory;
             _regionConnector = regionConnector;
             _tileConnector = tileConnector;
@@ -50,7 +53,7 @@ namespace CodeBase.Gameplay.World.Terrain
                 region = _regionFactory.Create(regionType);
 
             _regionConnector.Connect(tile, region);
-            _regionRebuilder.Rebuild(region);
+            _incomeRebuilder.Rebuild(_regionGeometryRebuilder.Rebuild(region));
         }
 
         public void DestroyTile(TileData tile)
@@ -62,14 +65,14 @@ namespace CodeBase.Gameplay.World.Terrain
             _tileArray.Remove(tile.Hex);
             _tileFactory.Destroy(tile);
 
-            _regionRebuilder.Rebuild(region);
+            _incomeRebuilder.Rebuild(_regionGeometryRebuilder.Rebuild(region));
         }
 
         public void CreateEntity(TileData rootTile, EntityType entityType)
         {
             var entity = _entityFactory.Create(rootTile, entityType);
             rootTile.Entity = entity;
-            _regionRebuilder.Rebuild(rootTile.Region);
+            _incomeRebuilder.Rebuild(rootTile.Region);
         }
 
         public void DestroyEntity(EntityData entity)
@@ -78,7 +81,7 @@ namespace CodeBase.Gameplay.World.Terrain
 
             _entityFactory.Destroy(entity);
             rootTile.Entity = null;
-            _regionRebuilder.Rebuild(rootTile.Region);
+            _incomeRebuilder.Rebuild(rootTile.Region);
         }
 
         public TileData GetTile(HexPosition hex) => _tileArray.Get(hex);
