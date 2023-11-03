@@ -9,7 +9,7 @@
         Spearman = 5,
         Baron = 6,
         Knight = 7,
-        
+
         Farm = 1,
         Pine = 3,
         Grave = 4

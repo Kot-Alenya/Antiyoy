@@ -1,7 +1,10 @@
-﻿using CodeBase.Gameplay.World.Terrain.Region.Data;
+﻿using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Terrain.Region;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
 using CodeBase.Gameplay.World.Terrain.Unit.Data;
 
-namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
+namespace CodeBase.Dev.TEMPO
 {
     public class RegionCoinsRebuilder
     {
@@ -30,6 +33,8 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
             if (region.CoinsCount < 0)
             {
                 region.CoinsCount = 0;
+                //starvationg event ?
+
                 KillCombatUnits(region);
                 _regionIncomeRebuilder.Rebuild(region);
             }

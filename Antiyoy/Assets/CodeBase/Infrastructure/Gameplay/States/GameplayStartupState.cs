@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Ecs;
 using CodeBase.Gameplay.Player;
 using CodeBase.Gameplay.UI;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Infrastructure.Gameplay.States
@@ -11,15 +11,15 @@ namespace CodeBase.Infrastructure.Gameplay.States
         private readonly CameraFactory _cameraFactory;
         private readonly GameplayUIFactory _gameplayUIFactory;
         private readonly PlayerFactory _playerFactory;
-        private readonly RegionCoinsRebuilder _regionCoinsRebuilder;
+        private readonly GameplayEcsSystems _gameplayEcsSystems;
 
         public GameplayStartupState(CameraFactory cameraFactory, GameplayUIFactory gameplayUIFactory,
-            PlayerFactory playerFactory, RegionCoinsRebuilder regionCoinsRebuilder)
+            PlayerFactory playerFactory,GameplayEcsSystems gameplayEcsSystems)
         {
             _cameraFactory = cameraFactory;
             _gameplayUIFactory = gameplayUIFactory;
             _playerFactory = playerFactory;
-            _regionCoinsRebuilder = regionCoinsRebuilder;
+            _gameplayEcsSystems = gameplayEcsSystems;
         }
 
         public void Enter()
@@ -27,7 +27,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
             _cameraFactory.Create();
             _gameplayUIFactory.Create();
             _playerFactory.Create();
-            _regionCoinsRebuilder.RebuildAll();
+            _gameplayEcsSystems.Initialize();
         }
     }
 }

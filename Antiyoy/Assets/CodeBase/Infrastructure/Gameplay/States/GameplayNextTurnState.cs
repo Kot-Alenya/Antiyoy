@@ -1,5 +1,5 @@
-﻿using CodeBase.Gameplay.Player.States;
-using CodeBase.Gameplay.World.Terrain.Region.Rebuilder;
+﻿using CodeBase.Gameplay.Ecs;
+using CodeBase.Gameplay.Player.States;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
@@ -9,19 +9,19 @@ namespace CodeBase.Infrastructure.Gameplay.States
     {
         private readonly WorldVersionRecorder _worldVersionRecorder;
         private readonly PlayerStateMachine _playerStateMachine;
-        private readonly RegionCoinsRebuilder _regionCoinsRebuilder;
+        private readonly GameplayEcsSystems _systems;
 
         public GameplayNextTurnState(WorldVersionRecorder worldVersionRecorder,
-            PlayerStateMachine playerStateMachine, RegionCoinsRebuilder regionCoinsRebuilder)
+            PlayerStateMachine playerStateMachine,GameplayEcsSystems systems)
         {
             _worldVersionRecorder = worldVersionRecorder;
             _playerStateMachine = playerStateMachine;
-            _regionCoinsRebuilder = regionCoinsRebuilder;
+            _systems = systems;
         }
 
         public void Enter()
         {
-            _regionCoinsRebuilder.RebuildAll();
+            _systems.Run();
             _worldVersionRecorder.ClearRecords();
             _playerStateMachine.SwitchTo<PlayerDefaultState>();
         }
