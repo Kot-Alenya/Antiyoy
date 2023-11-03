@@ -27,7 +27,7 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
             foreach (var tile in region.Tiles)
             {
                 if (tile.Entity != null)
-                    income += tile.Entity.Income;
+                    income += tile.Entity.Preset.Income;
                 else
                     income += defaultTileIncome;
             }

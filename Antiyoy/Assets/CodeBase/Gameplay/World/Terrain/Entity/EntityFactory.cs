@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.World.Terrain.Entity
             var config = _staticDataProvider.Get<EntitiesConfig>();
             var preset = config.Presets[entityType];
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var entity = new EntityData(instance, rootTile, entityType, preset.Income);
+            var entity = new EntityData(instance, rootTile, entityType, preset, true);
 
             return entity;
         }

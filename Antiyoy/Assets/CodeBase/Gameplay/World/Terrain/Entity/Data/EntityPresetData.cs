@@ -8,5 +8,6 @@ namespace CodeBase.Gameplay.World.Terrain.Entity.Data
         public EntityPrefabData Prefab;
         public int Income;
         public int Cost;
+        public int CostIncreaseFactor;
     }
 }

@@ -7,14 +7,16 @@ namespace CodeBase.Gameplay.World.Terrain.Entity.Data
         public readonly EntityPrefabData Instance;
         public readonly TileData RootTile;
         public readonly EntityType Type;
-        public readonly int Income;
+        public readonly EntityPresetData Preset;
+        public bool IsCanMove;
 
-        public EntityData(EntityPrefabData instance, TileData rootTile, EntityType type, int income)
+        public EntityData(EntityPrefabData instance, TileData rootTile, EntityType type, EntityPresetData preset, bool isCanMove)
         {
             Instance = instance;
             RootTile = rootTile;
             Type = type;
-            Income = income;
+            Preset = preset;
+            IsCanMove = isCanMove;
         }
     }
 }
