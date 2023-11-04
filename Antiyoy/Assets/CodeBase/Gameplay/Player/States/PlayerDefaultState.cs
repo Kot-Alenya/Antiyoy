@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.Player.States
             if (tile.Region.Type != _playerData.RegionType)
                 return;
 
-            if (tile.Unit.Type != UnitType.None)
+            if (tile.Unit.IsCanMove)
                 _playerStateMachine.SwitchTo<PlayerMoveUnitState, PlayerMoveUnitStateData>(
                     new PlayerMoveUnitStateData(tile.Unit));
             else

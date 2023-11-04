@@ -22,6 +22,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         private readonly TerrainPathFinding _terrainPathFinding;
         private readonly ITerrain _terrain;
         private readonly PlayerData _playerData;
+        
         private List<TileData> _unitTilesToMove;
         private UnitData _currentUnit;
 
@@ -87,7 +88,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
 
         private void MoveUnit(TileData toTile)
         {
-            _worldFactory.CreateTile(toTile.Hex, _currentUnit.RootTile.Region.Type);
+            _worldFactory.CreateTile(toTile.Hex, _playerData.RegionType);
             _worldFactory.CreateUnit(toTile.Hex, _currentUnit.Type, false);
             _worldFactory.TryDestroyUnit(_currentUnit.RootTile.Hex);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
