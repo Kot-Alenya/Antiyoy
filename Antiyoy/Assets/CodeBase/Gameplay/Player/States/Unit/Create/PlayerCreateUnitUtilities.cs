@@ -9,25 +9,13 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
     {
         public static List<TileData> GetTilesToCreateUnit(UnitType unitType, RegionData region)
         {
-            if (IsCombatUnit(unitType))
+            if (PlayerUnitUtilities.IsCombatUnit(unitType))
                 return GetTilesToCreateCombatUnit(region);
 
             return GetTilesToCreateNotCombatUnit(region);
         }
 
-        public static bool IsCombatUnit(UnitType unitType)
-        {
-            switch (unitType)
-            {
-                case UnitType.Peasant:
-                case UnitType.Spearman:
-                case UnitType.Baron:
-                case UnitType.Knight:
-                    return true;
-                default:
-                    return false;
-            }
-        }
+
 
         private static List<TileData> GetTilesToCreateCombatUnit(RegionData region)
         {

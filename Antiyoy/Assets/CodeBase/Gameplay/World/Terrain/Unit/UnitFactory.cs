@@ -31,6 +31,10 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
             return unit;
         }
 
-        public void Destroy(UnitData unit) => Object.Destroy(unit.Instance.gameObject);
+        public void Destroy(UnitData unit)
+        {
+            unit.RootTile.Unit = default;
+            Object.Destroy(unit.Instance.gameObject);
+        }
     }
 }

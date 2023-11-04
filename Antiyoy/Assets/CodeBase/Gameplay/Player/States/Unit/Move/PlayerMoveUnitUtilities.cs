@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Player.States.Unit.Create;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using CodeBase.Gameplay.World.Terrain.Unit.Data;
 
-namespace CodeBase.Gameplay.World.Terrain
+namespace CodeBase.Gameplay.Player.States.Unit.Move
 {
-    public class TerrainPathFinding
+    public static class PlayerMoveUnitUtilities
     {
-        public List<TileData> GetTilesToMoveUnit(UnitData unit)
+        public static List<TileData> GetTilesToMoveUnit(UnitData unit)
         {
             var result = new List<TileData>();
-            var front = new List<TileData>(unit.RootTile.Neighbors);
+            var front = new List<TileData> { unit.RootTile };
 
             while (front.Count > 0)
             {
@@ -21,18 +22,20 @@ namespace CodeBase.Gameplay.World.Terrain
                     if (HexPosition.GetMagnitude(neighbor.Hex, unit.RootTile.Hex) > unit.Preset.MoveRange)
                         continue;
 
-                    if (neighbor == unit.RootTile)
-                        continue;
-
                     if (tile.Region != unit.RootTile.Region)
                         continue;
+
+                    if (PlayerUnitUtilities.IsCombatUnit(neighbor.Unit.Type))
+                        if (!PlayerCombineUnitUtilities.TryCombinedUnitType(unit.Type, neighbor.Unit.Type, out _))
+                            continue;
 
                     if (!front.Contains(neighbor) && !result.Contains(neighbor))
                         front.Add(neighbor);
                 }
 
                 front.Remove(tile);
-                result.Add(tile);
+                if (tile != unit.RootTile)
+                    result.Add(tile);
             }
 
             return result;

@@ -19,23 +19,21 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         private readonly PlayerTerrainFocus _playerTerrainFocus;
         private readonly WorldFactory _worldFactory;
         private readonly WorldVersionRecorder _worldVersionRecorder;
-        private readonly TerrainPathFinding _terrainPathFinding;
         private readonly ITerrain _terrain;
         private readonly PlayerData _playerData;
-        
+
         private List<TileData> _unitTilesToMove;
         private UnitData _currentUnit;
 
         public PlayerMoveUnitState(IPlayerInput playerInput, ITerrain terrain, PlayerData playerData,
             PlayerStateMachine playerStateMachine, PlayerTerrainFocus playerTerrainFocus, WorldFactory worldFactory,
-            WorldVersionRecorder worldVersionRecorder, TerrainPathFinding terrainPathFinding)
+            WorldVersionRecorder worldVersionRecorder)
         {
             _playerInput = playerInput;
             _playerStateMachine = playerStateMachine;
             _playerTerrainFocus = playerTerrainFocus;
             _worldFactory = worldFactory;
             _worldVersionRecorder = worldVersionRecorder;
-            _terrainPathFinding = terrainPathFinding;
             _terrain = terrain;
             _playerData = playerData;
         }
@@ -43,7 +41,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         public void Enter(PlayerMoveUnitStateData parameter)
         {
             _currentUnit = parameter.Unit;
-            _unitTilesToMove = _terrainPathFinding.GetTilesToMoveUnit(parameter.Unit);
+            _unitTilesToMove = PlayerMoveUnitUtilities.GetTilesToMoveUnit(parameter.Unit);
 
             ShowView();
             _playerInput.OnPlayerInput += HandleInput;
@@ -73,23 +71,24 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         {
             var currentRegion = _playerData.CurrentRegion;
 
-            if (_terrain.TryGetTile(hex, out var tile))
+            if (_terrain.TryGetTile(hex, out var tile) && _unitTilesToMove.Contains(tile))
             {
-                if (_unitTilesToMove.Contains(tile))
-                {
-                    MoveUnit(tile);
-                    currentRegion = _terrain.GetTile(hex).Region;
-                }
+                if (PlayerCombineUnitUtilities.TryCombinedUnitType(_currentUnit.Type, tile.Unit.Type, out var type))
+                    MoveUnit(tile, type, tile.Unit.IsCanMove);
+                else
+                    MoveUnit(tile, _currentUnit.Type, false);
+
+                currentRegion = _terrain.GetTile(hex).Region;
             }
 
             _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                 new PlayerSelectRegionStateData(currentRegion));
         }
 
-        private void MoveUnit(TileData toTile)
+        private void MoveUnit(TileData toTile, UnitType unitToCreateType, bool isCanMove)
         {
             _worldFactory.CreateTile(toTile.Hex, _playerData.RegionType);
-            _worldFactory.CreateUnit(toTile.Hex, _currentUnit.Type, false);
+            _worldFactory.CreateUnit(toTile.Hex, unitToCreateType, isCanMove);
             _worldFactory.TryDestroyUnit(_currentUnit.RootTile.Hex);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
         }
