@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.Player.States.Unit
     {
         private readonly PlayerData _playerData;
         private readonly IPlayerInput _playerInput;
-        private readonly PlayerTileFocusView _focusView;
+        private readonly PlayerTerrainFocus _playerTerrainFocus;
 
         private readonly PlayerStateMachine _playerStateMachine;
         private readonly WorldVersionRecorder _worldVersionRecorder;
@@ -29,11 +29,11 @@ namespace CodeBase.Gameplay.Player.States.Unit
         private List<TileData> _tilesToCreateUnitAndCantMove;
 
         public PlayerCreateUnitState(PlayerStateMachine playerStateMachine, PlayerData playerData,
-            IPlayerInput playerInput, PlayerTileFocusView focusView, WorldVersionRecorder worldVersionRecorder,
+            IPlayerInput playerInput, PlayerTerrainFocus playerTerrainFocus, WorldVersionRecorder worldVersionRecorder,
             WorldFactory worldFactory, ITerrain terrain)
         {
             _playerInput = playerInput;
-            _focusView = focusView;
+            _playerTerrainFocus = playerTerrainFocus;
             _playerData = playerData;
             _playerStateMachine = playerStateMachine;
             _worldVersionRecorder = worldVersionRecorder;
@@ -48,14 +48,18 @@ namespace CodeBase.Gameplay.Player.States.Unit
             _tilesToCreateUnitAndCantMove = GetTilesToCreateUnitAndCantMove();
 
             var tilesToFocus = _tilesToCreateUnitAndCanMove.Concat(_tilesToCreateUnitAndCantMove).ToList();
-            _focusView.FocusTiles(tilesToFocus);
+            _playerTerrainFocus.ShowShadowField();
+            _playerTerrainFocus.SetTilesAboveShadowFiled(tilesToFocus);
+            _playerTerrainFocus.ShowTilesOutline(tilesToFocus);
 
             _playerInput.OnPlayerInput += HandleInput;
         }
 
         public void Exit()
         {
-            _focusView.UnFocusAllTiles();
+            _playerTerrainFocus.HideShadowField();
+            _playerTerrainFocus.SetAllTilesUnderShadowField();
+            _playerTerrainFocus.HideAllTilesOutlines();
             _playerInput.OnPlayerInput -= HandleInput;
         }
 
@@ -63,7 +67,7 @@ namespace CodeBase.Gameplay.Player.States.Unit
         {
             var currentRegion = _playerData.CurrentRegion;
 
-            if (_terrain.TryGetTile(hex, out var tile))
+            if (_terrain.TryGetTile(hex, out var tile)) //TODO: refactoring
             {
                 if (!IsCombatUnit(_unitTypeToCreate))
                     CreateUnit(tile, false);

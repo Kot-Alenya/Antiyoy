@@ -42,10 +42,7 @@ namespace CodeBase.Gameplay.Player
         private PlayerData CreatePlayerData(PlayerPrefabData instance)
         {
             var preset = _staticDataProvider.Get<PlayerConfig>();
-            var data = new PlayerData(instance, preset.DefaultRegionType)
-            {
-                CoinsCount = preset.DefaultCoinsCount
-            };
+            var data = new PlayerData(instance, preset.DefaultRegionType);
 
             return data;
         }

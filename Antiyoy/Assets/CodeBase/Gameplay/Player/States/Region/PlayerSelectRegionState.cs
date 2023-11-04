@@ -1,8 +1,10 @@
 ﻿using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Player.Input;
+using CodeBase.Gameplay.Player.States.Unit.Move;
 using CodeBase.Gameplay.Player.UI;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States.Region
@@ -10,18 +12,18 @@ namespace CodeBase.Gameplay.Player.States.Region
     public class PlayerSelectRegionState : IEnterState<PlayerSelectRegionStateData>, IExitState
     {
         private readonly PlayerData _playerData;
-        private readonly PlayerRegionFocusView _focusView;
+        private readonly PlayerTerrainFocus _playerTerrainFocus;
         private readonly IPlayerUIMediator _uiMediator;
         private readonly IPlayerInput _playerInput;
         private readonly ITerrain _terrain;
         private readonly PlayerStateMachine _playerStateMachine;
 
-        public PlayerSelectRegionState(PlayerData playerData, PlayerRegionFocusView focusView,
+        public PlayerSelectRegionState(PlayerData playerData, PlayerTerrainFocus playerTerrainFocus,
             IPlayerUIMediator uiMediator, IPlayerInput playerInput, ITerrain terrain,
             PlayerStateMachine playerStateMachine)
         {
             _playerData = playerData;
-            _focusView = focusView;
+            _playerTerrainFocus = playerTerrainFocus;
             _uiMediator = uiMediator;
             _playerInput = playerInput;
             _terrain = terrain;
@@ -31,7 +33,9 @@ namespace CodeBase.Gameplay.Player.States.Region
         public void Enter(PlayerSelectRegionStateData parameter)
         {
             _playerData.CurrentRegion = parameter.Region;
-            _focusView.FocusRegion(parameter.Region);
+
+            _playerTerrainFocus.ShowTilesOutline(parameter.Region.Tiles);
+
             _uiMediator.SetIncomeCount(parameter.Region.Income);
             _uiMediator.SetCoinsCount(parameter.Region.CoinsCount);
             _uiMediator.ShowUIWindow();
@@ -43,7 +47,7 @@ namespace CodeBase.Gameplay.Player.States.Region
         {
             _playerInput.OnPlayerInput -= HandleInput;
 
-            _focusView.UnFocusAllRegion();
+            _playerTerrainFocus.HideAllTilesOutlines();
             _uiMediator.HideUIWindow();
         }
 
@@ -59,8 +63,9 @@ namespace CodeBase.Gameplay.Player.States.Region
                 _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                     new PlayerSelectRegionStateData(tile.Region));
 
-            //else if (tile.Entity != null)
-            //    _playerStateMachine.SwitchTo<PlayerMoveEntityState>();
+            else if (tile.Unit.Type != UnitType.None)
+                _playerStateMachine.SwitchTo<PlayerMoveUnitState, PlayerMoveUnitStateData>(
+                    new PlayerMoveUnitStateData(tile.Unit));
         }
     }
 }
