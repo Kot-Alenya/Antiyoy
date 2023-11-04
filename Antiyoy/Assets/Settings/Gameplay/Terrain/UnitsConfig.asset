@@ -126,7 +126,7 @@ MonoBehaviour:
       Data: -2
     - Name: MoveRange
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: Cost
       Entry: 3
       Data: 10
@@ -186,7 +186,7 @@ MonoBehaviour:
       Data: -4
     - Name: MoveRange
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: Cost
       Entry: 3
       Data: 20
@@ -216,7 +216,7 @@ MonoBehaviour:
       Data: -16
     - Name: MoveRange
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: Cost
       Entry: 3
       Data: 30
@@ -246,7 +246,7 @@ MonoBehaviour:
       Data: -32
     - Name: MoveRange
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: Cost
       Entry: 3
       Data: 40
