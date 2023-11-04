@@ -64,6 +64,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: 1
+    - Name: MoveRange
+      Entry: 3
+      Data: 0
     - Name: Cost
       Entry: 3
       Data: 0
@@ -91,6 +94,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: 4
+    - Name: MoveRange
+      Entry: 3
+      Data: 0
     - Name: Cost
       Entry: 3
       Data: 4
@@ -118,6 +124,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: -2
+    - Name: MoveRange
+      Entry: 3
+      Data: 1
     - Name: Cost
       Entry: 3
       Data: 10
@@ -143,6 +152,9 @@ MonoBehaviour:
       Entry: 10
       Data: 2
     - Name: Income
+      Entry: 3
+      Data: 0
+    - Name: MoveRange
       Entry: 3
       Data: 0
     - Name: Cost
@@ -172,6 +184,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: -4
+    - Name: MoveRange
+      Entry: 3
+      Data: 0
     - Name: Cost
       Entry: 3
       Data: 20
@@ -199,6 +214,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: -16
+    - Name: MoveRange
+      Entry: 3
+      Data: 0
     - Name: Cost
       Entry: 3
       Data: 30
@@ -226,6 +244,9 @@ MonoBehaviour:
     - Name: Income
       Entry: 3
       Data: -32
+    - Name: MoveRange
+      Entry: 3
+      Data: 0
     - Name: Cost
       Entry: 3
       Data: 40
@@ -251,6 +272,9 @@ MonoBehaviour:
       Entry: 10
       Data: 6
     - Name: Income
+      Entry: 3
+      Data: 0
+    - Name: MoveRange
       Entry: 3
       Data: 0
     - Name: Cost

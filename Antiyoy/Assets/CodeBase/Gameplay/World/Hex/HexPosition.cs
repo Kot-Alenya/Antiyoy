@@ -15,6 +15,9 @@ namespace CodeBase.Gameplay.World.Hex
             R = r;
         }
 
+        public static int GetMagnitude(HexPosition a, HexPosition b) =>
+            (Math.Abs(a.Q - b.Q) + Math.Abs(a.R - b.R) + Math.Abs(a.S - b.S)) / 2;
+
         public static HexPosition operator +(HexPosition a, HexPosition b) => new(a.Q + b.Q, a.R + b.R);
 
         public static HexPosition operator -(HexPosition a, HexPosition b) => new(a.Q - b.Q, a.R - b.R);

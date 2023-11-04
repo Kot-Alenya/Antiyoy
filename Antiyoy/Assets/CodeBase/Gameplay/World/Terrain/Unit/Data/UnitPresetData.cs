@@ -7,6 +7,7 @@ namespace CodeBase.Gameplay.World.Terrain.Unit.Data
     {
         public UnitPrefabData Prefab;
         public int Income;
+        public int MoveRange;
         public int Cost;
         public int CostIncreaseFactor;
     }
