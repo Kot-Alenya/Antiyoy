@@ -1,8 +1,10 @@
 ﻿using CodeBase.Gameplay.Player.Data;
 using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Region;
+using CodeBase.Gameplay.Player.States.Unit.Move;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States
@@ -29,10 +31,18 @@ namespace CodeBase.Gameplay.Player.States
 
         private void HandleInput(HexPosition hex)
         {
-            if (_terrain.TryGetTile(hex, out var tile))
-                if (tile.Region.Type == _playerData.RegionType)
-                    _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
-                        new PlayerSelectRegionStateData(tile.Region));
+            if (!_terrain.TryGetTile(hex, out var tile))
+                return;
+
+            if (tile.Region.Type != _playerData.RegionType)
+                return;
+
+            if (tile.Unit.Type != UnitType.None)
+                _playerStateMachine.SwitchTo<PlayerMoveUnitState, PlayerMoveUnitStateData>(
+                    new PlayerMoveUnitStateData(tile.Unit));
+            else
+                _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
+                    new PlayerSelectRegionStateData(tile.Region));
         }
     }
 }

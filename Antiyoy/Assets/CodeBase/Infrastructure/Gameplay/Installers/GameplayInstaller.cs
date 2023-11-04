@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Ecs;
 using CodeBase.Gameplay.UI;
-using Leopotam.EcsLite;
 using UnityEngine;
 using Zenject;
 

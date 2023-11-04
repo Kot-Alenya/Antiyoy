@@ -33,6 +33,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
             Container.Bind<TerrainFactory>().AsSingle();
             Container.Bind<ITerrain>().To<TerrainObject>().AsSingle();
+            Container.Bind<TerrainPathFinding>().AsSingle();
         }
 
         private void BindTile()

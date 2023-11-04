@@ -11,7 +11,7 @@ using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Gameplay.World.Version;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
-namespace CodeBase.Gameplay.Player.States.Unit
+namespace CodeBase.Gameplay.Player.States.Unit.Create
 {
     public class PlayerCreateUnitState : IEnterState<PlayerCreateUnitStateData>, IExitState
     {
