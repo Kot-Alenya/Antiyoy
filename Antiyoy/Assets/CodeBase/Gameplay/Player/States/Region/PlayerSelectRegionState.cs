@@ -1,53 +1,62 @@
-﻿using CodeBase.Gameplay.Player.Data;
-using CodeBase.Gameplay.Player.Input;
+﻿using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Unit.Move;
 using CodeBase.Gameplay.Player.UI;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Unit.Data;
+using CodeBase.Gameplay.World.Terrain.Region.Data;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States.Region
 {
     public class PlayerSelectRegionState : IEnterState<PlayerSelectRegionStateData>, IExitState
     {
-        private readonly PlayerData _playerData;
-        private readonly PlayerTerrainFocus _playerTerrainFocus;
+        private readonly PlayerTerrainView _playerTerrainView;
         private readonly IPlayerUIMediator _uiMediator;
         private readonly IPlayerInput _playerInput;
         private readonly ITerrain _terrain;
         private readonly PlayerStateMachine _playerStateMachine;
+        private readonly IPlayerModel _playerModel;
+        private RegionData _currentRegion;
 
-        public PlayerSelectRegionState(PlayerData playerData, PlayerTerrainFocus playerTerrainFocus,
+        public PlayerSelectRegionState(PlayerTerrainView playerTerrainView,
             IPlayerUIMediator uiMediator, IPlayerInput playerInput, ITerrain terrain,
-            PlayerStateMachine playerStateMachine)
+            PlayerStateMachine playerStateMachine, IPlayerModel playerModel)
         {
-            _playerData = playerData;
-            _playerTerrainFocus = playerTerrainFocus;
+            _playerTerrainView = playerTerrainView;
             _uiMediator = uiMediator;
             _playerInput = playerInput;
             _terrain = terrain;
             _playerStateMachine = playerStateMachine;
+            _playerModel = playerModel;
         }
 
         public void Enter(PlayerSelectRegionStateData parameter)
         {
-            _playerData.CurrentRegion = parameter.Region;
+            _currentRegion = parameter.Region;
 
-            _playerTerrainFocus.ShowTilesOutline(parameter.Region.Tiles);
+            _playerModel.SelectRegion(_currentRegion);
 
-            _uiMediator.SetIncomeCount(parameter.Region.Income);
-            _uiMediator.SetCoinsCount(parameter.Region.CoinsCount);
-            _uiMediator.ShowUIWindow();
-
+            ShowView();
             _playerInput.OnPlayerInput += HandleInput;
         }
 
         public void Exit()
         {
+            HideView();
             _playerInput.OnPlayerInput -= HandleInput;
+        }
 
-            _playerTerrainFocus.HideAllTilesOutlines();
+        private void ShowView()
+        {
+            _playerTerrainView.ShowTilesOutline(_currentRegion.Tiles);
+            _uiMediator.SetIncomeCount(_currentRegion.Income);
+            _uiMediator.SetCoinsCount(_currentRegion.CoinsCount);
+            _uiMediator.ShowUIWindow();
+        }
+
+        private void HideView()
+        {
+            _playerTerrainView.HideAllTilesOutlines();
             _uiMediator.HideUIWindow();
         }
 
@@ -56,10 +65,10 @@ namespace CodeBase.Gameplay.Player.States.Region
             if (!_terrain.TryGetTile(hex, out var tile))
                 _playerStateMachine.SwitchTo<PlayerDefaultState>();
 
-            else if (tile.Region.Type != _playerData.RegionType)
+            else if (tile.Region.Type != _currentRegion.Type)
                 _playerStateMachine.SwitchTo<PlayerDefaultState>();
 
-            else if (tile.Region != _playerData.CurrentRegion)
+            else if (tile.Region != _currentRegion)
                 _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                     new PlayerSelectRegionStateData(tile.Region));
 

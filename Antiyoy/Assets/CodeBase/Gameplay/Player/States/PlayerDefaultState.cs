@@ -1,27 +1,25 @@
-﻿using CodeBase.Gameplay.Player.Data;
-using CodeBase.Gameplay.Player.Input;
+﻿using CodeBase.Gameplay.Player.Input;
 using CodeBase.Gameplay.Player.States.Region;
 using CodeBase.Gameplay.Player.States.Unit.Move;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain;
-using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.StateMachine.States;
 
 namespace CodeBase.Gameplay.Player.States
 {
     public class PlayerDefaultState : IEnterState, IExitState
     {
-        private readonly PlayerData _playerData;
         private readonly PlayerStateMachine _playerStateMachine;
+        private readonly IPlayerModel _playerModel;
         private readonly IPlayerInput _playerInput;
         private readonly ITerrain _terrain;
 
-        public PlayerDefaultState(PlayerData playerData, PlayerStateMachine playerStateMachine,
+        public PlayerDefaultState(IPlayerModel playerModel, PlayerStateMachine playerStateMachine,
             IPlayerInput playerInput, ITerrain terrain)
         {
+            _playerModel = playerModel;
             _playerInput = playerInput;
             _terrain = terrain;
-            _playerData = playerData;
             _playerStateMachine = playerStateMachine;
         }
 
@@ -34,7 +32,7 @@ namespace CodeBase.Gameplay.Player.States
             if (!_terrain.TryGetTile(hex, out var tile))
                 return;
 
-            if (tile.Region.Type != _playerData.RegionType)
+            if (tile.Region.Type != _playerModel.PersistenceRegionType)
                 return;
 
             if (tile.Unit != null && tile.Unit.IsCanMove)

@@ -33,7 +33,10 @@ namespace CodeBase.Gameplay.Player
 
             _container.Bind<IPlayerUIMediator>().FromInstance(instance.PlayerUIWindow).AsSingle();
             _container.Bind<IPlayerInput>().FromInstance(instance.PlayerInput).AsSingle();
-            _container.Bind<PlayerData>().FromInstance(data).AsSingle();
+
+            _container.Bind<PlayerUnitMover>().AsSingle().WithArguments(data);
+            _container.Bind<PlayerUnitCreator>().AsSingle().WithArguments(data);
+            _container.Bind<IPlayerModel>().To<PlayerModel>().AsSingle().WithArguments(data);
             _container.InjectGameObject(instance.gameObject);
 
             _playerStateMachine.SwitchTo<PlayerDefaultState>();

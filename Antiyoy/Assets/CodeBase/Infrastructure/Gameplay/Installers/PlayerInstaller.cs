@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<PlayerTerrainFocus>().AsSingle();
+            Container.Bind<PlayerTerrainView>().AsSingle();
             Container.Bind<PlayerStateMachine>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle().WithArguments(_playerPrefabData);
         }
