@@ -25,16 +25,7 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
 
         public void Load<T>(string key) where T : ProgressData, new()
         {
-            var filePath = GetFilePath(key);
-
-            if (!File.Exists(filePath))
-                return;
-
-            using var streamReader = new StreamReader(filePath, false);
-            var data = JsonUtility.FromJson<T>(streamReader.ReadToEnd());
-
-            if (data == null)
-                return;
+            var data = LoadData<T>(key);
 
             foreach (var watcher in _watchers)
                 if (watcher is IProgressReader<T> progressReader)
@@ -51,6 +42,17 @@ namespace CodeBase.Infrastructure.Services.ProgressSaveLoader
 
             using var streamWriter = new StreamWriter(GetFilePath(key), false);
             streamWriter.Write(JsonUtility.ToJson(data));
+        }
+
+        private T LoadData<T>(string key) where T : ProgressData, new()
+        {
+            var filePath = GetFilePath(key);
+
+            if (!File.Exists(filePath))
+                return null;
+
+            using var streamReader = new StreamReader(filePath, false);
+            return JsonUtility.FromJson<T>(streamReader.ReadToEnd());
         }
 
         private static string GetFilePath(string key) => $"{StoragePath}/{key + Extension}";

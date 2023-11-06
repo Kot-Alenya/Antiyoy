@@ -7,7 +7,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
 {
     public static class PlayerMoveUnitUtilities
     {
-        public static List<TileData> GetTilesToMoveUnit(UnitData_new unit, UnitStaticDataHelper unitStaticDataHelper)
+        public static List<TileData> GetTilesToMoveUnit(UnitData unit, UnitStaticDataHelper unitStaticDataHelper)
         {
             var unitPreset = (CombatUnitPresetData)unitStaticDataHelper.GetPreset(unit.Type);
             var result = new List<TileData>();

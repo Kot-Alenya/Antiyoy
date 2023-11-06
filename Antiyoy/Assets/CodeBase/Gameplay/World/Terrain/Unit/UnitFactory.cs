@@ -10,11 +10,11 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
 
         public UnitFactory(UnitStaticDataHelper staticDataHelper) => _staticDataHelper = staticDataHelper;
 
-        public UnitData_new Create(TileData rootTile, UnitType unitType, bool isCanMove)
+        public UnitData Create(TileData rootTile, UnitType unitType, bool isCanMove)
         {
             var preset = _staticDataHelper.GetPreset(unitType);
             var instance = Object.Instantiate(preset.Prefab, rootTile.Instance.transform);
-            var unit = new UnitData_new(unitType, instance, rootTile, isCanMove);
+            var unit = new UnitData(unitType, instance, rootTile, isCanMove);
 
             if (isCanMove)
                 unit.Instance.Animator.CanMove();
@@ -22,6 +22,6 @@ namespace CodeBase.Gameplay.World.Terrain.Unit
             return unit;
         }
 
-        public void Destroy(UnitData_new unit) => Object.Destroy(unit.Instance.gameObject);
+        public void Destroy(UnitData unit) => Object.Destroy(unit.Instance.gameObject);
     }
 }

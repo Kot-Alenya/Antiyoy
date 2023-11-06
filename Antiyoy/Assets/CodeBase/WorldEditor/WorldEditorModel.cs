@@ -49,7 +49,7 @@ namespace CodeBase.WorldEditor
                     _worldFactory.TryDestroyTile(hex);
                     break;
                 case WorldEditorMode.CreateUnit:
-                    _worldFactory.CreateUnit(hex, _currentUnitType, false);
+                    _worldFactory.TryCreateUnit(hex, _currentUnitType, false);
                     break;
                 case WorldEditorMode.DestroyUnit:
                     _worldFactory.TryDestroyUnit(hex);

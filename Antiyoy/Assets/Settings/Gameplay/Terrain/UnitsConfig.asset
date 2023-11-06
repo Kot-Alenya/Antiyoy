@@ -15,283 +15,59 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: -4724356662714697873, guid: cc39d115639e3a444beeaa76926856fe, type: 3}
-    - {fileID: -4724356662714697873, guid: 6c57552dcd1d15b42b6c8c6c14f67a57, type: 3}
-    - {fileID: -4724356662714697873, guid: 6010765b7d0cd324aa2c5015d3a20884, type: 3}
-    - {fileID: 6214659323934326926, guid: f2e360d8dbf2d3048a04a94c3e6ffc3c, type: 3}
-    - {fileID: 744388126975805290, guid: 7910911a5113f594887a14c33999cba2, type: 3}
-    - {fileID: 8047377957402820054, guid: b946a2e5b9a88bc4ab2a64821d248e1f, type: 3}
-    - {fileID: 1038506597755780547, guid: 537010568a463ee44ae68847eabef30a, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Presets
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitType,
-        CodeBase],[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase]],
-        mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[CodeBase.Gameplay.World.Terrain.Unit.Data.UnitType,
-        CodeBase]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 8
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 7
-      Data: 2|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 6
-      Data: 
-    - Name: Income
-      Entry: 3
-      Data: 1
-    - Name: MoveRange
-      Entry: 3
-      Data: 0
-    - Name: Cost
-      Entry: 3
-      Data: 0
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 7
-      Data: 3|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 0
-    - Name: Income
-      Entry: 3
-      Data: 4
-    - Name: MoveRange
-      Entry: 3
-      Data: 0
-    - Name: Cost
-      Entry: 3
-      Data: 4
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 7
-      Data: 4|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 1
-    - Name: Income
-      Entry: 3
-      Data: -2
-    - Name: MoveRange
-      Entry: 3
-      Data: 2
-    - Name: Cost
-      Entry: 3
-      Data: 10
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 7
-      Data: 5|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 2
-    - Name: Income
-      Entry: 3
-      Data: 0
-    - Name: MoveRange
-      Entry: 3
-      Data: 0
-    - Name: Cost
-      Entry: 3
-      Data: 0
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 5
-    - Name: $v
-      Entry: 7
-      Data: 6|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 3
-    - Name: Income
-      Entry: 3
-      Data: -4
-    - Name: MoveRange
-      Entry: 3
-      Data: 2
-    - Name: Cost
-      Entry: 3
-      Data: 20
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 6
-    - Name: $v
-      Entry: 7
-      Data: 7|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 4
-    - Name: Income
-      Entry: 3
-      Data: -16
-    - Name: MoveRange
-      Entry: 3
-      Data: 2
-    - Name: Cost
-      Entry: 3
-      Data: 30
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 7
-    - Name: $v
-      Entry: 7
-      Data: 8|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 5
-    - Name: Income
-      Entry: 3
-      Data: -32
-    - Name: MoveRange
-      Entry: 3
-      Data: 2
-    - Name: Cost
-      Entry: 3
-      Data: 40
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
-      Entry: 7
-      Data: 9|CodeBase.Gameplay.World.Terrain.Unit.Data.UnitPresetData, CodeBase
-    - Name: Prefab
-      Entry: 10
-      Data: 6
-    - Name: Income
-      Entry: 3
-      Data: 0
-    - Name: MoveRange
-      Entry: 3
-      Data: 0
-    - Name: Cost
-      Entry: 3
-      Data: 0
-    - Name: CostIncreaseFactor
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+  CombatUnitPresets:
+  - Prefab: {fileID: -4724356662714697873, guid: 6c57552dcd1d15b42b6c8c6c14f67a57, type: 3}
+    Type: 2
+    Income: -2
+    MoveRange: 4
+    Cost: 10
+  - Prefab: {fileID: 6214659323934326926, guid: f2e360d8dbf2d3048a04a94c3e6ffc3c, type: 3}
+    Type: 5
+    Income: -4
+    MoveRange: 3
+    Cost: 20
+  - Prefab: {fileID: 744388126975805290, guid: 7910911a5113f594887a14c33999cba2, type: 3}
+    Type: 6
+    Income: -8
+    MoveRange: 1
+    Cost: 30
+  - Prefab: {fileID: 8047377957402820054, guid: b946a2e5b9a88bc4ab2a64821d248e1f, type: 3}
+    Type: 7
+    Income: -16
+    MoveRange: 2
+    Cost: 40
+  ConstructionUnitPresets:
+  - Prefab: {fileID: -4724356662714697873, guid: cc39d115639e3a444beeaa76926856fe, type: 3}
+    Type: 1
+    Income: 4
+    Cost: 4
+    CostIncreaseFactor: 4
+    ProtectionLevel: 0
+    ProtectionRange: 0
+  - Prefab: {fileID: 6321174778834049357, guid: f918b10da2c54354f90455f6918a6ab6, type: 3}
+    Type: 8
+    Income: 0
+    Cost: 15
+    CostIncreaseFactor: 0
+    ProtectionLevel: 1
+    ProtectionRange: 1
+  - Prefab: {fileID: 3834048137787070294, guid: e48739dc7b29cc543a7b412928f67eeb, type: 3}
+    Type: 9
+    Income: -5
+    Cost: 35
+    CostIncreaseFactor: 0
+    ProtectionLevel: 2
+    ProtectionRange: 1
+  OtherUnitPresets:
+  - Prefab: {fileID: 1038506597755780547, guid: 537010568a463ee44ae68847eabef30a, type: 3}
+    Type: 4
+    Income: 0
+  - Prefab: {fileID: -4724356662714697873, guid: 6010765b7d0cd324aa2c5015d3a20884, type: 3}
+    Type: 3
+    Income: 0

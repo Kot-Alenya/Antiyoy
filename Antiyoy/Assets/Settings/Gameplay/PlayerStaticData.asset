@@ -21,7 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DefaultRegionType: 0
-  DefaultCoinsCount: -666
-  SelectedRegionBorderColor: {r: 1, g: 1, b: 1, a: 1}
-  UnSelectedRegionBorderColor: {r: 1, g: 0, b: 0, a: 0}
+  DefaultRegionType: 1

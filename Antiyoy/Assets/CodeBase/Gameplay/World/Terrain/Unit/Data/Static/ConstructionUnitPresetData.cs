@@ -3,12 +3,11 @@
 namespace CodeBase.Gameplay.World.Terrain.Unit.Data
 {
     [Serializable]
-    public class UnitPresetData
+    public class ConstructionUnitPresetData : UnitPresetData
     {
-        public UnitPrefabData Prefab;
-        public int Income;
-        public int MoveRange;
         public int Cost;
         public int CostIncreaseFactor;
+        public int ProtectionLevel;
+        public int ProtectionRange;
     }
 }

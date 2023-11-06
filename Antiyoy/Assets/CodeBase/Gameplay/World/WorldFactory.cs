@@ -44,11 +44,14 @@ namespace CodeBase.Gameplay.World
             _terrain.DestroyTile(tile);
         }
 
-        public void CreateUnit(HexPosition hex, UnitType unitType, bool isCanMove)
+        public void TryCreateUnit(HexPosition hex, UnitType unitType, bool isCanMove)
         {
+            if (!_terrain.TryGetTile(hex, out var tile))
+                return;
+
             TryDestroyUnit(hex);
 
-            _terrain.CreateUnit(_terrain.GetTile(hex), unitType, isCanMove);
+            _terrain.CreateUnit(tile, unitType, isCanMove);
             _worldVersionRecorder.AddToBuffer(
                 _unitVersionOperationFactory.GetCreateOperation(hex, unitType, isCanMove));
         }

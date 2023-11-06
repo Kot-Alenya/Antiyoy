@@ -2,12 +2,19 @@
 
 namespace CodeBase.Gameplay.World.Terrain.Unit.Data
 {
-    public struct UnitData
+    public class UnitData
     {
-        public UnitPrefabData Instance;
-        public UnitPresetData Preset;
-        public TileData RootTile;
-        public UnitType Type;
+        public readonly UnitType Type;
+        public readonly UnitPrefabData Instance;
+        public readonly TileData RootTile;
         public bool IsCanMove;
+
+        public UnitData(UnitType type, UnitPrefabData instance, TileData rootTile, bool isCanMove)
+        {
+            Type = type;
+            Instance = instance;
+            RootTile = rootTile;
+            IsCanMove = isCanMove;
+        }
     }
 }

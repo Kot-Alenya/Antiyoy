@@ -31,6 +31,8 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
                     {
                         case UnitType.Farm:
                         case UnitType.Knight:
+                        case UnitType.Tower:
+                        case UnitType.SuperTower:
                             continue;
                     }
                 }

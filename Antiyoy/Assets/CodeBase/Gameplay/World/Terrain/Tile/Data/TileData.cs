@@ -12,8 +12,7 @@ namespace CodeBase.Gameplay.World.Terrain.Tile.Data
         public readonly HexPosition Hex;
 
         public RegionData Region;
-        public UnitData_new Unit;
-        public int ProtectionLevel;
+        public UnitData Unit;
 
         public TileData(TilePrefabData instance, HexPosition hex)
         {

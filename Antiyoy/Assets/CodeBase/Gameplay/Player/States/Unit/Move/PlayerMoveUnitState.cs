@@ -24,7 +24,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         private readonly UnitStaticDataHelper _unitStaticDataHelper;
 
         private List<TileData> _unitTilesToMove;
-        private UnitData_new _currentUnit;
+        private UnitData _currentUnit;
 
         public PlayerMoveUnitState(IPlayerInput playerInput, ITerrain terrain, PlayerData playerData,
             PlayerStateMachine playerStateMachine, PlayerTerrainFocus playerTerrainFocus, WorldFactory worldFactory,
@@ -91,7 +91,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         private void MoveUnit(TileData toTile, UnitType unitToCreateType, bool isCanMove)
         {
             _worldFactory.CreateTile(toTile.Hex, _playerData.RegionType);
-            _worldFactory.CreateUnit(toTile.Hex, unitToCreateType, isCanMove);
+            _worldFactory.TryCreateUnit(toTile.Hex, unitToCreateType, isCanMove);
             _worldFactory.TryDestroyUnit(_currentUnit.RootTile.Hex);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
         }

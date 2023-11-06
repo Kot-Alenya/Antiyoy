@@ -13,9 +13,11 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
             {
                 Hex = tile.Hex.ToSaved(),
                 RegionType = tile.Region.Type,
-                Unit = tile.Unit.ToSaved() 
             };
 
+            if (tile.Unit != null)
+                saved.Unit = tile.Unit.ToSaved();
+            
             return saved;
         }
 
@@ -28,7 +30,7 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
             };
         }
 
-        public static SavedUnitData ToSaved(this UnitData_new unit)
+        public static SavedUnitData ToSaved(this UnitData unit)
         {
             return new SavedUnitData
             {

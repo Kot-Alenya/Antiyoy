@@ -92,7 +92,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
             var isUnitCanMoveAfterCreation = IsUnitCanMoveAfterCreation(tile, unitType);
 
             _worldFactory.CreateTile(tile.Hex, _playerData.RegionType);
-            _worldFactory.CreateUnit(tile.Hex, unitType, isUnitCanMoveAfterCreation);
+            _worldFactory.TryCreateUnit(tile.Hex, unitType, isUnitCanMoveAfterCreation);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
         }
 

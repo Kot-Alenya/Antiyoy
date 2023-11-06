@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.World.Terrain.Unit.Data
 
         public UnitStaticDataHelper(IStaticDataProvider staticDataProvider) => _staticDataProvider = staticDataProvider;
 
-        public UnitPresetData_new GetPreset(UnitType unitType)
+        public UnitPresetData GetPreset(UnitType unitType)
         {
             var config = _staticDataProvider.Get<UnitsConfig>();
 

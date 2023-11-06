@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Gameplay.World.Hex;
 using CodeBase.Gameplay.World.Terrain.Region;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
@@ -76,7 +77,7 @@ namespace CodeBase.Gameplay.World.Terrain
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 
-        public void DestroyUnit(UnitData_new unit)
+        public void DestroyUnit(UnitData unit)
         {
             var rootTile = unit.RootTile;
 
@@ -89,7 +90,7 @@ namespace CodeBase.Gameplay.World.Terrain
 
         public bool TryGetTile(HexPosition hex, out TileData tile) => _tileArray.TryGet(hex, out tile);
 
-        public IEnumerator<TileData> GetEnumerator() => _tileArray.GetEnumerator();
+        public IEnumerator<TileData> GetEnumerator() => _tileArray.Where(t => t != null).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

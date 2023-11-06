@@ -29,23 +29,26 @@ namespace CodeBase.Gameplay.World.Progress
 
         public void OnProgressLoad(WorldProgressData progress)
         {
-            var terrainSize = GetTerrainSize(progress);
+            if (progress == null)
+                CreateTerrain(_staticDataProvider.Get<TerrainConfig>().DefaultSize);
+            else
+                LoadTerrain(progress);
+        }
+
+        private void CreateTerrain(Vector2Int terrainSize)
+        {
             var terrainInstance = _terrainFactory.Create(terrainSize);
 
             _tileFactory.Initialize(terrainInstance.transform);
             _terrain.Initialize(new TileArray(terrainSize));
-
-            FillTerrain(progress);
         }
 
-        private Vector2Int GetTerrainSize(WorldProgressData progress)
+        private void LoadTerrain(WorldProgressData progress)
         {
             var terrainSize = progress.TerrainSize.FromSaved();
 
-            if (terrainSize == default)
-                terrainSize = _staticDataProvider.Get<TerrainConfig>().DefaultSize;
-
-            return terrainSize;
+            CreateTerrain(terrainSize);
+            FillTerrain(progress);
         }
 
         private void FillTerrain(WorldProgressData progress)
