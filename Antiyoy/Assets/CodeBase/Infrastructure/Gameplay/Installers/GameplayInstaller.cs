@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Camera;
+﻿using CodeBase.Dev.DebugWindow;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.Ecs;
 using CodeBase.Gameplay.UI;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
         {
             BindEcs();
 
+            Container.Bind<DebugWindowFactory>().AsSingle();
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<GameplayUIFactory>().AsSingle().WithArguments(_gameplayUIPrefab);
             Container.BindInterfacesTo<GameplayStartup>().AsSingle();
