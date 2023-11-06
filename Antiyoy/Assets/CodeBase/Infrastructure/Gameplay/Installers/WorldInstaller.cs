@@ -8,6 +8,7 @@ using CodeBase.Gameplay.World.Terrain.Region.Rebuilder.Geometry;
 using CodeBase.Gameplay.World.Terrain.Tile;
 using CodeBase.Gameplay.World.Terrain.Tile.Operation;
 using CodeBase.Gameplay.World.Terrain.Unit;
+using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Gameplay.World.Terrain.Unit.Operation;
 using CodeBase.Gameplay.World.Version;
 using Zenject;
@@ -47,6 +48,7 @@ namespace CodeBase.Infrastructure.Gameplay.Installers
         private void BindUnit()
         {
             Container.Bind<UnitFactory>().AsSingle();
+            Container.Bind<UnitStaticDataHelper>().AsSingle();
             Container.Bind<UnitVersionOperationFactory>().AsSingle();
             Container.Bind<CreateUnitOperationHandler>().AsSingle();
             Container.Bind<DestroyUnitOperationHandler>().AsSingle();

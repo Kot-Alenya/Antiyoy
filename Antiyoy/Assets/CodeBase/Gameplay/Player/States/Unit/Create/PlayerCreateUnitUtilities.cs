@@ -7,14 +7,9 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
 {
     public static class PlayerCreateUnitUtilities
     {
-        public static List<TileData> GetTilesToCreateUnit(UnitType unitType, RegionData region)
-        {
-            if (PlayerUnitUtilities.IsCombatUnit(unitType))
-                return GetTilesToCreateCombatUnit(region);
-
-            return GetTilesToCreateNotCombatUnit(region);
-        }
-
+        public static List<TileData> GetTilesToCreateUnit(UnitType unitType, RegionData region) => unitType.IsCombat()
+            ? GetTilesToCreateCombatUnit(region)
+            : GetTilesToCreateNotCombatUnit(region);
 
 
         private static List<TileData> GetTilesToCreateCombatUnit(RegionData region)
@@ -30,11 +25,14 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
                             result.Add(neighbor);
                 }
 
-                switch (tile.Unit.Type)
+                if (tile.Unit != null)
                 {
-                    case UnitType.Farm:
-                    case UnitType.Knight:
-                        continue;
+                    switch (tile.Unit.Type)
+                    {
+                        case UnitType.Farm:
+                        case UnitType.Knight:
+                            continue;
+                    }
                 }
 
                 result.Add(tile);
@@ -48,16 +46,8 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
             var result = new List<TileData>();
 
             foreach (var tile in region.Tiles)
-            {
-                switch (tile.Unit.Type)
-                {
-                    case UnitType.Farm:
-                    case UnitType.Pine:
-                        continue;
-                }
-
-                result.Add(tile);
-            }
+                if (tile.Unit == null)
+                    result.Add(tile);
 
             return result;
         }

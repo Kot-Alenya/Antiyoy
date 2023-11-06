@@ -22,7 +22,7 @@ namespace CodeBase.Gameplay.World.Terrain
 
         public void CreateUnit(TileData rootTile, UnitType unitType, bool isCanMove);
 
-        public void DestroyUnit(UnitData unit);
+        public void DestroyUnit(UnitData_new unit);
 
         public TileData GetTile(HexPosition hex);
 

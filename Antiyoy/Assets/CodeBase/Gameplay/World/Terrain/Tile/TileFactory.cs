@@ -27,7 +27,7 @@ namespace CodeBase.Gameplay.World.Terrain.Tile
         private TilePrefabData CreateInstance(HexPosition hex, Transform root)
         {
             var position = HexMath.ToWorldPosition(hex);
-            var tileStaticData = _staticDataProvider.Get<TilesConfig>();
+            var tileStaticData = _staticDataProvider.Get<TileConfig>();
             var instance = Object.Instantiate(tileStaticData.Prefab, root);
             var transform = instance.transform;
 

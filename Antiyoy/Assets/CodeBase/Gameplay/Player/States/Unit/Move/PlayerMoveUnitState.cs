@@ -21,19 +21,21 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         private readonly WorldVersionRecorder _worldVersionRecorder;
         private readonly ITerrain _terrain;
         private readonly PlayerData _playerData;
+        private readonly UnitStaticDataHelper _unitStaticDataHelper;
 
         private List<TileData> _unitTilesToMove;
-        private UnitData _currentUnit;
+        private UnitData_new _currentUnit;
 
         public PlayerMoveUnitState(IPlayerInput playerInput, ITerrain terrain, PlayerData playerData,
             PlayerStateMachine playerStateMachine, PlayerTerrainFocus playerTerrainFocus, WorldFactory worldFactory,
-            WorldVersionRecorder worldVersionRecorder)
+            WorldVersionRecorder worldVersionRecorder, UnitStaticDataHelper unitStaticDataHelper)
         {
             _playerInput = playerInput;
             _playerStateMachine = playerStateMachine;
             _playerTerrainFocus = playerTerrainFocus;
             _worldFactory = worldFactory;
             _worldVersionRecorder = worldVersionRecorder;
+            _unitStaticDataHelper = unitStaticDataHelper;
             _terrain = terrain;
             _playerData = playerData;
         }
@@ -41,7 +43,7 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
         public void Enter(PlayerMoveUnitStateData parameter)
         {
             _currentUnit = parameter.Unit;
-            _unitTilesToMove = PlayerMoveUnitUtilities.GetTilesToMoveUnit(parameter.Unit);
+            _unitTilesToMove = PlayerMoveUnitUtilities.GetTilesToMoveUnit(parameter.Unit, _unitStaticDataHelper);
 
             ShowView();
             _playerInput.OnPlayerInput += HandleInput;
@@ -73,7 +75,8 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
 
             if (_terrain.TryGetTile(hex, out var tile) && _unitTilesToMove.Contains(tile))
             {
-                if (PlayerCombineUnitUtilities.TryCombinedUnitType(_currentUnit.Type, tile.Unit.Type, out var type))
+                if (tile.Unit != null &&
+                    PlayerCombineUnitUtilities.TryCombinedUnitType(_currentUnit.Type, tile.Unit.Type, out var type))
                     MoveUnit(tile, type, tile.Unit.IsCanMove);
                 else
                     MoveUnit(tile, _currentUnit.Type, false);

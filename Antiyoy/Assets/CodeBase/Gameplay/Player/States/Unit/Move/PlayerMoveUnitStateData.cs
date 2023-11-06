@@ -5,8 +5,8 @@ namespace CodeBase.Gameplay.Player.States.Unit.Move
 {
     public readonly struct PlayerMoveUnitStateData : IStateParameter
     {
-        public readonly UnitData Unit;
+        public readonly UnitData_new Unit;
 
-        public PlayerMoveUnitStateData(UnitData unit) => Unit = unit;
+        public PlayerMoveUnitStateData(UnitData_new unit) => Unit = unit;
     }
 }

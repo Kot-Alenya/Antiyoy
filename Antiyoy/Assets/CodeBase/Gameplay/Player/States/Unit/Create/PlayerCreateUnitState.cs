@@ -74,7 +74,8 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
 
             if (_terrain.TryGetTile(hex, out var tile) && _tilesToCreateUnit.Contains(tile))
             {
-                if (PlayerCombineUnitUtilities.TryCombinedUnitType(_unitToCreateType, tile.Unit.Type, out var type))
+                if (tile.Unit != null &&
+                    PlayerCombineUnitUtilities.TryCombinedUnitType(_unitToCreateType, tile.Unit.Type, out var type))
                     CreateUnit(tile, type);
                 else
                     CreateUnit(tile, _unitToCreateType);
@@ -88,18 +89,34 @@ namespace CodeBase.Gameplay.Player.States.Unit.Create
 
         private void CreateUnit(TileData tile, UnitType unitType)
         {
-            var isUnitCanMoveAfterCreation = PlayerUnitUtilities.IsCombatUnit(unitType);
-
-            if (tile.Region.Type != _playerData.RegionType)
-                isUnitCanMoveAfterCreation = false;
-            else if (tile.Unit.Type == UnitType.Pine)
-                isUnitCanMoveAfterCreation = false;
-            else if (PlayerUnitUtilities.IsCombatUnit(tile.Unit.Type))
-                isUnitCanMoveAfterCreation = tile.Unit.IsCanMove;
+            var isUnitCanMoveAfterCreation = IsUnitCanMoveAfterCreation(tile, unitType);
 
             _worldFactory.CreateTile(tile.Hex, _playerData.RegionType);
             _worldFactory.CreateUnit(tile.Hex, unitType, isUnitCanMoveAfterCreation);
             _worldVersionRecorder.RecordFromBufferAndClearBuffer();
+        }
+
+        private bool IsUnitCanMoveAfterCreation(TileData tile, UnitType unitType)
+        {
+            if (!unitType.IsCombat())
+                return false;
+
+            if (tile.Region.Type != _playerData.RegionType)
+                return false;
+
+            if (tile.Unit != null)
+            {
+                if (tile.Unit.Type == UnitType.Tree)
+                    return false;
+
+                if (tile.Unit.Type == UnitType.Grave)
+                    return false;
+                
+                if (tile.Unit.Type.IsCombat())
+                    return tile.Unit.IsCanMove;
+            }
+
+            return true;
         }
     }
 }

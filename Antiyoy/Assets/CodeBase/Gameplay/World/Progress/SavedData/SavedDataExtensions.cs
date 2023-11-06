@@ -28,7 +28,7 @@ namespace CodeBase.Gameplay.World.Progress.SavedData
             };
         }
 
-        public static SavedUnitData ToSaved(this UnitData unit)
+        public static SavedUnitData ToSaved(this UnitData_new unit)
         {
             return new SavedUnitData
             {

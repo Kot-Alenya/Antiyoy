@@ -21,14 +21,14 @@ namespace CodeBase.Gameplay.Ecs.Systems
         {
             foreach (var region in _regionFactory.Regions)
             foreach (var tile in region.Tiles)
-                if (tile.Unit.Type == UnitType.Grave)
+                if (tile.Unit != null && tile.Unit.Type == UnitType.Grave)
                     ReplaceGrave(tile);
         }
 
         private void ReplaceGrave(TileData tile)
         {
             _terrain.DestroyUnit(tile.Unit);
-            _terrain.CreateUnit(tile, UnitType.Pine, false);
+            _terrain.CreateUnit(tile, UnitType.Tree, false);
         }
     }
 }

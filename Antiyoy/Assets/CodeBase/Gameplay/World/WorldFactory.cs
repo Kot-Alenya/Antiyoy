@@ -58,7 +58,7 @@ namespace CodeBase.Gameplay.World
             if (!_terrain.TryGetTile(hex, out var tile))
                 return;
 
-            if (tile.Unit.Type == UnitType.None)
+            if (tile.Unit == null)
                 return;
 
             _worldVersionRecorder.AddToBuffer(

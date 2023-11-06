@@ -38,15 +38,10 @@ namespace CodeBase.Gameplay.Ecs.Systems
         {
             foreach (var tile in region.Tiles)
             {
-                switch (tile.Unit.Type)
+                if (tile.Unit != null && tile.Unit.Type.IsCombat())
                 {
-                    case UnitType.Peasant:
-                    case UnitType.Spearman:
-                    case UnitType.Baron:
-                    case UnitType.Knight:
-                        _terrain.DestroyUnit(tile.Unit);
-                        _terrain.CreateUnit(tile, UnitType.Grave, false);
-                        break;
+                    _terrain.DestroyUnit(tile.Unit);
+                    _terrain.CreateUnit(tile, UnitType.Grave, false);
                 }
             }
         }

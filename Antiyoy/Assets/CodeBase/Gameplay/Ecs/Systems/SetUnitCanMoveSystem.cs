@@ -14,16 +14,11 @@ namespace CodeBase.Gameplay.Ecs.Systems
         {
             foreach (var tile in _terrain)
             {
-                switch (tile.Unit.Type)
-                {
-                    case UnitType.Peasant:
-                    case UnitType.Spearman:
-                    case UnitType.Baron:
-                    case UnitType.Knight:
-                        tile.Unit.IsCanMove = true;
-                        tile.Unit.Instance.Animator.CanMove();
-                        break;
-                }
+                if (tile.Unit == null || !tile.Unit.Type.IsCombat())
+                    continue;
+
+                tile.Unit.IsCanMove = true;
+                tile.Unit.Instance.Animator.CanMove();
             }
         }
     }

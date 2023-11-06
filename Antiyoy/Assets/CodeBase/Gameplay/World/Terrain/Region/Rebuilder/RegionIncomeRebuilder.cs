@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.World.Terrain.Region.Data;
+using CodeBase.Gameplay.World.Terrain.Tile.Data;
 using CodeBase.Gameplay.World.Terrain.Unit.Data;
 using CodeBase.Infrastructure.Services.StaticData;
 
@@ -8,9 +9,13 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
     public class RegionIncomeRebuilder
     {
         private readonly IStaticDataProvider _staticDataProvider;
+        private readonly UnitStaticDataHelper _unitStaticDataHelper;
 
-        public RegionIncomeRebuilder(IStaticDataProvider staticDataProvider) =>
+        public RegionIncomeRebuilder(IStaticDataProvider staticDataProvider, UnitStaticDataHelper unitStaticDataHelper)
+        {
             _staticDataProvider = staticDataProvider;
+            _unitStaticDataHelper = unitStaticDataHelper;
+        }
 
         public void Rebuild(List<RegionData> regions)
         {
@@ -18,20 +23,19 @@ namespace CodeBase.Gameplay.World.Terrain.Region.Rebuilder
                 Rebuild(region);
         }
 
-        public void Rebuild(RegionData region) => region.Income = GetIncome(region);
+        public void Rebuild(RegionData region) => region.Income = CalculateIncome(region);
 
-        private int GetIncome(RegionData region)
+        private int CalculateIncome(RegionData region)
         {
-            var entitiesConfig = _staticDataProvider.Get<UnitsConfig>();
-            var defaultTileIncome = entitiesConfig.Presets[UnitType.None].Income;
+            var config = _staticDataProvider.Get<TileConfig>();
             var income = 0;
 
             foreach (var tile in region.Tiles)
             {
-                if (tile.Unit.Type != UnitType.None)
-                    income += tile.Unit.Preset.Income;
+                if (tile.Unit != null)
+                    income += _unitStaticDataHelper.GetPreset(tile.Unit.Type).Income;
                 else
-                    income += defaultTileIncome;
+                    income += config.DefaultIncome;
             }
 
             return income;

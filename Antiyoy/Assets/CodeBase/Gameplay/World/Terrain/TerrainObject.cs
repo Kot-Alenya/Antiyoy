@@ -76,12 +76,12 @@ namespace CodeBase.Gameplay.World.Terrain
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 
-        public void DestroyUnit(UnitData unit)
+        public void DestroyUnit(UnitData_new unit)
         {
             var rootTile = unit.RootTile;
 
             _unitFactory.Destroy(unit);
-            rootTile.Unit.Type = UnitType.None;
+            rootTile.Unit = null;
             _incomeRebuilder.Rebuild(rootTile.Region);
         }
 

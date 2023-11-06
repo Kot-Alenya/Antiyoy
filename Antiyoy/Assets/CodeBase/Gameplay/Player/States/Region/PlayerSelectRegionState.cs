@@ -63,7 +63,7 @@ namespace CodeBase.Gameplay.Player.States.Region
                 _playerStateMachine.SwitchTo<PlayerSelectRegionState, PlayerSelectRegionStateData>(
                     new PlayerSelectRegionStateData(tile.Region));
 
-            else if (tile.Unit.Type != UnitType.None && tile.Unit.IsCanMove)
+            else if (tile.Unit != null && tile.Unit.IsCanMove)
                 _playerStateMachine.SwitchTo<PlayerMoveUnitState, PlayerMoveUnitStateData>(
                     new PlayerMoveUnitStateData(tile.Unit));
         }
