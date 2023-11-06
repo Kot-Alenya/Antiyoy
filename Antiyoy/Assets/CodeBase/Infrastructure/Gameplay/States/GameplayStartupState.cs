@@ -14,7 +14,7 @@ namespace CodeBase.Infrastructure.Gameplay.States
         private readonly GameplayEcsSystems _gameplayEcsSystems;
 
         public GameplayStartupState(CameraFactory cameraFactory, GameplayUIFactory gameplayUIFactory,
-            PlayerFactory playerFactory,GameplayEcsSystems gameplayEcsSystems)
+            PlayerFactory playerFactory, GameplayEcsSystems gameplayEcsSystems)
         {
             _cameraFactory = cameraFactory;
             _gameplayUIFactory = gameplayUIFactory;

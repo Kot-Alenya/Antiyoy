@@ -12,6 +12,6 @@ namespace CodeBase.Gameplay.UI.LeaveAndLoad
         [Inject]
         private void Construct(IStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        private protected override void OnClick() => _stateMachine.SwitchTo<GameplayLoadingState>();
+        private protected override void OnClick() => _stateMachine.SwitchTo<LoadGameplayState>();
     }
 }

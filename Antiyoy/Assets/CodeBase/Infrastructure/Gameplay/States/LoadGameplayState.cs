@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.Gameplay.States
 {
-    public class GameplayLoadingState : IEnterState
+    public class LoadGameplayState : IEnterState
     {
         private readonly ISceneLoader _sceneLoader;
         private readonly IStaticDataProvider _staticDataProvider;
 
-        public GameplayLoadingState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
+        public LoadGameplayState(ISceneLoader sceneLoader, IStaticDataProvider staticDataProvider)
         {
             _sceneLoader = sceneLoader;
             _staticDataProvider = staticDataProvider;
