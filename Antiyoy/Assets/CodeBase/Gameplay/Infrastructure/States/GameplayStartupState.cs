@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.CommonEcs;
-using CodeBase.Gameplay.PlayerCamera;
+using CodeBase.Gameplay.GameplayCamera;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Infrastructure.ProjectStateMachine;
 

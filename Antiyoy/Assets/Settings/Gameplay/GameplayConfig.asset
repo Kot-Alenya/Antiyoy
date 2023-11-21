@@ -20,3 +20,4 @@ MonoBehaviour:
     Controller: {fileID: 570142962622713041, guid: 6273d9749225951438569ebddee2c851, type: 3}
   TileConfig:
     PlacePrefab: {fileID: 1775694694559258790, guid: eb540b3d3215d85489d88f16f908a6dd, type: 3}
+    ControllerPrefab: {fileID: 6369599911138821378, guid: 5a568ec697c897248b49ae5e81b1dfd0, type: 3}

@@ -1,7 +1,8 @@
 ﻿using CodeBase.Gameplay.Infrastructure;
-using CodeBase.Gameplay.Tile;
 using CodeBase.Gameplay.Tile.Ecs;
+using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.ExtendedSystems;
 using Zenject;
 
 namespace CodeBase.Gameplay.CommonEcs
@@ -12,32 +13,37 @@ namespace CodeBase.Gameplay.CommonEcs
         private readonly GameplayStaticDataProvider _staticDataProvider;
         private readonly GameplayEcsControllerProvider _controllerProvider;
         private readonly GameplayEcsSystemFactory _systemFactory;
+        private readonly GameplayEcsWorld _world;
 
         public GameplayEcsFactory(IInstantiator instantiator, GameplayStaticDataProvider staticDataProvider,
-            GameplayEcsControllerProvider controllerProvider,GameplayEcsSystemFactory systemFactory)
+            GameplayEcsControllerProvider controllerProvider, GameplayEcsSystemFactory systemFactory,
+            GameplayEcsWorld world)
         {
             _instantiator = instantiator;
             _staticDataProvider = staticDataProvider;
             _controllerProvider = controllerProvider;
             _systemFactory = systemFactory;
+            _world = world;
         }
 
         public void Create()
         {
-            var world = _instantiator.Instantiate<GameplayEcsWorld>();
             var prefab = _staticDataProvider.GetEcsWorldConfig().ControllerPrefab;
             var controller = _instantiator.InstantiatePrefabForComponent<GameplayEcsController>(prefab);
 
-            controller.Initialize(CreateSystems(world));
+            controller.Initialize(CreateSystems());
             _controllerProvider.Initialize(controller);
         }
 
-        private IEcsSystems CreateSystems(GameplayEcsWorld world)
+        private IEcsSystems CreateSystems()
         {
-            var systems = new EcsSystems(world);
+            var systems = new EcsSystems(_world);
 
+            systems.Add(_systemFactory.Create<DestroyTileSystem>());
             systems.Add(_systemFactory.Create<CreateTileSystem>());
-            
+            systems.DelHere<TileCreateRequest>();
+            systems.DelHere<TileDestroyRequest>();
+
             return systems;
         }
     }

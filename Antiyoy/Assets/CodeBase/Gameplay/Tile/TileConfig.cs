@@ -6,5 +6,6 @@ namespace CodeBase.Gameplay.Tile
     public class TileConfig
     {
         public TilePlace PlacePrefab;
+        public TileController ControllerPrefab;
     }
 }

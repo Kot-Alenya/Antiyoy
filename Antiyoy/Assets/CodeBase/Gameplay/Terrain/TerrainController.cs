@@ -6,25 +6,28 @@ namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainController : MonoBehaviour
     {
-        private HexObjectCollection<TilePlace> _tilePlaceCollection;
+        private HexObjectCollection<TilePlace> _tilePlaces;
 
-        public void Initialize(HexObjectCollection<TilePlace> tilePlaceCollection)
+        public HexObjectCollection<TilePlace> TilePlaces => _tilePlaces;
+
+        public void Initialize(HexObjectCollection<TilePlace> tilePlaces)
         {
-            _tilePlaceCollection = tilePlaceCollection;
+            _tilePlaces = tilePlaces;
             ConnectTilePlaces();
         }
 
+
         private void ConnectTilePlaces()
         {
-            foreach (var tile in _tilePlaceCollection)
+            foreach (var tile in _tilePlaces)
             foreach (var direction in HexCoordinatesDirections.Directions)
             {
                 var neighbourTileIndex = tile.Hex + direction;
 
-                if (!_tilePlaceCollection.IsIndexValid(neighbourTileIndex))
+                if (!_tilePlaces.IsIndexValid(neighbourTileIndex))
                     continue;
 
-                var neighbourTile = _tilePlaceCollection.Get(neighbourTileIndex);
+                var neighbourTile = _tilePlaces.Get(neighbourTileIndex);
 
                 tile.Connections.Add(neighbourTile);
             }

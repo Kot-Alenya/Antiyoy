@@ -25,9 +25,18 @@ namespace CodeBase.Gameplay.Terrain
         public void Create()
         {
             var controller = Object.Instantiate(_config.Controller);
-            var collection = new HexObjectCollection<TilePlace>(_config.Size);
 
             _tileFactory.Initialize(controller.transform);
+
+            controller.Initialize(CreateTilePlaces());
+            _controllerProvider.Initialize(controller);
+
+            CreateTiles(controller); //TODO: temporary
+        }
+
+        private HexObjectCollection<TilePlace> CreateTilePlaces()
+        {
+            var collection = new HexObjectCollection<TilePlace>(_config.Size);
 
             for (var y = 0; y < _config.Size.y; y++)
             for (var x = 0; x < _config.Size.x; x++)
@@ -36,8 +45,13 @@ namespace CodeBase.Gameplay.Terrain
                 collection.Set(_tileFactory.CreatePlace(hex), hex);
             }
 
-            controller.Initialize(collection);
-            _controllerProvider.Initialize(controller);
+            return collection;
+        }
+
+        private void CreateTiles(TerrainController terrainController)
+        {
+            foreach (var place in terrainController.TilePlaces)
+                _tileFactory.CreateTile(place);
         }
     }
 }
