@@ -184,7 +184,7 @@ MonoBehaviour:
   _staticData:
     TileStaticData: {fileID: 11400000, guid: 341ac15613203d0418b98c510553e688, type: 2}
     TerrainStaticData: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
-    CameraStaticData: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+    CameraConfig: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
 --- !u!114 &1806076628
 MonoBehaviour:
   m_ObjectHideFlags: 0

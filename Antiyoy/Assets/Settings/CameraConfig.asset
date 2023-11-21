@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb3a17fbd34448d933de24b97a95f43, type: 3}
   m_Name: CameraConfig
   m_EditorClassIdentifier: 
-  ObjectPrefab: {fileID: 2159208019328989165, guid: c2a936dc13c389444ae6b0a54aa53f25, type: 3}
-  InputPrefabs:
-  - {fileID: 3927514758033950322, guid: 4952670f501f8da43a868899104cb0e0, type: 3}
-  - {fileID: 3146852550580726096, guid: 391247d85aa0e794798b46fd74beb053, type: 3}
+  Prefab: {fileID: 4069745870193029648, guid: c2a936dc13c389444ae6b0a54aa53f25, type: 3}
   MoveVelocity: 1
   ZoomVelocity: 1

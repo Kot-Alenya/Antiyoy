@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 2159208019328989164}
   - component: {fileID: 2159208019328988947}
   - component: {fileID: 2159208019328988945}
-  - component: {fileID: 2159208019328989165}
+  - component: {fileID: 4069745870193029648}
+  - component: {fileID: 3849519570404465560}
+  - component: {fileID: 4065305402202709974}
+  - component: {fileID: 2707038636104079869}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -85,7 +88,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2159208019328988944}
   m_Enabled: 1
---- !u!114 &2159208019328989165
+--- !u!114 &4069745870193029648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +97,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 2159208019328988944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74e393dfafb447489d63b81c99e7680, type: 3}
+  m_Script: {fileID: 11500000, guid: 097682224780495ebd97fa2264db390f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 2159208019328988947}
+  _movement: {fileID: 2707038636104079869}
+--- !u!114 &3849519570404465560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159208019328988944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b561a674c6475aaf4205fbaf3250e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraController: {fileID: 4069745870193029648}
+--- !u!114 &4065305402202709974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159208019328988944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563bdfd39aed4134ba673606962f7b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraController: {fileID: 4069745870193029648}
+--- !u!114 &2707038636104079869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159208019328988944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51227fab0c2e4112b06fc621dff27ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 2159208019328988947}
