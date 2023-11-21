@@ -1,6 +1,4 @@
-﻿using CodeBase.Gameplay.Terrain.Data;
-
-namespace CodeBase.Gameplay.Hex
+﻿namespace CodeBase.Gameplay.Hex
 {
     public struct HexCoordinatesDirections
     {

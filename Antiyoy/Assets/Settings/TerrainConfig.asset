@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8a442c3f0a4b2c821f47ab0b6c2541, type: 3}
+  m_Script: {fileID: 11500000, guid: d69d2c1ec1fe42b798dc1980321689d3, type: 3}
   m_Name: TerrainConfig
   m_EditorClassIdentifier: 
   Size: {x: 4, y: 4}
+  TilePrefab: {fileID: 7525892344587670576, guid: c73615c4e6c3dc64b8053dfed5105949, type: 3}

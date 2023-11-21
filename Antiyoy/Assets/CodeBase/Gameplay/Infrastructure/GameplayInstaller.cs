@@ -15,6 +15,7 @@ namespace CodeBase.Gameplay.Infrastructure
 
             Container.Bind<GameplayStaticDataProvider>().FromInstance(_gameplayStaticDataProvider).AsSingle();
             Container.Bind<CameraFactory>().AsSingle();
+            Container.Bind<TerrainFactory>().AsSingle();
         }
 
         private void BindStateMachine()

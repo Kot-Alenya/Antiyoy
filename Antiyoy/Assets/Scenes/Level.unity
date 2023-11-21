@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameplayStaticDataProvider:
     _cameraConfig: {fileID: 11400000, guid: 611ae0a561747484eafb9fc5e26b1d01, type: 2}
+    _terrainConfig: {fileID: 11400000, guid: 5f74032aed7458d45be6331fa526ac60, type: 2}
 --- !u!114 &1806076628
 MonoBehaviour:
   m_ObjectHideFlags: 0
