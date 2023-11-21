@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Gameplay.Ecs;
 using CodeBase.Gameplay.PlayerCamera;
 using CodeBase.Gameplay.Terrain;
 using UnityEngine;
@@ -14,5 +15,10 @@ namespace CodeBase.Gameplay.Infrastructure
         public CameraConfig GetCameraConfig() => _cameraConfig;
 
         public TerrainConfig GetTerrainConfig() => _terrainConfig;
+
+        public GameplayEcsConfig GetEcsWorldConfig()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.PlayerCamera;
+﻿using CodeBase.Gameplay.Ecs;
+using CodeBase.Gameplay.PlayerCamera;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Infrastructure.ProjectStateMachine;
 using UnityEngine;
@@ -13,10 +14,18 @@ namespace CodeBase.Gameplay.Infrastructure
         public override void InstallBindings()
         {
             BindStateMachine();
+            BindEcsWorld();
 
             Container.Bind<GameplayStaticDataProvider>().FromInstance(_gameplayStaticDataProvider).AsSingle();
             Container.Bind<CameraFactory>().AsSingle();
             Container.Bind<TerrainFactory>().AsSingle();
+        }
+
+        private void BindEcsWorld()
+        {
+            Container.Bind<GameplayEcsWorld>().AsSingle();
+            Container.Bind<GameplayEcsFactory>().AsSingle();
+            Container.Bind<GameplayEcsControllerProvider>().AsSingle();
         }
 
         private void BindStateMachine()
