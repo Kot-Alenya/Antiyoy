@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.Infrastructure;
 using Zenject;
 
-namespace CodeBase.Gameplay.GameplayCamera
+namespace CodeBase.Gameplay.PlayerCamera
 {
     public class CameraFactory
     {

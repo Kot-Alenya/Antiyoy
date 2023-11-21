@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Gameplay.Terrain
+namespace CodeBase.Gameplay.Tile
 {
     public class TilePrefabData : MonoBehaviour
     {

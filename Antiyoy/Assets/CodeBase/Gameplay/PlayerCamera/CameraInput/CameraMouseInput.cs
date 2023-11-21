@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Gameplay.GameplayCamera.CameraInput
+namespace CodeBase.Gameplay.PlayerCamera.CameraInput
 {
     public class CameraMouseInput : CameraInputBase
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Gameplay.GameplayCamera;
+using CodeBase.Gameplay.PlayerCamera;
 using CodeBase.Gameplay.Terrain;
 using UnityEngine;
 

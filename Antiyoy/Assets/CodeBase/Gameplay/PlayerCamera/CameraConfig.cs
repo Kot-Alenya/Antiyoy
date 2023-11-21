@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Gameplay.GameplayCamera
+namespace CodeBase.Gameplay.PlayerCamera
 {
     [CreateAssetMenu(menuName = "Configurations/Camera", fileName = "CameraConfig", order = 0)]
     public class CameraConfig : ScriptableObject

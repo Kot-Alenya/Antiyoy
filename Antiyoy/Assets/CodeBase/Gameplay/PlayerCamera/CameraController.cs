@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Gameplay.GameplayCamera
+namespace CodeBase.Gameplay.PlayerCamera
 {
     public class CameraController : MonoBehaviour
     {

@@ -1,5 +1,6 @@
-﻿using CodeBase.Gameplay.GameplayCamera;
-using CodeBase.ProjectInfrastructure.ProjectStateMachine;
+﻿using CodeBase.Gameplay.PlayerCamera;
+using CodeBase.Gameplay.Terrain;
+using CodeBase.Infrastructure.ProjectStateMachine;
 using UnityEngine;
 using Zenject;
 

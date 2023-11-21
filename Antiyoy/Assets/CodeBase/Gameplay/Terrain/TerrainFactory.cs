@@ -1,9 +1,8 @@
 ﻿using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Infrastructure;
-using CodeBase.Gameplay.Terrain;
 using UnityEngine;
 
-namespace CodeBase.Gameplay
+namespace CodeBase.Gameplay.Terrain
 {
     public class TerrainFactory
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Gameplay.GameplayCamera
+namespace CodeBase.Gameplay.PlayerCamera
 {
     public class CameraMovement : MonoBehaviour
     {
