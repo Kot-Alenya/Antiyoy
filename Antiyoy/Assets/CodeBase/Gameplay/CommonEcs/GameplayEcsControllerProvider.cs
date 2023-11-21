@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Gameplay.Ecs
+﻿namespace CodeBase.Gameplay.CommonEcs
 {
     public class GameplayEcsControllerProvider
     {

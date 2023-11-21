@@ -1,6 +1,6 @@
 ﻿using Leopotam.EcsLite;
 
-namespace CodeBase.Gameplay.Ecs
+namespace CodeBase.Gameplay.CommonEcs
 {
     public class GameplayEcsWorld : EcsWorld
     {

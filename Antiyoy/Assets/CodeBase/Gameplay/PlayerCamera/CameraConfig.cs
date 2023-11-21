@@ -2,7 +2,7 @@
 
 namespace CodeBase.Gameplay.PlayerCamera
 {
-    [CreateAssetMenu(menuName = "Configurations/Camera", fileName = "CameraConfig", order = 0)]
+    [CreateAssetMenu(menuName = "Configurations/Gameplay/Camera", fileName = "CameraConfig", order = 0)]
     public class CameraConfig : ScriptableObject
     {
         public CameraController Prefab;

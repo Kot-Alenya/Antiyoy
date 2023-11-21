@@ -1,12 +1,12 @@
-﻿using CodeBase.Gameplay.Tile;
+﻿using System;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain
 {
-    [CreateAssetMenu(menuName = "Configurations/Terrain", fileName = "TerrainConfig", order = 0)]
-    public class TerrainConfig : ScriptableObject
+    [Serializable]
+    public class TerrainConfig
     {
         public Vector2Int Size;
-        public TilePrefabData TilePrefab;
+        public TerrainController Controller;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Gameplay.Ecs
+namespace CodeBase.Gameplay.CommonEcs
 {
     public class GameplayEcsController : MonoBehaviour
     {

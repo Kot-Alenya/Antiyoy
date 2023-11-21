@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821db406505641779f538cd4c3577dcd, type: 3}
+  m_Name: GameplayConfig
+  m_EditorClassIdentifier: 
+  CameraConfig: {fileID: 11400000, guid: c75fab5f1d7c565488f352c4efca9f9f, type: 2}
+  EcsConfig:
+    ControllerPrefab: {fileID: 5047563422537161566, guid: e1061dd158f03d5479e17417145ddb08, type: 3}
+  TerrainConfig:
+    Size: {x: 4, y: 4}
+    Controller: {fileID: 570142962622713041, guid: 6273d9749225951438569ebddee2c851, type: 3}
+  TileConfig:
+    PlacePrefab: {fileID: 1775694694559258790, guid: eb540b3d3215d85489d88f16f908a6dd, type: 3}

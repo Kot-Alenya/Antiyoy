@@ -1,7 +1,8 @@
 ﻿using System;
-using CodeBase.Gameplay.Ecs;
+using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.PlayerCamera;
 using CodeBase.Gameplay.Terrain;
+using CodeBase.Gameplay.Tile;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Infrastructure
@@ -9,16 +10,14 @@ namespace CodeBase.Gameplay.Infrastructure
     [Serializable]
     public class GameplayStaticDataProvider
     {
-        [SerializeField] private CameraConfig _cameraConfig;
-        [SerializeField] private TerrainConfig _terrainConfig;
+        [SerializeField] private GameplayConfig _config;
 
-        public CameraConfig GetCameraConfig() => _cameraConfig;
+        public CameraConfig GetCameraConfig() => _config.CameraConfig;
 
-        public TerrainConfig GetTerrainConfig() => _terrainConfig;
+        public TerrainConfig GetTerrainConfig() => _config.TerrainConfig;
 
-        public GameplayEcsConfig GetEcsWorldConfig()
-        {
-            throw new NotImplementedException();
-        }
+        public GameplayEcsConfig GetEcsWorldConfig() => _config.EcsConfig;
+
+        public TileConfig GetTileConfig() => _config.TileConfig;
     }
 }
