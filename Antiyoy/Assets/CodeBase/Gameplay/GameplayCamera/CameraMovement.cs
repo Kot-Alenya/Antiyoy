@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure;
+﻿using CodeBase.Gameplay.Infrastructure;
 using UnityEngine;
 using Zenject;
 

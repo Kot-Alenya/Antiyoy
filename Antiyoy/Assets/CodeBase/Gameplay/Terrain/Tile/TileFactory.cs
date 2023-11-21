@@ -1,6 +1,6 @@
 ﻿using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Data;
-using CodeBase.Infrastructure;
+using CodeBase.ProjectInfrastructure;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Terrain.Tile

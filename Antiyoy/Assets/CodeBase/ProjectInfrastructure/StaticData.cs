@@ -3,7 +3,7 @@ using CodeBase.Gameplay.GameplayCamera;
 using CodeBase.Gameplay.Terrain.Data;
 using CodeBase.Gameplay.Terrain.Tile.Data;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.ProjectInfrastructure
 {
     [Serializable]
     public class StaticData
