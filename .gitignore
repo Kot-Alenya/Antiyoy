@@ -71,3 +71,6 @@ Antiyoy/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 # Temporary auto-generated Android Assets
 Antiyoy/[Aa]ssets/[Ss]treamingAssets/aa.meta
 Antiyoy/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# My dev not sync folder
+Antiyoy/[Aa]ssets/CodeBase/_devNotSync/
