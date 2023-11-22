@@ -13,5 +13,6 @@ namespace CodeBase.Gameplay.Infrastructure
         public GameplayEcsConfig EcsConfig;
         public TerrainConfig TerrainConfig;
         public TileConfig TileConfig;
+        public RegionsConfig RegionsConfig;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CodeBase.Gameplay.GameplayCamera;
+using CodeBase.Gameplay.Region;
 using CodeBase.Gameplay.Tile;
 using UnityEngine;
 using Zenject;
@@ -35,7 +36,7 @@ namespace CodeBase.Gameplay.Player
                 return;
 
             if (hit.transform.TryGetComponent<TilePlace>(out var tilePlace))
-                _tileFactory.CreateTile(tilePlace);
+                _tileFactory.CreateTile(tilePlace, RegionType.Red);
         }
 
         private void DestroyTile()

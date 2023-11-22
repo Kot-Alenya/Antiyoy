@@ -1,6 +1,8 @@
 ﻿using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.Hex;
 using CodeBase.Gameplay.Infrastructure;
+using CodeBase.Gameplay.Region;
+using CodeBase.Gameplay.Region.Ecs.Components;
 using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
 using UnityEngine;
@@ -13,10 +15,12 @@ namespace CodeBase.Gameplay.Tile
         private readonly GameplayEcsWorld _world;
         private Transform _tilePlaceRoot;
         private TileConfig _config;
-        private EcsPool<TileCreateRequest> _createRequestPool;
-        private EcsPool<TileDestroyRequest> _destroyRequestPool;
+        private EcsPool<TileCreateRequest> _createTileRequestPool;
+        private EcsPool<TileDestroyRequest> _destroyTileRequestPool;
         private EcsPool<TileComponent> _tilePool;
         private EcsPool<TilePlaceComponent> _tilePlacePool;
+        private EcsPool<RegionCreateRequest> _createRegionRequestPool;
+        private EcsPool<RegionDestroyRequest> _destroyRegionRequestPool;
 
         public TileFactory(GameplayStaticDataProvider staticDataProvider, GameplayEcsWorld world)
         {
@@ -28,8 +32,13 @@ namespace CodeBase.Gameplay.Tile
         {
             _tilePlaceRoot = tilePlaceRoot;
             _config = _staticDataProvider.GetTileConfig();
-            _createRequestPool = _world.GetPool<TileCreateRequest>();
-            _destroyRequestPool = _world.GetPool<TileDestroyRequest>();
+
+            _createTileRequestPool = _world.GetPool<TileCreateRequest>();
+            _destroyTileRequestPool = _world.GetPool<TileDestroyRequest>();
+
+            _createRegionRequestPool = _world.GetPool<RegionCreateRequest>();
+            _destroyRegionRequestPool = _world.GetPool<RegionDestroyRequest>();
+
             _tilePool = _world.GetPool<TileComponent>();
             _tilePlacePool = _world.GetPool<TilePlaceComponent>();
         }
@@ -48,17 +57,22 @@ namespace CodeBase.Gameplay.Tile
             return tilePlace;
         }
 
-        public void CreateTile(TilePlace tilePlace)
+        public void CreateTile(TilePlace tilePlace, RegionType regionType)
         {
             DestroyTile(tilePlace);
 
-            _createRequestPool.Add(tilePlace.EntityId);
+            _createTileRequestPool.Add(tilePlace.EntityId);
+            ref var regionRequest = ref _createRegionRequestPool.Add(tilePlace.EntityId);
+            regionRequest.Type = regionType;
         }
 
         public void DestroyTile(TilePlace tilePlace)
         {
             if (_tilePool.Has(tilePlace.EntityId))
-                _destroyRequestPool.Add(tilePlace.EntityId);
+            {
+                _destroyTileRequestPool.Add(tilePlace.EntityId);
+                _destroyRegionRequestPool.Add(tilePlace.EntityId);
+            }
         }
     }
 }

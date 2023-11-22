@@ -21,3 +21,7 @@ MonoBehaviour:
   TileConfig:
     PlacePrefab: {fileID: 1775694694559258790, guid: eb540b3d3215d85489d88f16f908a6dd, type: 3}
     ControllerPrefab: {fileID: 6369599911138821378, guid: 5a568ec697c897248b49ae5e81b1dfd0, type: 3}
+  RegionsConfig:
+    _neutral: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    _red: {r: 1, g: 0.28773582, b: 0.28773582, a: 1}
+    _blue: {r: 0.25943398, g: 0.8093975, b: 1, a: 1}

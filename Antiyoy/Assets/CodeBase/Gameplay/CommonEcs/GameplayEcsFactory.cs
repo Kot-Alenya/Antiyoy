@@ -1,4 +1,6 @@
 ﻿using CodeBase.Gameplay.Infrastructure;
+using CodeBase.Gameplay.Region.Ecs;
+using CodeBase.Gameplay.Region.Ecs.Components;
 using CodeBase.Gameplay.Tile.Ecs;
 using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
@@ -39,8 +41,15 @@ namespace CodeBase.Gameplay.CommonEcs
         {
             var systems = new EcsSystems(_world);
 
+            systems.Add(_systemFactory.Create<DestroyRegionSystem>());
             systems.Add(_systemFactory.Create<DestroyTileSystem>());
+
             systems.Add(_systemFactory.Create<CreateTileSystem>());
+            systems.Add(_systemFactory.Create<CreateRegionSystem>());
+
+            systems.DelHere<RegionCreateRequest>();
+            systems.DelHere<RegionDestroyRequest>();
+
             systems.DelHere<TileCreateRequest>();
             systems.DelHere<TileDestroyRequest>();
 
