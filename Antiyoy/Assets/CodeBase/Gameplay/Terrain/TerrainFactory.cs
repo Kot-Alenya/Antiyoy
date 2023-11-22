@@ -30,8 +30,6 @@ namespace CodeBase.Gameplay.Terrain
 
             controller.Initialize(CreateTilePlaces());
             _controllerProvider.Initialize(controller);
-
-            CreateTiles(controller); //TODO: temporary
         }
 
         private HexObjectCollection<TilePlace> CreateTilePlaces()
@@ -46,12 +44,6 @@ namespace CodeBase.Gameplay.Terrain
             }
 
             return collection;
-        }
-
-        private void CreateTiles(TerrainController terrainController)
-        {
-            foreach (var place in terrainController.TilePlaces)
-                _tileFactory.CreateTile(place);
         }
     }
 }
