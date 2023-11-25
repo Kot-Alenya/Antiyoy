@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.Region.Ecs;
 using CodeBase.Gameplay.Region.Ecs.Components;
+using CodeBase.Gameplay.Region.Ecs.Recalculate;
 using CodeBase.Gameplay.Tile.Ecs;
 using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
@@ -45,6 +46,8 @@ namespace CodeBase.Gameplay.CommonEcs
             systems.Add(Create<CreateTileSystem>());
             systems.Add(Create<CreateRegionLinkSystem>());
 
+            systems.Add(Create<RecalculateRegionGeometrySystem>());
+
             systems.DelHere<RegionLinkCreateRequest>();
             systems.DelHere<RegionLinkDestroyRequest>();
 
@@ -78,8 +81,6 @@ namespace CodeBase.Gameplay.CommonEcs
 #endif
             return systems;
         }
-
-        public IEcsSystems CreateTurnNextSystems() => throw new System.NotImplementedException();
 
         private T Create<T>() where T : IEcsSystem => _instantiator.Instantiate<T>();
     }

@@ -12,7 +12,7 @@ namespace CodeBase.Gameplay.Region.Ecs
         private readonly GameplayEcsEventsBus _eventsBus;
         private EcsFilter _regionCreateRequestFilter;
         private EcsPool<RegionLinkCreateRequest> _regionCreateRequestPool;
-        private EcsPool<RegionLink> _regionLinkPool;
+        private EcsPool<RegionLinkComponent> _regionLinkPool;
         private EcsPool<TilePlaceComponent> _tilePlacePool;
 
         public CreateRegionLinkSystem(GameplayEcsWorld world, RegionFactory regionFactory,
@@ -27,7 +27,7 @@ namespace CodeBase.Gameplay.Region.Ecs
         {
             _regionCreateRequestFilter = _world.Filter<RegionLinkCreateRequest>().End();
             _regionCreateRequestPool = _world.GetPool<RegionLinkCreateRequest>();
-            _regionLinkPool = _world.GetPool<RegionLink>();
+            _regionLinkPool = _world.GetPool<RegionLinkComponent>();
             _tilePlacePool = _world.GetPool<TilePlaceComponent>();
             _world.GetPool<RegionRecalculateEvent>();
         }
@@ -40,6 +40,7 @@ namespace CodeBase.Gameplay.Region.Ecs
 
                 CreateLink(entity, controller);
                 CreateRecalculateEvent(controller);
+                controller.Add(entity);
             }
         }
 
@@ -55,11 +56,11 @@ namespace CodeBase.Gameplay.Region.Ecs
 
                 var regionLink = _regionLinkPool.Get(connection.EntityId);
 
-                if (regionLink.Type == linkCreateRequest.Type)
+                if (regionLink.Controller.Type == linkCreateRequest.Type)
                     return regionLink.Controller;
             }
 
-            return _regionFactory.CreateController(linkCreateRequest.Type);
+            return _regionFactory.CreateControllerAndRegister(linkCreateRequest.Type);
         }
 
         private void CreateLink(int entity, RegionController controller)

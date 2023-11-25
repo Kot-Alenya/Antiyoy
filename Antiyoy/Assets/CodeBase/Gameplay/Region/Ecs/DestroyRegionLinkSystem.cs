@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.Region.Ecs
         private readonly GameplayEcsWorld _world;
         private readonly GameplayEcsEventsBus _eventsBus;
         private EcsFilter _regionDestroyRequestFilter;
-        private EcsPool<RegionLink> _regionLinkPool;
+        private EcsPool<RegionLinkComponent> _regionLinkPool;
 
         public DestroyRegionLinkSystem(GameplayEcsWorld world, GameplayEcsEventsBus eventsBus)
         {
@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.Region.Ecs
         public void Init(IEcsSystems systems)
         {
             _regionDestroyRequestFilter = _world.Filter<RegionLinkDestroyRequest>().End();
-            _regionLinkPool = _world.GetPool<RegionLink>();
+            _regionLinkPool = _world.GetPool<RegionLinkComponent>();
             _world.GetPool<RegionRecalculateEvent>();
         }
 
@@ -28,15 +28,19 @@ namespace CodeBase.Gameplay.Region.Ecs
         {
             foreach (var entity in _regionDestroyRequestFilter)
             {
-                CreateRecalculateEvent(entity);
+                var controller = _regionLinkPool.Get(entity).Controller;
+                
+                CreateRecalculateEvent(controller);
+                controller.Remove(entity);
+
                 _regionLinkPool.Del(entity);
             }
         }
 
-        private void CreateRecalculateEvent(int entity)
+        private void CreateRecalculateEvent(RegionController controller)
         {
             ref var recalculateEvent = ref _eventsBus.NewEvent<RegionRecalculateEvent>();
-            recalculateEvent.Controller = _regionLinkPool.Get(entity).Controller;
+            recalculateEvent.Controller = controller;
         }
     }
 }
