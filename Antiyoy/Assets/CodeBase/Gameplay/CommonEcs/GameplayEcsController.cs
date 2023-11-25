@@ -6,24 +6,44 @@ namespace CodeBase.Gameplay.CommonEcs
 {
     public class GameplayEcsController : MonoBehaviour
     {
-        private IEcsSystems _systems;
         private EcsWorld _world;
+        private GameplayEcsEventsBus _eventsBus;
+        private IEcsSystems _mainSystems;
+        private IEcsSystems _mainDebugSystems;
+        private IEcsSystems _eventsDebugSystems;
 
         [Inject]
-        public void Construct(GameplayEcsWorld world) => _world = world;
-
-        public void Initialize(IEcsSystems systems)
+        public void Construct(GameplayEcsWorld world, GameplayEcsEventsBus eventsBus)
         {
-            _systems = systems;
-            _systems.Init();
+            _world = world;
+            _eventsBus = eventsBus;
+        }
+
+        public void Initialize(IEcsSystems mainSystems, IEcsSystems mainDebugSystems, IEcsSystems eventsDebugSystems)
+        {
+            _mainSystems = mainSystems;
+            _mainDebugSystems = mainDebugSystems;
+            _eventsDebugSystems = eventsDebugSystems;
+
+            _mainSystems.Init();
+            _mainDebugSystems.Init();
+            _eventsDebugSystems.Init();
         }
 
         private void Dispose()
         {
-            _systems?.Destroy();
-            _world?.Destroy();
+            _mainSystems.Destroy();
+            _mainDebugSystems.Destroy();
+            _eventsDebugSystems.Destroy();
+            _world.Destroy();
+            _eventsBus.Destroy();
         }
 
-        private void Update() => _systems.Run();
+        private void Update()
+        {
+            _mainSystems.Run();
+            _mainDebugSystems.Run();
+            _eventsDebugSystems.Run();
+        }
     }
 }

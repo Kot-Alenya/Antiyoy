@@ -7,7 +7,7 @@ using Leopotam.EcsLite;
 
 namespace CodeBase.Gameplay.Region.Ecs
 {
-    public class CreateRecalculationRequestSystem  : IEcsInitSystem, IEcsRunSystem
+    public class RecalculateRegionSystem  : IEcsInitSystem, IEcsRunSystem
     {
         private readonly GameplayEcsWorld _world;
         private readonly GameplayStaticDataProvider _staticDataProvider;
@@ -17,7 +17,7 @@ namespace CodeBase.Gameplay.Region.Ecs
         private EcsPool<RegionLink> _regionLinkPool;
         private RegionsConfig _regionsConfig;
         private EcsPool<TileComponent> _tilePool;
-        private EcsPool<RegionRecalculateRequest> _recalculateRequestPool;
+        private EcsPool<RegionRecalculateEvent> _recalculateRequestPool;
         private EcsPool<TilePlaceComponent> _tilePlacePool;
         
         public void Init(IEcsSystems systems)
@@ -29,10 +29,8 @@ namespace CodeBase.Gameplay.Region.Ecs
         
         public void Run(IEcsSystems systems)
         {
-            _passedControllersBuffer.Clear();
-
-            foreach (var entity in _regionCreateRequestFilter) 
-                FindRecalculationRequestsAndCreate(entity);
+            //фильтруем ругионы(исключаем дубли)
+            //выбираем 1 контроллер, проходимся по его тайлам.
         }
         
         private void FindRecalculationRequestsAndCreate(int entity)

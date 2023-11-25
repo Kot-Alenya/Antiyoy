@@ -24,7 +24,8 @@ namespace CodeBase.Gameplay.CommonEcs
             var prefab = _staticDataProvider.GetEcsWorldConfig().ControllerPrefab;
             var controller = _instantiator.InstantiatePrefabForComponent<GameplayEcsController>(prefab);
 
-            controller.Initialize(_systemFactory.CreateMainSystems());
+            controller.Initialize(_systemFactory.CreateMainSystems(), _systemFactory.CreateMainDebugSystems(),
+                _systemFactory.CreateEventsDebugSystems());
             _controllerProvider.Initialize(controller);
         }
     }

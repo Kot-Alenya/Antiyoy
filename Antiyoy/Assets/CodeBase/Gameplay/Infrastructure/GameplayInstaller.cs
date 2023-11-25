@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Infrastructure
         public override void InstallBindings()
         {
             BindStateMachine();
-            BindEcsWorld();
+            BindEcs();
             BindTerrain();
             BindCamera();
 
@@ -37,12 +37,13 @@ namespace CodeBase.Gameplay.Infrastructure
             Container.Bind<TerrainControllerProvider>().AsSingle();
         }
 
-        private void BindEcsWorld()
+        private void BindEcs()
         {
             Container.Bind<GameplayEcsWorld>().AsSingle();
             Container.Bind<GameplayEcsSystemFactory>().AsSingle();
             Container.Bind<GameplayEcsFactory>().AsSingle();
             Container.Bind<GameplayEcsControllerProvider>().AsSingle();
+            Container.Bind<GameplayEcsEventsBus>().AsSingle();
         }
 
         private void BindStateMachine()

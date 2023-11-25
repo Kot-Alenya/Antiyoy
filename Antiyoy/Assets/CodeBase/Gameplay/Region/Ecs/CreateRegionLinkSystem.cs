@@ -9,16 +9,18 @@ namespace CodeBase.Gameplay.Region.Ecs
     {
         private readonly GameplayEcsWorld _world;
         private readonly RegionFactory _regionFactory;
+        private readonly GameplayEcsEventsBus _eventsBus;
         private EcsFilter _regionCreateRequestFilter;
         private EcsPool<RegionLinkCreateRequest> _regionCreateRequestPool;
         private EcsPool<RegionLink> _regionLinkPool;
         private EcsPool<TilePlaceComponent> _tilePlacePool;
-        private EcsPool<RegionRecalculateRequest> _regionRecalculateRequestPool;
 
-        public CreateRegionLinkSystem(GameplayEcsWorld world, RegionFactory regionFactory)
+        public CreateRegionLinkSystem(GameplayEcsWorld world, RegionFactory regionFactory,
+            GameplayEcsEventsBus eventsBus)
         {
             _world = world;
             _regionFactory = regionFactory;
+            _eventsBus = eventsBus;
         }
 
         public void Init(IEcsSystems systems)
@@ -27,7 +29,7 @@ namespace CodeBase.Gameplay.Region.Ecs
             _regionCreateRequestPool = _world.GetPool<RegionLinkCreateRequest>();
             _regionLinkPool = _world.GetPool<RegionLink>();
             _tilePlacePool = _world.GetPool<TilePlaceComponent>();
-            _regionRecalculateRequestPool = _world.GetPool<RegionRecalculateRequest>();
+            _world.GetPool<RegionRecalculateEvent>();
         }
 
         public void Run(IEcsSystems systems)
@@ -37,7 +39,7 @@ namespace CodeBase.Gameplay.Region.Ecs
                 var controller = FindOrCreateRegionController(entity);
 
                 CreateLink(entity, controller);
-                CreateRecalculateRequest(entity, controller);
+                CreateRecalculateEvent(controller);
             }
         }
 
@@ -66,10 +68,10 @@ namespace CodeBase.Gameplay.Region.Ecs
             link.Controller = controller;
         }
 
-        private void CreateRecalculateRequest(int entity, RegionController controller)
+        private void CreateRecalculateEvent(RegionController controller)
         {
-            ref var request = ref _regionRecalculateRequestPool.Add(entity);
-            request.Controller = controller;
+            ref var recalculateEvent = ref _eventsBus.NewEvent<RegionRecalculateEvent>();
+            recalculateEvent.Controller = controller;
         }
     }
 }

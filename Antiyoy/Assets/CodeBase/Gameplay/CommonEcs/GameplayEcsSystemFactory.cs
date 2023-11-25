@@ -10,21 +10,25 @@ namespace CodeBase.Gameplay.CommonEcs
 {
     public class GameplayEcsSystemFactory
     {
+        private const string MainWorldName = "Main";
+        private const string EventWorldName = "Events";
+
         private readonly IInstantiator _instantiator;
         private readonly GameplayEcsWorld _world;
+        private readonly GameplayEcsEventsBus _eventsBus;
 
-        private GameplayEcsSystemFactory(IInstantiator instantiator, GameplayEcsWorld world)
+        private GameplayEcsSystemFactory(IInstantiator instantiator, GameplayEcsWorld world,
+            GameplayEcsEventsBus eventsBus)
         {
             _instantiator = instantiator;
             _world = world;
+            _eventsBus = eventsBus;
         }
 
         public IEcsSystems CreateMainSystems()
         {
             var systems = new EcsSystems(_world);
 
-            AddDebugSystems(systems);
-            
             systems.Add(Create<DestroyRegionLinkSystem>());
             systems.Add(Create<DestroyTileSystem>());
 
@@ -40,14 +44,26 @@ namespace CodeBase.Gameplay.CommonEcs
             return systems;
         }
 
-        private void AddDebugSystems(IEcsSystems systems)
+        public IEcsSystems CreateMainDebugSystems()
         {
+            var systems = new EcsSystems(_world);
 #if UNITY_EDITOR
-            // Регистрируем отладочные системы по контролю за состоянием каждого отдельного мира:
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-            // Регистрируем отладочные системы по контролю за текущей группой систем. 
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+            systems.AddWorld(_world, MainWorldName);
+            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(MainWorldName));
+            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem(MainWorldName));
 #endif
+            return systems;
+        }
+
+        public IEcsSystems CreateEventsDebugSystems()
+        {
+            var systems = new EcsSystems(_eventsBus.GetEventsWorld());
+#if UNITY_EDITOR
+            systems.AddWorld(_eventsBus.GetEventsWorld(), EventWorldName);
+            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(EventWorldName));
+            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem(EventWorldName));
+#endif
+            return systems;
         }
 
         public IEcsSystems CreateTurnNextSystems() => throw new System.NotImplementedException();
