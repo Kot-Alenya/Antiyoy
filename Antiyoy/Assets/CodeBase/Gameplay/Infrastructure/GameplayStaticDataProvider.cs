@@ -11,6 +11,11 @@ namespace CodeBase.Gameplay.Infrastructure
     public class GameplayStaticDataProvider
     {
         [SerializeField] private GameplayConfig _config;
+
+        public void Initialize()
+        {
+            _config.RegionsConfig.Initialize();
+        }
         
         public CameraConfig GetCameraConfig() => _config.CameraConfig;
 
@@ -20,10 +25,6 @@ namespace CodeBase.Gameplay.Infrastructure
 
         public TileConfig GetTileConfig() => _config.TileConfig;
 
-        public RegionsConfig GetRegionsConfig()
-        {
-            _config.RegionsConfig.Initialize();
-            return _config.RegionsConfig;
-        }
+        public RegionsConfig GetRegionsConfig() => _config.RegionsConfig;
     }
 }
