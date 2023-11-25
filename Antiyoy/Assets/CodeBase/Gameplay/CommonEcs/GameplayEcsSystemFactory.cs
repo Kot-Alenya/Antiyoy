@@ -25,7 +25,17 @@ namespace CodeBase.Gameplay.CommonEcs
             _eventsBus = eventsBus;
         }
 
-        public IEcsSystems CreateMainSystems()
+        public IEcsSystems[] CreateGameplaySystems()
+        {
+            return new[]
+            {
+                CreateMainGameplaySystems(),
+                CreateMainGameplayDebugSystems(),
+                CreateEventsDebugSystems()
+            };
+        }
+
+        private IEcsSystems CreateMainGameplaySystems()
         {
             var systems = new EcsSystems(_world);
 
@@ -41,10 +51,13 @@ namespace CodeBase.Gameplay.CommonEcs
             systems.DelHere<TileCreateRequest>();
             systems.DelHere<TileDestroyRequest>();
 
+            systems.Add(_eventsBus.GetDestroyEventsSystem()
+                .IncReplicant<RegionRecalculateEvent>());
+
             return systems;
         }
 
-        public IEcsSystems CreateMainDebugSystems()
+        private IEcsSystems CreateMainGameplayDebugSystems()
         {
             var systems = new EcsSystems(_world);
 #if UNITY_EDITOR
@@ -55,7 +68,7 @@ namespace CodeBase.Gameplay.CommonEcs
             return systems;
         }
 
-        public IEcsSystems CreateEventsDebugSystems()
+        private IEcsSystems CreateEventsDebugSystems()
         {
             var systems = new EcsSystems(_eventsBus.GetEventsWorld());
 #if UNITY_EDITOR

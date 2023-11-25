@@ -8,9 +8,7 @@ namespace CodeBase.Gameplay.CommonEcs
     {
         private EcsWorld _world;
         private GameplayEcsEventsBus _eventsBus;
-        private IEcsSystems _mainSystems;
-        private IEcsSystems _mainDebugSystems;
-        private IEcsSystems _eventsDebugSystems;
+        private IEcsSystems[] _gameplaySystems;
 
         [Inject]
         public void Construct(GameplayEcsWorld world, GameplayEcsEventsBus eventsBus)
@@ -19,31 +17,27 @@ namespace CodeBase.Gameplay.CommonEcs
             _eventsBus = eventsBus;
         }
 
-        public void Initialize(IEcsSystems mainSystems, IEcsSystems mainDebugSystems, IEcsSystems eventsDebugSystems)
+        public void Initialize(IEcsSystems[] gameplaySystems)
         {
-            _mainSystems = mainSystems;
-            _mainDebugSystems = mainDebugSystems;
-            _eventsDebugSystems = eventsDebugSystems;
+            _gameplaySystems = gameplaySystems;
 
-            _mainSystems.Init();
-            _mainDebugSystems.Init();
-            _eventsDebugSystems.Init();
+            foreach (var system in _gameplaySystems)
+                system.Init();
         }
 
-        private void Dispose()
+        public void Dispose()
         {
-            _mainSystems.Destroy();
-            _mainDebugSystems.Destroy();
-            _eventsDebugSystems.Destroy();
+            foreach (var system in _gameplaySystems)
+                system.Destroy();
+
             _world.Destroy();
             _eventsBus.Destroy();
         }
 
         private void Update()
         {
-            _mainSystems.Run();
-            _mainDebugSystems.Run();
-            _eventsDebugSystems.Run();
+            foreach (var system in _gameplaySystems)
+                system.Run();
         }
     }
 }
