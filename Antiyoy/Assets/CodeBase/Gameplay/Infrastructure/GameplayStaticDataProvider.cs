@@ -12,11 +12,8 @@ namespace CodeBase.Gameplay.Infrastructure
     {
         [SerializeField] private GameplayConfig _config;
 
-        public void Initialize()
-        {
-            _config.RegionsConfig.Initialize();
-        }
-        
+        public void Initialize() => _config.RegionsConfig.Initialize();
+
         public CameraConfig GetCameraConfig() => _config.CameraConfig;
 
         public TerrainConfig GetTerrainConfig() => _config.TerrainConfig;
