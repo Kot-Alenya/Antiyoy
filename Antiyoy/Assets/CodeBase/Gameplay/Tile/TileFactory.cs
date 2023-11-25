@@ -19,8 +19,8 @@ namespace CodeBase.Gameplay.Tile
         private EcsPool<TileDestroyRequest> _destroyTileRequestPool;
         private EcsPool<TileComponent> _tilePool;
         private EcsPool<TilePlaceComponent> _tilePlacePool;
-        private EcsPool<RegionCreateRequest> _createRegionRequestPool;
-        private EcsPool<RegionDestroyRequest> _destroyRegionRequestPool;
+        private EcsPool<RegionLinkCreateRequest> _createRegionRequestPool;
+        private EcsPool<RegionLinkDestroyRequest> _destroyRegionRequestPool;
 
         public TileFactory(GameplayStaticDataProvider staticDataProvider, GameplayEcsWorld world)
         {
@@ -36,8 +36,8 @@ namespace CodeBase.Gameplay.Tile
             _createTileRequestPool = _world.GetPool<TileCreateRequest>();
             _destroyTileRequestPool = _world.GetPool<TileDestroyRequest>();
 
-            _createRegionRequestPool = _world.GetPool<RegionCreateRequest>();
-            _destroyRegionRequestPool = _world.GetPool<RegionDestroyRequest>();
+            _createRegionRequestPool = _world.GetPool<RegionLinkCreateRequest>();
+            _destroyRegionRequestPool = _world.GetPool<RegionLinkDestroyRequest>();
 
             _tilePool = _world.GetPool<TileComponent>();
             _tilePlacePool = _world.GetPool<TilePlaceComponent>();

@@ -25,14 +25,14 @@ namespace CodeBase.Gameplay.CommonEcs
 
             AddDebugSystems(systems);
             
-            systems.Add(Create<DestroyRegionSystem>());
+            systems.Add(Create<DestroyRegionLinkSystem>());
             systems.Add(Create<DestroyTileSystem>());
 
             systems.Add(Create<CreateTileSystem>());
-            systems.Add(Create<CreateRegionSystem>());
+            systems.Add(Create<CreateRegionLinkSystem>());
 
-            systems.DelHere<RegionCreateRequest>();
-            systems.DelHere<RegionDestroyRequest>();
+            systems.DelHere<RegionLinkCreateRequest>();
+            systems.DelHere<RegionLinkDestroyRequest>();
 
             systems.DelHere<TileCreateRequest>();
             systems.DelHere<TileDestroyRequest>();

@@ -1,7 +1,8 @@
 ﻿namespace CodeBase.Gameplay.Region.Ecs.Components
 {
-    public struct RegionComponent
+    public struct RegionLink
     {
+        public RegionController Controller;
         public RegionType Type;
     }
 }

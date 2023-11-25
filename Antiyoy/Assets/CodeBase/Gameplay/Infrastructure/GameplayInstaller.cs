@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.GameplayCamera;
+using CodeBase.Gameplay.Region.Ecs;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Tile;
 using CodeBase.Infrastructure.ProjectStateMachine;
@@ -21,6 +22,7 @@ namespace CodeBase.Gameplay.Infrastructure
 
             Container.Bind<GameplayStaticDataProvider>().FromInstance(_gameplayStaticDataProvider).AsSingle();
             Container.Bind<TileFactory>().AsSingle();
+            Container.Bind<RegionFactory>().AsSingle();
         }
 
         private void BindCamera()
