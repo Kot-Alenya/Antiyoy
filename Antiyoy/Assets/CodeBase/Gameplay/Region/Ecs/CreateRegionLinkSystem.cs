@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.CommonEcs;
+﻿using System.Collections.Generic;
+using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.Region.Ecs.Components;
 using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
@@ -38,9 +39,9 @@ namespace CodeBase.Gameplay.Region.Ecs
             {
                 var controller = FindOrCreateRegionController(entity);
 
+                controller.Entities.AddAndMatchColor(entity);
                 CreateLink(entity, controller);
                 CreateRecalculateEvent(controller);
-                controller.Add(entity);
             }
         }
 
@@ -60,7 +61,10 @@ namespace CodeBase.Gameplay.Region.Ecs
                     return regionLink.Controller;
             }
 
-            return _regionFactory.CreateControllerAndRegister(linkCreateRequest.Type);
+            var newCollection = _regionFactory.CreateEntitiesCollection(new List<int>());
+            var newController = _regionFactory.CreateControllerAndRegister(linkCreateRequest.Type, newCollection);
+
+            return newController;
         }
 
         private void CreateLink(int entity, RegionController controller)

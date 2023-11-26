@@ -10,23 +10,28 @@ namespace CodeBase.Gameplay.Region
 
         private RegionFactory(IInstantiator instantiator) => _instantiator = instantiator;
 
-        public RegionController CreateController(RegionType type, List<int> entities)
+        public RegionEntitiesCollection CreateEntitiesCollection(List<int> entities)
         {
-            var controller = _instantiator.Instantiate<RegionController>(new object[]
+            var collection = _instantiator.Instantiate<RegionEntitiesCollection>(new object[]
             {
-                type,
                 Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f),
                 entities
             });
 
-            controller.Initialize();
+            collection.Initialize();
 
-            return controller;
+            return collection;
         }
 
-        public RegionController CreateControllerAndRegister(RegionType type)
+        public RegionController CreateControllerAndRegister(RegionType type, RegionEntitiesCollection entities)
         {
-            return CreateController(type, new List<int>());
+            var controller = _instantiator.Instantiate<RegionController>(new object[]
+            {
+                type,
+                entities
+            });
+
+            return controller;
         }
 
         public void Destroy(RegionController controller)

@@ -31,7 +31,7 @@ namespace CodeBase.Gameplay.Region.Ecs
                 var controller = _regionLinkPool.Get(entity).Controller;
                 
                 CreateRecalculateEvent(controller);
-                controller.Remove(entity);
+                controller.Entities.Remove(entity);
 
                 _regionLinkPool.Del(entity);
             }

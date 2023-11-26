@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.Region.Ecs.Components;
 using CodeBase.Gameplay.Tile.Ecs.Components;
@@ -9,10 +8,6 @@ using UnityEngine.Pool;
 
 namespace CodeBase.Gameplay.Region.Ecs.Recalculate
 {
-    //TODO: refactoring regionController
-    //TODO: remove duplicates
-    //TODO: performance
-
     public class RecalculateRegionGeometrySystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly GameplayEcsWorld _world;
@@ -76,12 +71,7 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
             var splitResult = Split(controller);
 
             foreach (var region in splitResult)
-            {
-                region.MatchColors();
-            }
-
-            //foreach (var region in splitResult)
-            //    Join(region);
+                Join(region);
         }
 
         private List<RegionController> Split(RegionController rootController)
@@ -92,20 +82,37 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
             if (regions.Count <= 1)
                 return result;
 
-            RemoveBiggestControllerFromList(regions);
+            RemoveBiggestFromList(regions);
 
             foreach (var region in regions)
-            foreach (var entity in region.Entities)
             {
-                _regionLink.Get(entity).Controller = region;
-                rootController.Entities.Remove(entity);
+                var newController = _regionFactory.CreateControllerAndRegister(rootController.Type, region);
+
+                foreach (var entity in region)
+                {
+                    _regionLink.Get(entity).Controller = newController;
+                    rootController.Entities.Remove(entity);
+                }
+
+                newController.Entities.MatchColorsAll();
+                result.Add(newController);
             }
 
-            result.AddRange(regions);
             return result;
         }
 
-        private void RemoveBiggestControllerFromList(List<RegionController> regions)
+        private void RemoveBiggestFromList(List<RegionEntitiesCollection> regions)
+        {
+            var biggestPart = regions[0];
+
+            for (var i = 0; i < regions.Count; i++)
+                if (regions[i].Count > biggestPart.Count)
+                    biggestPart = regions[i];
+
+            regions.Remove(biggestPart);
+        }
+
+        private RegionController GetBiggestFromList(List<RegionController> regions)
         {
             var biggestPart = regions[0];
 
@@ -113,14 +120,14 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
                 if (regions[i].Entities.Count > biggestPart.Entities.Count)
                     biggestPart = regions[i];
 
-            regions.Remove(biggestPart);
+            return biggestPart;
         }
 
-        private List<RegionController> GetRegionParts(RegionController controller)
+        private List<RegionEntitiesCollection> GetRegionParts(RegionController controller)
         {
             var allPassedEntitiesBuffer = new List<int>();
             var frontEntitiesBuffer = new List<int>();
-            var parts = new List<RegionController>();
+            var parts = new List<RegionEntitiesCollection>();
 
             while (allPassedEntitiesBuffer.Count < controller.Entities.Count)
             {
@@ -134,13 +141,14 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
                 WaveSearch(frontEntitiesBuffer, currentPassedEntitiesBuffer, controller.Type, null);
 
                 allPassedEntitiesBuffer.AddRange(currentPassedEntitiesBuffer);
-                parts.Add(_regionFactory.CreateController(controller.Type, currentPassedEntitiesBuffer));
+                parts.Add(_regionFactory.CreateEntitiesCollection(currentPassedEntitiesBuffer));
             }
 
             return parts;
         }
 
-        private bool TryGetUnPassedEntity(List<int> passedEntities, List<int> allEntities, out int entity)
+        private bool TryGetUnPassedEntity(List<int> passedEntities, RegionEntitiesCollection allEntities,
+            out int entity)
         {
             foreach (var e in allEntities)
             {
@@ -187,26 +195,26 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
             }
         }
 
-        private void Join(RegionController region)
+        private void Join(RegionController rootController)
         {
-            var regionsToJoin = GetRegionsToJoin(region);
+            var regionsToJoin = GetRegionsToJoin(rootController);
 
             if (regionsToJoin.Count <= 1)
                 return;
 
-            //TODO: duplicate
-            var biggest = regionsToJoin[0];
-            foreach (var r in regionsToJoin.Where(r => r.Entities.Count > biggest.Entities.Count))
-                biggest = r;
+            var biggest = GetBiggestFromList(regionsToJoin);
+
             regionsToJoin.Remove(biggest);
-            //
 
-            foreach (var regionToJoin in regionsToJoin)
+            foreach (var region in regionsToJoin)
             {
-                foreach (var entity in regionToJoin.Entities)
-                    biggest.Add(entity);
+                foreach (var entity in region.Entities)
+                {
+                    _regionLink.Get(entity).Controller = biggest;
+                    biggest.Entities.AddAndMatchColor(entity);
+                }
 
-                _regionFactory.Destroy(regionToJoin);
+                _regionFactory.Destroy(region);
             }
         }
 
@@ -218,8 +226,11 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
 
             WaveSearch(frontEntitiesBuffer, passedEntitiesBuffer, region.Type, entity =>
             {
-                if (_regionLink.Get(entity).Controller != region)
-                    regionsToJoin.Add(region);
+                var otherController = _regionLink.Get(entity).Controller;
+
+                if (otherController != region)
+                    if (!regionsToJoin.Contains(otherController))
+                        regionsToJoin.Add(otherController);
             });
 
             return regionsToJoin;

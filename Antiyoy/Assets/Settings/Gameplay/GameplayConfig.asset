@@ -16,7 +16,7 @@ MonoBehaviour:
   EcsConfig:
     ControllerPrefab: {fileID: 5047563422537161566, guid: e1061dd158f03d5479e17417145ddb08, type: 3}
   TerrainConfig:
-    Size: {x: 4, y: 4}
+    Size: {x: 10, y: 10}
     Controller: {fileID: 570142962622713041, guid: 6273d9749225951438569ebddee2c851, type: 3}
   TileConfig:
     PlacePrefab: {fileID: 1775694694559258790, guid: eb540b3d3215d85489d88f16f908a6dd, type: 3}
