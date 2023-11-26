@@ -1,7 +1,6 @@
 ﻿using CodeBase.Gameplay.CommonEcs;
 using CodeBase.Gameplay.GameplayCamera;
 using CodeBase.Gameplay.Region;
-using CodeBase.Gameplay.Region.Ecs;
 using CodeBase.Gameplay.Terrain;
 using CodeBase.Gameplay.Tile;
 using CodeBase.Infrastructure.ProjectStateMachine;

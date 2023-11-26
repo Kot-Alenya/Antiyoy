@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Tile.Ecs;
 using CodeBase.Gameplay.Tile.Ecs.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
+using Leopotam.EcsLite.UnityEditor;
 using Zenject;
 
 namespace CodeBase.Gameplay.CommonEcs
@@ -65,8 +66,8 @@ namespace CodeBase.Gameplay.CommonEcs
             var systems = new EcsSystems(_world);
 #if UNITY_EDITOR
             systems.AddWorld(_world, MainWorldName);
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(MainWorldName));
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem(MainWorldName));
+            systems.Add(new EcsWorldDebugSystem(MainWorldName));
+            systems.Add(new EcsSystemsDebugSystem(MainWorldName));
 #endif
             return systems;
         }
@@ -76,8 +77,8 @@ namespace CodeBase.Gameplay.CommonEcs
             var systems = new EcsSystems(_eventsBus.GetEventsWorld());
 #if UNITY_EDITOR
             systems.AddWorld(_eventsBus.GetEventsWorld(), EventWorldName);
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(EventWorldName));
-            systems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem(EventWorldName));
+            systems.Add(new EcsWorldDebugSystem(EventWorldName));
+            systems.Add(new EcsSystemsDebugSystem(EventWorldName));
 #endif
             return systems;
         }

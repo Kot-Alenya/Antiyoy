@@ -13,7 +13,7 @@ namespace CodeBase.Gameplay.Infrastructure.States
         private readonly GameplayStaticDataProvider _staticDataProvider;
 
         public GameplayStartupState(CameraFactory cameraFactory, TerrainFactory terrainFactory,
-            GameplayEcsFactory ecsFactory,GameplayStaticDataProvider staticDataProvider)
+            GameplayEcsFactory ecsFactory, GameplayStaticDataProvider staticDataProvider)
         {
             _cameraFactory = cameraFactory;
             _terrainFactory = terrainFactory;

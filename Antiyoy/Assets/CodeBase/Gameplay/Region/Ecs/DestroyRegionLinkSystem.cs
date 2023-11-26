@@ -29,7 +29,7 @@ namespace CodeBase.Gameplay.Region.Ecs
             foreach (var entity in _regionDestroyRequestFilter)
             {
                 var controller = _regionLinkPool.Get(entity).Controller;
-                
+
                 CreateRecalculateEvent(controller);
                 controller.Entities.Remove(entity);
 

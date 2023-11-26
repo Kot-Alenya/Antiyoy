@@ -13,8 +13,6 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
         private readonly GameplayEcsWorld _world;
         private readonly GameplayEcsEventsBus _eventsBus;
         private readonly RegionFactory _regionFactory;
-        private readonly List<RegionController> _controllersToRecalculateBuffer = new();
-        private readonly ListPool<int> _listPoolInt;
 
         private EcsFilter _recalculateEventFilter;
         private EcsPool<RegionRecalculateEvent> _recalculateEventPool;
@@ -38,25 +36,25 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
 
         public void Run(IEcsSystems systems)
         {
-            if (!_eventsBus.HasEvents<RegionRecalculateEvent>())
+            if (_recalculateEventFilter.GetEntitiesCount() <= 0)
                 return;
 
-            FillRecalculateBuffer();
+            using var _ = ListPool<RegionController>.Get(out var controllersToRecalculateBuffer);
 
-            foreach (var controller in _controllersToRecalculateBuffer)
+            FillRecalculateBuffer(controllersToRecalculateBuffer);
+
+            foreach (var controller in controllersToRecalculateBuffer)
                 Recalculate(controller);
         }
 
-        private void FillRecalculateBuffer()
+        private void FillRecalculateBuffer(List<RegionController> buffer)
         {
-            _controllersToRecalculateBuffer.Clear();
-
             foreach (var entity in _recalculateEventFilter)
             {
                 var controller = _recalculateEventPool.Get(entity).Controller;
 
-                if (!_controllersToRecalculateBuffer.Contains(controller) && controller != null)
-                    _controllersToRecalculateBuffer.Add(controller);
+                if (!buffer.Contains(controller) && controller != null)
+                    buffer.Add(controller);
             }
         }
 
@@ -77,7 +75,7 @@ namespace CodeBase.Gameplay.Region.Ecs.Recalculate
         private List<RegionController> Split(RegionController rootController)
         {
             var regions = GetRegionParts(rootController);
-            var result = new List<RegionController> { rootController };
+            var result = new List<RegionController> { rootController }; //new Collection
 
             if (regions.Count <= 1)
                 return result;
